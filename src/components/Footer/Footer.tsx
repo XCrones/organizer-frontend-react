@@ -1,68 +1,43 @@
 import { NavLink } from "react-router-dom";
+import { IRouterLinkItem, ROUTER_LINKS } from "../../router-links";
 
 interface IProps {}
 
 const FooterComponent = () => {
-  const COLOR_LINK_ACTIVE = "#ffffff";
-  const COLOR_LINK_DEFAULT = "#707070";
+  const links = Object.values(ROUTER_LINKS).map((value) => value) as IRouterLinkItem[];
 
-  const sizeIcons = 20;
-  const sizeTitle = 10.5;
-  const linkItem = "flex flex-col justify-center items-center transition-all duration-300";
+  const getIcon = (navPath: string) => {
+    switch (navPath) {
+      case ROUTER_LINKS.calendar.link:
+        return "bi bi-calendar";
+      case ROUTER_LINKS.todos.link:
+        return "bi bi-check2-circle";
+      case ROUTER_LINKS.wather.link:
+        return "bi bi-cloud-sun-fill";
+      case ROUTER_LINKS.settings.link:
+        return "bi bi-gear-wide-connected";
+      default:
+        return "";
+    }
+  };
 
   return (
     <nav className="flex flex-row justify-between items-center capitalize font-inter pb-[30px] pt-[15px]">
-      <NavLink
-        to={"calendar"}
-        className={`${linkItem}`}
-        style={({ isActive }) => (isActive ? { color: COLOR_LINK_ACTIVE } : { color: COLOR_LINK_DEFAULT })}
-      >
-        <div style={{ fontSize: `${sizeIcons}px` }} className="">
-          <i className="bi bi-calendar"></i>
-        </div>
-        <h3 style={{ fontSize: sizeTitle }} className="">
-          calendar
-        </h3>
-      </NavLink>
-
-      <NavLink
-        to={"todos"}
-        className={`${linkItem}`}
-        style={({ isActive }) => (isActive ? { color: COLOR_LINK_ACTIVE } : { color: COLOR_LINK_DEFAULT })}
-      >
-        <div style={{ fontSize: `${sizeIcons}px` }} className="">
-          <i className="bi bi-check2"></i>
-        </div>
-        <h3 style={{ fontSize: sizeTitle }} className="">
-          toDo list
-        </h3>
-      </NavLink>
-
-      <NavLink
-        to={"weather"}
-        className={`${linkItem}`}
-        style={({ isActive }) => (isActive ? { color: COLOR_LINK_ACTIVE } : { color: COLOR_LINK_DEFAULT })}
-      >
-        <div style={{ fontSize: `${sizeIcons}px` }} className="">
-          <i className="bi bi-cloud-sun-fill"></i>
-        </div>
-        <h3 style={{ fontSize: sizeTitle }} className="">
-          weather
-        </h3>
-      </NavLink>
-
-      <NavLink
-        to={"settings"}
-        className={`${linkItem}`}
-        style={({ isActive }) => (isActive ? { color: COLOR_LINK_ACTIVE } : { color: COLOR_LINK_DEFAULT })}
-      >
-        <div style={{ fontSize: `${sizeIcons}px` }} className="">
-          <i className="bi bi-gear-wide-connected"></i>
-        </div>
-        <h3 style={{ fontSize: sizeTitle }} className="">
-          settings
-        </h3>
-      </NavLink>
+      {links.map((item) => (
+        <NavLink
+          key={item.link}
+          to={item.link}
+          className="flex flex-col justify-center items-center transition-all duration-300"
+          style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
+        >
+          <div style={{ fontSize: "20px" }} className="">
+            <i className={getIcon(item.link)}></i>
+          </div>
+          <h3 style={{ fontSize: "10.5px" }} className="">
+            {item.title}
+          </h3>
+        </NavLink>
+      ))}
     </nav>
   );
 };
