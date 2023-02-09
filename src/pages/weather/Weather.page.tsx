@@ -1,9 +1,27 @@
-import style from "./Weather.module.scss";
+import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
+import { WeatherWrapper } from "./Weather.style";
 
 interface Props {}
 
-const WeatherComponent = () => {
-  return <div className="h-full w-full">WeatherComponent</div>;
+const WeatherPage = () => {
+  const callbackPlus = () => {};
+  const callbackSearch = () => {};
+  const buttonsHeader: IButtonHeader[] = [
+    {
+      callback: callbackPlus,
+      icon: "bi bi-search",
+    },
+    {
+      callback: callbackSearch,
+      icon: "bi bi-plus-lg",
+    },
+  ];
+
+  return (
+    <WeatherWrapper>
+      <HeaderComponent buttns={buttonsHeader} title={"weather"} />
+    </WeatherWrapper>
+  );
 };
 
-export default WeatherComponent;
+export default WeatherPage;

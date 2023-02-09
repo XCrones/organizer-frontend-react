@@ -1,9 +1,27 @@
-import style from "./Settings.module.scss";
+import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
+import { SettingsWrapper } from "./Settings.style";
 
 interface Props {}
 
-const SettingsComponent = () => {
-  return <div className="h-full w-full">SettingsComponent</div>;
+const SettingsPage = () => {
+  const callbackPlus = () => {};
+  const callbackSearch = () => {};
+  const buttonsHeader: IButtonHeader[] = [
+    {
+      callback: callbackPlus,
+      icon: "bi bi-search",
+    },
+    {
+      callback: callbackSearch,
+      icon: "bi bi-plus-lg",
+    },
+  ];
+
+  return (
+    <SettingsWrapper>
+      <HeaderComponent buttns={buttonsHeader} title={"settings"} />
+    </SettingsWrapper>
+  );
 };
 
-export default SettingsComponent;
+export default SettingsPage;
