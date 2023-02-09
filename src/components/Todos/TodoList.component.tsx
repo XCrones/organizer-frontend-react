@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import style from "./TodosList.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { addTodo, fetchOneTodo, fetchTodos, editTodo } from "../../store/slices/todos.slice";
-import { ITodo, ITodoCreate } from "../../models/todos.models";
+import { ITodo } from "../../models/todos.models";
 import TodoItemComponent from "./TodoItem.component";
 import { TodoListEmpty, TodoListItems, TodoListTitle, TodoListWrapper } from "./TodoList.style";
 import { color } from "../../style/variables.style";
@@ -11,7 +10,7 @@ interface Props {}
 
 const TodosListComponent = () => {
   const dispatch = useAppDispatch();
-  const todos = useAppSelector((state) => state.todos.todos);
+  const todos: ITodo[] = useAppSelector((state) => state.todos.todos);
   const date = new Date();
 
   const parseCurrDate = (date: Date) => {
