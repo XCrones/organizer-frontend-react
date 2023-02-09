@@ -31,5 +31,4 @@ export const Examples = styled.div<{}>`
 
 export const Items = styled.div`
   flex: 1 1 auto;
-  padding: 0 5px;
 `;
