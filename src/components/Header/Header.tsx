@@ -1,20 +1,23 @@
-import { HeaderButt, HeaderButtns, HeaderTitle, HeaderWrapper } from "./Header.style";
+import { HeaderButt, HeaderButtns, HeaderTitle, HeaderWrapper } from "./Header.component.style";
+
+export interface IButtonHeader {
+  icon: string;
+  callback: Function;
+}
 
 interface IProps {
   title: string;
+  buttns: IButtonHeader[];
 }
 
-const HeaderComponent = ({ title }: IProps) => {
+const HeaderComponent = ({ title, buttns }: IProps) => {
   return (
     <HeaderWrapper>
       <HeaderTitle>{title}</HeaderTitle>
       <HeaderButtns>
-        <HeaderButt type="button" onClick={() => {}}>
-          <i className="bi bi-search"></i>
-        </HeaderButt>
-        <HeaderButt type="button" onClick={() => {}}>
-          <i className="bi bi-plus-lg"></i>
-        </HeaderButt>
+        {buttns.map((butt, idx) => (
+          <HeaderButt key={idx} onClick={() => butt.callback()} type="button" className={butt.icon} />
+        ))}
       </HeaderButtns>
     </HeaderWrapper>
   );
