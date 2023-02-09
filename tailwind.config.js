@@ -7,6 +7,7 @@ module.exports = {
         main: "#171930",
         footer: "#0D0F22",
         "link-default": "#707070",
+        "todo-item": "#1E203B",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

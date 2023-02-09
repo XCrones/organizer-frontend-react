@@ -1,4 +1,4 @@
-import style from "./Header.module.scss";
+import { HeaderButt, HeaderButtns, HeaderTitle, HeaderWrapper } from "./Header.style";
 
 interface IProps {
   title: string;
@@ -6,17 +6,17 @@ interface IProps {
 
 const HeaderComponent = ({ title }: IProps) => {
   return (
-    <div className="flex flex-row justify-between items-center pt-[38px] pb-[23px]">
-      <div className="capitalize text-[27px] font-inter font-bold">{title}</div>
-      <div className="flex flex-row gap-x-[15px]">
-        <button onClick={() => {}} type="button" className="text-2xl">
+    <HeaderWrapper>
+      <HeaderTitle>{title}</HeaderTitle>
+      <HeaderButtns>
+        <HeaderButt type="button" onClick={() => {}}>
           <i className="bi bi-search"></i>
-        </button>
-        <button onClick={() => {}} type="button" className="text-2xl">
+        </HeaderButt>
+        <HeaderButt type="button" onClick={() => {}}>
           <i className="bi bi-plus-lg"></i>
-        </button>
-      </div>
-    </div>
+        </HeaderButt>
+      </HeaderButtns>
+    </HeaderWrapper>
   );
 };
 

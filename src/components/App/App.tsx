@@ -7,18 +7,18 @@ import { ROUTER_LINKS } from "../../router-links";
 import FooterComponent from "../Footer/Footer";
 import HeaderComponent from "../Header/Header";
 import { Routes, Route } from "react-router-dom";
-
-interface IProps {}
+import { Footer, Header, Section, Wrapper } from "./App.style";
+import { color } from "../../style/variables.style";
 
 const App = () => {
   const paddingX = 20;
 
   return (
-    <div className="min-h-screen w-full bg-main text-white  flex flex-col">
-      <header style={{ paddingLeft: `${paddingX}px`, paddingRight: `${paddingX}px` }} className="">
+    <Wrapper colorBg={color.mainBg}>
+      <Header style={{ paddingLeft: `${paddingX}px`, paddingRight: `${paddingX}px` }}>
         <HeaderComponent title="toDo" />
-      </header>
-      <section className="flex-auto h-full w-full">
+      </Header>
+      <Section>
         <Routes>
           <Route path="" element={<MainPage />} />
           <Route path={ROUTER_LINKS.todos.link} element={<TodosComponent />} />
@@ -26,11 +26,11 @@ const App = () => {
           <Route path={ROUTER_LINKS.wather.link} element={<WeatherComponent />} />
           <Route path={ROUTER_LINKS.settings.link} element={<SettingsComponent />} />
         </Routes>
-      </section>
-      <footer style={{ paddingLeft: `${paddingX}px`, paddingRight: `${paddingX}px` }} className="bg-footer">
+      </Section>
+      <Footer style={{ paddingLeft: `${paddingX}px`, paddingRight: `${paddingX}px` }} colorBg={color.footerBg}>
         <FooterComponent />
-      </footer>
-    </div>
+      </Footer>
+    </Wrapper>
   );
 };
 

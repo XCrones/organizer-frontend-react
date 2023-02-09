@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IRouterLinkItem, ROUTER_LINKS } from "../../router-links";
-
-interface IProps {}
+import { FooterIcon, FooterNav, FooterTitle } from "./Footer.style";
 
 const FooterComponent = () => {
   const links = Object.values(ROUTER_LINKS).map((value) => value) as IRouterLinkItem[];
@@ -22,7 +21,7 @@ const FooterComponent = () => {
   };
 
   return (
-    <nav className="flex flex-row justify-between items-center capitalize font-inter pb-[30px] pt-[15px]">
+    <FooterNav>
       {links.map((item) => (
         <NavLink
           key={item.link}
@@ -30,15 +29,13 @@ const FooterComponent = () => {
           className="flex flex-col justify-center items-center transition-all duration-300"
           style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
         >
-          <div style={{ fontSize: "20px" }} className="">
+          <FooterIcon>
             <i className={getIcon(item.link)}></i>
-          </div>
-          <h3 style={{ fontSize: "10.5px" }} className="">
-            {item.title}
-          </h3>
+          </FooterIcon>
+          <FooterTitle>{item.title}</FooterTitle>
         </NavLink>
       ))}
-    </nav>
+    </FooterNav>
   );
 };
 

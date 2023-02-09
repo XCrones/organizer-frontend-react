@@ -11,13 +11,13 @@ interface IRouterLinks {
 }
 
 export const ROUTER_LINKS: IRouterLinks = {
-  calendar: {
-    title: "calendar",
-    link: "/calendar",
-  },
   todos: {
     title: "todos",
     link: "/todos",
+  },
+  calendar: {
+    title: "calendar",
+    link: "/calendar",
   },
   wather: {
     title: "weather",
