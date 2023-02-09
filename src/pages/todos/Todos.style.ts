@@ -22,11 +22,16 @@ export const TodosWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 35px;
+  row-gap: 25px;
+`;
+
+export const TodoHeader = styled.header<{}>`
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const Examples = styled.div<{}>`
-  flex: 1 1 auto;
+  flex: 0 0 140px;
 `;
 
 export const Items = styled.div`
