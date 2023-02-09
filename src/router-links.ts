@@ -8,6 +8,7 @@ interface IRouterLinks {
   todos: IRouterLinkItem;
   wather: IRouterLinkItem;
   settings: IRouterLinkItem;
+  auth: IRouterLinkItem;
 }
 
 export const ROUTER_LINKS: IRouterLinks = {
@@ -26,5 +27,9 @@ export const ROUTER_LINKS: IRouterLinks = {
   settings: {
     title: "settings",
     link: "/settings",
+  },
+  auth: {
+    title: "auth",
+    link: "/",
   },
 };
