@@ -1,9 +1,14 @@
+import { useWindowSize } from "../../hooks/windowResize";
 import { TodoExampleItems, TodoExpampleWrapper } from "./TodoExample.style";
 import TodoExampleItemComponent, { IExampleItem } from "./TodoExampleItem.component";
 
 interface Props {}
 
 const TodosPreviewComponent = () => {
+  const {
+    size: { windowWidth },
+  } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
+
   const arr: IExampleItem[] = [
     { id: 1, count: 5, time: "22.01(10pm)" },
     { id: 2, count: 2, time: "13.00(01pm)" },
@@ -14,7 +19,7 @@ const TodosPreviewComponent = () => {
 
   return (
     <TodoExpampleWrapper>
-      <TodoExampleItems>
+      <TodoExampleItems maxWidth={windowWidth}>
         {arr.map((item) => (
           <TodoExampleItemComponent key={item.id} item={item} callback={callback} />
         ))}
