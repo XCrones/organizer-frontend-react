@@ -1,21 +1,35 @@
-import TodoListComponent from "../../components/Todos/TodoList.component";
-import TodoExampleComponent from "../../components/Todos/TodoExample.component";
-import style from "./Todos.module.scss";
+import TodoListComponent from "../../components/todos/TodoList.component";
+import TodoExampleComponent from "../../components/todos/TodoExample.component";
 import { Examples, Items, TodosWrapper } from "./Todos.style";
+import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 
 interface Props {}
 
-const TodosComponent = () => {
+const TodosPage = () => {
+  const callbackPlus = () => {};
+  const callbackSearch = () => {};
+  const buttonsHeader: IButtonHeader[] = [
+    {
+      callback: callbackPlus,
+      icon: "bi bi-search",
+    },
+    {
+      callback: callbackSearch,
+      icon: "bi bi-plus-lg",
+    },
+  ];
+
   return (
     <TodosWrapper>
+      <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
       <Examples>
         <TodoExampleComponent />
       </Examples>
-      <Items className={style.scroll}>
+      <Items>
         <TodoListComponent />
       </Items>
     </TodosWrapper>
   );
 };
 
-export default TodosComponent;
+export default TodosPage;
