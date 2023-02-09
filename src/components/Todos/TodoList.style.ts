@@ -2,18 +2,13 @@ import { fonts } from "../../style/variables.style";
 import styled from "styled-components";
 
 export const TodoListWrapper = styled.div`
-  max-height: 380px;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   row-gap: 35px;
   padding-left: 20px;
   padding-right: 20px;
-  &:last-child {
-    padding-bottom: 35px;
-  }
 `;
 
 export const TodoListEmpty = styled.div<{}>``;
