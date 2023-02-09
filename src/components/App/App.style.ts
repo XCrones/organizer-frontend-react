@@ -1,22 +1,34 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{ colorBg: string }>`
+interface IHeight {
+  footer: number;
+}
+
+interface IWrapper {
+  colorBg: string;
+  height: IHeight;
+}
+
+export const Wrapper = styled.div<IWrapper>`
   min-height: 100vh;
-  width: 100%;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  background-color: ${(props) => props.colorBg};
-`;
-
-export const Header = styled.header<{}>``;
-
-export const Section = styled.section<{}>`
-  min-height: 100%;
   min-width: 100%;
-  flex: 1 1 auto;
+  color: #fff;
+  background-color: ${(props) => props.colorBg};
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr ${(props) => props.height.footer}px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 `;
 
-export const Footer = styled.footer<{ colorBg: string }>`
-  background-color: ${(props) => props.colorBg};
+export const Section = styled.section<{ maxHeight: number }>`
+  grid-area: 1 / 1 / 2 / 2;
+  overflow-y: auto;
+  max-height: ${(props) => props.maxHeight}px;
+  padding-bottom: 40px;
+`;
+
+export const Footer = styled.footer<{}>`
+  grid-area: 2 / 1 / 3 / 2;
 `;
