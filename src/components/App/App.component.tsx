@@ -1,0 +1,41 @@
+import CalendarPage from "../../pages/calendar/Calendar.page";
+import SettingsPage from "../../pages/settings/Settings.page";
+import TodosPage from "../../pages/todos/Todos.page";
+import WeatherPage from "../../pages/weather/Weather.page";
+import { ROUTER_LINKS } from "../../router-links";
+import FooterComponent from "../footer/Footer.component";
+import { Routes, Route } from "react-router-dom";
+import { Footer, Section, Wrapper } from "./App.style";
+import { color } from "../../style/variables.style";
+import { useWindowSize } from "../../hooks/windowResize";
+import style from "./App.module.scss";
+import AuthPage from "../../pages/auth/Auth.page";
+import { useAppSelector } from "../../hooks/redux";
+
+const App = () => {
+  const isAuth = useAppSelector((state) => state.audh.isAuth);
+  const HEIGHT_FOOTER = isAuth ? 50 : 0;
+
+  const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
+
+  return (
+    <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
+      <Section maxHeight={memoizedHeight}>
+        <Routes>
+          <Route path={ROUTER_LINKS.auth.link} element={<AuthPage />} />
+          <Route path={ROUTER_LINKS.todos.link} element={<TodosPage />} />
+          <Route path={ROUTER_LINKS.calendar.link} element={<CalendarPage />} />
+          <Route path={ROUTER_LINKS.wather.link} element={<WeatherPage />} />
+          <Route path={ROUTER_LINKS.settings.link} element={<SettingsPage />} />
+        </Routes>
+      </Section>
+      {isAuth && (
+        <Footer>
+          <FooterComponent />
+        </Footer>
+      )}
+    </Wrapper>
+  );
+};
+
+export default App;
