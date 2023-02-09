@@ -5,6 +5,8 @@ export const color = {
   todoItem: "#1E203B",
   todoBtnToday: "#f18c27",
   todoBtnTommorow: "#4886E8",
+  colorAuth: "#5e5c55",
+  colorAuthTitle: "#8f8a79",
 };
 
 export const fonts = {
