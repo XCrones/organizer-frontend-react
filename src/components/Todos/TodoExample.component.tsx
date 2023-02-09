@@ -1,33 +1,23 @@
-import {
-  TodoExampleButt,
-  TodoExampleItem,
-  TodoExampleItems,
-  TodoExampleSubTitle,
-  TodoExampleTitle,
-  TodoExpampleTime,
-  TodoExpampleWrapper,
-} from "./TodoExample.style";
+import { TodoExampleItems, TodoExpampleWrapper } from "./TodoExample.style";
+import TodoExampleItemComponent, { IExampleItem } from "./TodoExampleItem.component";
 
 interface Props {}
 
 const TodosPreviewComponent = () => {
-  const expample1 = "22.01(10pm)";
+  const arr: IExampleItem[] = [
+    { id: 1, count: 5, time: "22.01(10pm)" },
+    { id: 2, count: 2, time: "13.00(01pm)" },
+    { id: 3, count: 8, time: "08.00(08am)" },
+  ];
+
+  const callback = (id: number) => console.log(`call settings example id: ${id}`);
 
   return (
     <TodoExpampleWrapper>
       <TodoExampleItems>
-        <TodoExampleItem>
-          <TodoExampleButt onClick={() => console.log("open setting")} />
-          <TodoExampleTitle>example project test</TodoExampleTitle>
-          <TodoExpampleTime>
-            <i className="bi bi-clock-fill"></i>
-            <TodoExampleSubTitle>{expample1}</TodoExampleSubTitle>
-          </TodoExpampleTime>
-          <TodoExpampleTime>
-            <i className="bi bi-check2-circle"></i>
-            <TodoExampleSubTitle>{expample1}</TodoExampleSubTitle>
-          </TodoExpampleTime>
-        </TodoExampleItem>
+        {arr.map((item) => (
+          <TodoExampleItemComponent key={item.id} item={item} callback={callback} />
+        ))}
       </TodoExampleItems>
     </TodoExpampleWrapper>
   );
