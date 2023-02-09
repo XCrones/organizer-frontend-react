@@ -5,7 +5,7 @@ export const TodoItem = styled.div<{ bgColor: string }>`
   display: flex;
   flex-direction: row;
   column-gap: 16px;
-  padding: 19px 20px 17px 20px;
+  padding: 20px;
   border-radius: 11px;
   background-color: ${(props) => props.bgColor};
 `;
