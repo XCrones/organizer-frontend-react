@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { authSignIn, IAuthUser } from "../../store/slices/auth.slice";
+import AuthPreloaderComponent from "./AuthPreloader.component";
 import {
   AuthForm,
   AuthFormItem,
@@ -18,6 +21,8 @@ import {
   AuthAlternativeSign,
   AuthAlternativeSignItem,
   AuthToggleForm,
+  AuthTitle,
+  AuthSubTitle,
 } from "./AuthSign.style";
 
 interface Props {
@@ -26,11 +31,13 @@ interface Props {
 }
 
 const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
+  const dispatch = useAppDispatch();
+  const { isPending } = useAppSelector((state) => state.audh);
+
   const [isFormValid, setFormValid] = useState<boolean | undefined>(undefined);
   const [typePass, setTypePass] = useState<"password" | "text">("password");
 
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -38,16 +45,25 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
     mode: "onBlur",
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: any) => {
     if (isValid) {
-      callback();
+      const user: IAuthUser = {
+        email: data["email"] || "",
+        password: data["password"] || "",
+      };
+      // callback(user);
+      dispatch(authSignIn(user));
     }
   };
-
   const getError = (field: string) => (errors[field]?.message as string) || "Error!";
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
+      {isPending && <AuthPreloaderComponent />}
+      <AuthTitle>sign in to organize pro</AuthTitle>
+      <AuthSubTitle>
+        Lorem ipsum dolor sit amet, consetetur sadipscing, lorem ipsum dolorsed diam nonumy amet eirmod.
+      </AuthSubTitle>
       <AuthFormItems>
         <AuthFormItem>
           <AuthLabel>username</AuthLabel>
@@ -78,14 +94,6 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
               type={typePass}
               {...register("password", {
                 required: "required filed",
-                minLength: {
-                  value: 8,
-                  message: `min char 8`,
-                },
-                maxLength: {
-                  value: 20,
-                  message: `max char 20`,
-                },
               })}
             />
             <AuthInputIcon
@@ -108,16 +116,24 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
           <AuthAlternativeLine />
         </AuthAlternativeTitle>
         <AuthAlternativeSign>
-          <AuthAlternativeSignItem style={{ backgroundColor: "#fff" }}></AuthAlternativeSignItem>
-          <AuthAlternativeSignItem style={{ backgroundColor: "#fff000" }}></AuthAlternativeSignItem>
-          <AuthAlternativeSignItem style={{ backgroundColor: "#f00" }}></AuthAlternativeSignItem>
+          <AuthAlternativeSignItem color="#281286">
+            <i className="bi bi-github"></i>
+          </AuthAlternativeSignItem>
+          <AuthAlternativeSignItem color="#000">
+            <i className="bi bi-apple"></i>
+          </AuthAlternativeSignItem>
+          <AuthAlternativeSignItem color="#ff4800">
+            <i className="bi bi-ubuntu"></i>
+          </AuthAlternativeSignItem>
         </AuthAlternativeSign>
         <AuthLink>forgot password?</AuthLink>
       </AuthAlternativeItems>
 
-      <AuthSubmit type="submit">login</AuthSubmit>
+      <AuthSubmit type="submit">sign in</AuthSubmit>
 
-      <AuthToggleForm type="button">I’m a new user. Registration</AuthToggleForm>
+      <AuthToggleForm onClick={() => toggleForm()} type="button">
+        I’m a new user. Registration
+      </AuthToggleForm>
     </AuthForm>
   );
 };
