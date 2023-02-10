@@ -9,3 +9,5 @@ export const CalendarWrapper = styled.div`
   flex-direction: column;
   row-gap: 25px;
 `;
+
+export const CalendarItems = styled.div<{}>``;

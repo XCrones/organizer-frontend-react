@@ -1,5 +1,7 @@
+import DaysComponent from "../../components/calendar/Days.component";
+import TimesComponent from "../../components/calendar/Times.component";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
-import { CalendarWrapper } from "./Calendar.style";
+import { CalendarItems, CalendarWrapper } from "./Calendar.style";
 
 interface Props {}
 
@@ -20,6 +22,10 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
+      <CalendarItems>
+        <DaysComponent />
+        <TimesComponent />
+      </CalendarItems>
     </CalendarWrapper>
   );
 };
