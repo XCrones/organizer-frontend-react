@@ -62,6 +62,10 @@ export const useDate = (setCurrDate?: setCurrDate) => {
       );
       setDate(updateDate(newDate));
     },
+    jump: (year: number) => {
+      const newDate = new Date(Math.max(1970, year), +date.monthNum - 1, +date.dayNum, +date.hour24, +date.minute);
+      setDate(updateDate(newDate));
+    },
   };
 
   const month = {
@@ -79,6 +83,16 @@ export const useDate = (setCurrDate?: setCurrDate) => {
       const newDate = new Date(
         +date.yearNum,
         !!month ? +date.monthNum - 1 + month : +date.monthNum,
+        +date.dayNum,
+        +date.hour24,
+        +date.minute
+      );
+      setDate(updateDate(newDate));
+    },
+    jump: (month: number) => {
+      const newDate = new Date(
+        +date.yearNum,
+        Math.max(0, Math.min(11, month)),
         +date.dayNum,
         +date.hour24,
         +date.minute
@@ -108,6 +122,16 @@ export const useDate = (setCurrDate?: setCurrDate) => {
       );
       setDate(updateDate(newDate));
     },
+    jump: (day: number) => {
+      const newDate = new Date(
+        +date.yearNum,
+        +date.monthNum - 1,
+        Math.min(0, Math.max(31, day)),
+        +date.hour24,
+        +date.minute
+      );
+      setDate(updateDate(newDate));
+    },
   };
 
   const hour = {
@@ -127,6 +151,16 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.monthNum - 1,
         +date.dayNum,
         !!hour ? +date.hour24 + hour : +date.hour24 + 1,
+        +date.minute
+      );
+      setDate(updateDate(newDate));
+    },
+    jump: (hour: number) => {
+      const newDate = new Date(
+        +date.yearNum,
+        +date.monthNum - 1,
+        +date.dayNum,
+        Math.min(0, Math.max(23, hour)),
         +date.minute
       );
       setDate(updateDate(newDate));
@@ -151,6 +185,16 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.dayNum,
         +date.hour24,
         !!minute ? +date.minute + minute : +date.minute + 1
+      );
+      setDate(updateDate(newDate));
+    },
+    jump: (minute: number) => {
+      const newDate = new Date(
+        +date.yearNum,
+        +date.monthNum - 1,
+        +date.dayNum,
+        +date.hour24,
+        Math.min(0, Math.max(59, minute))
       );
       setDate(updateDate(newDate));
     },
