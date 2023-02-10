@@ -22,11 +22,11 @@ export const Wrapper = styled.div<IWrapper>`
   grid-row-gap: 0px;
 `;
 
-export const Section = styled.section<{ maxHeight: number }>`
+export const Section = styled.section<{ maxHeight: number; paddingBottom: number }>`
   grid-area: 1 / 1 / 2 / 2;
   overflow-y: auto;
   max-height: ${(props) => props.maxHeight}px;
-  padding-bottom: 40px;
+  padding-bottom: ${(props) => props.paddingBottom}px; //40px;
 `;
 
 export const Footer = styled.footer<{}>`
