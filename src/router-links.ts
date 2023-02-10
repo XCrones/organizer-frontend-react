@@ -30,6 +30,6 @@ export const ROUTER_LINKS: IRouterLinks = {
   },
   auth: {
     title: "auth",
-    link: "/",
+    link: "/auth",
   },
 };
