@@ -85,31 +85,39 @@ export const AuthAlternativeSign = styled.div`
   padding-bottom: 20px;
 `;
 
-export const AuthAlternativeSignItem = styled.a`
+export const AuthAlternativeSignItem = styled.a<{ color: string }>`
   display: block;
   flex: 0 1 100px;
   height: 45px;
   border-radius: 10px;
   cursor: pointer;
+  background-color: ${(props) => props.color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 20px;
 `;
 
 export const AuthLink = styled.a`
+  /* cursor: pointer; */
   text-align: center;
   display: block;
   font-size: 12px;
-  &::first-letter {
-    text-transform: uppercase;
-  }
   color: ${color.colorAuthTitle};
   text-decoration: underline;
   padding-bottom: 20px;
+  min-height: 38px;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 export const AuthSubmit = styled.button`
   height: 50px;
   width: 100%;
-  background: rgb(38, 110, 215);
-  background: linear-gradient(142deg, rgba(38, 110, 215, 1) 0%, rgba(77, 138, 235, 1) 0%);
+  background: rgb(8, 69, 159);
+  background: linear-gradient(142deg, rgba(8, 69, 159, 1) 0%, rgba(19, 75, 163, 1) 100%);
   text-transform: capitalize;
   font-size: 14px;
   line-height: 19px;
@@ -119,5 +127,26 @@ export const AuthSubmit = styled.button`
 export const AuthToggleForm = styled.button`
   font-size: 14px;
   line-height: 15px;
+  color: ${color.colorAuthTitle};
+`;
+
+export const AuthTitle = styled.h1`
+  max-width: 170px;
+  font-size: 27px;
+  line-height: 34px;
+  font-weight: 700;
+  padding-bottom: 16px;
+  color: #fff;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`;
+
+export const AuthSubTitle = styled.h2`
+  max-width: 290px;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 400;
+  padding-bottom: 30px;
   color: ${color.colorAuthTitle};
 `;
