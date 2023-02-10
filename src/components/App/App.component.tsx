@@ -15,12 +15,13 @@ import { useAppSelector } from "../../hooks/redux";
 const App = () => {
   const isAuth = useAppSelector((state) => state.audh.isAuth);
   const HEIGHT_FOOTER = isAuth ? 50 : 0;
+  const PADDING_BOTTOM = isAuth ? 40 : 0;
 
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
   return (
     <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
-      <Section maxHeight={memoizedHeight}>
+      <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <Routes>
           <Route path={ROUTER_LINKS.auth.link} element={<AuthPage />} />
           <Route path={ROUTER_LINKS.todos.link} element={<TodosPage />} />
