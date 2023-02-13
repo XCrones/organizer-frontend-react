@@ -10,4 +10,10 @@ export const CalendarWrapper = styled.div`
   row-gap: 25px;
 `;
 
-export const CalendarItems = styled.div<{}>``;
+export const CalendarItems = styled.div<{}>`
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
