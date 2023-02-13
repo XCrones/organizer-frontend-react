@@ -2,11 +2,8 @@ import { IBaseInfo } from "./base.models";
 
 export interface IEventCreate {
   uid: number;
-  year: number;
-  month: number;
-  day: number;
-  timeStart: number;
-  timeEnd: number;
+  eventStart: Date;
+  eventEnd: Date;
   title: string;
   description: string;
   color: string;
