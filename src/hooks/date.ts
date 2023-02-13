@@ -7,20 +7,21 @@ interface IDate {
   dayNum: string;
   hour24: string;
   minute: string;
-  dayShort: string;
   weekDayShort: string;
 }
 
 type setCurrDate = Date;
 
 export const useDate = (setCurrDate?: setCurrDate) => {
+  const [date, SetDate] = useState<IDate>(updateDate());
+
   useEffect(() => {
     if (!!setCurrDate) {
       updateDate(setCurrDate);
     }
   }, [setCurrDate]);
 
-  const updateDate = (date?: setCurrDate): IDate => {
+  function updateDate(date?: setCurrDate): IDate {
     let currDate = new Date();
 
     if (!!date) {
@@ -34,12 +35,9 @@ export const useDate = (setCurrDate?: setCurrDate) => {
       dayNum: currDate.toLocaleString("en-US", { day: "numeric" }),
       hour24: currDate.toLocaleString("en-US", { hour: "numeric", hour12: false }),
       minute: currDate.toLocaleString("en-US", { minute: "numeric" }),
-      dayShort: currDate.toLocaleString("en-US", { day: "numeric" }),
       weekDayShort: currDate.toLocaleString("en-US", { weekday: "short" }),
     };
-  };
-
-  const [date, setDate] = useState<IDate>(updateDate());
+  }
 
   const year = {
     prev: (year?: number) => {
@@ -50,7 +48,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     next: (year?: number) => {
       const newDate = new Date(
@@ -60,11 +58,11 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     jump: (year: number) => {
       const newDate = new Date(Math.max(1970, year), +date.monthNum - 1, +date.dayNum, +date.hour24, +date.minute);
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
   };
 
@@ -77,7 +75,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     next: (month?: number) => {
       const newDate = new Date(
@@ -87,7 +85,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     jump: (month: number) => {
       const newDate = new Date(
@@ -97,7 +95,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
   };
 
@@ -110,7 +108,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     next: (day?: number) => {
       const newDate = new Date(
@@ -120,7 +118,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     jump: (day: number) => {
       const newDate = new Date(
@@ -130,7 +128,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
   };
 
@@ -143,7 +141,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         !!hour ? +date.hour24 - hour : +date.hour24 - 1,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     next: (hour?: number) => {
       const newDate = new Date(
@@ -153,7 +151,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         !!hour ? +date.hour24 + hour : +date.hour24 + 1,
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     jump: (hour: number) => {
       const newDate = new Date(
@@ -163,7 +161,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         Math.min(0, Math.max(23, hour)),
         +date.minute
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
   };
 
@@ -176,7 +174,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         !!minute ? +date.minute - minute : +date.minute - 1
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     next: (minute?: number) => {
       const newDate = new Date(
@@ -186,7 +184,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         !!minute ? +date.minute + minute : +date.minute + 1
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
     jump: (minute: number) => {
       const newDate = new Date(
@@ -196,7 +194,7 @@ export const useDate = (setCurrDate?: setCurrDate) => {
         +date.hour24,
         Math.min(0, Math.max(59, minute))
       );
-      setDate(updateDate(newDate));
+      SetDate(updateDate(newDate));
     },
   };
 
