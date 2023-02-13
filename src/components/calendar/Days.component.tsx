@@ -84,7 +84,7 @@ const DaysComponent = () => {
 
   const setDay = (day: number) => {
     setCurrDay(day);
-    console.log(day);
+    // console.log(day);
 
     if (!!refDays.current) {
       refDays.current.scrollToItem(day, "smart");
@@ -133,7 +133,7 @@ const DaysComponent = () => {
     return (
       <div style={style}>
         <DaysItem
-          style={{ borderColor: today - 1 === data[index].dayNum ? "#ff0000" : "#fff" }}
+          style={{ borderColor: today - 1 === data[index].dayNum ? "#ff6600" : "#fff" }}
           onClick={() => setDay(data[index].dayNum)}
           currDay={currDay === data[index].dayNum}
           type="button"
