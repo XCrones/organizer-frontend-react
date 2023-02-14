@@ -126,7 +126,7 @@ const DaysComponent = () => {
       };
     });
     SetDaysMonth(filledArray);
-    // setDay(currDay);
+    setDay(currDay);
   }, [date.monthNum]);
 
   const Column = memo(({ index, style, data }: IColumn) => {
