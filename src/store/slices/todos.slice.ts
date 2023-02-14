@@ -84,7 +84,6 @@ export const Todos = createSlice({
       .addCase(fetchTodos.fulfilled, (state, action) => {
         state.pending.getAll = false;
         state.todos = action.payload;
-        console.log(action.payload);
       })
       .addCase(fetchTodos.rejected, (state) => {
         state.pending.getAll = false;
