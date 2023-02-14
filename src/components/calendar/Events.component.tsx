@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useDate } from "../../hooks/date";
-import { DayNum, Days, DaysItem, DaysItems, DayWeeek, MonthCurr, MonthNext, MonthPrev, Moth } from "./Days.style";
+import { DayNum, Days, DaysItem, DaysItems, DayWeeek, MonthCurr, MonthNext, MonthPrev, Moth } from "./Events.style";
 import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";

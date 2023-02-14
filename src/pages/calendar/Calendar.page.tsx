@@ -1,4 +1,4 @@
-import DaysComponent from "../../components/calendar/Days.component";
+import DaysComponent from "../../components/calendar/Events.component";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { CalendarItems, CalendarWrapper } from "./Calendar.style";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IParseEvent } from "./Days.component";
+import { IParseEvent } from "./Events.component";
 import {
   EventDescription,
   EventItem,
