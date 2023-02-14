@@ -7,9 +7,6 @@ export const SheduleItems = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  &:last-child {
-    margin-bottom: 30px;
-  }
 `;
 
 export const SheduleItem = styled.div`
