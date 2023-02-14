@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice, Dispatch } from "@reduxjs/toolkit";
 
-export interface IUserData {}
+export interface IUserData {
+  email: string;
+  name: string;
+  urlAvatar: string | null;
+}
 
 export interface IAuthUser {
   email: string;
@@ -8,6 +12,7 @@ export interface IAuthUser {
 }
 
 interface IStateInitial {
+  userData: IUserData;
   isAuth: boolean;
   isPending: boolean;
   error: {
@@ -32,7 +37,7 @@ export const authSignIn = createAsyncThunk<
   };
 
   await asd();
-  return fulfillWithValue({});
+  return rejectWithValue("");
 });
 
 export const authSignUp = createAsyncThunk<
@@ -51,8 +56,24 @@ export const authSignUp = createAsyncThunk<
   };
 
   await asd();
-  return fulfillWithValue({});
+  return rejectWithValue("");
 });
+
+export const logOut = createAsyncThunk<void, void, { dispatch: Dispatch; rejectValue: void; fullFilled: void }>(
+  "auth/logOut",
+  async function (_, { rejectWithValue, fulfillWithValue }) {
+    const asd = (): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+    };
+
+    await asd();
+    return rejectWithValue();
+  }
+);
 
 const initialStateValue: IStateInitial = {
   isAuth: true,
@@ -60,6 +81,11 @@ const initialStateValue: IStateInitial = {
   error: {
     state: false,
     value: "",
+  },
+  userData: {
+    email: "test@mail.com",
+    name: "name",
+    urlAvatar: null,
   },
 };
 
@@ -85,6 +111,15 @@ export const Auth = createSlice({
         state.isPending = false;
       })
       .addCase(authSignUp.rejected, (state, action) => {
+        state.isPending = false;
+      })
+      .addCase(logOut.pending, (state) => {
+        state.isPending = true;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.isPending = false;
+      })
+      .addCase(logOut.rejected, (state) => {
         state.isPending = false;
       });
   },
