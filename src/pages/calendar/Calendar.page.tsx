@@ -124,7 +124,7 @@ const CalendarPage = () => {
       <div style={style}>
         <DaysItem
           style={{
-            borderColor: isCurrDate(+data[index].dayNum, +data[index].monthNum) ? "#ff6600" : "#fff",
+            borderColor: isCurrDate(+data[index].dayNum, +data[index].monthNum) ? "#ff4800" : "#fff",
           }}
           onClick={() => updateEvents(data[index].dayNum)}
           currDay={selectDay === data[index].dayNum}
