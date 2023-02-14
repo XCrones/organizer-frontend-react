@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { fonts } from "../../style/variables.style";
 
 export const CalendarWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
   display: flex;
   flex-direction: column;
   row-gap: 25px;
