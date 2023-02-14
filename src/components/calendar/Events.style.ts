@@ -1,4 +1,4 @@
-import { fonts } from "./../../style/variables.style";
+import { fonts } from "../../style/variables.style";
 import styled from "styled-components";
 
 export const Days = styled.div`
