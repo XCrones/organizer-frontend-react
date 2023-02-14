@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { IParseEvent } from "./Events.component";
+import { IParseEvent } from "../../models/calendar.models";
 import {
   EventDescription,
   EventItem,
   Events,
   EventTitle,
-  EventWrapper,
+  SheduleEvents,
   SheduleItem,
   SheduleItems,
   SheduleLine,
   SheduleTime,
-  SheduleWrapper,
+  Shedule,
 } from "./Shedule.style";
 
 interface Props {
@@ -21,7 +21,7 @@ const SheduleComponent = ({ events }: Props) => {
   const [times] = useState<number[]>(Array.from(Array(24), (_, idx) => idx));
 
   return (
-    <SheduleWrapper>
+    <Shedule>
       <SheduleItems>
         {times.map((_, idx) => (
           <SheduleItem key={idx}>
@@ -29,7 +29,7 @@ const SheduleComponent = ({ events }: Props) => {
             <SheduleLine />
           </SheduleItem>
         ))}
-        <EventWrapper>
+        <SheduleEvents>
           <Events>
             {events.map((event) => (
               <EventItem
@@ -43,9 +43,9 @@ const SheduleComponent = ({ events }: Props) => {
               </EventItem>
             ))}
           </Events>
-        </EventWrapper>
+        </SheduleEvents>
       </SheduleItems>
-    </SheduleWrapper>
+    </Shedule>
   );
 };
 

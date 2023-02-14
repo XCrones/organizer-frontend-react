@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Elem = styled.div``;
-
-export const SheduleWrapper = styled.div``;
+export const Shedule = styled.div``;
 
 export const SheduleItems = styled.div`
   position: relative;
@@ -51,7 +49,7 @@ export const SheduleLine = styled.div<{}>`
   }
 `;
 
-export const EventWrapper = styled.div`
+export const SheduleEvents = styled.div`
   position: absolute;
   top: 0;
   left: 75px;
