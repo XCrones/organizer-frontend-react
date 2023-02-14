@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { authSignUp, IAuthUser } from "../../store/slices/auth.slice";
+import { GButton } from "../../style/components/button.style";
 import AuthPreloaderComponent from "./AuthPreloader.component";
 import {
   AuthForm,
@@ -12,7 +13,6 @@ import {
   AuthAlternativeItems,
   AuthAlternativeTitle,
   AuthLink,
-  AuthSubmit,
   AuthFormItems,
   AuthField,
   AuthErr,
@@ -138,7 +138,9 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
         <AuthLink></AuthLink>
       </AuthAlternativeItems>
 
-      <AuthSubmit type="submit">sign up</AuthSubmit>
+      <GButton type="submit" color1="#266ED7" color2="#4D8AEB">
+        sign up
+      </GButton>
 
       <AuthToggleForm onClick={() => toggleForm()} type="button">
         I have an account, Login

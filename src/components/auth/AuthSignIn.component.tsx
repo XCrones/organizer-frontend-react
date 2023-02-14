@@ -13,7 +13,6 @@ import {
   AuthAlternativeItems,
   AuthAlternativeTitle,
   AuthLink,
-  AuthSubmit,
   AuthFormItems,
   AuthField,
   AuthErr,

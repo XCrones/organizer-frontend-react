@@ -113,17 +113,6 @@ export const AuthLink = styled.a`
   }
 `;
 
-export const AuthSubmit = styled.button`
-  height: 50px;
-  width: 100%;
-  background: rgb(8, 69, 159);
-  background: linear-gradient(142deg, rgba(8, 69, 159, 1) 0%, rgba(19, 75, 163, 1) 100%);
-  text-transform: capitalize;
-  font-size: 14px;
-  line-height: 19px;
-  margin-bottom: 10px;
-`;
-
 export const AuthToggleForm = styled.button`
   font-size: 14px;
   line-height: 15px;
