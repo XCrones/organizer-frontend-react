@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IParseEvent } from "../../models/calendar.models";
 import {
-  EventDescription,
   EventItem,
   Events,
   EventTitle,
@@ -39,7 +38,6 @@ const SheduleComponent = ({ events }: Props) => {
                 startTime={event.startTime}
               >
                 <EventTitle>{event.title}</EventTitle>
-                <EventDescription>{event.description}</EventDescription>
               </EventItem>
             ))}
           </Events>
