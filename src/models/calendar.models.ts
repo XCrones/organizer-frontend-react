@@ -11,3 +11,12 @@ export interface IEventCreate {
 }
 
 export interface IEvent extends IEventCreate, IBaseInfo {}
+
+export interface IParseEvent {
+  id: number;
+  startTime: number;
+  edntTime: number;
+  background: string;
+  title: string;
+  description: string;
+}
