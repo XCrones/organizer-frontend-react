@@ -71,10 +71,19 @@ export const EventItem = styled.div<{ startTime: number; edntTime: number; backg
   height: ${(props) => (props.edntTime - props.startTime) * 40 - 4}px;
   left: 0;
   right: 0;
-  background-color: ${(props) => props.background};
-  text-align: center;
+  background-color: ${(props) => `${props.background}50`};
   border-radius: 5px;
   padding: 5px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: ${(props) => props.background};
+    border-radius: 5px 0 0 5px;
+  }
 `;
 
 export const EventTitle = styled.h4`
@@ -82,11 +91,5 @@ export const EventTitle = styled.h4`
   overflow: hidden;
   white-space: nowrap;
   text-transform: capitalize;
-`;
-
-export const EventDescription = styled.h4`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  color: #8eb5f2;
+  padding-left: 10px;
 `;
