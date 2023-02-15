@@ -7,6 +7,7 @@ export const color = {
   todoBtnTommorow: "#4886E8",
   colorAuth: "#5e5c55",
   colorAuthTitle: "#8f8a79",
+  colorSettings: "#383b5f",
 };
 
 export const fonts = {
