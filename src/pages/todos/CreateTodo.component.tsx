@@ -13,7 +13,7 @@ import {
   PopupPallete,
 } from "../../components/popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
-import { IJoinEvent } from "../../models/calendar.models";
+import { IJoinTodo } from "../../models/todos.models";
 import { color } from "../../style/variables.style";
 
 interface Props {
@@ -36,13 +36,14 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const metaData: IJoinEvent = {
+      const metaData: IJoinTodo = {
         uid: 1,
-        eventStart: data["startEvent"],
-        eventEnd: data["endEvent"],
-        title: data["eventName"],
-        description: data["description"],
-        background: currColor,
+        title: data["todoName"],
+        category: "",
+        priority: 0,
+        deadline: data["deadLine"],
+        status: false,
+        descritption: data["description"],
       };
       console.log(metaData);
       // dispatch(joinEvent(metaData));
@@ -56,7 +57,7 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
       <PopupItems>
         <PopupItem>
           <PopupEventName
-            {...register("eventName", {
+            {...register("todoName", {
               required: "required filed",
               minLength: 2,
             })}
@@ -67,7 +68,7 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
         <PopupItem>
           <PopupTitle>deadline:</PopupTitle>
           <PopupEventDate
-            {...register("startEvent", {
+            {...register("deadLine", {
               required: "required filed",
             })}
             type="datetime-local"
