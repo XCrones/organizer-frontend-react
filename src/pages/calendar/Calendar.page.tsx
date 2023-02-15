@@ -9,7 +9,7 @@ import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
 import { fetchEvents } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
-import CreatingComponent from "../../components/creating/Creating.component";
+import CreateEventComponent from "./CreateEvent.component";
 
 interface IDay {
   dayStr: string;
@@ -169,7 +169,7 @@ const CalendarPage = () => {
           </List>
         </DaysList>
         <SheduleComponent events={events} />
-        {!isHideCreate && <CreatingComponent callbackClose={() => SetHideCreate(true)} title="event" />}
+        {!isHideCreate && <CreateEventComponent callbackClose={() => SetHideCreate(true)} title="event" />}
       </Events>
     </CalendarWrapper>
   );
