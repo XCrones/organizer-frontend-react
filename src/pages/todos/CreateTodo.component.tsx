@@ -97,17 +97,17 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
           <PopupRadioItems>
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(0)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect="#ff0000" rounded={50} isSelect={priority === 0} />
+              <GRadioRaplace colorSelect={color.priority.hight} rounded={50} isSelect={priority === 0} />
             </GRadioItem>
 
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(1)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect="#ff8800" rounded={50} isSelect={priority === 1} />
+              <GRadioRaplace colorSelect={color.priority.medium} rounded={50} isSelect={priority === 1} />
             </GRadioItem>
 
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(2)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect="#00ff00" rounded={50} isSelect={priority === 2} />
+              <GRadioRaplace colorSelect={color.priority.low} rounded={50} isSelect={priority === 2} />
             </GRadioItem>
           </PopupRadioItems>
         </PopupItem>
