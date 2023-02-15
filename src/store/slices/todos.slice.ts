@@ -1,6 +1,6 @@
 import { RootState } from "..";
 import axios from "../../axios";
-import { ITodo, ITodoCreate } from "./../../models/todos.models";
+import { IJoinTodo, ITodo } from "./../../models/todos.models";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface IStateInitial {
@@ -36,10 +36,11 @@ export const fetchOneTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo;
   }
 );
 
-export const addTodo = createAsyncThunk<ITodo, ITodoCreate, { fullFilled: ITodo; rejectValue: void }>(
+export const joinTodo = createAsyncThunk<ITodo, IJoinTodo, { fullFilled: ITodo; rejectValue: void }>(
   "todos/addTodo",
-  async function (todoItem, { fulfillWithValue, rejectWithValue }) {
-    const { data } = await axios.post<ITodo>("todos", todoItem);
+  async function (newTodo, { fulfillWithValue, rejectWithValue }) {
+    const { data } = await axios.post<ITodo>("todos", newTodo);
+
     if (!!data) {
       return fulfillWithValue(data);
     }
@@ -101,15 +102,15 @@ export const Todos = createSlice({
         state.pending.getOne = false;
       })
       //
-      .addCase(addTodo.pending, (state) => {
+      .addCase(joinTodo.pending, (state) => {
         state.pending.addNew = true;
       })
-      .addCase(addTodo.fulfilled, (state, action) => {
+      .addCase(joinTodo.fulfilled, (state, action) => {
         state.pending.addNew = false;
         console.log(action.payload);
         // state.todos.push(action.payload);
       })
-      .addCase(addTodo.rejected, (state) => {
+      .addCase(joinTodo.rejected, (state) => {
         state.pending.addNew = false;
         state.todos = [...state.todos];
       })

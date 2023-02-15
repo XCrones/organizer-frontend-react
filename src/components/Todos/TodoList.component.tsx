@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { addTodo, fetchOneTodo, fetchTodos, editTodo } from "../../store/slices/todos.slice";
+import { joinTodo, fetchOneTodo, fetchTodos, editTodo } from "../../store/slices/todos.slice";
 import { ITodo } from "../../models/todos.models";
 import TodoItemComponent from "./TodoItem.component";
 import { TodoListEmpty, TodoListItems, TodoListTitle, TodoListWrapper } from "./TodoList.style";
