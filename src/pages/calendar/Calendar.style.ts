@@ -14,6 +14,7 @@ export const Events = styled.div`
   padding-right: 20px;
   font-size: 17px;
   font-family: ${fonts.inter};
+  position: relative;
 `;
 
 export const DaysList = styled.div`
