@@ -3,12 +3,13 @@ import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from "./Calendar.style";
 import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
 import { fetchEvents } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
+import CreatingComponent from "../../components/creating/Creating.component";
 
 interface IDay {
   dayStr: string;
@@ -23,46 +24,37 @@ interface IColumn {
 }
 
 const CalendarPage = () => {
+  const dispatch = useAppDispatch();
+  const calendarEvents = useAppSelector((state) => state.calendar.events);
+
+  const [isHideCreate, SetHideCreate] = useState(true);
+  const [daysMonth, SetDaysMonth] = useState<IDay[]>([]);
+  const [events, SetEvents] = useState<IParseEvent[]>([]);
+  const [updateRef, SetUpdateRef] = useState(false);
+
+  const { dateParse, next, prev, jump, selectDate, dateLocal } = useDate();
+  const { size } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
+
+  const refListDays = useRef<FixedSizeList | null>(null);
+
   const buttonsHeader: IButtonHeader[] = [
     {
-      callback: callbackPlus,
+      callback: () => {},
       icon: "bi bi-search",
     },
     {
-      callback: callbackSearch,
+      callback: () => SetHideCreate(false),
       icon: "bi bi-plus-lg",
     },
   ];
 
-  const dispatch = useAppDispatch();
-
-  const [todayDate] = useState({
-    day: +new Date().toLocaleString("en-US", { day: "numeric" }),
-    month: +new Date().toLocaleString("en-US", { month: "numeric" }),
-  });
-
-  const calendarEvents = useAppSelector((state) => state.calendar.events);
-
-  const [daysMonth, SetDaysMonth] = useState<IDay[]>([]);
-  const [selectDay, SetSelectDay] = useState(0);
-  const [events, SetEvents] = useState<IParseEvent[]>([]);
-
-  const { size } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
-  const { date, month } = useDate();
-
-  const refListDays = useRef<FixedSizeList | null>(null);
-
-  function callbackPlus() {}
-  function callbackSearch() {}
-
   const parseEvents = (events: IEvent[]) => {
-    SetEvents([]);
     events.forEach((event) => {
-      const startTime = String(event.eventStart).split("T")[1].split(".")[0];
-      const endTime = String(event.eventEnd).split("T")[1].split(".")[0];
+      const hourSTart = new Date(Date.parse(event.eventStart)).toLocaleTimeString();
+      const hourEnd = new Date(Date.parse(event.eventEnd)).toLocaleTimeString();
       const parseEvent: IParseEvent = {
-        startTime: +startTime.split(":")[0],
-        edntTime: +endTime.split(":")[0],
+        hourStart: +hourSTart.split(":")[0],
+        hourEnd: +hourEnd.split(":")[0],
         title: event.title,
         background: event.background,
         id: event.id,
@@ -72,21 +64,17 @@ const CalendarPage = () => {
     });
   };
 
-  const updateEvents = (day: number) => {
-    SetSelectDay(day);
+  const updateEvents = () => {
+    SetEvents([]);
 
-    if (!!refListDays.current) {
-      refListDays.current.scrollToItem(day, "smart");
+    if (!updateRef) {
+      SetUpdateRef(true);
     }
 
     try {
-      const dateISO = new Date(+date.yearNum, +date.monthNum - 1, day + 1)
-        .toLocaleString()
-        .split(",")[0]
-        .split(".")
-        .reverse()
-        .join("-");
-      const findEvents = calendarEvents.filter((item) => String(item.eventStart).split("T")[0] === dateISO);
+      const findEvents = calendarEvents.filter(
+        (event) => new Date(Date.parse(event.eventStart)).toLocaleDateString() === selectDate.toLocaleDateString()
+      );
       parseEvents(findEvents);
     } catch (e) {
       SetEvents([]);
@@ -94,43 +82,61 @@ const CalendarPage = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(fetchEvents());
   }, []);
 
   useEffect(() => {
-    updateEvents(+date.dayNum - 1);
+    if (dateParse.daysMonth !== -1) {
+      const fillMonth = Array.from(Array(dateParse.daysMonth), (_, idx) => {
+        return {
+          dayStr: new Date(dateParse.year, dateParse.monthNum, idx + 1).toLocaleString("en-US", {
+            weekday: "short",
+          }),
+          dayNum: idx,
+          monthNum: dateParse.monthNum,
+        };
+      });
+      SetDaysMonth(fillMonth);
+      updateEvents();
+    }
+  }, [dateParse]);
+
+  useEffect(() => {
+    if (calendarEvents.length > 0) {
+      updateEvents();
+    }
   }, [calendarEvents]);
 
   useEffect(() => {
-    const countDays = 33 - new Date(+date.yearNum, +date.monthNum - 1, 33).getDate();
-    const filledArray = Array.from(Array(countDays), (_, idx) => {
-      return {
-        dayStr: new Date(+date.yearNum, +date.monthNum - 1, idx + 1).toLocaleString("en-US", {
-          weekday: "short",
-        }),
-        dayNum: idx,
-        monthNum: +date.monthNum - 1,
-      };
-    });
-    SetDaysMonth(filledArray);
-    updateEvents(selectDay);
-  }, [date.monthNum]);
-
-  const isCurrDate = (day: number, month: number) => todayDate.day - 1 === day && +todayDate.month - 1 === month;
+    if (updateRef) {
+      if (!!refListDays.current && updateRef) {
+        refListDays.current.scrollToItem(dateParse.day, "smart");
+        SetUpdateRef(false);
+      }
+    }
+  }, [updateRef]);
 
   const Column = memo(({ index, style, data }: IColumn) => {
+    const isSelectDay = (day: number, month: number) =>
+      +selectDate.toLocaleDateString().split(".")[0] - 1 === day &&
+      +selectDate.toLocaleDateString().split(".")[1] - 1 === month;
+
+    const isToday = (day: number, month: number) =>
+      +dateLocal.toLocaleDateString().split(".")[0] - 1 === day &&
+      +dateLocal.toLocaleDateString().split(".")[1] - 1 === month;
+
     return (
       <div style={style}>
         <DaysItem
           style={{
-            borderColor: isCurrDate(+data[index].dayNum, +data[index].monthNum) ? "#ff4800" : "#fff",
+            borderColor: isToday(+data[index].dayNum, +data[index].monthNum) ? "#ff4800" : "#fff",
           }}
-          onClick={() => updateEvents(data[index].dayNum)}
-          currDay={selectDay === data[index].dayNum}
+          onClick={() => jump.day(data[index].dayNum)}
+          currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
           type="button"
         >
-          <DayWeeek currDay={selectDay === data[index].dayNum}>{data[index].dayStr}</DayWeeek>
+          <DayWeeek currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}>{data[index].dayStr}</DayWeeek>
           <DayNum>{data[index].dayNum + 1}</DayNum>
         </DaysItem>
         <div style={{ width: "10px" }}></div>
@@ -142,7 +148,12 @@ const CalendarPage = () => {
     <CalendarWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
       <Events>
-        <MonthComponent monthStr={date.monthStr} yearNum={date.yearNum} nextMonth={month.next} prevMonth={month.prev} />
+        <MonthComponent
+          monthStr={dateParse.month}
+          yearNum={dateParse.year}
+          nextMonth={next.month}
+          prevMonth={prev.month}
+        />
         <DaysList>
           <List
             ref={refListDays}
@@ -158,6 +169,7 @@ const CalendarPage = () => {
           </List>
         </DaysList>
         <SheduleComponent events={events} />
+        {!isHideCreate && <CreatingComponent callbackClose={() => SetHideCreate(true)} title="event" />}
       </Events>
     </CalendarWrapper>
   );
