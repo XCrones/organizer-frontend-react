@@ -8,6 +8,11 @@ export const color = {
   colorAuth: "#5e5c55",
   colorAuthTitle: "#8f8a79",
   colorSettings: "#383b5f",
+  priority: {
+    hight: "#ff0000",
+    medium: "#ff8800",
+    low: "#00ff00",
+  },
   pallete: [
     "#0066ff",
     "#6666ff",
