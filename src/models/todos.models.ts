@@ -5,7 +5,7 @@ export interface IJoinTodo {
   title: string;
   category: string;
   priority: number;
-  deadline: Date;
+  deadline: string;
   status: boolean;
   descritption: string;
   background: string;
