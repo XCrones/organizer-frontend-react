@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { color } from "../../style/variables.style";
 
 export const PopupWrapper = styled.form`
-  position: absolute;
-  top: 0px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  /* position: absolute; */
+  /* margin-left: 10px;
+  margin-right: 10px; */
   border-radius: 10px 10px 0 0;
   background-color: #111219;
   padding: 5px;
