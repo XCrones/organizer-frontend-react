@@ -4,7 +4,7 @@ interface Props {
   nextMonth: Function;
   prevMonth: Function;
   monthStr: string;
-  yearNum: string;
+  yearNum: number;
 }
 
 const MonthComponent = ({ monthStr, nextMonth, prevMonth, yearNum }: Props) => {
