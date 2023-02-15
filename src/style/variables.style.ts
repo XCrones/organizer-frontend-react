@@ -8,6 +8,20 @@ export const color = {
   colorAuth: "#5e5c55",
   colorAuthTitle: "#8f8a79",
   colorSettings: "#383b5f",
+  pallete: [
+    "#0066ff",
+    "#6666ff",
+    "#ff33cc",
+    "#ff0066",
+    "#ff6600",
+    "#ccff33",
+    "#cc33ff",
+    "#66ff33",
+    "#00ff00",
+    "#00ffcc",
+    "#ff3300",
+    "#ffcc00",
+  ],
 };
 
 export const fonts = {
