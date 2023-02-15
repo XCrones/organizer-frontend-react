@@ -112,7 +112,6 @@ export const useDate = () => {
   };
 
   return {
-    makeDate,
     currDate,
     dateParse,
     next,
