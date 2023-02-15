@@ -147,30 +147,32 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
-      <Events>
-        <MonthComponent
-          monthStr={dateParse.monthStr}
-          yearNum={dateParse.year}
-          nextMonth={next.month}
-          prevMonth={prev.month}
-        />
-        <DaysList>
-          <List
-            ref={refListDays}
-            overscanCount={2}
-            height={60}
-            itemSize={60}
-            itemCount={daysMonth.length}
-            itemData={daysMonth}
-            layout="horizontal"
-            width={size.windowWidth - 40} // padding-left: 20px + padding-right: 20px
-          >
-            {Column}
-          </List>
-        </DaysList>
-        <SheduleComponent events={events} />
-        {!isHideCreate && <CreateEventComponent callbackClose={() => SetHideCreate(true)} title="event" />}
-      </Events>
+      {isHideCreate && (
+        <Events>
+          <MonthComponent
+            monthStr={dateParse.monthStr}
+            yearNum={dateParse.year}
+            nextMonth={next.month}
+            prevMonth={prev.month}
+          />
+          <DaysList>
+            <List
+              ref={refListDays}
+              overscanCount={2}
+              height={60}
+              itemSize={60}
+              itemCount={daysMonth.length}
+              itemData={daysMonth}
+              layout="horizontal"
+              width={size.windowWidth - 40} // padding-left: 20px + padding-right: 20px
+            >
+              {Column}
+            </List>
+          </DaysList>
+          <SheduleComponent events={events} />
+        </Events>
+      )}
+      {!isHideCreate && <CreateEventComponent callbackClose={() => SetHideCreate(true)} title="event" />}
     </CalendarWrapper>
   );
 };
