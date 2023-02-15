@@ -10,9 +10,11 @@ import {
   PopupEventDate,
   PopupDescription,
   PopupPallete,
+  PopupRadioItems,
 } from "../../components/popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo } from "../../models/todos.models";
+import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 
 interface Props {
@@ -22,6 +24,7 @@ interface Props {
 
 const CreateTodoComponent = ({ callbackClose, title }: Props) => {
   const dispatch = useAppDispatch();
+  const [priority, SetPriority] = useState<0 | 1 | 2>(0);
 
   const [currColor, SetColor] = useState(color.pallete[0]);
 
@@ -38,8 +41,8 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
       const metaData: IJoinTodo = {
         uid: 1,
         title: data["todoName"],
-        category: "",
-        priority: 0,
+        category: data["category"],
+        priority: priority,
         deadline: data["deadLine"],
         status: false,
         descritption: data["description"],
@@ -56,11 +59,27 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
       <PopupItems>
         <PopupItem>
           <PopupEventName
+            minLength={2}
+            maxLength={20}
             {...register("todoName", {
               required: "required filed",
               minLength: 2,
+              maxLength: 20,
             })}
             placeholder={`${title} name`}
+            type="text"
+          />
+        </PopupItem>
+        <PopupItem>
+          <PopupEventName
+            minLength={2}
+            maxLength={20}
+            {...register("category", {
+              required: "required filed",
+              minLength: 2,
+              maxLength: 20,
+            })}
+            placeholder={"category"}
             type="text"
           />
         </PopupItem>
@@ -74,13 +93,32 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
           />
         </PopupItem>
         <PopupItem>
+          <PopupTitle>priority:</PopupTitle>
+          <PopupRadioItems>
+            <GRadioItem size={30}>
+              <input onClick={() => SetPriority(0)} name="priority" type="radio" />
+              <GRadioRaplace colorSelect="#ff0000" rounded={50} isSelect={priority === 0} />
+            </GRadioItem>
+
+            <GRadioItem size={30}>
+              <input onClick={() => SetPriority(1)} name="priority" type="radio" />
+              <GRadioRaplace colorSelect="#ff8800" rounded={50} isSelect={priority === 1} />
+            </GRadioItem>
+
+            <GRadioItem size={30}>
+              <input onClick={() => SetPriority(2)} name="priority" type="radio" />
+              <GRadioRaplace colorSelect="#00ff00" rounded={50} isSelect={priority === 2} />
+            </GRadioItem>
+          </PopupRadioItems>
+        </PopupItem>
+        <PopupItem>
           <PopupDescription
-            maxLength={200}
+            maxLength={100}
             {...register("description", {
               required: false,
-              maxLength: 200,
+              maxLength: 100,
             })}
-            rows={6}
+            rows={2}
             placeholder={`${title} description`}
           />
         </PopupItem>
