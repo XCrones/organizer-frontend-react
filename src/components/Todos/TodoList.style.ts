@@ -2,8 +2,6 @@ import { fonts } from "../../style/variables.style";
 import styled from "styled-components";
 
 export const TodoListWrapper = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 35px;
