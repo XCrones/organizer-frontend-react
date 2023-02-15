@@ -6,7 +6,6 @@ interface IDate {
   monthNum: number;
   daysMonth: number;
   day: number;
-  weekDay: string;
   hour: number;
   min: number;
 }
@@ -19,7 +18,6 @@ export const useDate = () => {
     monthNum: -1,
     month: "",
     daysMonth: -1,
-    weekDay: "",
     day: -1,
     hour: -1,
     min: -1,
@@ -41,7 +39,6 @@ export const useDate = () => {
           +currDate.toLocaleString("en-US", { month: "numeric" }) - 1,
           33
         ).getDate(),
-      weekDay: currDate.toLocaleString("en-US", { weekday: "short" }),
       day: +currDate.toLocaleString("en-US", { day: "numeric" }),
       hour: +currDate.toLocaleString("en-US", { hour: "numeric", hour12: false }),
       min: +currDate.toLocaleString("en-US", { minute: "numeric" }),
