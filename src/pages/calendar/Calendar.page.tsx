@@ -123,8 +123,8 @@ const CalendarPage = () => {
       +selectDate.toLocaleDateString().split(".")[1] - 1 === month;
 
     const isToday = (day: number, month: number) =>
-      +dateLocal.toLocaleDateString().split(".")[0] - 1 === day &&
-      +dateLocal.toLocaleDateString().split(".")[1] - 1 === month;
+      +currDate.toLocaleDateString().split(".")[0] - 1 === day &&
+      +currDate.toLocaleDateString().split(".")[1] - 1 === month;
 
     return (
       <div style={style}>
