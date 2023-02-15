@@ -59,7 +59,7 @@ const CreateEventComponent = ({ callbackClose, title }: Props) => {
               required: "required filed",
               minLength: 2,
             })}
-            placeholder={`${title} eventName`}
+            placeholder={`${title} name`}
             type="text"
           />
         </PopupItem>
@@ -89,6 +89,7 @@ const CreateEventComponent = ({ callbackClose, title }: Props) => {
               maxLength: 200,
             })}
             rows={6}
+            placeholder={`${title} description`}
           />
         </PopupItem>
         <PopupItem>
