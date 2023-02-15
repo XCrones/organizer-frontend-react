@@ -26,9 +26,9 @@ const TodosPage = () => {
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
       {isHideCreate && (
         <Todos>
-          <Examples>
+          {/* <Examples>
             <TodoExampleComponent />
-          </Examples>
+          </Examples> */}
           <Items>
             <TodoListComponent />
           </Items>
