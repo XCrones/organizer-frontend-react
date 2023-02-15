@@ -34,8 +34,8 @@ const SheduleComponent = ({ events }: Props) => {
               <EventItem
                 key={event.id}
                 background={event.background}
-                edntTime={event.edntTime}
-                startTime={event.startTime}
+                edntTime={event.hourEnd}
+                startTime={event.hourStart}
               >
                 <EventTitle>{event.title}</EventTitle>
               </EventItem>
