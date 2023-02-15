@@ -65,7 +65,7 @@ export const PopupEventName = styled(DefaultInput)`
 `;
 
 export const PopupTitle = styled.h3`
-  flex: 0 0 70px;
+  flex: 0 0 80px;
   text-transform: capitalize;
 `;
 
