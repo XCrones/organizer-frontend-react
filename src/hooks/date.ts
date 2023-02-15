@@ -1,209 +1,126 @@
 import { useEffect, useState } from "react";
 
 interface IDate {
-  yearNum: string;
-  monthStr: string;
-  monthNum: string;
-  dayNum: string;
-  hour24: string;
-  minute: string;
-  weekDayShort: string;
+  year: number;
+  month: string;
+  monthNum: number;
+  daysMonth: number;
+  day: number;
+  weekDay: string;
+  hour: number;
+  min: number;
 }
 
-type setCurrDate = Date;
+export const useDate = () => {
+  const [dateLocal] = useState<Date>(new Date());
+  const [selectDate, SetSelectDate] = useState(new Date());
+  const [dateParse, SetDateParse] = useState<IDate>({
+    year: -1,
+    monthNum: -1,
+    month: "",
+    daysMonth: -1,
+    weekDay: "",
+    day: -1,
+    hour: -1,
+    min: -1,
+  });
 
-export const useDate = (setCurrDate?: setCurrDate) => {
-  const [date, SetDate] = useState<IDate>(updateDate());
-
-  useEffect(() => {
-    if (!!setCurrDate) {
-      updateDate(setCurrDate);
-    }
-  }, [setCurrDate]);
-
-  function updateDate(date?: setCurrDate): IDate {
+  function makeDate(date?: string) {
     let currDate = new Date();
-
     if (!!date) {
-      currDate = date;
+      currDate = new Date(Date.parse(date));
     }
-
-    return {
-      monthStr: currDate.toLocaleString("en-US", { month: "long" }),
-      monthNum: currDate.toLocaleString("en-US", { month: "numeric" }),
-      yearNum: currDate.toLocaleString("en-US", { year: "numeric" }),
-      dayNum: currDate.toLocaleString("en-US", { day: "numeric" }),
-      hour24: currDate.toLocaleString("en-US", { hour: "numeric", hour12: false }),
-      minute: currDate.toLocaleString("en-US", { minute: "numeric" }),
-      weekDayShort: currDate.toLocaleString("en-US", { weekday: "short" }),
+    const tempDate: IDate = {
+      year: +currDate.toLocaleString("en-US", { year: "numeric" }),
+      monthNum: +currDate.toLocaleString("en-US", { month: "numeric" }) - 1,
+      month: currDate.toLocaleString("en-US", { month: "long" }),
+      daysMonth:
+        33 -
+        new Date(
+          +currDate.toLocaleString("en-US", { year: "numeric" }),
+          +currDate.toLocaleString("en-US", { month: "numeric" }) - 1,
+          33
+        ).getDate(),
+      weekDay: currDate.toLocaleString("en-US", { weekday: "short" }),
+      day: +currDate.toLocaleString("en-US", { day: "numeric" }),
+      hour: +currDate.toLocaleString("en-US", { hour: "numeric", hour12: false }),
+      min: +currDate.toLocaleString("en-US", { minute: "numeric" }),
     };
+    SetDateParse(tempDate);
+    SetSelectDate(currDate);
   }
 
-  const year = {
-    prev: (year?: number) => {
-      const newDate = new Date(
-        !!year ? +date.yearNum - year : +date.yearNum - 1,
-        +date.monthNum - 1,
-        +date.dayNum,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+  useEffect(() => {
+    makeDate();
+  }, []);
+
+  const next = {
+    year: () => {
+      const newDate = new Date(selectDate);
+      newDate.setFullYear(dateParse.year + 1);
+      makeDate(newDate.toISOString());
     },
-    next: (year?: number) => {
-      const newDate = new Date(
-        !!year ? +date.yearNum + year : +date.yearNum + 1,
-        +date.monthNum - 1,
-        +date.dayNum,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+    month: () => {
+      const newDate = new Date(selectDate);
+      newDate.setMonth(dateParse.monthNum + 1);
+      makeDate(newDate.toISOString());
     },
-    jump: (year: number) => {
-      const newDate = new Date(Math.max(1970, year), +date.monthNum - 1, +date.dayNum, +date.hour24, +date.minute);
-      SetDate(updateDate(newDate));
+    day: () => {
+      const newDate = new Date(selectDate);
+      newDate.setDate(dateParse.day + 1);
+      makeDate(newDate.toISOString());
     },
+    hour: () => {},
+    minute: () => {},
   };
 
-  const month = {
-    prev: (month?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        !!month ? +date.monthNum - 1 - month : +date.monthNum - 2,
-        +date.dayNum,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+  const prev = {
+    year: () => {
+      const newDate = new Date(selectDate);
+      newDate.setFullYear(dateParse.year - 1);
+      makeDate(newDate.toISOString());
     },
-    next: (month?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        !!month ? +date.monthNum - 1 + month : +date.monthNum,
-        +date.dayNum,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+    month: () => {
+      const newDate = new Date(selectDate);
+      newDate.setMonth(dateParse.monthNum - 1);
+      makeDate(newDate.toISOString());
     },
-    jump: (month: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        Math.max(0, Math.min(11, month)),
-        +date.dayNum,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+    day: () => {
+      const newDate = new Date(selectDate);
+      newDate.setDate(dateParse.day - 1);
+      makeDate(newDate.toISOString());
     },
+    hour: () => {},
+    minute: () => {},
   };
 
-  const day = {
-    prev: (day?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        !!day ? +date.dayNum - day : +date.dayNum - 1,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+  const jump = {
+    year: (year: number) => {
+      const newDate = new Date(selectDate);
+      newDate.setFullYear(dateParse.year + 1);
+      makeDate(newDate.toISOString());
     },
-    next: (day?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        !!day ? +date.dayNum + day : +date.dayNum + 1,
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+    month: (month: number) => {
+      const newDate = new Date(selectDate);
+      newDate.setMonth(month);
+      makeDate(newDate.toISOString());
     },
-    jump: (day: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        Math.min(0, Math.max(31, day)),
-        +date.hour24,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
+    day: (day: number) => {
+      const newDate = new Date(selectDate);
+      newDate.setDate(day + 1);
+      makeDate(newDate.toISOString());
     },
-  };
-
-  const hour = {
-    prev: (hour?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        !!hour ? +date.hour24 - hour : +date.hour24 - 1,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
-    },
-    next: (hour?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        !!hour ? +date.hour24 + hour : +date.hour24 + 1,
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
-    },
-    jump: (hour: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        Math.min(0, Math.max(23, hour)),
-        +date.minute
-      );
-      SetDate(updateDate(newDate));
-    },
-  };
-
-  const minute = {
-    prev: (minute?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        +date.hour24,
-        !!minute ? +date.minute - minute : +date.minute - 1
-      );
-      SetDate(updateDate(newDate));
-    },
-    next: (minute?: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        +date.hour24,
-        !!minute ? +date.minute + minute : +date.minute + 1
-      );
-      SetDate(updateDate(newDate));
-    },
-    jump: (minute: number) => {
-      const newDate = new Date(
-        +date.yearNum,
-        +date.monthNum - 1,
-        +date.dayNum,
-        +date.hour24,
-        Math.min(0, Math.max(59, minute))
-      );
-      SetDate(updateDate(newDate));
-    },
+    hour: () => {},
+    minute: () => {},
   };
 
   return {
-    date,
-    year,
-    month,
-    day,
-    hour,
-    minute,
+    makeDate,
+    dateLocal,
+    dateParse,
+    next,
+    prev,
+    jump,
+    selectDate,
   };
 };
