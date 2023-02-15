@@ -11,7 +11,7 @@ interface IDate {
 }
 
 export const useDate = () => {
-  const [dateLocal] = useState<Date>(new Date());
+  const [currDate] = useState<Date>(new Date());
   const [selectDate, SetSelectDate] = useState(new Date());
   const [dateParse, SetDateParse] = useState<IDate>({
     year: -1,
@@ -113,7 +113,7 @@ export const useDate = () => {
 
   return {
     makeDate,
-    dateLocal,
+    currDate,
     dateParse,
     next,
     prev,

@@ -32,7 +32,7 @@ const CalendarPage = () => {
   const [events, SetEvents] = useState<IParseEvent[]>([]);
   const [updateRef, SetUpdateRef] = useState(false);
 
-  const { dateParse, next, prev, jump, selectDate, dateLocal } = useDate();
+  const { dateParse, next, prev, jump, selectDate, currDate } = useDate();
   const { size } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
 
   const refListDays = useRef<FixedSizeList | null>(null);
