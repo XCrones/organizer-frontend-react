@@ -24,15 +24,17 @@ const TodosPage = () => {
   return (
     <TodosWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
-      <Todos>
-        <Examples>
-          <TodoExampleComponent />
-        </Examples>
-        <Items>
-          <TodoListComponent />
-        </Items>
-        {!isHideCreate && <CreateTodoComponent callbackClose={() => SetHideCreate(true)} title="todo" />}
-      </Todos>
+      {isHideCreate && (
+        <Todos>
+          <Examples>
+            <TodoExampleComponent />
+          </Examples>
+          <Items>
+            <TodoListComponent />
+          </Items>
+        </Todos>
+      )}
+      {!isHideCreate && <CreateTodoComponent callbackClose={() => SetHideCreate(true)} title="todo" />}
     </TodosWrapper>
   );
 };
