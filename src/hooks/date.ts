@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 interface IDate {
   year: number;
-  month: string;
+  monthStr: string;
   monthNum: number;
   daysMonth: number;
   day: number;
@@ -16,7 +16,7 @@ export const useDate = () => {
   const [dateParse, SetDateParse] = useState<IDate>({
     year: -1,
     monthNum: -1,
-    month: "",
+    monthStr: "",
     daysMonth: -1,
     day: -1,
     hour: -1,
@@ -31,7 +31,7 @@ export const useDate = () => {
     const tempDate: IDate = {
       year: +currDate.toLocaleString("en-US", { year: "numeric" }),
       monthNum: +currDate.toLocaleString("en-US", { month: "numeric" }) - 1,
-      month: currDate.toLocaleString("en-US", { month: "long" }),
+      monthStr: currDate.toLocaleString("en-US", { month: "long" }),
       daysMonth:
         33 -
         new Date(

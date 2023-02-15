@@ -149,7 +149,7 @@ const CalendarPage = () => {
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
       <Events>
         <MonthComponent
-          monthStr={dateParse.month}
+          monthStr={dateParse.monthStr}
           yearNum={dateParse.year}
           nextMonth={next.month}
           prevMonth={prev.month}
