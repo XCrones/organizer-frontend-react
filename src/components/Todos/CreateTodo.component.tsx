@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import PopupComponent from "../../components/popup/Popup.component";
+import PopupComponent from "../popup/Popup.component";
 import {
   PopupWrapper,
   PopupItems,
@@ -11,7 +11,7 @@ import {
   PopupDescription,
   PopupPallete,
   PopupRadioItems,
-} from "../../components/popup/Popup.style";
+} from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo } from "../../models/todos.models";
 import { joinTodo } from "../../store/slices/todos.slice";

@@ -3,7 +3,7 @@ import TodoExampleComponent from "../../components/todos/TodoExample.component";
 import { Examples, Items, Todos, TodosWrapper } from "./Todos.style";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useState } from "react";
-import CreateTodoComponent from "./CreateTodo.component";
+import CreateTodoComponent from "../../components/todos/CreateTodo.component";
 
 interface Props {}
 
