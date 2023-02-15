@@ -96,3 +96,10 @@ export const PopupPallete = styled.div`
     }
   }
 `;
+
+export const PopupRadioItems = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+`;
