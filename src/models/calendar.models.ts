@@ -6,17 +6,32 @@ export interface IEventCreate {
   eventEnd: Date;
   title: string;
   description: string;
-  color: string;
   background: string;
 }
 
-export interface IEvent extends IEventCreate, IBaseInfo {}
+export interface IEvent extends IBaseInfo {
+  uid: number;
+  eventStart: string;
+  eventEnd: string;
+  title: string;
+  description: string;
+  background: string;
+}
 
 export interface IParseEvent {
   id: number;
-  startTime: number;
-  edntTime: number;
+  hourStart: number;
+  hourEnd: number;
   background: string;
   title: string;
+  description: string;
+}
+
+export interface IJoinEvent {
+  uid: number;
+  title: string;
+  eventStart: Date;
+  eventEnd: Date;
+  background: string;
   description: string;
 }
