@@ -60,23 +60,14 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
               required: "required filed",
               minLength: 2,
             })}
-            placeholder={`${title} eventName`}
+            placeholder={`${title} name`}
             type="text"
           />
         </PopupItem>
         <PopupItem>
-          <PopupTitle>start:</PopupTitle>
+          <PopupTitle>deadline:</PopupTitle>
           <PopupEventDate
             {...register("startEvent", {
-              required: "required filed",
-            })}
-            type="datetime-local"
-          />
-        </PopupItem>
-        <PopupItem>
-          <PopupTitle>end:</PopupTitle>
-          <PopupEventDate
-            {...register("endEvent", {
               required: "required filed",
             })}
             type="datetime-local"
@@ -90,6 +81,7 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
               maxLength: 200,
             })}
             rows={6}
+            placeholder={`${title} description`}
           />
         </PopupItem>
         <PopupItem>
