@@ -18,8 +18,12 @@ const Scroll = styled.div`
 `;
 
 export const TodosWrapper = styled.div`
-  height: 100%;
+  /* height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px; */
+
   display: flex;
   flex-direction: column;
   row-gap: 25px;
@@ -30,10 +34,20 @@ export const TodoHeader = styled.header<{}>`
   padding-right: 20px;
 `;
 
+export const Todos = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  position: relative;
+`;
+
 export const Examples = styled.div<{}>`
   flex: 0 0 140px;
 `;
 
 export const Items = styled.div`
   flex: 1 1 auto;
+  position: relative;
 `;
