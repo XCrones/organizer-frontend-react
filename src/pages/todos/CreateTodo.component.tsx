@@ -14,6 +14,7 @@ import {
 } from "../../components/popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo } from "../../models/todos.models";
+import { joinTodo } from "../../store/slices/todos.slice";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 
@@ -46,10 +47,11 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
         deadline: data["deadLine"],
         status: false,
         descritption: data["description"],
+        background: currColor,
       };
       console.log(metaData);
-      // dispatch(joinEvent(metaData));
-      // callbackClose();
+      dispatch(joinTodo(metaData));
+      callbackClose();
     }
   };
 
