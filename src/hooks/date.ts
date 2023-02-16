@@ -111,6 +111,20 @@ export const useDate = () => {
     minute: () => {},
   };
 
+  const makeLocalDate = (date: string | undefined) => {
+    try {
+      if (!!date) {
+        const fullParseDate = new Date(Date.parse(date)).toLocaleString();
+        const parseDate = fullParseDate.split(",")[0];
+        const parseTime = fullParseDate.split(",")[1];
+        return `${parseDate.split(".").reverse().join("-")}T${parseTime.trim()}`;
+      }
+      return "";
+    } catch (err) {
+      return "";
+    }
+  };
+
   return {
     currDate,
     dateParse,
@@ -118,5 +132,6 @@ export const useDate = () => {
     prev,
     jump,
     selectDate,
+    makeLocalDate,
   };
 };
