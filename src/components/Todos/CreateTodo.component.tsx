@@ -49,7 +49,6 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
         descritption: data["description"],
         background: currColor,
       };
-      console.log(metaData);
       dispatch(joinTodo(metaData));
       callbackClose();
     }
