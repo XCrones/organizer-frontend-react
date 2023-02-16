@@ -71,9 +71,12 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
       <PopupItems>
         <PopupItem>
           <PopupEventName
+            minLength={2}
+            maxLength={30}
             {...register("eventName", {
               required: "required filed",
               minLength: 2,
+              maxLength: 30,
               value: item?.title,
             })}
             placeholder={`${titleWindow} name`}
