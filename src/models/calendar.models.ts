@@ -21,7 +21,9 @@ export interface IEvent extends IBaseInfo {
 export interface IParseEvent {
   id: number;
   hourStart: number;
+  minuteStart: number;
   hourEnd: number;
+  minuteEnd: number;
   background: string;
   title: string;
   description: string;
