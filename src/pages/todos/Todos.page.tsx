@@ -4,7 +4,7 @@ import { useLayoutEffect, useMemo, useState } from "react";
 import CreateTodoComponent from "../../components/todos/TodoEditor.component";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ITodo } from "../../models/todos.models";
-import { patchTodo, fetchTodos, joinTodo } from "../../store/slices/todos.slice";
+import { patchTodo, fetchTodos, joinTodo, deleteTodo } from "../../store/slices/todos.slice";
 import TodoItemComponent from "../../components/todos/ListItem.component";
 import TodoExampleComponent from "../../components/todos/TodoExample.component";
 import SortComponent from "../../components/sort/Sort.component";
@@ -205,6 +205,7 @@ const TodosPage = () => {
             titleWindow="todo"
             titleSubmit="join"
             callbackSubmit={joinTodo}
+            isShowDelete={false}
           />
         )}
         {!isHideEdit && (
@@ -214,6 +215,8 @@ const TodosPage = () => {
             titleWindow="todo"
             titleSubmit="save"
             callbackSubmit={patchTodo}
+            isShowDelete={true}
+            callbackDelete={deleteTodo}
           />
         )}
         {!isHideSort && <SortComponent />}
