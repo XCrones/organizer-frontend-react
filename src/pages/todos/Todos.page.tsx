@@ -183,11 +183,8 @@ const TodosPage = () => {
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
       <Todos>
         {/* <Examples>
-            <TodoExampleComponent />
-          </Examples> */}
-        {/* <Items>
-            <TodoListComponent />
-          </Items> */}
+          <TodoExampleComponent />
+        </Examples> */}
         <ListItems>
           {memoizeList.map((item) => (
             <ListItem isHide={item.todos.length === 0} key={item.title}>
