@@ -37,8 +37,8 @@ const SheduleComponent = ({ events, callbackEdit }: Props) => {
                 onClick={() => callbackEdit(event.id)}
                 key={event.id}
                 background={event.background}
-                edntTime={event.hourEnd}
-                startTime={event.hourStart}
+                endTime={{ hour: event.hourEnd, minute: event.minuteEnd }}
+                startTime={{ hour: event.hourStart, minute: event.minuteStart }}
               >
                 <EventTitle>{event.title}</EventTitle>
                 <EventDescription>{event.description}</EventDescription>
