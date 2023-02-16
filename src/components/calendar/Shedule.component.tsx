@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IParseEvent } from "../../models/calendar.models";
+import { IEvent, IParseEvent } from "../../models/calendar.models";
 import {
   EventItem,
   Events,
@@ -14,9 +14,10 @@ import {
 
 interface Props {
   events: IParseEvent[];
+  callbackEdit: Function;
 }
 
-const SheduleComponent = ({ events }: Props) => {
+const SheduleComponent = ({ events, callbackEdit }: Props) => {
   const [times] = useState<number[]>(Array.from(Array(24), (_, idx) => idx));
 
   return (
@@ -32,6 +33,7 @@ const SheduleComponent = ({ events }: Props) => {
           <Events>
             {events.map((event) => (
               <EventItem
+                onClick={() => callbackEdit(event.id)}
                 key={event.id}
                 background={event.background}
                 edntTime={event.hourEnd}
