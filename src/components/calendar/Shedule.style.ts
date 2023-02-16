@@ -62,10 +62,21 @@ export const Events = styled.div`
   position: relative;
 `;
 
-export const EventItem = styled.div<{ startTime: number; edntTime: number; background: string }>`
+interface ITime {
+  hour: number;
+  minute: number;
+}
+
+interface IEventItem {
+  startTime: ITime;
+  endTime: ITime;
+  background: string;
+}
+
+export const EventItem = styled.div<IEventItem>`
   position: absolute;
-  top: ${(props) => props.startTime * 40 + 10 + 2}px;
-  height: ${(props) => (props.edntTime - props.startTime) * 40 - 4}px;
+  top: ${(props) => props.startTime.hour * 40 + 10 + (40 * props.startTime.minute) / 60}px;
+  height: ${(props) => (props.endTime.hour - props.startTime.hour) * 40 + (40 * props.endTime.minute) / 60}px;
   left: 0;
   right: 0;
   background-color: ${(props) => `${props.background}50`};
