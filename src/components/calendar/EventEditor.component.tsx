@@ -14,7 +14,6 @@ import {
 } from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
-import { joinEvent } from "../../store/slices/calendar.slice";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
 
@@ -22,10 +21,11 @@ interface Props {
   titleWindow: string;
   titleSubmit: string;
   callbackClose: Function;
+  callbackSubmit: Function;
   item?: IEvent;
 }
 
-const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }: Props) => {
+const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item, callbackSubmit }: Props) => {
   const dispatch = useAppDispatch();
 
   const [currColor, SetColor] = useState(color.pallete[0]);
@@ -41,15 +41,24 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const metaData: IJoinEvent = {
-        uid: 1,
-        eventStart: data["startEvent"],
-        eventEnd: data["endEvent"],
-        title: data["eventName"],
-        description: data["description"],
-        background: currColor,
-      };
-      dispatch(joinEvent(metaData));
+      if (!!item) {
+        item.eventStart = data["startEvent"];
+        item.eventEnd = data["endEvent"];
+        item.title = data["eventName"];
+        item.description = data["description"];
+        item.background = currColor;
+        dispatch(callbackSubmit(item));
+      } else {
+        const metaData: IJoinEvent = {
+          uid: 1,
+          eventStart: data["startEvent"],
+          eventEnd: data["endEvent"],
+          title: data["eventName"],
+          description: data["description"],
+          background: currColor,
+        };
+        dispatch(callbackSubmit(metaData));
+      }
       callbackClose();
     }
   };
