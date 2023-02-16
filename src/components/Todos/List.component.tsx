@@ -39,6 +39,13 @@ const TodosListComponent = () => {
     dispatch(editTodo(todoItem));
   };
 
+  const editItem = (item: ITodo) => {
+    const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
+    console.log(item);
+    // todoItem.status = !todoItem.status;
+    // dispatch(editTodo(todoItem));
+  };
+
   useLayoutEffect(() => {
     dispatch(fetchTodos());
   }, []);
@@ -112,6 +119,7 @@ const TodosListComponent = () => {
   useEffect(() => {
     if (todos.length > 0) {
       SetList(Object.values(memoizeList));
+      console.log(memoizeList);
     }
   }, [todos]);
 
@@ -121,7 +129,7 @@ const TodosListComponent = () => {
         <ListItem key={item.title}>
           <ListTitle>{item.title}</ListTitle>
           {item.todos.map((todo) => (
-            <TodoItemComponent key={todo.id} item={todo} background={todo.background} toggleStatus={toggleStatus} />
+            <TodoItemComponent key={todo.id} item={todo} callbackToggle={toggleStatus} callbackEdit={editItem} />
           ))}
         </ListItem>
       ))}
