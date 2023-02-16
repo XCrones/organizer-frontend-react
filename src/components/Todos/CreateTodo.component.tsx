@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import PopupComponent from "../popup/Popup.component";
 import {
@@ -13,20 +13,22 @@ import {
   PopupPalleteItem,
 } from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
-import { IJoinTodo } from "../../models/todos.models";
-import { joinTodo } from "../../store/slices/todos.slice";
+import { IJoinTodo, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 
 interface Props {
-  title: string;
+  titleWindow: string;
+  titleSubmit: string;
   callbackClose: Function;
+  callbackSubmit: Function;
+  item?: ITodo;
 }
 
-const CreateTodoComponent = ({ callbackClose, title }: Props) => {
+const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, callbackSubmit }: Props) => {
   const dispatch = useAppDispatch();
-  const [priority, SetPriority] = useState<0 | 1 | 2>(0);
 
+  const [priority, SetPriority] = useState<number>(0);
   const [currColor, SetColor] = useState(color.pallete[0]);
 
   const {
@@ -39,23 +41,58 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const metaData: IJoinTodo = {
-        uid: 1,
-        title: data["todoName"],
-        category: data["category"],
-        priority: priority,
-        deadline: data["deadLine"],
-        status: false,
-        background: currColor,
-      };
-      dispatch(joinTodo(metaData));
+      if (!!item) {
+        item.title = data["todoName"];
+        item.background = currColor;
+        item.category = data["category"];
+        item.priority = priority;
+        item.deadline = data["deadLine"];
+        dispatch(callbackSubmit(item));
+      } else {
+        const metaData: IJoinTodo = {
+          uid: 1,
+          title: data["todoName"],
+          category: data["category"],
+          priority: priority,
+          deadline: data["deadLine"],
+          status: false,
+          background: currColor,
+        };
+        dispatch(callbackSubmit(metaData));
+      }
       callbackClose();
+    }
+  };
+
+  useEffect(() => {
+    if (!!item) {
+      SetPriority(item.priority);
+      SetColor(item.background);
+    }
+  }, [item]);
+
+  const makeDate = (date: string | undefined) => {
+    try {
+      if (!!date) {
+        const fullParseDate = new Date(Date.parse(date)).toLocaleString();
+        const parseDate = fullParseDate.split(",")[0];
+        const parseTime = fullParseDate.split(",")[1];
+        return `${parseDate.split(".").reverse().join("-")}T${parseTime.trim()}`;
+      }
+      return "";
+    } catch (err) {
+      return "";
     }
   };
 
   return (
     <PopupWrapper onSubmit={handleSubmit(onSubmit)}>
-      <PopupComponent isDisableSubmit={isValid} title={title} callbackCancel={callbackClose} />
+      <PopupComponent
+        titleSubmit={titleSubmit}
+        isDisableSubmit={isValid}
+        title={titleWindow}
+        callbackCancel={callbackClose}
+      />
       <PopupItems>
         <PopupItem>
           <PopupEventName
@@ -65,8 +102,9 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
               required: "required filed",
               minLength: 2,
               maxLength: 20,
+              value: item?.title,
             })}
-            placeholder={`${title} name`}
+            placeholder={`${titleWindow} name`}
             type="text"
           />
         </PopupItem>
@@ -78,6 +116,7 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
               required: "required filed",
               minLength: 2,
               maxLength: 20,
+              value: item?.category,
             })}
             placeholder={"category"}
             type="text"
@@ -88,6 +127,7 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
           <PopupEventDate
             {...register("deadLine", {
               required: "required filed",
+              value: !!item ? makeDate(item.deadline) : "",
             })}
             type="datetime-local"
           />
