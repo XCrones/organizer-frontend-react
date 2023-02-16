@@ -1,4 +1,4 @@
-import { Examples, ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
+import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
 import CreateTodoComponent from "../../components/todos/TodoEditor.component";
@@ -6,10 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ITodo } from "../../models/todos.models";
 import { patchTodo, fetchTodos, joinTodo, deleteTodo } from "../../store/slices/todos.slice";
 import TodoItemComponent from "../../components/todos/ListItem.component";
-import TodoExampleComponent from "../../components/todos/TodoExample.component";
 import SortComponent from "../../components/sort/Sort.component";
-
-interface Props {}
 
 interface IParsingTodo {
   title: string;
