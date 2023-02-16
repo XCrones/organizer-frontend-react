@@ -12,7 +12,7 @@ interface Props {
 
 const TodoItemComponent = ({ item, callbackEdit, callbackToggle }: Props) => {
   const parseDate = (date: string): string => {
-    const parseDate = new Date(Date.parse(date)).toLocaleDateString();
+    const parseDate = new Date(Date.parse(date)).toLocaleString();
     return parseDate;
   };
 
