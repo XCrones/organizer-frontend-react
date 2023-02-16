@@ -10,6 +10,7 @@ import {
   SheduleLine,
   SheduleTime,
   Shedule,
+  EventDescription,
 } from "./Shedule.style";
 
 interface Props {
@@ -40,6 +41,7 @@ const SheduleComponent = ({ events, callbackEdit }: Props) => {
                 startTime={event.hourStart}
               >
                 <EventTitle>{event.title}</EventTitle>
+                <EventDescription>{event.description}</EventDescription>
               </EventItem>
             ))}
           </Events>
