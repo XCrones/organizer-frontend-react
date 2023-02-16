@@ -70,7 +70,9 @@ export const EventItem = styled.div<{ startTime: number; edntTime: number; backg
   right: 0;
   background-color: ${(props) => `${props.background}50`};
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
   &::before {
     content: "";
     position: absolute;
@@ -84,9 +86,20 @@ export const EventItem = styled.div<{ startTime: number; edntTime: number; backg
 `;
 
 export const EventTitle = styled.h4`
+  flex: 0 0 30px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   text-transform: capitalize;
-  padding-left: 10px;
+`;
+
+export const EventDescription = styled.h5`
+  flex: 1 1 auto;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
