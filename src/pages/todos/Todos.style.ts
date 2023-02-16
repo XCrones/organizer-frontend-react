@@ -21,7 +21,7 @@ const Scroll = styled.div`
 export const TodosWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 25px;
+  row-gap: 10px;
 `;
 
 export const TodoHeader = styled.header<{}>`
