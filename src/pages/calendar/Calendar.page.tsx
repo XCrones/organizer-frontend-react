@@ -9,7 +9,7 @@ import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
 import { fetchEvents } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
-import CreateEventComponent from "../../components/calendar/CreateEvent.component";
+import CreateEventComponent from "../../components/calendar/EventEditor.component";
 
 interface IDay {
   dayStr: string;
@@ -147,33 +147,31 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
-      {isHideCreate && (
-        <Events>
-          <MonthComponent
-            monthStr={dateParse.monthStr}
-            yearNum={dateParse.year}
-            nextMonth={next.month}
-            prevMonth={prev.month}
-          />
-          <DaysList>
-            <List
-              ref={refListDays}
-              overscanCount={2}
-              height={60}
-              itemSize={60}
-              itemCount={daysMonth.length}
-              itemData={daysMonth}
-              layout="horizontal"
-              width={size.windowWidth - 40} // padding-left: 20px + padding-right: 20px
-            >
-              {Column}
-            </List>
-          </DaysList>
-          <SheduleComponent events={events} />
-        </Events>
-      )}
+      <Events>
+        <MonthComponent
+          monthStr={dateParse.monthStr}
+          yearNum={dateParse.year}
+          nextMonth={next.month}
+          prevMonth={prev.month}
+        />
+        <DaysList>
+          <List
+            ref={refListDays}
+            overscanCount={2}
+            height={60}
+            itemSize={60}
+            itemCount={daysMonth.length}
+            itemData={daysMonth}
+            layout="horizontal"
+            width={size.windowWidth - 40} // padding-left: 20px + padding-right: 20px
+          >
+            {Column}
+          </List>
+        </DaysList>
+        <SheduleComponent events={events} />
+      </Events>
       {!isHideCreate && (
-        <CreateEventComponent callbackClose={() => SetHideCreate(true)} titleWindow="event" titleSubmit="" />
+        <CreateEventComponent callbackClose={() => SetHideCreate(true)} titleWindow="event" titleSubmit="join" />
       )}
     </CalendarWrapper>
   );
