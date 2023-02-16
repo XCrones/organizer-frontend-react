@@ -1,4 +1,4 @@
-import TodoListComponent from "../../components/todos/TodoList.component";
+import TodoListComponent from "../../components/todos/List.component";
 import TodoExampleComponent from "../../components/todos/TodoExample.component";
 import { Examples, Items, Todos, TodosWrapper } from "./Todos.style";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
