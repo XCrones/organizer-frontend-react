@@ -39,11 +39,11 @@ export const fetchOneTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo;
 export const joinTodo = createAsyncThunk<ITodo, IJoinTodo, { fullFilled: ITodo; rejectValue: void }>(
   "todos/addTodo",
   async function (newTodo, { fulfillWithValue, rejectWithValue }) {
-    // const { data } = await axios.post<ITodo>("todos", newTodo);
+    const { data } = await axios.post<ITodo>("todos", newTodo);
 
-    // if (!!data) {
-    //   return fulfillWithValue(data);
-    // }
+    if (!!data) {
+      return fulfillWithValue(data);
+    }
     return rejectWithValue();
   }
 );
@@ -107,12 +107,10 @@ export const Todos = createSlice({
       })
       .addCase(joinTodo.fulfilled, (state, action) => {
         state.pending.addNew = false;
-        console.log(action.payload);
-        // state.todos.push(action.payload);
+        state.todos.push(action.payload);
       })
       .addCase(joinTodo.rejected, (state) => {
         state.pending.addNew = false;
-        // state.todos = [...state.todos];
       })
       //
       .addCase(editTodo.pending, (state) => {
