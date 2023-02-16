@@ -1,5 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { color } from "../../style/variables.style";
+
+const slider = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+`;
 
 export const PopupWrapper = styled.form`
   position: fixed;
@@ -8,9 +18,10 @@ export const PopupWrapper = styled.form`
   right: 0;
   bottom: 49px;
   border-radius: 10px 10px 0 0;
-  background-color: ${color.mainBg}; //#111219
+  background-color: ${color.mainBg};
   padding: 5px;
   z-index: 10;
+  animation: ${slider} 150ms linear;
 `;
 
 export const PopupHeader = styled.div<{}>`
@@ -19,7 +30,7 @@ export const PopupHeader = styled.div<{}>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 10px;
   text-transform: capitalize;
 `;
 
