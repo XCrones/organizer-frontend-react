@@ -56,7 +56,9 @@ const CalendarPage = () => {
       const hourEnd = new Date(Date.parse(event.eventEnd)).toLocaleTimeString();
       const parseEvent: IParseEvent = {
         hourStart: +hourSTart.split(":")[0],
+        minuteStart: +hourSTart.split(":")[1],
         hourEnd: +hourEnd.split(":")[0],
+        minuteEnd: +hourEnd.split(":")[1],
         title: event.title,
         background: event.background,
         id: event.id,
