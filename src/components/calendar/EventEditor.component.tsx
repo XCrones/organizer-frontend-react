@@ -16,6 +16,7 @@ import { useAppDispatch } from "../../hooks/redux";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
 import { joinEvent } from "../../store/slices/calendar.slice";
 import { color } from "../../style/variables.style";
+import { useDate } from "../../hooks/date";
 
 interface Props {
   titleWindow: string;
@@ -28,6 +29,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
   const dispatch = useAppDispatch();
 
   const [currColor, SetColor] = useState(color.pallete[0]);
+  const { makeLocalDate } = useDate();
 
   const {
     register,
@@ -54,7 +56,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
 
   useEffect(() => {
     if (!!item) {
-      console.log(item);
+      SetColor(item.background);
     }
   }, [item]);
 
@@ -72,6 +74,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
             {...register("eventName", {
               required: "required filed",
               minLength: 2,
+              value: item?.title,
             })}
             placeholder={`${titleWindow} name`}
             type="text"
@@ -82,6 +85,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
           <PopupEventDate
             {...register("startEvent", {
               required: "required filed",
+              value: !!item ? makeLocalDate(item.eventStart) : "",
             })}
             type="datetime-local"
           />
@@ -91,6 +95,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
           <PopupEventDate
             {...register("endEvent", {
               required: "required filed",
+              value: !!item ? makeLocalDate(item.eventEnd) : "",
             })}
             type="datetime-local"
           />
@@ -101,6 +106,7 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
             {...register("description", {
               required: false,
               maxLength: 200,
+              value: item?.description,
             })}
             rows={6}
             placeholder={`${titleWindow} description`}
