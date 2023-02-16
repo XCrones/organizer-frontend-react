@@ -27,10 +27,10 @@ export const fetchTodos = createAsyncThunk<ITodo[], undefined, { fullFilled: ITo
 export const fetchOneTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo; rejectValue: void }>(
   "todos/fetchOneTodo",
   async function (id, { fulfillWithValue, rejectWithValue }) {
-    // const { data } = await axios.get<ITodo>(`todos/${id}`);
-    // if (!!data) {
-    //   return fulfillWithValue(data);
-    // }
+    const { data } = await axios.get<ITodo>(`todos/${id}`);
+    if (!!data) {
+      return fulfillWithValue(data);
+    }
     return rejectWithValue();
   }
 );
