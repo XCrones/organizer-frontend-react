@@ -27,10 +27,12 @@ const CalendarPage = () => {
   const dispatch = useAppDispatch();
   const calendarEvents = useAppSelector((state) => state.calendar.events);
 
+  const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideCreate, SetHideCreate] = useState(true);
   const [daysMonth, SetDaysMonth] = useState<IDay[]>([]);
   const [events, SetEvents] = useState<IParseEvent[]>([]);
   const [updateRef, SetUpdateRef] = useState(false);
+  const [editEvent, SetEditEvent] = useState<IEvent | undefined>();
 
   const { dateParse, next, prev, jump, selectDate, currDate } = useDate();
   const { size } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
@@ -144,6 +146,14 @@ const CalendarPage = () => {
     );
   }, areEqual);
 
+  const callbackEdit = (id: number) => {
+    const findEvent = calendarEvents.find((event) => event.id === id);
+    if (!!findEvent) {
+      SetEditEvent(findEvent);
+      SetHideEdit(false);
+    }
+  };
+
   return (
     <CalendarWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
@@ -168,10 +178,18 @@ const CalendarPage = () => {
             {Column}
           </List>
         </DaysList>
-        <SheduleComponent events={events} />
+        <SheduleComponent callbackEdit={callbackEdit} events={events} />
       </Events>
       {!isHideCreate && (
         <CreateEventComponent callbackClose={() => SetHideCreate(true)} titleWindow="event" titleSubmit="join" />
+      )}
+      {!isHideEdit && (
+        <CreateEventComponent
+          callbackClose={() => SetHideEdit(true)}
+          titleWindow="event"
+          titleSubmit="save"
+          item={editEvent}
+        />
       )}
     </CalendarWrapper>
   );
