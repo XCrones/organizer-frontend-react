@@ -7,7 +7,7 @@ import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
-import { fetchEvents } from "../../store/slices/calendar.slice";
+import { fetchEvents, joinEvent, patchEvent } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
 import CreateEventComponent from "../../components/calendar/EventEditor.component";
 
@@ -149,7 +149,7 @@ const CalendarPage = () => {
   const callbackEdit = (id: number) => {
     const findEvent = calendarEvents.find((event) => event.id === id);
     if (!!findEvent) {
-      SetEditEvent(findEvent);
+      SetEditEvent(JSON.parse(JSON.stringify(findEvent)));
       SetHideEdit(false);
     }
   };
@@ -181,10 +181,16 @@ const CalendarPage = () => {
         <SheduleComponent callbackEdit={callbackEdit} events={events} />
       </Events>
       {!isHideCreate && (
-        <CreateEventComponent callbackClose={() => SetHideCreate(true)} titleWindow="event" titleSubmit="join" />
+        <CreateEventComponent
+          callbackSubmit={joinEvent}
+          callbackClose={() => SetHideCreate(true)}
+          titleWindow="event"
+          titleSubmit="join"
+        />
       )}
       {!isHideEdit && (
         <CreateEventComponent
+          callbackSubmit={patchEvent}
           callbackClose={() => SetHideEdit(true)}
           titleWindow="event"
           titleSubmit="save"
