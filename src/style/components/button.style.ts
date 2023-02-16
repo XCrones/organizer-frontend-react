@@ -8,5 +8,4 @@ export const GButton = styled.button<{ color1: string; color2: string }>`
   text-transform: capitalize;
   font-size: 14px;
   line-height: 19px;
-  margin-bottom: 10px;
 `;
