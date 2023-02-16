@@ -1,7 +1,6 @@
-import { RootState } from "..";
 import axios from "../../axios";
 import { IJoinTodo, ITodo } from "./../../models/todos.models";
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface IStateInitial {
   todos: ITodo[];
@@ -62,6 +61,18 @@ export const patchTodo = createAsyncThunk<ITodo, ITodo, { fullFilled: ITodo; rej
   }
 );
 
+export const deleteTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo; rejectValue: void }>(
+  "todos/deleteTodo",
+  async function (id, { fulfillWithValue, rejectWithValue }) {
+    const { data } = await axios.delete<ITodo>(`todos/${id}`);
+
+    if (!!data) {
+      return fulfillWithValue(data);
+    }
+    return rejectWithValue();
+  }
+);
+
 const initialStateValue: IStateInitial = {
   pending: {
     getAll: false,
@@ -88,7 +99,6 @@ export const Todos = createSlice({
       })
       .addCase(fetchTodos.rejected, (state) => {
         state.pending.getAll = false;
-        // state.todos = [...state.todos];
       })
       //
       .addCase(fetchOneTodo.pending, (state) => {
@@ -96,7 +106,6 @@ export const Todos = createSlice({
       })
       .addCase(fetchOneTodo.fulfilled, (state, action) => {
         state.pending.getOne = false;
-        // console.log(action.payload);
       })
       .addCase(fetchOneTodo.rejected, (state) => {
         state.pending.getOne = false;
@@ -127,6 +136,20 @@ export const Todos = createSlice({
       })
       .addCase(patchTodo.rejected, (state) => {
         state.pending.change = false;
+      })
+      //
+      .addCase(deleteTodo.pending, (state) => {
+        state.pending.delete = true;
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.pending.delete = false;
+        const todoIndex = state.todos.findIndex((todo) => todo.id === action.payload.id);
+        if (todoIndex >= 0) {
+          state.todos.splice(todoIndex, 1);
+        }
+      })
+      .addCase(deleteTodo.rejected, (state) => {
+        state.pending.delete = false;
       });
   },
 });
