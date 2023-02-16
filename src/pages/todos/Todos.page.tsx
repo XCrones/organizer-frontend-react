@@ -1,7 +1,7 @@
 import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
-import CreateTodoComponent from "../../components/todos/CreateTodo.component";
+import CreateTodoComponent from "../../components/todos/TodoEditor.component";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ITodo } from "../../models/todos.models";
 import { patchTodo, fetchTodos, joinTodo } from "../../store/slices/todos.slice";
