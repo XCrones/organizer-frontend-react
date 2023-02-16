@@ -48,8 +48,8 @@ export const joinTodo = createAsyncThunk<ITodo, IJoinTodo, { fullFilled: ITodo; 
   }
 );
 
-export const editTodo = createAsyncThunk<ITodo, ITodo, { fullFilled: ITodo; rejectValue: void }>(
-  "todos/editTodo",
+export const patchTodo = createAsyncThunk<ITodo, ITodo, { fullFilled: ITodo; rejectValue: void }>(
+  "todos/patchTodo",
   async function (todoItem, { fulfillWithValue, rejectWithValue }) {
     const { data } = await axios.patch(`todos/${todoItem.id}`, todoItem);
     const [count, item] = data;
@@ -113,10 +113,10 @@ export const Todos = createSlice({
         state.pending.addNew = false;
       })
       //
-      .addCase(editTodo.pending, (state) => {
+      .addCase(patchTodo.pending, (state) => {
         state.pending.change = true;
       })
-      .addCase(editTodo.fulfilled, (state, action) => {
+      .addCase(patchTodo.fulfilled, (state, action) => {
         state.pending.change = false;
         if (!!action.payload) {
           const item = state.todos.find((item) => item.id === action.payload.id);
@@ -125,7 +125,7 @@ export const Todos = createSlice({
           }
         }
       })
-      .addCase(editTodo.rejected, (state) => {
+      .addCase(patchTodo.rejected, (state) => {
         state.pending.change = false;
       });
   },
