@@ -8,9 +8,9 @@ import {
   PopupEventName,
   PopupTitle,
   PopupEventDate,
-  PopupDescription,
   PopupPallete,
   PopupRadioItems,
+  PopupPalleteItem,
 } from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo } from "../../models/todos.models";
@@ -46,7 +46,6 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
         priority: priority,
         deadline: data["deadLine"],
         status: false,
-        descritption: data["description"],
         background: currColor,
       };
       dispatch(joinTodo(metaData));
@@ -113,24 +112,14 @@ const CreateTodoComponent = ({ callbackClose, title }: Props) => {
           </PopupRadioItems>
         </PopupItem>
         <PopupItem>
-          <PopupDescription
-            maxLength={100}
-            {...register("description", {
-              required: false,
-              maxLength: 100,
-            })}
-            rows={2}
-            placeholder={`${title} description`}
-          />
-        </PopupItem>
-        <PopupItem>
           <PopupPallete>
             {color.pallete.map((item) => (
-              <div
-                onClick={() => SetColor(item)}
+              <PopupPalleteItem
                 key={item}
-                style={{ backgroundColor: item, outline: item === currColor ? "1px solid #000" : "" }}
-              ></div>
+                onClick={() => SetColor(item)}
+                isSelect={item === currColor}
+                background={item}
+              ></PopupPalleteItem>
             ))}
           </PopupPallete>
         </PopupItem>
