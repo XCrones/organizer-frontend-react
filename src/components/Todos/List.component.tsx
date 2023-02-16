@@ -1,6 +1,6 @@
 import { useLayoutEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchTodos, editTodo } from "../../store/slices/todos.slice";
+import { fetchTodos, patchTodo } from "../../store/slices/todos.slice";
 import { ITodo } from "../../models/todos.models";
 import TodoItemComponent from "./ListItem.component";
 import { ListItem, ListItems, ListTitle } from "./List.style";
@@ -42,7 +42,7 @@ const TodosListComponent = () => {
   const toggleStatus = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     todoItem.status = !todoItem.status;
-    dispatch(editTodo(todoItem));
+    dispatch(patchTodo(todoItem));
   };
 
   const editItem = (item: ITodo) => {
