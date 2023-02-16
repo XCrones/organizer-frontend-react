@@ -85,15 +85,18 @@ export const PopupPallete = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  & > div {
-    cursor: pointer;
-    flex: 0 0 45px;
-    height: 45px;
-    border-radius: 5px;
-    &:hover {
-      outline: 1px solid #000;
-      transition: all 0.2s ease-in-out;
-    }
+`;
+
+export const PopupPalleteItem = styled.div<{ background: string; isSelect: boolean }>`
+  cursor: pointer;
+  flex: 0 0 45px;
+  height: 45px;
+  border-radius: 5px;
+  background-color: ${(props) => props.background};
+  border: ${(props) => (props.isSelect ? "2px solid #000" : "0")};
+  &:hover {
+    outline: 1px solid #000;
+    transition: all 0.2s ease-in-out;
   }
 `;
 
