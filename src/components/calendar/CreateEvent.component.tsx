@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import PopupComponent from "../../components/popup/Popup.component";
+import PopupComponent from "../popup/Popup.component";
 import {
   PopupEventName,
   PopupEventDate,
@@ -10,7 +10,7 @@ import {
   PopupWrapper,
   PopupDescription,
   PopupPallete,
-} from "../../components/popup/Popup.style";
+} from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IJoinEvent } from "../../models/calendar.models";
 import { joinEvent } from "../../store/slices/calendar.slice";
