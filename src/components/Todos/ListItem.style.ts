@@ -15,8 +15,11 @@ export const Item = styled.div<{ bgColor: string }>`
 `;
 
 export const ItemTitle = styled.h3<{}>`
+  max-width: 220px;
   font-size: 15px;
   font-family: ${fonts.inter};
+  text-overflow: ellipsis;
+  overflow: hidden;
   &::first-letter {
     text-transform: uppercase;
   }
@@ -28,9 +31,15 @@ export const ItemDate = styled.div<{}>`
 `;
 
 export const ItemInfo = styled.div`
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+`;
+
+export const ItemEdit = styled.button<{ color: string }>`
+  font-size: 22px;
+  color: ${(props) => props.color};
 `;
 
 export const ItemTriangle = styled.div<{ background: string }>`
