@@ -42,7 +42,7 @@ const CalendarPage = () => {
   const buttonsHeader: IButtonHeader[] = [
     {
       callback: () => {},
-      icon: "bi bi-search",
+      icon: "",
     },
     {
       callback: () => SetHideCreate(false),
