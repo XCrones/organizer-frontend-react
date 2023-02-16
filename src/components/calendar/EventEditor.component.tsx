@@ -10,6 +10,7 @@ import {
   PopupWrapper,
   PopupDescription,
   PopupPallete,
+  PopupPalleteItem,
 } from "../popup/Popup.style";
 import { useAppDispatch } from "../../hooks/redux";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
@@ -108,11 +109,12 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item }:
         <PopupItem>
           <PopupPallete>
             {color.pallete.map((item) => (
-              <div
-                onClick={() => SetColor(item)}
+              <PopupPalleteItem
                 key={item}
-                style={{ backgroundColor: item, outline: item === currColor ? "1px solid #000" : "" }}
-              ></div>
+                onClick={() => SetColor(item)}
+                isSelect={item === currColor}
+                background={item}
+              ></PopupPalleteItem>
             ))}
           </PopupPallete>
         </PopupItem>
