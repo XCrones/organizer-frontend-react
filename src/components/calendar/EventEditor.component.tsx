@@ -16,16 +16,27 @@ import { useAppDispatch } from "../../hooks/redux";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
+import { GButton } from "../../style/components/button.style";
 
 interface Props {
   titleWindow: string;
   titleSubmit: string;
   callbackClose: Function;
   callbackSubmit: Function;
+  callbackDelete?: Function;
+  isShowDelete: boolean;
   item?: IEvent;
 }
 
-const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item, callbackSubmit }: Props) => {
+const CreateEventComponent = ({
+  callbackClose,
+  titleSubmit,
+  titleWindow,
+  item,
+  callbackSubmit,
+  callbackDelete,
+  isShowDelete,
+}: Props) => {
   const dispatch = useAppDispatch();
 
   const [currColor, SetColor] = useState(color.pallete[0]);
@@ -61,6 +72,13 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item, c
       }
       callbackClose();
     }
+  };
+
+  const deleteItem = (id: number | undefined) => {
+    if (!!id && !!callbackDelete) {
+      dispatch(callbackDelete(id));
+    }
+    callbackClose();
   };
 
   useEffect(() => {
@@ -136,6 +154,19 @@ const CreateEventComponent = ({ callbackClose, titleSubmit, titleWindow, item, c
             ))}
           </PopupPallete>
         </PopupItem>
+        {isShowDelete && (
+          <PopupItem>
+            <GButton
+              onClick={() => deleteItem(item?.id)}
+              style={{ fontSize: "18px" }}
+              color1="#871111"
+              color2="#e03138"
+              type="button"
+            >
+              delete
+            </GButton>
+          </PopupItem>
+        )}
       </PopupItems>
     </PopupWrapper>
   );

@@ -7,7 +7,7 @@ import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
-import { fetchEvents, joinEvent, patchEvent } from "../../store/slices/calendar.slice";
+import { deleteEvent, fetchEvents, joinEvent, patchEvent } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
 import CreateEventComponent from "../../components/calendar/EventEditor.component";
 
@@ -186,6 +186,7 @@ const CalendarPage = () => {
           callbackClose={() => SetHideCreate(true)}
           titleWindow="event"
           titleSubmit="join"
+          isShowDelete={false}
         />
       )}
       {!isHideEdit && (
@@ -195,6 +196,8 @@ const CalendarPage = () => {
           titleWindow="event"
           titleSubmit="save"
           item={editEvent}
+          isShowDelete={true}
+          callbackDelete={deleteEvent}
         />
       )}
     </CalendarWrapper>

@@ -7,6 +7,7 @@ interface IStateInitial {
     getAll: boolean;
     join: boolean;
     patch: boolean;
+    delete: boolean;
   };
   events: IEvent[];
 }
@@ -16,6 +17,7 @@ const initialStateValue: IStateInitial = {
     getAll: false,
     join: false,
     patch: false,
+    delete: false,
   },
   events: [],
 };
@@ -64,6 +66,18 @@ export const patchEvent = createAsyncThunk<IEvent, IEvent, { fullFilled: IEvent;
   }
 );
 
+export const deleteEvent = createAsyncThunk<IEvent, number, { fullFilled: IEvent; rejectValue: void }>(
+  "calendar/deleteEvent",
+  async function (id, { fulfillWithValue, rejectWithValue }) {
+    const { data } = await axios.delete<IEvent>(`calendar/${id}`);
+
+    if (!!data) {
+      return fulfillWithValue(data);
+    }
+    return rejectWithValue();
+  }
+);
+
 export const Calenadar = createSlice({
   name: "calendar",
   initialState: initialStateValue,
@@ -106,6 +120,20 @@ export const Calenadar = createSlice({
       })
       .addCase(patchEvent.rejected, (state) => {
         state.pending.patch = false;
+      })
+      //
+      .addCase(deleteEvent.pending, (state) => {
+        state.pending.delete = true;
+      })
+      .addCase(deleteEvent.fulfilled, (state, action) => {
+        state.pending.delete = false;
+        const eventIndex = state.events.findIndex((event) => event.id === action.payload.id);
+        if (eventIndex >= 0) {
+          state.events.splice(eventIndex, 1);
+        }
+      })
+      .addCase(deleteEvent.rejected, (state) => {
+        state.pending.delete = false;
       });
   },
 });
