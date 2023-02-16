@@ -28,10 +28,10 @@ export const fetchTodos = createAsyncThunk<ITodo[], undefined, { fullFilled: ITo
 export const fetchOneTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo; rejectValue: void }>(
   "todos/fetchOneTodo",
   async function (id, { fulfillWithValue, rejectWithValue }) {
-    const { data } = await axios.get<ITodo>(`todos/${id}`);
-    if (!!data) {
-      return fulfillWithValue(data);
-    }
+    // const { data } = await axios.get<ITodo>(`todos/${id}`);
+    // if (!!data) {
+    //   return fulfillWithValue(data);
+    // }
     return rejectWithValue();
   }
 );
@@ -39,11 +39,11 @@ export const fetchOneTodo = createAsyncThunk<ITodo, number, { fullFilled: ITodo;
 export const joinTodo = createAsyncThunk<ITodo, IJoinTodo, { fullFilled: ITodo; rejectValue: void }>(
   "todos/addTodo",
   async function (newTodo, { fulfillWithValue, rejectWithValue }) {
-    const { data } = await axios.post<ITodo>("todos", newTodo);
+    // const { data } = await axios.post<ITodo>("todos", newTodo);
 
-    if (!!data) {
-      return fulfillWithValue(data);
-    }
+    // if (!!data) {
+    //   return fulfillWithValue(data);
+    // }
     return rejectWithValue();
   }
 );
@@ -63,7 +63,6 @@ export const editTodo = createAsyncThunk<ITodo, ITodo, { fullFilled: ITodo; reje
 );
 
 const initialStateValue: IStateInitial = {
-  todos: [],
   pending: {
     getAll: false,
     getOne: false,
@@ -71,6 +70,7 @@ const initialStateValue: IStateInitial = {
     delete: false,
     change: false,
   },
+  todos: [],
 };
 
 export const Todos = createSlice({
@@ -88,7 +88,7 @@ export const Todos = createSlice({
       })
       .addCase(fetchTodos.rejected, (state) => {
         state.pending.getAll = false;
-        state.todos = [...state.todos];
+        // state.todos = [...state.todos];
       })
       //
       .addCase(fetchOneTodo.pending, (state) => {
@@ -96,7 +96,7 @@ export const Todos = createSlice({
       })
       .addCase(fetchOneTodo.fulfilled, (state, action) => {
         state.pending.getOne = false;
-        console.log(action.payload);
+        // console.log(action.payload);
       })
       .addCase(fetchOneTodo.rejected, (state) => {
         state.pending.getOne = false;
@@ -112,7 +112,7 @@ export const Todos = createSlice({
       })
       .addCase(joinTodo.rejected, (state) => {
         state.pending.addNew = false;
-        state.todos = [...state.todos];
+        // state.todos = [...state.todos];
       })
       //
       .addCase(editTodo.pending, (state) => {
@@ -133,5 +133,4 @@ export const Todos = createSlice({
   },
 });
 
-// export const { completeTodo } = Todos.actions;
 export default Todos.reducer;
