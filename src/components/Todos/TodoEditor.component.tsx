@@ -17,16 +17,27 @@ import { IJoinTodo, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
+import { GButton } from "../../style/components/button.style";
 
 interface Props {
   titleWindow: string;
   titleSubmit: string;
   callbackClose: Function;
   callbackSubmit: Function;
+  callbackDelete?: Function;
   item?: ITodo;
+  isShowDelete: boolean;
 }
 
-const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, callbackSubmit }: Props) => {
+const CreateTodoComponent = ({
+  callbackClose,
+  titleWindow,
+  titleSubmit,
+  item,
+  callbackSubmit,
+  isShowDelete,
+  callbackDelete,
+}: Props) => {
   const dispatch = useAppDispatch();
 
   const [priority, SetPriority] = useState<number>(0);
@@ -65,6 +76,13 @@ const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, ca
       }
       callbackClose();
     }
+  };
+
+  const deleteItem = (id: number | undefined) => {
+    if (!!id && !!callbackDelete) {
+      dispatch(callbackDelete(id));
+    }
+    callbackClose();
   };
 
   useEffect(() => {
@@ -152,6 +170,19 @@ const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, ca
             ))}
           </PopupPallete>
         </PopupItem>
+        {isShowDelete && (
+          <PopupItem>
+            <GButton
+              onClick={() => deleteItem(item?.id)}
+              style={{ fontSize: "18px" }}
+              color1="#871111"
+              color2="#e03138"
+              type="button"
+            >
+              delete
+            </GButton>
+          </PopupItem>
+        )}
       </PopupItems>
     </PopupWrapper>
   );
