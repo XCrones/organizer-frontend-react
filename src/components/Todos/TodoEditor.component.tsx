@@ -16,6 +16,7 @@ import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
+import { useDate } from "../../hooks/date";
 
 interface Props {
   titleWindow: string;
@@ -30,6 +31,8 @@ const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, ca
 
   const [priority, SetPriority] = useState<number>(0);
   const [currColor, SetColor] = useState(color.pallete[0]);
+
+  const { makeLocalDate } = useDate();
 
   const {
     register,
@@ -70,20 +73,6 @@ const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, ca
       SetColor(item.background);
     }
   }, [item]);
-
-  const makeDate = (date: string | undefined) => {
-    try {
-      if (!!date) {
-        const fullParseDate = new Date(Date.parse(date)).toLocaleString();
-        const parseDate = fullParseDate.split(",")[0];
-        const parseTime = fullParseDate.split(",")[1];
-        return `${parseDate.split(".").reverse().join("-")}T${parseTime.trim()}`;
-      }
-      return "";
-    } catch (err) {
-      return "";
-    }
-  };
 
   return (
     <PopupWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -127,7 +116,7 @@ const CreateTodoComponent = ({ callbackClose, titleWindow, titleSubmit, item, ca
           <PopupEventDate
             {...register("deadLine", {
               required: "required filed",
-              value: !!item ? makeDate(item.deadline) : "",
+              value: !!item ? makeLocalDate(item.deadline) : "",
             })}
             type="datetime-local"
           />
