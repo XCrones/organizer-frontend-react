@@ -6,6 +6,7 @@ interface IStateInitial {
   pending: {
     getAll: boolean;
     join: boolean;
+    patch: boolean;
   };
   events: IEvent[];
 }
@@ -14,6 +15,7 @@ const initialStateValue: IStateInitial = {
   pending: {
     getAll: false,
     join: false,
+    patch: false,
   },
   events: [],
 };
@@ -48,6 +50,20 @@ export const joinEvent = createAsyncThunk<IEvent, IJoinEvent, { fullFilled: IEve
   }
 );
 
+export const patchEvent = createAsyncThunk<IEvent, IEvent, { fullFilled: IEvent; rejectValue: void }>(
+  "calendar/patchEvent",
+  async function (event, { fulfillWithValue, rejectWithValue }) {
+    const { data } = await axios.patch(`calendar/${event.id}`, event);
+    const [count, item] = data;
+    const [payload] = item;
+
+    if (!!payload) {
+      return fulfillWithValue(payload);
+    }
+    return rejectWithValue();
+  }
+);
+
 export const Calenadar = createSlice({
   name: "calendar",
   initialState: initialStateValue,
@@ -74,6 +90,22 @@ export const Calenadar = createSlice({
       })
       .addCase(joinEvent.rejected, (state) => {
         state.pending.join = false;
+      })
+      //
+      .addCase(patchEvent.pending, (state) => {
+        state.pending.patch = true;
+      })
+      .addCase(patchEvent.fulfilled, (state, action) => {
+        state.pending.patch = false;
+        if (!!action.payload) {
+          const event = state.events.find((event) => event.id === action.payload.id);
+          if (!!event) {
+            Object.assign(event, action.payload);
+          }
+        }
+      })
+      .addCase(patchEvent.rejected, (state) => {
+        state.pending.patch = false;
       });
   },
 });
