@@ -47,7 +47,7 @@ const TodosListComponent = () => {
 
   const editItem = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
-    console.log(item);
+    // console.log(item);
     // todoItem.status = !todoItem.status;
     // dispatch(editTodo(todoItem));
   };
