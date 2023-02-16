@@ -9,10 +9,10 @@ export const ListItems = styled.div<{}>`
   padding-right: 20px;
 `;
 
-export const ListItem = styled.div`
+export const ListItem = styled.div<{ isHide: boolean }>`
   width: 100%;
   height: 100%;
-  display: flex;
+  display: ${(props) => (props.isHide ? "none" : "flex")};
   flex-direction: column;
   row-gap: 10px;
 `;
