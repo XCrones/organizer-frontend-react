@@ -4,9 +4,10 @@ interface Props {
   title: string;
   callbackCancel: Function;
   isDisableSubmit: boolean;
+  titleSubmit: string;
 }
 
-const PopupComponent = ({ title, callbackCancel, isDisableSubmit }: Props) => {
+const PopupComponent = ({ title, callbackCancel, isDisableSubmit, titleSubmit }: Props) => {
   return (
     <PopupHeader>
       <PopupCancel onClick={() => callbackCancel()} type="button">
@@ -21,7 +22,7 @@ const PopupComponent = ({ title, callbackCancel, isDisableSubmit }: Props) => {
         }}
         type="submit"
       >
-        add
+        {titleSubmit}
       </PopupSubmit>
     </PopupHeader>
   );
