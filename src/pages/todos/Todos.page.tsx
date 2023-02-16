@@ -1,4 +1,4 @@
-import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
+import { Examples, ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
 import CreateTodoComponent from "../../components/todos/TodoEditor.component";
@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ITodo } from "../../models/todos.models";
 import { patchTodo, fetchTodos, joinTodo } from "../../store/slices/todos.slice";
 import TodoItemComponent from "../../components/todos/ListItem.component";
+import TodoExampleComponent from "../../components/todos/TodoExample.component";
+import SortComponent from "../../components/sort/Sort.component";
 
 interface Props {}
 
@@ -43,12 +45,13 @@ const TodosPage = () => {
 
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
+  const [isHideSort, SetHideSort] = useState(true);
   const [editTodo, SetEditTodo] = useState<ITodo | undefined>();
 
   const buttonsHeader: IButtonHeader[] = [
     {
       callback: () => {},
-      icon: "bi bi-search",
+      icon: "bi bi-funnel",
     },
     {
       callback: () => SetHideCreate(false),
@@ -213,6 +216,7 @@ const TodosPage = () => {
             callbackSubmit={patchTodo}
           />
         )}
+        {!isHideSort && <SortComponent />}
       </Todos>
     </TodosWrapper>
   );
