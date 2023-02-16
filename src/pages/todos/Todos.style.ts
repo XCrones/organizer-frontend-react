@@ -19,12 +19,6 @@ const Scroll = styled.div`
 `;
 
 export const TodosWrapper = styled.div`
-  /* height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 25px; */
-
   display: flex;
   flex-direction: column;
   row-gap: 25px;
