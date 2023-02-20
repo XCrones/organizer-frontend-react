@@ -21,7 +21,7 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
   },
   todos: [],
   fetchTodos: async () => {
-    set({ pending: { fetchAll: true, fetchOne: false } });
+    set({ pending: { ...get().pending, fetchAll: true } });
     try {
       const { data } = await axios.get<ITodo[]>("todos");
       if (!!data) {
@@ -34,11 +34,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchAll: false } });
     }
   },
   fetchOneTodo: async (id) => {
-    set({ pending: { fetchAll: false, fetchOne: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.get<ITodo>(`todos/${id}`);
       if (!!data) {
@@ -49,11 +49,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
   joinTodo: async (newTodo) => {
-    set({ pending: { fetchAll: false, fetchOne: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.post<ITodo>("todos", newTodo);
       if (!!data) {
@@ -66,11 +66,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
   patchTodo: async (todoItem) => {
-    set({ pending: { fetchAll: false, fetchOne: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.patch(`todos/${todoItem.id}`, todoItem);
       const [count, item] = data;
@@ -88,11 +88,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
   deleteTodo: async (id) => {
-    set({ pending: { fetchAll: false, fetchOne: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.delete<ITodo>(`todos/${id}`);
       if (!!data) {
@@ -105,7 +105,7 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
 }));
