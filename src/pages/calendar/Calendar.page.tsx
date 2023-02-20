@@ -85,7 +85,7 @@ const CalendarPage = () => {
   };
 
   useLayoutEffect(() => {
-    calendarStore.fetchEvents();
+    calendarStore.fetchAllEvents();
   }, []);
 
   useEffect(() => {

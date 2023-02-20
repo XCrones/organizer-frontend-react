@@ -7,7 +7,7 @@ import { IPending } from "../models/pending.model";
 interface CalendarStore {
   pending: IPending;
   events: IEvent[];
-  fetchEvents: () => void;
+  fetchAllEvents: () => void;
   joinEvent: (event: IJoinEvent) => void;
   patchEvent: (event: IEvent) => void;
   deleteEvent: (id: number) => void;
@@ -19,7 +19,7 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
     fetchOne: false,
   },
   events: [],
-  fetchEvents: async () => {
+  fetchAllEvents: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
       const { data } = await axios.get<IEvent[]>("calendar");
