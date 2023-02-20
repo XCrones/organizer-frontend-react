@@ -67,7 +67,7 @@ const TodosPage = () => {
   };
 
   useLayoutEffect(() => {
-    todoStore.fetchTodos();
+    todoStore.fetchAllTodos();
   }, []);
 
   const parseTodos = (todoItems: ITodo[]): IParsingTodo[] => {

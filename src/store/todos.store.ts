@@ -7,7 +7,7 @@ import { IPending } from "../models/pending.model";
 interface TodosStore {
   todos: ITodo[];
   pending: IPending;
-  fetchTodos: () => void;
+  fetchAllTodos: () => void;
   fetchOneTodo: (id: number) => void;
   joinTodo: (newTodo: ITodo) => void;
   patchTodo: (todoItem: ITodo) => void;
@@ -20,7 +20,7 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
     fetchOne: false,
   },
   todos: [],
-  fetchTodos: async () => {
+  fetchAllTodos: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
       const { data } = await axios.get<ITodo[]>("todos");
