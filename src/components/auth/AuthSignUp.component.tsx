@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { authSignUp, IAuthUser } from "../../store/slices/auth.slice";
+import { IAuth } from "../../models/auth.model";
+import { useAuthStore } from "../../store/auth.store";
 import { GButton } from "../../style/components/button.style";
 import AuthPreloaderComponent from "./AuthPreloader.component";
 import {
@@ -31,8 +31,7 @@ interface Props {
 }
 
 const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
-  const dispatch = useAppDispatch();
-  const { isPending } = useAppSelector((state) => state.audh);
+  const authStore = useAuthStore((state) => state);
 
   const [isFormValid, setFormValid] = useState<boolean | undefined>(undefined);
   const [typePass, setTypePass] = useState<"password" | "text">("password");
@@ -47,12 +46,11 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const user: IAuthUser = {
+      const user: IAuth = {
         email: data["email"] || "",
         password: data["password"] || "",
       };
-      // callback(user);
-      dispatch(authSignUp(user));
+      authStore.singUp(user);
     }
   };
 
@@ -60,7 +58,7 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
-      {isPending && <AuthPreloaderComponent />}
+      {authStore.isPending && <AuthPreloaderComponent />}
       <AuthTitle>sign up to organize pro</AuthTitle>
       <AuthSubTitle>
         Lorem ipsum dolor sit amet, consetetur sadipscing, lorem ipsum dolorsed diam nonumy amet eirmod.

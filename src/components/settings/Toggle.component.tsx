@@ -1,14 +1,11 @@
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { toggleTheme } from "../../store/slices/settings.slice";
+import { useSettingsStore } from "../../store/settings.store";
 import { GToggle } from "../../style/components/toggle.style";
 import { ItemAbout, ItemIcon, ItemTitle, ToggleItem, ToggleItems, ToggleWrapper } from "./Toggle.style";
 
 interface Props {}
 
 const ToggleComponent = () => {
-  const dispatch = useAppDispatch();
-  const isNightTheme = useAppSelector((state) => state.settings.isNightTheme);
+  const settingsStore = useSettingsStore((state) => state);
 
   return (
     <ToggleWrapper>
@@ -21,10 +18,10 @@ const ToggleComponent = () => {
             <ItemTitle>night theme</ItemTitle>
           </ItemAbout>
           <GToggle
-            isSet={isNightTheme}
+            isSet={settingsStore.isNightTheme}
             colors={{ true: "#1aff1a", false: "#ff1a1a", slider: "#fff" }}
             size={{ width: 50, height: 22 }}
-            onClick={() => dispatch(toggleTheme())}
+            onClick={() => settingsStore.toggleTheme()}
           />
         </ToggleItem>
       </ToggleItems>
