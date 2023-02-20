@@ -20,7 +20,7 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
   },
   events: [],
   fetchEvents: async () => {
-    set({ pending: { fetchAll: true, fetchOne: false } });
+    set({ pending: { ...get().pending, fetchAll: true } });
     try {
       const { data } = await axios.get<IEvent[]>("calendar");
 
@@ -34,12 +34,12 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchAll: false } });
     }
   },
 
   joinEvent: async (event) => {
-    set({ pending: { fetchAll: true, fetchOne: false } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.post<IEvent>("calendar", event);
 
@@ -53,12 +53,12 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
 
   patchEvent: async (event) => {
-    set({ pending: { fetchAll: true, fetchOne: false } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.patch(`calendar/${event.id}`, event);
       const [count, item] = data;
@@ -78,12 +78,12 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
 
   deleteEvent: async (id) => {
-    set({ pending: { fetchAll: false, fetchOne: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.delete<IEvent>(`calendar/${id}`);
       if (!!data) {
@@ -96,7 +96,7 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { fetchAll: false, fetchOne: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
 }));
