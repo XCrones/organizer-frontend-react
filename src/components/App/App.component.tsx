@@ -8,7 +8,6 @@ import { Routes, Route } from "react-router-dom";
 import { Footer, Section, Wrapper } from "./App.style";
 import { color } from "../../style/variables.style";
 import { useWindowSize } from "../../hooks/windowResize";
-import style from "./App.module.scss";
 import { useAuthStore } from "../../store/auth.store";
 import { ROUTER_LINKS } from "../../router-links";
 
@@ -20,7 +19,7 @@ const App = () => {
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
   return (
-    <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
+    <Wrapper colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <Routes>
           <Route path={ROUTER_LINKS.auth.link} element={<AuthPage />} />
