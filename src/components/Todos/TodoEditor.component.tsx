@@ -12,7 +12,6 @@ import {
   PopupRadioItems,
   PopupPalleteItem,
 } from "../popup/Popup.style";
-import { useAppDispatch } from "../../hooks/redux";
 import { IJoinTodo, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
@@ -38,8 +37,6 @@ const CreateTodoComponent = ({
   isShowDelete,
   callbackDelete,
 }: Props) => {
-  const dispatch = useAppDispatch();
-
   const [priority, SetPriority] = useState<number>(0);
   const [currColor, SetColor] = useState(color.pallete[0]);
 
@@ -61,7 +58,7 @@ const CreateTodoComponent = ({
         item.category = data["category"];
         item.priority = priority;
         item.deadline = data["deadLine"];
-        dispatch(callbackSubmit(item));
+        callbackSubmit(item);
       } else {
         const metaData: IJoinTodo = {
           uid: 1,
@@ -72,7 +69,7 @@ const CreateTodoComponent = ({
           status: false,
           background: currColor,
         };
-        dispatch(callbackSubmit(metaData));
+        callbackSubmit(metaData);
       }
       callbackClose();
     }
@@ -80,7 +77,7 @@ const CreateTodoComponent = ({
 
   const deleteItem = (id: number | undefined) => {
     if (!!id && !!callbackDelete) {
-      dispatch(callbackDelete(id));
+      callbackDelete(id);
     }
     callbackClose();
   };

@@ -2,11 +2,10 @@ import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.sty
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
 import CreateTodoComponent from "../../components/todos/TodoEditor.component";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ITodo } from "../../models/todos.models";
-import { patchTodo, fetchTodos, joinTodo, deleteTodo } from "../../store/slices/todos.slice";
 import TodoItemComponent from "../../components/todos/ListItem.component";
 import SortComponent from "../../components/sort/Sort.component";
+import { useTodosStore } from "../../store/todos.store";
 
 interface IParsingTodo {
   title: string;
@@ -37,8 +36,7 @@ interface ITodos {
 }
 
 const TodosPage = () => {
-  const dispatch = useAppDispatch();
-  const todos = useAppSelector((state) => state.todos.todos);
+  const todoStore = useTodosStore((state) => state);
 
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
@@ -47,7 +45,7 @@ const TodosPage = () => {
 
   const buttonsHeader: IButtonHeader[] = [
     {
-      callback: () => {},
+      callback: () => SetHideSort(false),
       icon: "bi bi-funnel",
     },
     {
@@ -59,7 +57,7 @@ const TodosPage = () => {
   const toggleStatus = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     todoItem.status = !todoItem.status;
-    dispatch(patchTodo(todoItem));
+    todoStore.patchTodo(todoItem);
   };
 
   const editItem = (item: ITodo) => {
@@ -69,7 +67,7 @@ const TodosPage = () => {
   };
 
   useLayoutEffect(() => {
-    dispatch(fetchTodos());
+    todoStore.fetchTodos();
   }, []);
 
   const parseTodos = (todoItems: ITodo[]): IParsingTodo[] => {
@@ -176,7 +174,7 @@ const TodosPage = () => {
     }
   };
 
-  const memoizeList = useMemo(() => parseTodos(todos) as IParsingTodo[], [todos]);
+  const memoizeList = useMemo(() => parseTodos(todoStore.todos) as IParsingTodo[], [todoStore.todos]);
 
   return (
     <TodosWrapper>
@@ -201,7 +199,7 @@ const TodosPage = () => {
             callbackClose={() => SetHideCreate(true)}
             titleWindow="todo"
             titleSubmit="join"
-            callbackSubmit={joinTodo}
+            callbackSubmit={todoStore.joinTodo}
             isShowDelete={false}
           />
         )}
@@ -211,9 +209,9 @@ const TodosPage = () => {
             callbackClose={() => SetHideEdit(true)}
             titleWindow="todo"
             titleSubmit="save"
-            callbackSubmit={patchTodo}
+            callbackSubmit={todoStore.patchTodo}
             isShowDelete={true}
-            callbackDelete={deleteTodo}
+            callbackDelete={todoStore.deleteTodo}
           />
         )}
         {!isHideSort && <SortComponent />}

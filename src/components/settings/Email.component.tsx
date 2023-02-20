@@ -1,14 +1,15 @@
-import { useAppSelector } from "../../hooks/redux";
+import { useAuthStore } from "../../store/auth.store";
 import { Avatar, AvatarImg, AvatarSvg, EmailWrapper, Info, InfoEmail, InfoName } from "./Email.style";
 
 interface Props {}
 
 const EmailComponent = () => {
-  const {
-    userData: { email, name, urlAvatar },
-  } = useAppSelector((state) => state.audh);
+  // const {
+  //   userData: { email, name, urlAvatar },
+  // } = useAppSelector((state) => state.audh);
+  const authStore = useAuthStore((state) => state.userData);
 
-  const isEmptyAvatar = !!urlAvatar ? true : false;
+  const isEmptyAvatar = !!authStore?.urlAvatar ? true : false;
 
   return (
     <EmailWrapper>
@@ -18,11 +19,11 @@ const EmailComponent = () => {
             <i className="bi bi-person-circle"></i>
           </AvatarSvg>
         )}
-        {isEmptyAvatar && <AvatarImg src={String(urlAvatar)} alt={"avatar"} />}
+        {isEmptyAvatar && <AvatarImg src={String(authStore?.urlAvatar)} alt={"avatar"} />}
       </Avatar>
       <Info>
-        <InfoName>{name}</InfoName>
-        <InfoEmail>{email}</InfoEmail>
+        <InfoName>{authStore?.name}</InfoName>
+        <InfoEmail>{authStore?.email}</InfoEmail>
       </Info>
     </EmailWrapper>
   );

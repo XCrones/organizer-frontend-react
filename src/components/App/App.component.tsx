@@ -1,19 +1,19 @@
+import TodosPage from "../../pages/todos/Todos.page";
 import CalendarPage from "../../pages/calendar/Calendar.page";
 import SettingsPage from "../../pages/settings/Settings.page";
-import TodosPage from "../../pages/todos/Todos.page";
 import WeatherPage from "../../pages/weather/Weather.page";
-import { ROUTER_LINKS } from "../../router-links";
+import AuthPage from "../../pages/auth/Auth.page";
 import FooterComponent from "../footer/Footer.component";
 import { Routes, Route } from "react-router-dom";
 import { Footer, Section, Wrapper } from "./App.style";
 import { color } from "../../style/variables.style";
 import { useWindowSize } from "../../hooks/windowResize";
 import style from "./App.module.scss";
-import AuthPage from "../../pages/auth/Auth.page";
-import { useAppSelector } from "../../hooks/redux";
+import { useAuthStore } from "../../store/auth.store";
+import { ROUTER_LINKS } from "../../router-links";
 
 const App = () => {
-  const isAuth = useAppSelector((state) => state.audh.isAuth);
+  const isAuth = useAuthStore((state) => state.isAuth);
   const HEIGHT_FOOTER = isAuth ? 50 : 0;
   const PADDING_BOTTOM = isAuth ? 40 : 0;
 
