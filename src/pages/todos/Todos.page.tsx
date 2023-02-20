@@ -47,7 +47,7 @@ const TodosPage = () => {
 
   const buttonsHeader: IButtonHeader[] = [
     {
-      callback: () => {},
+      callback: () => SetHideSort(false),
       icon: "bi bi-funnel",
     },
     {

@@ -3,7 +3,7 @@ import { SortWrapper } from "./Sort.style";
 interface Props {}
 
 const SortComponent = () => {
-  return <SortWrapper></SortWrapper>;
+  return <SortWrapper>sort</SortWrapper>;
 };
 
 export default SortComponent;
