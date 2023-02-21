@@ -1,14 +1,13 @@
 import { useState } from "react";
-import AuthPreloaderComponent from "../../components/auth/AuthPreloader.component";
 import AuthSignInComponent from "../../components/auth/AuthSignIn.component";
 import AuthSignUpComponent from "../../components/auth/AuthSignUp.component";
-import { IAuthUser } from "../../store/slices/auth.slice";
+import { IAuth } from "../../models/auth.model";
 import { AuthWrapper } from "./Auth.style";
 
 const AuthPage = () => {
   const [isSignIn, toggleForm] = useState(true);
 
-  const callbackSubmit = (user: IAuthUser) => {
+  const callbackSubmit = (user: IAuth) => {
     console.log(user);
   };
 

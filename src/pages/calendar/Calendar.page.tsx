@@ -2,14 +2,13 @@ import MonthComponent from "../../components/calendar/Month.component";
 import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from "./Calendar.style";
 import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useDate } from "../../hooks/date";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
-import { deleteEvent, fetchEvents, joinEvent, patchEvent } from "../../store/slices/calendar.slice";
 import SheduleComponent from "../../components/calendar/Shedule.component";
 import CreateEventComponent from "../../components/calendar/EventEditor.component";
+import { useCalendarStore } from "../../store/calendar.store";
 
 interface IDay {
   dayStr: string;
@@ -24,8 +23,7 @@ interface IColumn {
 }
 
 const CalendarPage = () => {
-  const dispatch = useAppDispatch();
-  const calendarEvents = useAppSelector((state) => state.calendar.events);
+  const calendarStore = useCalendarStore((state) => state);
 
   const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideCreate, SetHideCreate] = useState(true);
@@ -76,7 +74,7 @@ const CalendarPage = () => {
     }
 
     try {
-      const findEvents = calendarEvents.filter(
+      const findEvents = calendarStore.events.filter(
         (event) => new Date(Date.parse(event.eventStart)).toLocaleDateString() === selectDate.toLocaleDateString()
       );
       parseEvents(findEvents);
@@ -87,7 +85,7 @@ const CalendarPage = () => {
   };
 
   useLayoutEffect(() => {
-    dispatch(fetchEvents());
+    calendarStore.fetchAllEvents();
   }, []);
 
   useEffect(() => {
@@ -107,10 +105,10 @@ const CalendarPage = () => {
   }, [dateParse]);
 
   useEffect(() => {
-    if (calendarEvents.length > 0) {
+    if (calendarStore.events.length > 0) {
       updateEvents();
     }
-  }, [calendarEvents]);
+  }, [calendarStore.events]);
 
   useEffect(() => {
     if (updateRef) {
@@ -149,7 +147,7 @@ const CalendarPage = () => {
   }, areEqual);
 
   const callbackEdit = (id: number) => {
-    const findEvent = calendarEvents.find((event) => event.id === id);
+    const findEvent = calendarStore.events.find((event) => event.id === id);
     if (!!findEvent) {
       SetEditEvent(JSON.parse(JSON.stringify(findEvent)));
       SetHideEdit(false);
@@ -184,7 +182,7 @@ const CalendarPage = () => {
       </Events>
       {!isHideCreate && (
         <CreateEventComponent
-          callbackSubmit={joinEvent}
+          callbackSubmit={calendarStore.joinEvent}
           callbackClose={() => SetHideCreate(true)}
           titleWindow="event"
           titleSubmit="join"
@@ -193,13 +191,13 @@ const CalendarPage = () => {
       )}
       {!isHideEdit && (
         <CreateEventComponent
-          callbackSubmit={patchEvent}
+          callbackSubmit={calendarStore.patchEvent}
           callbackClose={() => SetHideEdit(true)}
           titleWindow="event"
           titleSubmit="save"
           item={editEvent}
           isShowDelete={true}
-          callbackDelete={deleteEvent}
+          callbackDelete={calendarStore.deleteEvent}
         />
       )}
     </CalendarWrapper>

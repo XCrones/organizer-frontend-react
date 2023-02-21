@@ -12,7 +12,6 @@ import {
   PopupPallete,
   PopupPalleteItem,
 } from "../popup/Popup.style";
-import { useAppDispatch } from "../../hooks/redux";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
@@ -37,8 +36,6 @@ const CreateEventComponent = ({
   callbackDelete,
   isShowDelete,
 }: Props) => {
-  const dispatch = useAppDispatch();
-
   const [currColor, SetColor] = useState(color.pallete[0]);
   const { makeLocalDate } = useDate();
 
@@ -58,7 +55,7 @@ const CreateEventComponent = ({
         item.title = data["eventName"];
         item.description = data["description"];
         item.background = currColor;
-        dispatch(callbackSubmit(item));
+        callbackSubmit(item);
       } else {
         const metaData: IJoinEvent = {
           uid: 1,
@@ -68,7 +65,7 @@ const CreateEventComponent = ({
           description: data["description"],
           background: currColor,
         };
-        dispatch(callbackSubmit(metaData));
+        callbackSubmit(metaData);
       }
       callbackClose();
     }
@@ -76,7 +73,7 @@ const CreateEventComponent = ({
 
   const deleteItem = (id: number | undefined) => {
     if (!!id && !!callbackDelete) {
-      dispatch(callbackDelete(id));
+      callbackDelete(id);
     }
     callbackClose();
   };

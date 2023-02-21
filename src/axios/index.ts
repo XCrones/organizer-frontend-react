@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: String(import.meta.env.VITE_APP_BASE_URL),
 });
