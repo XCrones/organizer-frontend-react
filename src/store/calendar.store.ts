@@ -61,15 +61,11 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.patch(`calendar/${event.id}`, event);
-      const [count, item] = data;
-      const [payload] = item;
 
-      if (!!payload) {
-        if (!!item) {
-          set({
-            events: get().events.map((item) => (item.id === payload.id ? { ...payload } : item)),
-          });
-        }
+      if (!!data) {
+        set({
+          events: get().events.map((item) => (item.id === data.id ? { ...data } : item)),
+        });
       } else {
         throw "error get all events";
       }

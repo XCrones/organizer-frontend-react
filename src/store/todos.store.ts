@@ -73,15 +73,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const { data } = await axios.patch(`todos/${todoItem.id}`, todoItem);
-      const [count, item] = data;
-      const payload = item[0] as ITodo;
 
-      if (!!payload) {
-        if (!!item) {
-          set({
-            todos: get().todos.map((item) => (item.id === payload.id ? { ...payload } : item)),
-          });
-        }
+      if (!!data) {
+        set({
+          todos: get().todos.map((item) => (item.id === data.id ? { ...data } : item)),
+        });
       }
     } catch (error) {
       const err = error as AxiosError;
