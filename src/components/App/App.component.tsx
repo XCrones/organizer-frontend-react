@@ -10,6 +10,7 @@ import { color } from "../../style/variables.style";
 import { useWindowSize } from "../../hooks/windowResize";
 import { useAuthStore } from "../../store/auth.store";
 import { ROUTER_LINKS } from "../../router-links";
+import style from "./App.module.scss";
 
 const App = () => {
   const isAuth = useAuthStore((state) => state.isAuth);
@@ -19,7 +20,7 @@ const App = () => {
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
   return (
-    <Wrapper colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
+    <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <Routes>
           <Route path={ROUTER_LINKS.auth.link} element={<AuthPage />} />
