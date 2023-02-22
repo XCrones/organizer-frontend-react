@@ -1,22 +1,13 @@
 import { IBaseInfo } from "./base.models";
 
-export interface IEventCreate {
-  uid: number;
-  eventStart: Date;
-  eventEnd: Date;
+export interface IJoinEvent {
   title: string;
-  description: string;
-  background: string;
-}
-
-export interface IEvent extends IBaseInfo {
-  uid: number;
   eventStart: string;
   eventEnd: string;
-  title: string;
-  description: string;
   background: string;
+  description: string;
 }
+export interface IEvent extends IBaseInfo, IJoinEvent {}
 
 export interface IParseEvent {
   id: number;
@@ -26,14 +17,5 @@ export interface IParseEvent {
   minuteEnd: number;
   background: string;
   title: string;
-  description: string;
-}
-
-export interface IJoinEvent {
-  uid: number;
-  title: string;
-  eventStart: Date;
-  eventEnd: Date;
-  background: string;
   description: string;
 }
