@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IAuth } from "../../models/auth.model";
+import { IAuthSignIn } from "../../models/auth.model";
 import { useAuthStore } from "../../store/auth.store";
 import { GButton } from "../../style/components/button.style";
 import AuthPreloaderComponent from "./AuthPreloader.component";
@@ -10,31 +10,25 @@ import {
   AuthLabel,
   AuthInput,
   AuthInputIcon,
-  AuthAlternativeItems,
-  AuthAlternativeTitle,
-  AuthLink,
   AuthFormItems,
   AuthField,
   AuthErr,
-  AuthAlternativeLine,
-  AuthAlternativetext,
-  AuthAlternativeSign,
-  AuthAlternativeSignItem,
   AuthToggleForm,
   AuthTitle,
   AuthSubTitle,
 } from "./AuthSign.style";
+import { useNavigate } from "react-router-dom";
+import { ROUTER_LINKS } from "../../router-links";
 
 interface Props {
-  callback: Function;
   toggleForm: Function;
 }
 
-const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
+const AuthSignInComponent = ({ toggleForm }: Props) => {
+  const navigate = useNavigate();
   const authStore = useAuthStore((state) => state);
-
-  const [isFormValid, setFormValid] = useState<boolean | undefined>(undefined);
-  const [typePass, setTypePass] = useState<"password" | "text">("password");
+  const [typePass, SetTypePass] = useState<"password" | "text">("password");
+  const [errMessage, SetErrMessage] = useState("");
 
   const {
     register,
@@ -46,11 +40,17 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const user: IAuth = {
+      const user: IAuthSignIn = {
         email: data["email"] || "",
         password: data["password"] || "",
       };
-      authStore.singIn(user);
+      const result = await authStore.singIn(user);
+      console.log(result);
+      if (!result.isError) {
+        navigate(ROUTER_LINKS.todos.link, { replace: false });
+      } else {
+        SetErrMessage(result.message);
+      }
     }
   };
   const getError = (field: string) => (errors[field]?.message as string) || "Error!";
@@ -64,10 +64,10 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
       </AuthSubTitle>
       <AuthFormItems>
         <AuthFormItem>
-          <AuthLabel>username</AuthLabel>
+          <AuthLabel>email</AuthLabel>
           <AuthField>
             <AuthInput
-              onFocus={() => setFormValid(true)}
+              onFocus={() => SetErrMessage("")}
               type="email"
               {...register("email", {
                 required: "required filed",
@@ -78,17 +78,19 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
               })}
             />
             <AuthInputIcon>
-              {!errors.email && isFormValid && <i className="bi bi-check2 text-orange-400"></i>}
-              {errors.email && isFormValid && <i className="bi bi-x-lg text-red-600"></i>}
+              {/* {!errors.email && <i className="bi bi-check2 text-orange-400"></i>} */}
+              {errors.email && <i className="bi bi-x-lg text-red-600"></i>}
             </AuthInputIcon>
           </AuthField>
           {errors?.email && <AuthErr>{getError("email")}</AuthErr>}
+          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
         </AuthFormItem>
 
         <AuthFormItem>
           <AuthLabel>password</AuthLabel>
           <AuthField>
             <AuthInput
+              onFocus={() => SetErrMessage("")}
               type={typePass}
               {...register("password", {
                 required: "required filed",
@@ -96,38 +98,19 @@ const AuthSignInComponent = ({ callback, toggleForm }: Props) => {
             />
             <AuthInputIcon
               style={{ cursor: "pointer" }}
-              onMouseUp={() => setTypePass("password")}
-              onMouseDown={() => setTypePass("text")}
+              onMouseUp={() => SetTypePass("password")}
+              onMouseDown={() => SetTypePass("text")}
             >
               {typePass === "text" && <i className="bi bi-eye-fill"></i>}
               {typePass === "password" && <i className="bi bi-eye-slash-fill"></i>}
             </AuthInputIcon>
           </AuthField>
           {errors?.password && <AuthErr>{getError("password")}</AuthErr>}
+          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
         </AuthFormItem>
       </AuthFormItems>
 
-      <AuthAlternativeItems>
-        <AuthAlternativeTitle>
-          <AuthAlternativeLine />
-          <AuthAlternativetext>or</AuthAlternativetext>
-          <AuthAlternativeLine />
-        </AuthAlternativeTitle>
-        <AuthAlternativeSign>
-          <AuthAlternativeSignItem color="#281286">
-            <i className="bi bi-github"></i>
-          </AuthAlternativeSignItem>
-          <AuthAlternativeSignItem color="#000">
-            <i className="bi bi-apple"></i>
-          </AuthAlternativeSignItem>
-          <AuthAlternativeSignItem color="#ff4800">
-            <i className="bi bi-ubuntu"></i>
-          </AuthAlternativeSignItem>
-        </AuthAlternativeSign>
-        <AuthLink>forgot password?</AuthLink>
-      </AuthAlternativeItems>
-
-      <GButton type="submit" color1="#266ED7" color2="#4D8AEB">
+      <GButton style={{ marginBottom: "20px" }} type="submit" color1="#266ED7" color2="#4D8AEB">
         sign in
       </GButton>
 
