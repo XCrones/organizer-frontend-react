@@ -1,14 +1,13 @@
-import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
-import EmailComponent from "../../components/settings/Email.component";
-import ToggleComponent from "../../components/settings/Toggle.component";
-import { useAuthStore } from "../../store/auth.store";
-import { GButton } from "../../style/components/button.style";
+import { EmailComponent, HeaderComponent, ToggleComponent } from "../../components";
 import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Settings.style";
+import { IHeaderButton } from "../../models";
+import { useAuthStore } from "../../store";
+import { GButton } from "../../style/components";
 
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);
 
-  const buttonsHeader: IButtonHeader[] = [
+  const buttonsHeader: IHeaderButton[] = [
     {
       callback: () => {},
       icon: "",

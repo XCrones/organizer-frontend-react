@@ -1,9 +1,8 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
-import { ITodoJoin, ITodo } from "../models/todos.models";
-import { IPending } from "../models/pending.model";
-import { Axios } from "../axios/methods";
-import { ROUTER_LINKS } from "../router-links";
+import { Axios } from "../config/axios/methods";
+import { ROUTES } from "../config/routes/routes";
+import { IPending, ITodo, ITodoJoin } from "../models";
 
 interface IStateInitial {
   endPoint: string;
@@ -16,7 +15,7 @@ interface IStateInitial {
 }
 
 export const useTodosStore = create<IStateInitial>()((set, get) => ({
-  endPoint: ROUTER_LINKS.todos.path,
+  endPoint: ROUTES.TODOS.PATH,
   pending: {
     fetchAll: false,
     fetchOne: false,

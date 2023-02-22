@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from "../../style/variables.style";
+import { GColor } from "../../style/variables.style";
 
 export const AuthForm = styled.form<{}>`
   display: flex;
@@ -20,7 +20,7 @@ export const AuthFormItem = styled.div`
 
 export const AuthLabel = styled.label`
   text-transform: capitalize;
-  color: ${color.colorAuth};
+  color: ${GColor.colorAuth};
   font-size: 12px;
   line-height: 19px;
   font-weight: 400;
@@ -73,7 +73,7 @@ export const AuthAlternativetext = styled.div``;
 export const AuthAlternativeLine = styled.div`
   flex: 1 1 auto;
   height: 1px;
-  background-color: ${color.colorAuth};
+  background-color: ${GColor.colorAuth};
 `;
 
 export const AuthAlternativeItems = styled.div``;
@@ -106,7 +106,7 @@ export const AuthLink = styled.a`
   text-align: center;
   display: block;
   font-size: 12px;
-  color: ${color.colorAuthTitle};
+  color: ${GColor.colorAuthTitle};
   text-decoration: underline;
   padding-bottom: 20px;
   min-height: 38px;
@@ -118,7 +118,7 @@ export const AuthLink = styled.a`
 export const AuthToggleForm = styled.button`
   font-size: 14px;
   line-height: 15px;
-  color: ${color.colorAuthTitle};
+  color: ${GColor.colorAuthTitle};
 `;
 
 export const AuthTitle = styled.h1`
@@ -139,5 +139,5 @@ export const AuthSubTitle = styled.h2`
   line-height: 19px;
   font-weight: 400;
   padding-bottom: 30px;
-  color: ${color.colorAuthTitle};
+  color: ${GColor.colorAuthTitle};
 `;

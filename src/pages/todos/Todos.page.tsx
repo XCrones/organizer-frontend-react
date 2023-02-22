@@ -1,12 +1,9 @@
-import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
-import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
-import CreateTodoComponent from "../../components/todos/TodoEditor.component";
-import { ITodo } from "../../models/todos.models";
-import TodoItemComponent from "../../components/todos/TodoItem.component";
-import SortComponent from "../../components/sort/Sort.component";
-import { useTodosStore } from "../../store/todos.store";
 import { shallow } from "zustand/shallow";
+import { HeaderComponent, SortComponent, TodoEditorComponent, TodoItemComponent } from "../../components";
+import { IHeaderButton, ITodo } from "../../models";
+import { useTodosStore } from "../../store";
+import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 
 interface IParsingTodo {
   title: string;
@@ -53,7 +50,7 @@ const TodosPage = () => {
   const [isHideSort, SetHideSort] = useState(true);
   const [editTodo, SetEditTodo] = useState<ITodo | undefined>();
 
-  const buttonsHeader: IButtonHeader[] = [
+  const buttonsHeader: IHeaderButton[] = [
     {
       callback: () => SetHideSort(false),
       icon: "bi bi-funnel",
@@ -184,9 +181,6 @@ const TodosPage = () => {
     <TodosWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
       <Todos>
-        {/* <Examples>
-          <TodoExampleComponent />
-        </Examples> */}
         <ListItems>
           {memoizeList.map((item) => (
             <ListItem isHide={item.todos.length === 0} key={item.title}>
@@ -199,7 +193,7 @@ const TodosPage = () => {
         </ListItems>
 
         {!isHideCreate && (
-          <CreateTodoComponent
+          <TodoEditorComponent
             item={undefined}
             callbackClose={() => SetHideCreate(true)}
             titleWindow="todo"
@@ -209,7 +203,7 @@ const TodosPage = () => {
           />
         )}
         {!isHideEdit && (
-          <CreateTodoComponent
+          <TodoEditorComponent
             item={editTodo}
             callbackClose={() => SetHideEdit(true)}
             titleWindow="todo"

@@ -1,10 +1,3 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { ITodoJoin, ITodo } from "../../models/todos.models";
-import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
-import { color } from "../../style/variables.style";
-import { useDate } from "../../hooks/date";
-import { GButton } from "../../style/components/button.style";
 import {
   GEditCancel,
   GEditDate,
@@ -19,7 +12,16 @@ import {
   GEditTitle,
   GEditWinTitle,
   GEditWrapper,
-} from "../../style/components/editor.style";
+  GRadioItem,
+  GRadioRaplace,
+  GButton,
+} from "../../style/components";
+import ReactDOM from "react-dom";
+import { useEffect, useState } from "react";
+import { GColor } from "../../style/variables.style";
+import { useForm } from "react-hook-form";
+import { useDate } from "../../hooks";
+import { ITodo, ITodoJoin } from "../../models";
 
 interface Props {
   titleWindow: string;
@@ -47,7 +49,7 @@ const TodoEditorComponent = ({
   callbackDelete,
 }: Props) => {
   const [priority, SetPriority] = useState<number>(0);
-  const [currColor, SetColor] = useState(color.pallete[0]);
+  const [currColor, SetColor] = useState(GColor.pallete[0]);
 
   const { makeLocalDate } = useDate();
 
@@ -98,7 +100,7 @@ const TodoEditorComponent = ({
     }
   }, [item]);
 
-  return (
+  return ReactDOM.createPortal(
     <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
       <GEditHeader>
         <GEditCancel onClick={() => callbackClose()} type="button">
@@ -160,23 +162,23 @@ const TodoEditorComponent = ({
           <GEditRadioItems>
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(0)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={color.priority.hight} rounded={50} isSelect={priority === 0} />
+              <GRadioRaplace colorSelect={GColor.priority.hight} rounded={50} isSelect={priority === 0} />
             </GRadioItem>
 
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(1)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={color.priority.medium} rounded={50} isSelect={priority === 1} />
+              <GRadioRaplace colorSelect={GColor.priority.medium} rounded={50} isSelect={priority === 1} />
             </GRadioItem>
 
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(2)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={color.priority.low} rounded={50} isSelect={priority === 2} />
+              <GRadioRaplace colorSelect={GColor.priority.low} rounded={50} isSelect={priority === 2} />
             </GRadioItem>
           </GEditRadioItems>
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {color.pallete.map((item) => (
+            {GColor.pallete.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -200,7 +202,8 @@ const TodoEditorComponent = ({
           </GEditItem>
         )}
       </GEditItems>
-    </GEditWrapper>
+    </GEditWrapper>,
+    document.body
   );
 };
 

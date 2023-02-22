@@ -1,15 +1,12 @@
-import MonthComponent from "../../components/calendar/Month.component";
-import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
-import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from "./Calendar.style";
-import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
 import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
-import { useWindowSize } from "../../hooks/windowResize";
-import { useDate } from "../../hooks/date";
+import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
+import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from "./Calendar.style";
 import { IEvent, IParseEvent } from "../../models/calendar.models";
-import SheduleComponent from "../../components/calendar/Shedule.component";
-import CreateEventComponent from "../../components/calendar/EventEditor.component";
-import { useCalendarStore } from "../../store/calendar.store";
 import { shallow } from "zustand/shallow";
+import { IHeaderButton } from "../../models/header.model";
+import { EventEditorComponent, HeaderComponent, MonthComponent, SheduleComponent } from "../../components";
+import { useDate, useWindowSize } from "../../hooks";
+import { useCalendarStore } from "../../store";
 
 interface IDay {
   dayStr: string;
@@ -47,7 +44,7 @@ const CalendarPage = () => {
 
   const refListDays = useRef<FixedSizeList | null>(null);
 
-  const buttonsHeader: IButtonHeader[] = [
+  const buttonsHeader: IHeaderButton[] = [
     {
       callback: () => {},
       icon: "",
@@ -191,7 +188,7 @@ const CalendarPage = () => {
         <SheduleComponent callbackEdit={callbackEdit} events={events} />
       </Events>
       {!isHideCreate && (
-        <CreateEventComponent
+        <EventEditorComponent
           callbackSubmit={calendarStore.joinData}
           callbackClose={() => SetHideCreate(true)}
           titleWindow="event"
@@ -200,7 +197,7 @@ const CalendarPage = () => {
         />
       )}
       {!isHideEdit && (
-        <CreateEventComponent
+        <EventEditorComponent
           callbackSubmit={calendarStore.patchData}
           callbackClose={() => SetHideEdit(true)}
           titleWindow="event"

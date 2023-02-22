@@ -1,4 +1,4 @@
-import { color } from "./../../style/variables.style";
+import { GColor } from "./../../style/variables.style";
 import styled from "styled-components";
 
 export const Elem = styled.div``;

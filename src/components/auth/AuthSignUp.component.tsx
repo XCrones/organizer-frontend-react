@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { IAuthSignUp } from "../../models/auth.model";
-import { ROUTER_LINKS } from "../../router-links";
-import { useAuthStore } from "../../store/auth.store";
-import { GButton } from "../../style/components/button.style";
-import AuthPreloaderComponent from "./AuthPreloader.component";
+import { ROUTES } from "../../config/routes/routes";
+import { IAuthSignUp } from "../../models";
+import { useAuthStore } from "../../store";
+import { GButton } from "../../style/components";
+import { PulseLoderComponent } from "../../ui";
 import {
+  AuthErr,
+  AuthField,
   AuthForm,
   AuthFormItem,
-  AuthLabel,
+  AuthFormItems,
   AuthInput,
   AuthInputIcon,
-  AuthFormItems,
-  AuthField,
-  AuthErr,
-  AuthToggleForm,
-  AuthTitle,
+  AuthLabel,
   AuthSubTitle,
+  AuthTitle,
+  AuthToggleForm,
 } from "./AuthSign.style";
 
 interface Props {
@@ -51,7 +51,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
       const result = await authStore.singUp(user);
       console.log(result);
       if (!result.isError) {
-        navigate(ROUTER_LINKS.todos.path, { replace: false });
+        navigate(ROUTES.TODOS.PATH, { replace: false });
       } else {
         SetErrMessage(result.message);
       }
@@ -62,7 +62,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
-      {authStore.isPending && <AuthPreloaderComponent />}
+      {authStore.isPending && <PulseLoderComponent />}
       <AuthTitle>sign up to organize pro</AuthTitle>
       <AuthSubTitle>
         Lorem ipsum dolor sit amet, consetetur sadipscing, lorem ipsum dolorsed diam nonumy amet eirmod.

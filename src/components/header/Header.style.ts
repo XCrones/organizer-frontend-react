@@ -1,4 +1,4 @@
-import { fonts } from "../../style/variables.style";
+import { GFonts } from "../../style/variables.style";
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.header<{}>`
@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.header<{}>`
 export const HeaderTitle = styled.h1<{}>`
   text-transform: capitalize;
   font-size: 27px;
-  font-family: ${fonts.inter};
+  font-family: ${GFonts.inter};
   font-weight: 700;
 `;
 

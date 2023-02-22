@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { color } from "../variables.style";
+import { GColor } from "../variables.style";
 
 const slider = keyframes`
   from {
@@ -18,10 +18,11 @@ export const GEditWrapper = styled.form`
   right: 0;
   bottom: 49px;
   border-radius: 10px 10px 0 0;
-  background-color: ${color.mainBg};
+  background-color: ${GColor.mainBg};
   padding: 5px;
   z-index: 10;
   animation: ${slider} 150ms linear;
+  color: #fff;
 `;
 
 export const GEditHeader = styled.div<{}>`
@@ -55,7 +56,7 @@ export const GEditItems = styled.div`
 
 export const GEditItem = styled.div`
   width: 100%;
-  background-color: ${color.colorSettings};
+  background-color: ${GColor.colorSettings};
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -64,7 +65,7 @@ export const GEditItem = styled.div`
 
 const DefaultInput = styled.input`
   width: 100%;
-  background-color: ${color.colorSettings};
+  background-color: ${GColor.colorSettings};
   outline: 0;
   font-size: 15px;
 `;
@@ -72,7 +73,7 @@ const DefaultInput = styled.input`
 export const GEditName = styled(DefaultInput)`
   &::placeholder {
     font-size: 14px;
-    color: ${color.colorAuthTitle};
+    color: ${GColor.colorAuthTitle};
   }
 `;
 
@@ -85,7 +86,7 @@ export const GEditDate = styled(DefaultInput)``;
 
 export const GEditDecr = styled.textarea`
   width: 100%;
-  background-color: ${color.colorSettings};
+  background-color: ${GColor.colorSettings};
   outline: 0;
   resize: none;
   font-size: 15px;

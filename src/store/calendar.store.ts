@@ -1,9 +1,8 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
-import { Axios } from "../axios/methods";
-import { IEvent, IJoinEvent } from "../models/calendar.models";
-import { IPending } from "../models/pending.model";
-import { ROUTER_LINKS } from "../router-links";
+import { Axios } from "../config/axios/methods";
+import { ROUTES } from "../config/routes/routes";
+import { IEvent, IJoinEvent, IPending } from "../models";
 
 interface IStateInitial {
   endPoint: string;
@@ -16,7 +15,7 @@ interface IStateInitial {
 }
 
 export const useCalendarStore = create<IStateInitial>()((set, get) => ({
-  endPoint: ROUTER_LINKS.calendar.path,
+  endPoint: ROUTES.CALENDAR.PATH,
   pending: {
     fetchAll: false,
     fetchOne: false,

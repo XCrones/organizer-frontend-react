@@ -1,8 +1,8 @@
-import { AuthPreloader } from "./AuthPreloader.style";
+import { PulseLoader } from "./Pulse.style";
 
-const AuthPreloaderComponent = () => {
+const PulseLoderComponent = () => {
   return (
-    <AuthPreloader color="#29345834">
+    <PulseLoader color="#29345834">
       <svg
         style={{ display: "block", shapeRendering: "auto", background: "#ffffff0" }}
         width="80%"
@@ -74,8 +74,8 @@ const AuthPreloaderComponent = () => {
           ></animate>
         </rect>
       </svg>
-    </AuthPreloader>
+    </PulseLoader>
   );
 };
 
-export default AuthPreloaderComponent;
+export default PulseLoderComponent;

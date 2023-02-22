@@ -1,6 +1,6 @@
-import { color } from "../../style/variables.style";
+import { GColor } from "../../style/variables.style";
 import styled from "styled-components";
-import { fonts } from "../../style/variables.style";
+import { GFonts } from "../../style/variables.style";
 
 export const Item = styled.div<{ bgColor: string }>`
   display: flex;
@@ -17,7 +17,7 @@ export const Item = styled.div<{ bgColor: string }>`
 export const ItemTitle = styled.h3<{}>`
   max-width: 220px;
   font-size: 15px;
-  font-family: ${fonts.inter};
+  font-family: ${GFonts.inter};
   text-overflow: ellipsis;
   overflow: hidden;
   &::first-letter {
@@ -27,7 +27,7 @@ export const ItemTitle = styled.h3<{}>`
 
 export const ItemDate = styled.div<{}>`
   font-size: 13px;
-  color: ${color.colorAuthTitle};
+  color: ${GColor.colorAuthTitle};
 `;
 
 export const ItemInfo = styled.div`

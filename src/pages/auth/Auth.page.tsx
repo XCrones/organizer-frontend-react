@@ -1,6 +1,5 @@
 import { useState } from "react";
-import AuthSignInComponent from "../../components/auth/AuthSignIn.component";
-import AuthSignUpComponent from "../../components/auth/AuthSignUp.component";
+import { AuthSignInComponent, AuthSignUpComponent } from "../../components";
 import { AuthWrapper } from "./Auth.style";
 
 const AuthPage = () => {

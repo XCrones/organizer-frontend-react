@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fonts } from "../../style/variables.style";
+import { GFonts } from "../../style/variables.style";
 
 const Scroll = styled.div`
   &::-webkit-scrollbar {
@@ -67,6 +67,6 @@ export const ListItem = styled.div<{ isHide: boolean }>`
 export const ListTitle = styled.h2<{}>`
   text-transform: capitalize;
   font-weight: 700;
-  font-family: ${fonts.inter};
+  font-family: ${GFonts.inter};
   padding-bottom: 10px;
 `;

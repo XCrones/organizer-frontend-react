@@ -1,4 +1,4 @@
-import { color } from "./../../style/variables.style";
+import { GColor } from "./../../style/variables.style";
 import styled from "styled-components";
 
 export const Elem = styled.div``;
@@ -23,7 +23,7 @@ export const SettingsItems = styled.div`
 
 export const Settingsitem = styled.div`
   padding: 5px;
-  background-color: ${color.colorSettings};
+  background-color: ${GColor.colorSettings};
   border-radius: 10px;
 `;
 

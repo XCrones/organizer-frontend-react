@@ -1,11 +1,7 @@
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import AuthPage from "../../pages/auth/Auth.page";
-import CalendarPage from "../../pages/calendar/Calendar.page";
-import SettingsPage from "../../pages/settings/Settings.page";
-import TodosPage from "../../pages/todos/Todos.page";
-import WeatherPage from "../../pages/weather/Weather.page";
-import { ROUTER_LINKS } from "../../router-links";
-import { useAuthStore } from "../../store/auth.store";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { ROUTES } from "../../config/routes/routes";
+import { AuthPage, CalendarPage, SettingsPage, TodosPage, WeatherPage } from "../../pages";
+import { useAuthStore } from "../../store";
 
 const RoutesComponent = () => {
   const isAuth = useAuthStore().userData;
@@ -13,16 +9,16 @@ const RoutesComponent = () => {
 
   const GuardRoute = ({ children }: { children: JSX.Element }) => {
     if (!isAuth) {
-      return <Navigate to={ROUTER_LINKS.auth.path} state={{ from: location }} replace />;
+      return <Navigate to={ROUTES.AUTH.PATH} state={{ from: location }} replace />;
     }
     return children;
   };
 
   return (
     <Routes>
-      <Route path={ROUTER_LINKS.auth.path} element={<AuthPage />} />
+      <Route path={ROUTES.AUTH.PATH} element={<AuthPage />} />
       <Route
-        path={ROUTER_LINKS.todos.path}
+        path={ROUTES.TODOS.PATH}
         element={
           <GuardRoute>
             <TodosPage />
@@ -30,7 +26,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.calendar.path}
+        path={ROUTES.CALENDAR.PATH}
         element={
           <GuardRoute>
             <CalendarPage />
@@ -38,7 +34,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.wather.path}
+        path={ROUTES.WEATHER.PATH}
         element={
           <GuardRoute>
             <WeatherPage />
@@ -46,7 +42,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.settings.path}
+        path={ROUTES.SETTINGS.PATH}
         element={
           <GuardRoute>
             <SettingsPage />
