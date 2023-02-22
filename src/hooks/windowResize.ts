@@ -6,25 +6,27 @@ export interface IMemoSize {
 }
 
 export const useWindowSize = ({ totalHeight, totalWidth }: IMemoSize) => {
-  const [size, setSize] = useState({ windowHeight: 0, windowWidth: 0 });
+  const [size, SetSize] = useState(getWindowDimensions());
+
+  function getWindowDimensions() {
+    const { innerWidth, innerHeight } = window;
+    return {
+      innerWidth,
+      innerHeight,
+    };
+  }
 
   useLayoutEffect(() => {
-    const updateSize = () => {
-      setSize({ windowHeight: window.innerHeight, windowWidth: window.innerWidth });
-    };
-
-    window.addEventListener("resize", updateSize, true);
-
-    updateSize();
-
-    return () => window.removeEventListener("resize", updateSize, true);
+    const updateSize = () => SetSize(getWindowDimensions());
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const calcHeight = () => Math.max(0, size.windowHeight - Math.max(0, totalHeight));
-  const memoizedHeight = useMemo(() => calcHeight(), [size.windowHeight, totalHeight]);
+  const calcHeight = () => Math.max(0, size.innerHeight - Math.max(0, totalHeight));
+  const memoizedHeight = useMemo(() => calcHeight(), [size.innerHeight, totalHeight]);
 
-  const calcWidth = () => Math.max(0, size.windowWidth - Math.max(0, totalWidth));
-  const memoizedWidth = useMemo(() => calcWidth(), [size.windowWidth, totalWidth]);
+  const calcWidth = () => Math.max(0, size.innerWidth - Math.max(0, totalWidth));
+  const memoizedWidth = useMemo(() => calcWidth(), [size.innerWidth, totalWidth]);
 
   return {
     size,
