@@ -24,8 +24,6 @@ interface IColumn {
 }
 
 const CalendarPage = () => {
-  // const calendarStore = useCalendarStore((state) => state);
-
   const calendarStore = useCalendarStore(
     (state) => ({
       data: state.data,
@@ -98,10 +96,6 @@ const CalendarPage = () => {
     }
   };
 
-  useLayoutEffect(() => {
-    calendarStore.getAllData();
-  }, []);
-
   useEffect(() => {
     if (dateParse.daysMonth !== -1) {
       const fillMonth = Array.from(Array(dateParse.daysMonth), (_, idx) => {
@@ -132,6 +126,10 @@ const CalendarPage = () => {
       }
     }
   }, [updateRef]);
+
+  useLayoutEffect(() => {
+    calendarStore.getAllData();
+  }, []);
 
   const Column = memo(({ index, style, data }: IColumn) => {
     const isSelectDay = (day: number, month: number) =>
