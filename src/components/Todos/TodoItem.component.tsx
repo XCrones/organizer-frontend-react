@@ -1,21 +1,20 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { shallow } from "zustand/shallow";
 import { ITodo } from "../../models/todos.models";
+import { useTodosStore } from "../../store/todos.store";
 import { GCheckboxItem, GCheckboxReplace } from "../../style/components/checkbox.style";
 import { color } from "../../style/variables.style";
-import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./ListItem.style";
+import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
 
 interface Props {
   item: ITodo;
-  callbackToggle: Function;
   callbackEdit: Function;
 }
 
-const TodoItemComponent = ({ item, callbackEdit, callbackToggle }: Props) => {
-  const parseDate = (date: string): string => {
-    const parseDate = new Date(Date.parse(date)).toLocaleString();
-    return parseDate;
-  };
+const TodoItemComponent = ({ item, callbackEdit }: Props) => {
+  const patchData = useTodosStore((state) => state.patchData, shallow);
 
+  const parseDate = (date: string): string => new Date(Date.parse(date)).toLocaleString();
   const memoizeDate = useMemo(() => parseDate(item.deadline), [item.deadline]);
 
   const parsePriority = (priority: number) => {
@@ -30,13 +29,18 @@ const TodoItemComponent = ({ item, callbackEdit, callbackToggle }: Props) => {
         return "";
     }
   };
-
   const memoizePriority = useMemo(() => parsePriority(item.priority), [item.priority]);
+
+  const toggleStatus = useCallback(() => {
+    const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
+    todoItem.status = !todoItem.status;
+    patchData(todoItem);
+  }, [item]);
 
   return (
     <Item bgColor={color.todoItem}>
       <GCheckboxItem size={20}>
-        <input onClick={() => callbackToggle(item)} type="checkbox" />
+        <input onClick={toggleStatus} type="checkbox" />
         <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={15} />
       </GCheckboxItem>
       <ItemInfo>
