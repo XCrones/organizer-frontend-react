@@ -1,31 +1,34 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
-import axios from "../axios";
+import { Axios } from "../axios/methods";
 import { IEvent, IJoinEvent } from "../models/calendar.models";
 import { IPending } from "../models/pending.model";
+import { ROUTER_LINKS } from "../router-links";
 
-interface CalendarStore {
+interface IStateInitial {
+  endPoint: string;
   pending: IPending;
-  events: IEvent[];
-  fetchAllEvents: () => void;
-  joinEvent: (event: IJoinEvent) => void;
-  patchEvent: (event: IEvent) => void;
-  deleteEvent: (id: number) => void;
+  data: IEvent[];
+  getAllData: () => void;
+  joinData: (newData: IJoinEvent) => void;
+  patchData: (editData: IEvent) => void;
+  deleteData: (idData: number) => void;
 }
 
-export const useCalendarStore = create<CalendarStore>()((set, get) => ({
+export const useCalendarStore = create<IStateInitial>()((set, get) => ({
+  endPoint: ROUTER_LINKS.calendar.path,
   pending: {
     fetchAll: false,
     fetchOne: false,
   },
-  events: [],
-  fetchAllEvents: async () => {
+  data: [],
+  getAllData: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
-      const { data } = await axios.get<IEvent[]>("calendar");
+      const data = await Axios.get<IEvent[]>({ path: get().endPoint });
 
       if (!!data) {
-        set({ events: data });
+        set({ data: data });
       } else {
         throw "error get all events";
       }
@@ -38,13 +41,13 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
     }
   },
 
-  joinEvent: async (event) => {
+  joinData: async (newData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.post<IEvent>("calendar", event);
+      const data = await Axios.post<IEvent, IJoinEvent>({ path: get().endPoint, data: newData });
 
       if (!!data) {
-        set({ events: [...get().events, data] });
+        set({ data: [...get().data, data] });
       } else {
         throw "error get all events";
       }
@@ -57,14 +60,14 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
     }
   },
 
-  patchEvent: async (event) => {
+  patchData: async (editData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.patch(`calendar/${event.id}`, event);
+      const data = await Axios.patch<IEvent, IEvent>({ path: get().endPoint, data: editData });
 
       if (!!data) {
         set({
-          events: get().events.map((item) => (item.id === data.id ? { ...data } : item)),
+          data: get().data.map((item) => (item.id === data.id ? { ...data } : item)),
         });
       } else {
         throw "error get all events";
@@ -78,13 +81,13 @@ export const useCalendarStore = create<CalendarStore>()((set, get) => ({
     }
   },
 
-  deleteEvent: async (id) => {
+  deleteData: async (idData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.delete<IEvent>(`calendar/${id}`);
+      const data = await Axios.delete<IEvent>({ path: `${get().endPoint}/${idData}` });
       if (!!data) {
         set({
-          events: get().events.filter((item) => item.id !== data.id),
+          data: get().data.filter((item) => item.id !== data.id),
         });
       }
     } catch (error) {
