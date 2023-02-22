@@ -3,7 +3,7 @@ import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
 import { useLayoutEffect, useMemo, useState } from "react";
 import CreateTodoComponent from "../../components/todos/TodoEditor.component";
 import { ITodo } from "../../models/todos.models";
-import TodoItemComponent from "../../components/todos/ListItem.component";
+import TodoItemComponent from "../../components/todos/TodoItem.component";
 import SortComponent from "../../components/sort/Sort.component";
 import { useTodosStore } from "../../store/todos.store";
 import { shallow } from "zustand/shallow";
@@ -37,7 +37,18 @@ interface ITodos {
 }
 
 const TodosPage = () => {
-  const todoStore = useTodosStore((state) => state, shallow);
+  const todosStore = useTodosStore(
+    (state) => ({
+      data: state.data,
+      getAll: state.getAllData,
+      deleteOne: state.deleteData,
+      editTodo: state.patchData,
+      joinTodo: state.joinData,
+    }),
+    shallow
+  );
+
+  console.log("todos");
 
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
@@ -55,21 +66,11 @@ const TodosPage = () => {
     },
   ];
 
-  const toggleStatus = (item: ITodo) => {
-    const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
-    todoItem.status = !todoItem.status;
-    todoStore.patchData(todoItem);
-  };
-
   const editItem = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     SetEditTodo(todoItem);
     SetHideEdit(false);
   };
-
-  useLayoutEffect(() => {
-    todoStore.getAllData();
-  }, []);
 
   const parseTodos = (todoItems: ITodo[]): IParsingTodo[] => {
     const sortArr = (arr: ITodo[]) => arr.sort((a, b) => (a.deadline < b.deadline ? -1 : 1));
@@ -175,7 +176,11 @@ const TodosPage = () => {
     }
   };
 
-  const memoizeList = useMemo(() => parseTodos(todoStore.data) as IParsingTodo[], [todoStore.data]);
+  const memoizeList = useMemo(() => (todosStore.data.length > 0 ? parseTodos(todosStore.data) : []), [todosStore.data]);
+
+  useLayoutEffect(() => {
+    todosStore.getAll();
+  }, []);
 
   return (
     <TodosWrapper>
@@ -189,18 +194,19 @@ const TodosPage = () => {
             <ListItem isHide={item.todos.length === 0} key={item.title}>
               <ListTitle>{item.title}</ListTitle>
               {item.todos.map((todo) => (
-                <TodoItemComponent key={todo.id} item={todo} callbackToggle={toggleStatus} callbackEdit={editItem} />
+                <TodoItemComponent key={todo.id} item={todo} callbackEdit={editItem} />
               ))}
             </ListItem>
           ))}
         </ListItems>
+
         {!isHideCreate && (
           <CreateTodoComponent
             item={undefined}
             callbackClose={() => SetHideCreate(true)}
             titleWindow="todo"
             titleSubmit="join"
-            callbackSubmit={todoStore.joinData}
+            callbackSubmit={todosStore.joinTodo}
             isShowDelete={false}
           />
         )}
@@ -210,9 +216,9 @@ const TodosPage = () => {
             callbackClose={() => SetHideEdit(true)}
             titleWindow="todo"
             titleSubmit="save"
-            callbackSubmit={todoStore.patchData}
+            callbackSubmit={todosStore.editTodo}
             isShowDelete={true}
-            callbackDelete={todoStore.deleteData}
+            callbackDelete={todosStore.deleteOne}
           />
         )}
         {!isHideSort && <SortComponent />}
