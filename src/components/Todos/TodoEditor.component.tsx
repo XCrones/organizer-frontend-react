@@ -61,7 +61,6 @@ const CreateTodoComponent = ({
         callbackSubmit(item);
       } else {
         const metaData: IJoinTodo = {
-          uid: 1,
           title: data["todoName"],
           category: data["category"],
           priority: priority,
