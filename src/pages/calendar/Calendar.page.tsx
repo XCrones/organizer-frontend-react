@@ -9,7 +9,7 @@ import { IEvent, IParseEvent } from "../../models/calendar.models";
 import SheduleComponent from "../../components/calendar/Shedule.component";
 import CreateEventComponent from "../../components/calendar/EventEditor.component";
 import { useCalendarStore } from "../../store/calendar.store";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 
 interface IDay {
   dayStr: string;
