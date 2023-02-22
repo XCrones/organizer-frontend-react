@@ -74,7 +74,7 @@ const CalendarPage = () => {
     }
 
     try {
-      const findEvents = calendarStore.events.filter(
+      const findEvents = calendarStore.data.filter(
         (event) => new Date(Date.parse(event.eventStart)).toLocaleDateString() === selectDate.toLocaleDateString()
       );
       parseEvents(findEvents);
@@ -85,7 +85,7 @@ const CalendarPage = () => {
   };
 
   useLayoutEffect(() => {
-    calendarStore.fetchAllEvents();
+    calendarStore.getAllData();
   }, []);
 
   useEffect(() => {
@@ -105,10 +105,10 @@ const CalendarPage = () => {
   }, [dateParse]);
 
   useEffect(() => {
-    if (calendarStore.events.length > 0) {
+    if (calendarStore.data.length > 0) {
       updateEvents();
     }
-  }, [calendarStore.events]);
+  }, [calendarStore.data]);
 
   useEffect(() => {
     if (updateRef) {
@@ -147,7 +147,7 @@ const CalendarPage = () => {
   }, areEqual);
 
   const callbackEdit = (id: number) => {
-    const findEvent = calendarStore.events.find((event) => event.id === id);
+    const findEvent = calendarStore.data.find((event) => event.id === id);
     if (!!findEvent) {
       SetEditEvent(JSON.parse(JSON.stringify(findEvent)));
       SetHideEdit(false);
@@ -182,7 +182,7 @@ const CalendarPage = () => {
       </Events>
       {!isHideCreate && (
         <CreateEventComponent
-          callbackSubmit={calendarStore.joinEvent}
+          callbackSubmit={calendarStore.joinData}
           callbackClose={() => SetHideCreate(true)}
           titleWindow="event"
           titleSubmit="join"
@@ -191,13 +191,13 @@ const CalendarPage = () => {
       )}
       {!isHideEdit && (
         <CreateEventComponent
-          callbackSubmit={calendarStore.patchEvent}
+          callbackSubmit={calendarStore.patchData}
           callbackClose={() => SetHideEdit(true)}
           titleWindow="event"
           titleSubmit="save"
           item={editEvent}
           isShowDelete={true}
-          callbackDelete={calendarStore.deleteEvent}
+          callbackDelete={calendarStore.deleteData}
         />
       )}
     </CalendarWrapper>
