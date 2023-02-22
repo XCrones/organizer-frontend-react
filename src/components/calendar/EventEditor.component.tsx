@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import PopupComponent from "../popup/Popup.component";
 import {
-  PopupEventName,
-  PopupEventDate,
-  PopupItem,
-  PopupItems,
-  PopupTitle,
-  PopupWrapper,
-  PopupDescription,
-  PopupPallete,
-  PopupPalleteItem,
-} from "../popup/Popup.style";
+  GEditCancel,
+  GEditDate,
+  GEditDecr,
+  GEditHeader,
+  GEditItem,
+  GEditItems,
+  GEditName,
+  GEditPallete,
+  GEditPalleteItem,
+  GEditRadioItems,
+  GEditSubmit,
+  GEditTitle,
+  GEditWinTitle,
+  GEditWrapper,
+} from "../../style/components/editor.style";
 import { IEvent, IJoinEvent } from "../../models/calendar.models";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
@@ -84,16 +88,26 @@ const CreateEventComponent = ({
   }, [item]);
 
   return (
-    <PopupWrapper onSubmit={handleSubmit(onSubmit)}>
-      <PopupComponent
-        titleSubmit={titleSubmit}
-        isDisableSubmit={isValid}
-        title={titleWindow}
-        callbackCancel={callbackClose}
-      />
-      <PopupItems>
-        <PopupItem>
-          <PopupEventName
+    <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
+      <GEditHeader>
+        <GEditCancel onClick={() => callbackClose()} type="button">
+          cancel
+        </GEditCancel>
+        <GEditWinTitle>{titleWindow}</GEditWinTitle>
+        <GEditSubmit
+          disabled={!isValid}
+          style={{
+            color: isValid ? "#ff0000" : "#c0c0c0",
+            cursor: isValid ? "pointer" : "not-allowed",
+          }}
+          type="submit"
+        >
+          {titleSubmit}
+        </GEditSubmit>
+      </GEditHeader>
+      <GEditItems>
+        <GEditItem>
+          <GEditName
             minLength={2}
             maxLength={30}
             {...register("eventName", {
@@ -105,29 +119,29 @@ const CreateEventComponent = ({
             placeholder={`${titleWindow} name`}
             type="text"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupTitle>start:</PopupTitle>
-          <PopupEventDate
+        </GEditItem>
+        <GEditItem>
+          <GEditTitle>start:</GEditTitle>
+          <GEditDate
             {...register("startEvent", {
               required: "required filed",
               value: !!item ? makeLocalDate(item.eventStart) : "",
             })}
             type="datetime-local"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupTitle>end:</PopupTitle>
-          <PopupEventDate
+        </GEditItem>
+        <GEditItem>
+          <GEditTitle>end:</GEditTitle>
+          <GEditDate
             {...register("endEvent", {
               required: "required filed",
               value: !!item ? makeLocalDate(item.eventEnd) : "",
             })}
             type="datetime-local"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupDescription
+        </GEditItem>
+        <GEditItem>
+          <GEditDecr
             maxLength={200}
             {...register("description", {
               required: false,
@@ -137,21 +151,21 @@ const CreateEventComponent = ({
             rows={6}
             placeholder={`${titleWindow} description`}
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupPallete>
+        </GEditItem>
+        <GEditItem>
+          <GEditPallete>
             {color.pallete.map((item) => (
-              <PopupPalleteItem
+              <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
                 isSelect={item === currColor}
                 background={item}
-              ></PopupPalleteItem>
+              ></GEditPalleteItem>
             ))}
-          </PopupPallete>
-        </PopupItem>
+          </GEditPallete>
+        </GEditItem>
         {isShowDelete && (
-          <PopupItem>
+          <GEditItem>
             <GButton
               onClick={() => deleteItem(item?.id)}
               style={{ fontSize: "18px" }}
@@ -161,10 +175,10 @@ const CreateEventComponent = ({
             >
               delete
             </GButton>
-          </PopupItem>
+          </GEditItem>
         )}
-      </PopupItems>
-    </PopupWrapper>
+      </GEditItems>
+    </GEditWrapper>
   );
 };
 
