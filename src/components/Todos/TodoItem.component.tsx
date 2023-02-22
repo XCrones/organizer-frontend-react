@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 import { ITodo } from "../../models";
 import { useTodosStore } from "../../store";
 import { GCheckboxItem, GCheckboxReplace } from "../../style/components";
