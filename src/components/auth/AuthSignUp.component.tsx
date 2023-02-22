@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { IAuthSignIn, IAuthSignUp } from "../../models/auth.model";
+import { IAuthSignUp } from "../../models/auth.model";
 import { ROUTER_LINKS } from "../../router-links";
 import { useAuthStore } from "../../store/auth.store";
 import { GButton } from "../../style/components/button.style";
@@ -12,7 +12,6 @@ import {
   AuthLabel,
   AuthInput,
   AuthInputIcon,
-  AuthLink,
   AuthFormItems,
   AuthField,
   AuthErr,
@@ -146,26 +145,6 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
           {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
         </AuthFormItem>
       </AuthFormItems>
-
-      {/* <AuthAlternativeItems>
-        <AuthAlternativeTitle>
-          <AuthAlternativeLine />
-          <AuthAlternativetext>or</AuthAlternativetext>
-          <AuthAlternativeLine />
-        </AuthAlternativeTitle>
-        <AuthAlternativeSign>
-          <AuthAlternativeSignItem color="#281286">
-            <i className="bi bi-github"></i>
-          </AuthAlternativeSignItem>
-          <AuthAlternativeSignItem color="#000">
-            <i className="bi bi-apple"></i>
-          </AuthAlternativeSignItem>
-          <AuthAlternativeSignItem color="#ff4800">
-            <i className="bi bi-ubuntu"></i>
-          </AuthAlternativeSignItem>
-        </AuthAlternativeSign>
-        <AuthLink></AuthLink>
-      </AuthAlternativeItems> */}
 
       <GButton style={{ marginBottom: "20px" }} type="submit" color1="#266ED7" color2="#4D8AEB">
         sign up
