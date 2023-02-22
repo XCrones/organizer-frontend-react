@@ -8,11 +8,11 @@ import { ROUTER_LINKS } from "../../router-links";
 import { useAuthStore } from "../../store/auth.store";
 
 const RoutesComponent = () => {
-  const auth = useAuthStore();
+  const isAuth = useAuthStore().userData;
   const location = useLocation();
 
   const GuardRoute = ({ children }: { children: JSX.Element }) => {
-    if (!auth.isAuth) {
+    if (!isAuth) {
       return <Navigate to={ROUTER_LINKS.auth.link} state={{ from: location }} replace />;
     }
     return children;
