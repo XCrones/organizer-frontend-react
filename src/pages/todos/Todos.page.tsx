@@ -58,7 +58,7 @@ const TodosPage = () => {
   const toggleStatus = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     todoItem.status = !todoItem.status;
-    todoStore.patchTodo(todoItem);
+    todoStore.patchData(todoItem);
   };
 
   const editItem = (item: ITodo) => {
@@ -68,7 +68,7 @@ const TodosPage = () => {
   };
 
   useLayoutEffect(() => {
-    todoStore.fetchAllTodos();
+    todoStore.getAllData();
   }, []);
 
   const parseTodos = (todoItems: ITodo[]): IParsingTodo[] => {
@@ -175,7 +175,7 @@ const TodosPage = () => {
     }
   };
 
-  const memoizeList = useMemo(() => parseTodos(todoStore.todos) as IParsingTodo[], [todoStore.todos]);
+  const memoizeList = useMemo(() => parseTodos(todoStore.data) as IParsingTodo[], [todoStore.data]);
 
   return (
     <TodosWrapper>
@@ -200,7 +200,7 @@ const TodosPage = () => {
             callbackClose={() => SetHideCreate(true)}
             titleWindow="todo"
             titleSubmit="join"
-            callbackSubmit={todoStore.joinTodo}
+            callbackSubmit={todoStore.joinData}
             isShowDelete={false}
           />
         )}
@@ -210,9 +210,9 @@ const TodosPage = () => {
             callbackClose={() => SetHideEdit(true)}
             titleWindow="todo"
             titleSubmit="save"
-            callbackSubmit={todoStore.patchTodo}
+            callbackSubmit={todoStore.patchData}
             isShowDelete={true}
-            callbackDelete={todoStore.deleteTodo}
+            callbackDelete={todoStore.deleteData}
           />
         )}
         {!isHideSort && <SortComponent />}
