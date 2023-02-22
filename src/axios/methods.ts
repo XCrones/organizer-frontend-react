@@ -11,18 +11,7 @@ export interface IAxios<T> {
 }
 
 export const Axios = {
-  getAll: async <T>(meta: IAxios<T>): Promise<T | undefined> => {
-    try {
-      const token = useAuthStore.getState().userData?.token;
-      const { data } = await axios.get<T>(meta.path, {
-        headers: { Authorization: `bearer ${token}` },
-      });
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-  getOne: async <T>(meta: IAxios<T>): Promise<T | undefined> => {
+  get: async <T>(meta: IAxios<T>): Promise<T | undefined> => {
     try {
       const token = useAuthStore.getState().userData?.token;
       const { data } = await axios.get<T>(meta.path, {
