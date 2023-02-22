@@ -6,6 +6,7 @@ import { ITodo } from "../../models/todos.models";
 import TodoItemComponent from "../../components/todos/ListItem.component";
 import SortComponent from "../../components/sort/Sort.component";
 import { useTodosStore } from "../../store/todos.store";
+import { shallow } from "zustand/shallow";
 
 interface IParsingTodo {
   title: string;
@@ -36,7 +37,7 @@ interface ITodos {
 }
 
 const TodosPage = () => {
-  const todoStore = useTodosStore((state) => state);
+  const todoStore = useTodosStore((state) => state, shallow);
 
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
