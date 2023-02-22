@@ -10,7 +10,6 @@ import {
   GEditName,
   GEditPallete,
   GEditPalleteItem,
-  GEditRadioItems,
   GEditSubmit,
   GEditTitle,
   GEditWinTitle,
@@ -21,6 +20,12 @@ import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
 import { GButton } from "../../style/components/button.style";
 
+interface IFormInputs {
+  startEvent: string;
+  endEvent: string;
+  eventName: string;
+  description: string;
+}
 interface Props {
   titleWindow: string;
   titleSubmit: string;
@@ -47,25 +52,25 @@ const CreateEventComponent = ({
     register,
     handleSubmit,
     formState: { isValid },
-  } = useForm({
+  } = useForm<IFormInputs>({
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
       if (!!item) {
-        item.eventStart = data["startEvent"];
-        item.eventEnd = data["endEvent"];
-        item.title = data["eventName"];
-        item.description = data["description"];
+        item.eventStart = data.startEvent;
+        item.eventEnd = data.endEvent;
+        item.title = data.eventName;
+        item.description = data.description;
         item.background = currColor;
         callbackSubmit(item);
       } else {
         const metaData: IJoinEvent = {
-          eventStart: data["startEvent"],
-          eventEnd: data["endEvent"],
-          title: data["eventName"],
-          description: data["description"],
+          eventStart: data.startEvent,
+          eventEnd: data.endEvent,
+          title: data.eventName,
+          description: data.description,
           background: currColor,
         };
         callbackSubmit(metaData);
