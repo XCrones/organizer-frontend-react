@@ -44,6 +44,8 @@ export const AuthInput = styled.input`
 export const AuthErr = styled.div`
   font-size: 14px;
   padding-left: 20px;
+  margin-top: 5px;
+  color: #ff0000;
 `;
 
 export const AuthInputIcon = styled.div`
