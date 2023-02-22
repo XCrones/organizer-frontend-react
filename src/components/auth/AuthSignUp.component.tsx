@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IAuth } from "../../models/auth.model";
+import { useNavigate } from "react-router-dom";
+import { IAuthSignIn, IAuthSignUp } from "../../models/auth.model";
+import { ROUTER_LINKS } from "../../router-links";
 import { useAuthStore } from "../../store/auth.store";
 import { GButton } from "../../style/components/button.style";
 import AuthPreloaderComponent from "./AuthPreloader.component";
@@ -10,31 +12,25 @@ import {
   AuthLabel,
   AuthInput,
   AuthInputIcon,
-  AuthAlternativeItems,
-  AuthAlternativeTitle,
   AuthLink,
   AuthFormItems,
   AuthField,
   AuthErr,
-  AuthAlternativeLine,
-  AuthAlternativetext,
-  AuthAlternativeSign,
-  AuthAlternativeSignItem,
   AuthToggleForm,
   AuthTitle,
   AuthSubTitle,
 } from "./AuthSign.style";
 
 interface Props {
-  callback: Function;
   toggleForm: Function;
 }
 
-const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
+const AuthSignUpComponent = ({ toggleForm }: Props) => {
+  const navigate = useNavigate();
   const authStore = useAuthStore((state) => state);
 
-  const [isFormValid, setFormValid] = useState<boolean | undefined>(undefined);
   const [typePass, setTypePass] = useState<"password" | "text">("password");
+  const [errMessage, SetErrMessage] = useState("");
 
   const {
     register,
@@ -46,11 +42,20 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
 
   const onSubmit = async (data: any) => {
     if (isValid) {
-      const user: IAuth = {
+      const user: IAuthSignUp = {
         email: data["email"] || "",
         password: data["password"] || "",
+        name: data["name"] || "",
+        urlAvatar: "",
       };
-      authStore.singUp(user);
+
+      const result = await authStore.singUp(user);
+      console.log(result);
+      if (!result.isError) {
+        navigate(ROUTER_LINKS.todos.link, { replace: false });
+      } else {
+        SetErrMessage(result.message);
+      }
     }
   };
 
@@ -65,10 +70,33 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
       </AuthSubTitle>
       <AuthFormItems>
         <AuthFormItem>
-          <AuthLabel>username</AuthLabel>
+          <AuthLabel>first name</AuthLabel>
           <AuthField>
             <AuthInput
-              onFocus={() => setFormValid(true)}
+              minLength={3}
+              maxLength={20}
+              onFocus={() => SetErrMessage("")}
+              type="text"
+              {...register("name", {
+                required: "required filed",
+                minLength: 3,
+                maxLength: 20,
+              })}
+            />
+            <AuthInputIcon>
+              {/* {!errors.name && <i className="bi bi-check2 text-orange-400"></i>} */}
+              {errors.name && <i className="bi bi-x-lg text-red-600"></i>}
+            </AuthInputIcon>
+          </AuthField>
+          {errors?.name && <AuthErr>{getError("name")}</AuthErr>}
+          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
+        </AuthFormItem>
+
+        <AuthFormItem>
+          <AuthLabel>email</AuthLabel>
+          <AuthField>
+            <AuthInput
+              onFocus={() => SetErrMessage("")}
               type="email"
               {...register("email", {
                 required: "required filed",
@@ -79,17 +107,19 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
               })}
             />
             <AuthInputIcon>
-              {!errors.email && isFormValid && <i className="bi bi-check2 text-orange-400"></i>}
-              {errors.email && isFormValid && <i className="bi bi-x-lg text-red-600"></i>}
+              {/* {!errors.email && isFormValid && <i className="bi bi-check2 text-orange-400"></i>} */}
+              {errors.email && <i className="bi bi-x-lg text-red-600"></i>}
             </AuthInputIcon>
           </AuthField>
           {errors?.email && <AuthErr>{getError("email")}</AuthErr>}
+          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
         </AuthFormItem>
 
         <AuthFormItem>
           <AuthLabel>password</AuthLabel>
           <AuthField>
             <AuthInput
+              onFocus={() => SetErrMessage("")}
               type={typePass}
               {...register("password", {
                 required: "required filed",
@@ -113,10 +143,11 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
             </AuthInputIcon>
           </AuthField>
           {errors?.password && <AuthErr>{getError("password")}</AuthErr>}
+          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
         </AuthFormItem>
       </AuthFormItems>
 
-      <AuthAlternativeItems>
+      {/* <AuthAlternativeItems>
         <AuthAlternativeTitle>
           <AuthAlternativeLine />
           <AuthAlternativetext>or</AuthAlternativetext>
@@ -134,9 +165,9 @@ const AuthSignUpComponent = ({ callback, toggleForm }: Props) => {
           </AuthAlternativeSignItem>
         </AuthAlternativeSign>
         <AuthLink></AuthLink>
-      </AuthAlternativeItems>
+      </AuthAlternativeItems> */}
 
-      <GButton type="submit" color1="#266ED7" color2="#4D8AEB">
+      <GButton style={{ marginBottom: "20px" }} type="submit" color1="#266ED7" color2="#4D8AEB">
         sign up
       </GButton>
 
