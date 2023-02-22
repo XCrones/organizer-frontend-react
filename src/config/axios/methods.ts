@@ -1,5 +1,5 @@
 import axios from ".";
-import { useAuthStore } from "../store/auth.store";
+import { useAuthStore } from "../../store";
 
 const contentTypeJSON = {
   "Content-type": "application/json",

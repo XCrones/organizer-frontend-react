@@ -1,22 +1,22 @@
 import { NavLink } from "react-router-dom";
-import { IRouterLinkItem, ROUTER_LINKS } from "../../router-links";
-import { color } from "../../style/variables.style";
+import { IRouterLinkItem, ROUTES } from "../../config/routes/routes";
+import { GColor } from "../../style/variables.style";
 import { FooterIcon, FooterNav, FooterTitle } from "./Footer.style";
 
 const FooterComponent = () => {
-  const links = [...(Object.values(ROUTER_LINKS).map((value) => value) as IRouterLinkItem[])].filter(
-    (item) => item.title !== "auth"
+  const links = [...(Object.values(ROUTES).map((value) => value) as IRouterLinkItem[])].filter(
+    (item) => item.TITLE !== "auth"
   );
 
   const getIcon = (navPath: string) => {
     switch (navPath) {
-      case ROUTER_LINKS.calendar.path:
+      case ROUTES.CALENDAR.PATH:
         return "bi bi-calendar3";
-      case ROUTER_LINKS.todos.path:
+      case ROUTES.TODOS.PATH:
         return "bi bi-check2-circle";
-      case ROUTER_LINKS.wather.path:
+      case ROUTES.WEATHER.PATH:
         return "bi bi-cloud-sun-fill";
-      case ROUTER_LINKS.settings.path:
+      case ROUTES.SETTINGS.PATH:
         return "bi bi-gear-wide-connected";
       default:
         return "";
@@ -24,18 +24,18 @@ const FooterComponent = () => {
   };
 
   return (
-    <FooterNav bgColor={color.footerBg}>
+    <FooterNav bgColor={GColor.footerBg}>
       {links.map((item) => (
         <NavLink
-          key={item.path}
-          to={item.path}
+          key={item.PATH}
+          to={item.PATH}
           className="flex flex-col justify-center items-center transition-all duration-300"
           style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
         >
           <FooterIcon>
-            <i className={getIcon(item.path)}></i>
+            <i className={getIcon(item.PATH)}></i>
           </FooterIcon>
-          <FooterTitle>{item.title}</FooterTitle>
+          <FooterTitle>{item.TITLE}</FooterTitle>
         </NavLink>
       ))}
     </FooterNav>

@@ -1,10 +1,9 @@
-import FooterComponent from "../footer/Footer.component";
-import { Footer, Section, Wrapper } from "./App.style";
-import { color } from "../../style/variables.style";
-import { useWindowSize } from "../../hooks/windowResize";
-import { useAuthStore } from "../../store/auth.store";
+import { FooterComponent, RoutesComponent } from "..";
+import { useWindowSize } from "../../hooks";
+import { useAuthStore } from "../../store";
+import { GColor } from "../../style/variables.style";
 import style from "./App.module.scss";
-import RoutesComponent from "../routes/Routes.component";
+import { Footer, Section, Wrapper } from "./App.style";
 
 const App = () => {
   const isAuth = useAuthStore((state) => state.userData);
@@ -13,10 +12,8 @@ const App = () => {
 
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
-  console.log("app");
-
   return (
-    <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
+    <Wrapper className={style.scroll} colorBg={GColor.mainBg} height={{ footer: HEIGHT_FOOTER }}>
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <RoutesComponent />
       </Section>

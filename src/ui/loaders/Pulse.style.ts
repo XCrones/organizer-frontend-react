@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AuthPreloader = styled.div<{ color: string }>`
+export const PulseLoader = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
   position: absolute;
   top: 50%;

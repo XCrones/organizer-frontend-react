@@ -1,4 +1,4 @@
-import { fonts } from "./../../style/variables.style";
+import { GFonts } from "./../../style/variables.style";
 import styled from "styled-components";
 
 export const ToggleWrapper = styled.div`
@@ -41,7 +41,7 @@ export const ItemIcon = styled.div`
 `;
 export const ItemTitle = styled.div`
   font-size: 14px;
-  font-family: ${fonts.inter};
+  font-family: ${GFonts.inter};
   &::first-letter {
     text-transform: uppercase;
   }

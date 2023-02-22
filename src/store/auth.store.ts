@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import axios from "../axios";
-import { IAuthSignIn, IAuthSignUp } from "../models/auth.model";
+import { IAuthSignIn, IAuthSignUp } from "../models";
+import axios from "../config/axios";
 
 interface IUserData {
   email: string;

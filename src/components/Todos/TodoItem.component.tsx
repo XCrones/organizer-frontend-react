@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
-import { ITodo } from "../../models/todos.models";
-import { useTodosStore } from "../../store/todos.store";
-import { GCheckboxItem, GCheckboxReplace } from "../../style/components/checkbox.style";
-import { color } from "../../style/variables.style";
+import { ITodo } from "../../models";
+import { useTodosStore } from "../../store";
+import { GCheckboxItem, GCheckboxReplace } from "../../style/components";
+import { GColor } from "../../style/variables.style";
 import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
 
 interface Props {
@@ -20,11 +20,11 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const parsePriority = (priority: number) => {
     switch (priority) {
       case 0:
-        return color.priority.hight;
+        return GColor.priority.hight;
       case 1:
-        return color.priority.medium;
+        return GColor.priority.medium;
       case 2:
-        return color.priority.low;
+        return GColor.priority.low;
       default:
         return "";
     }
@@ -38,7 +38,7 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   }, [item]);
 
   return (
-    <Item bgColor={color.todoItem}>
+    <Item bgColor={GColor.todoItem}>
       <GCheckboxItem size={20}>
         <input onClick={toggleStatus} type="checkbox" />
         <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={15} />

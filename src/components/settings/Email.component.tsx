@@ -1,4 +1,4 @@
-import { useAuthStore } from "../../store/auth.store";
+import { useAuthStore } from "../../store";
 import { Avatar, AvatarImg, AvatarSvg, EmailWrapper, Info, InfoEmail, InfoName } from "./Email.style";
 
 interface Props {}

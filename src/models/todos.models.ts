@@ -1,4 +1,4 @@
-import { IBaseInfo } from "./base.models";
+import { IBaseInfo } from ".";
 
 export interface ITodoJoin {
   title: string;

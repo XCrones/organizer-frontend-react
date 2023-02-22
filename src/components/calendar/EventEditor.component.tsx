@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDate } from "../../hooks";
+import { IEvent, IJoinEvent } from "../../models";
 import {
+  GButton,
+  GEditWrapper,
+  GEditHeader,
   GEditCancel,
+  GEditWinTitle,
+  GEditSubmit,
+  GEditItems,
+  GEditItem,
+  GEditName,
+  GEditTitle,
   GEditDate,
   GEditDecr,
-  GEditHeader,
-  GEditItem,
-  GEditItems,
-  GEditName,
   GEditPallete,
   GEditPalleteItem,
-  GEditSubmit,
-  GEditTitle,
-  GEditWinTitle,
-  GEditWrapper,
-} from "../../style/components/editor.style";
-import { IEvent, IJoinEvent } from "../../models/calendar.models";
-import { color } from "../../style/variables.style";
-import { useDate } from "../../hooks/date";
-import { GButton } from "../../style/components/button.style";
+} from "../../style/components";
+import { GColor } from "../../style/variables.style";
 
 interface IFormInputs {
   startEvent: string;
@@ -36,7 +36,7 @@ interface Props {
   item?: IEvent;
 }
 
-const CreateEventComponent = ({
+const EventEditorComponent = ({
   callbackClose,
   titleSubmit,
   titleWindow,
@@ -45,7 +45,7 @@ const CreateEventComponent = ({
   callbackDelete,
   isShowDelete,
 }: Props) => {
-  const [currColor, SetColor] = useState(color.pallete[0]);
+  const [currColor, SetColor] = useState(GColor.pallete[0]);
   const { makeLocalDate } = useDate();
 
   const {
@@ -159,7 +159,7 @@ const CreateEventComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {color.pallete.map((item) => (
+            {GColor.pallete.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -187,4 +187,4 @@ const CreateEventComponent = ({
   );
 };
 
-export default CreateEventComponent;
+export default EventEditorComponent;

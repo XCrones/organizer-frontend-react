@@ -1,13 +1,9 @@
-import { HeaderButt, HeaderButtns, HeaderTitle, HeaderWrapper } from "./Header.component.style";
-
-export interface IButtonHeader {
-  icon: string;
-  callback: Function;
-}
+import { IHeaderButton } from "../../models";
+import { HeaderButt, HeaderButtns, HeaderTitle, HeaderWrapper } from "./Header.style";
 
 interface IProps {
   title: string;
-  buttns: IButtonHeader[];
+  buttns: IHeaderButton[];
 }
 
 const HeaderComponent = ({ title, buttns }: IProps) => {

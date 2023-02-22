@@ -1,4 +1,5 @@
-import HeaderComponent, { IButtonHeader } from "../../components/header/Header";
+import { HeaderComponent } from "../../components";
+import { IHeaderButton } from "../../models";
 import { WeatherWrapper } from "./Weather.style";
 
 interface Props {}
@@ -6,7 +7,7 @@ interface Props {}
 const WeatherPage = () => {
   const callbackPlus = () => {};
   const callbackSearch = () => {};
-  const buttonsHeader: IButtonHeader[] = [
+  const buttonsHeader: IHeaderButton[] = [
     {
       callback: callbackPlus,
       icon: "bi bi-search",
