@@ -13,16 +13,16 @@ const RoutesComponent = () => {
 
   const GuardRoute = ({ children }: { children: JSX.Element }) => {
     if (!isAuth) {
-      return <Navigate to={ROUTER_LINKS.auth.link} state={{ from: location }} replace />;
+      return <Navigate to={ROUTER_LINKS.auth.path} state={{ from: location }} replace />;
     }
     return children;
   };
 
   return (
     <Routes>
-      <Route path={ROUTER_LINKS.auth.link} element={<AuthPage />} />
+      <Route path={ROUTER_LINKS.auth.path} element={<AuthPage />} />
       <Route
-        path={ROUTER_LINKS.todos.link}
+        path={ROUTER_LINKS.todos.path}
         element={
           <GuardRoute>
             <TodosPage />
@@ -30,7 +30,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.calendar.link}
+        path={ROUTER_LINKS.calendar.path}
         element={
           <GuardRoute>
             <CalendarPage />
@@ -38,7 +38,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.wather.link}
+        path={ROUTER_LINKS.wather.path}
         element={
           <GuardRoute>
             <WeatherPage />
@@ -46,7 +46,7 @@ const RoutesComponent = () => {
         }
       />
       <Route
-        path={ROUTER_LINKS.settings.link}
+        path={ROUTER_LINKS.settings.path}
         element={
           <GuardRoute>
             <SettingsPage />
