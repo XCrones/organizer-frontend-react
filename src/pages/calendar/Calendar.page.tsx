@@ -25,6 +25,8 @@ interface IColumn {
 const CalendarPage = () => {
   const calendarStore = useCalendarStore((state) => state);
 
+  console.log("calendar");
+
   const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideCreate, SetHideCreate] = useState(true);
   const [daysMonth, SetDaysMonth] = useState<IDay[]>([]);
