@@ -28,7 +28,7 @@ interface Props {
   isShowDelete: boolean;
 }
 
-const CreateTodoComponent = ({
+const TodoEditorComponent = ({
   callbackClose,
   titleWindow,
   titleSubmit,
@@ -184,4 +184,4 @@ const CreateTodoComponent = ({
   );
 };
 
-export default CreateTodoComponent;
+export default TodoEditorComponent;
