@@ -1,34 +1,33 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
-import { ITodo } from "../models/todos.models";
+import { ITodoJoin, ITodo } from "../models/todos.models";
 import { IPending } from "../models/pending.model";
-import { Axios, IAxios } from "../axios/methods";
+import { Axios } from "../axios/methods";
+import { ROUTER_LINKS } from "../router-links";
 
-interface TodosStore {
-  todos: ITodo[];
+interface IStateInitial {
+  endPoint: string;
   pending: IPending;
-  fetchAllTodos: () => void;
-  joinTodo: (newTodo: ITodo) => void;
-  patchTodo: (editTodo: ITodo) => void;
-  deleteTodo: (id: number) => void;
+  data: ITodo[];
+  getAllData: () => void;
+  joinData: (newData: ITodoJoin) => void;
+  patchData: (editData: ITodo) => void;
+  deleteData: (idData: number) => void;
 }
 
-export const useTodosStore = create<TodosStore>()((set, get) => ({
+export const useTodosStore = create<IStateInitial>()((set, get) => ({
+  endPoint: ROUTER_LINKS.todos.path,
   pending: {
     fetchAll: false,
     fetchOne: false,
   },
-  todos: [],
-  fetchAllTodos: async () => {
+  data: [],
+  getAllData: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
-      const metaAxios: IAxios<ITodo[]> = {
-        path: "todos",
-        data: null,
-      };
-      const data = await Axios.get<ITodo[]>(metaAxios);
+      const data = await Axios.get<ITodo[]>({ path: get().endPoint });
       if (!!data) {
-        set({ todos: data });
+        set({ data: data });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -38,39 +37,14 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       set({ pending: { ...get().pending, fetchAll: false } });
     }
   },
-  joinTodo: async (newTodo) => {
+  joinData: async (newTodo) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const metaAxios: IAxios<ITodo> = {
-        path: "todos",
-        data: newTodo,
-      };
-      const data = await Axios.post<ITodo>(metaAxios);
-      if (!!data) {
-        set({
-          todos: [...get().todos, data],
-        });
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      console.log(err);
-      throw err;
-    } finally {
-      set({ pending: { ...get().pending, fetchOne: false } });
-    }
-  },
-  patchTodo: async (editTodo) => {
-    set({ pending: { ...get().pending, fetchOne: true } });
-    try {
-      const metaAxios: IAxios<ITodo> = {
-        path: "todos",
-        data: editTodo,
-      };
-      const data = await Axios.patch<ITodo>(metaAxios);
+      const data = await Axios.post<ITodo, ITodoJoin>({ path: get().endPoint, data: newTodo });
 
       if (!!data) {
         set({
-          todos: get().todos.map((item) => (item.id === data.id ? { ...data } : item)),
+          data: [...get().data, data],
         });
       }
     } catch (error) {
@@ -81,17 +55,32 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
-  deleteTodo: async (id) => {
+  patchData: async (editData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const metaAxios: IAxios<ITodo> = {
-        path: `todos/${id}`,
-        data: null,
-      };
-      const data = await Axios.delete<ITodo>(metaAxios);
+      const data = await Axios.post<ITodo, ITodo>({ path: get().endPoint, data: editData });
+
       if (!!data) {
         set({
-          todos: get().todos.filter((item) => item.id !== data.id),
+          data: get().data.map((item) => (item.id === data.id ? { ...data } : item)),
+        });
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      console.log(err);
+      throw err;
+    } finally {
+      set({ pending: { ...get().pending, fetchOne: false } });
+    }
+  },
+  deleteData: async (idData) => {
+    set({ pending: { ...get().pending, fetchOne: true } });
+    try {
+      const data = await Axios.delete<ITodo>({ path: `${get().endPoint}/${idData}` });
+
+      if (!!data) {
+        set({
+          data: get().data.filter((item) => item.id !== data.id),
         });
       }
     } catch (error) {
