@@ -35,8 +35,6 @@ const CalendarPage = () => {
     shallow
   );
 
-  console.log("calendar");
-
   const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideCreate, SetHideCreate] = useState(true);
   const [daysMonth, SetDaysMonth] = useState<IDay[]>([]);

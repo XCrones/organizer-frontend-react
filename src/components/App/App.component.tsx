@@ -13,8 +13,6 @@ const App = () => {
 
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
-  console.log("app");
-
   return (
     <Wrapper className={style.scroll} colorBg={color.mainBg} height={{ footer: HEIGHT_FOOTER }}>
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>

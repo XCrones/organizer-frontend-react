@@ -48,8 +48,6 @@ const TodosPage = () => {
     shallow
   );
 
-  console.log("todos");
-
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideSort, SetHideSort] = useState(true);
