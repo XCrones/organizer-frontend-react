@@ -58,7 +58,6 @@ const CreateEventComponent = ({
         callbackSubmit(item);
       } else {
         const metaData: IJoinEvent = {
-          uid: 1,
           eventStart: data["startEvent"],
           eventEnd: data["endEvent"],
           title: data["eventName"],
