@@ -58,7 +58,7 @@ export const useTodosStore = create<IStateInitial>()((set, get) => ({
   patchData: async (editData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.post<ITodo, ITodo>({ path: get().endPoint, data: editData });
+      const data = await Axios.patch<ITodo, ITodo>({ path: get().endPoint, data: editData });
 
       if (!!data) {
         set({
