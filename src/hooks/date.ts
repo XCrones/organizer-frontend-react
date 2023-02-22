@@ -12,7 +12,7 @@ interface IDate {
 
 export const useDate = () => {
   const [currDate] = useState<Date>(new Date());
-  const [selectDate, SetSelectDate] = useState(new Date());
+  const [selectDate, SetSelectDate] = useState<Date>(new Date());
   const [dateParse, SetDateParse] = useState<IDate>({
     year: -1,
     monthNum: -1,

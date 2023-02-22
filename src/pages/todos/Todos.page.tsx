@@ -40,10 +40,10 @@ const TodosPage = () => {
   const todosStore = useTodosStore(
     (state) => ({
       data: state.data,
-      getAll: state.getAllData,
-      deleteOne: state.deleteData,
-      editTodo: state.patchData,
-      joinTodo: state.joinData,
+      getAllData: state.getAllData,
+      deleteData: state.deleteData,
+      patchData: state.patchData,
+      joinData: state.joinData,
     }),
     shallow
   );
@@ -179,7 +179,7 @@ const TodosPage = () => {
   const memoizeList = useMemo(() => (todosStore.data.length > 0 ? parseTodos(todosStore.data) : []), [todosStore.data]);
 
   useLayoutEffect(() => {
-    todosStore.getAll();
+    todosStore.getAllData();
   }, []);
 
   return (
@@ -206,7 +206,7 @@ const TodosPage = () => {
             callbackClose={() => SetHideCreate(true)}
             titleWindow="todo"
             titleSubmit="join"
-            callbackSubmit={todosStore.joinTodo}
+            callbackSubmit={todosStore.joinData}
             isShowDelete={false}
           />
         )}
@@ -216,9 +216,9 @@ const TodosPage = () => {
             callbackClose={() => SetHideEdit(true)}
             titleWindow="todo"
             titleSubmit="save"
-            callbackSubmit={todosStore.editTodo}
+            callbackSubmit={todosStore.patchData}
             isShowDelete={true}
-            callbackDelete={todosStore.deleteOne}
+            callbackDelete={todosStore.deleteData}
           />
         )}
         {!isHideSort && <SortComponent />}

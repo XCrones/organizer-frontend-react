@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import PopupComponent from "../popup/Popup.component";
-import {
-  PopupWrapper,
-  PopupItems,
-  PopupItem,
-  PopupEventName,
-  PopupTitle,
-  PopupEventDate,
-  PopupPallete,
-  PopupRadioItems,
-  PopupPalleteItem,
-} from "../popup/Popup.style";
 import { ITodoJoin, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
 import { GButton } from "../../style/components/button.style";
+import {
+  GEditCancel,
+  GEditDate,
+  GEditHeader,
+  GEditItem,
+  GEditItems,
+  GEditName,
+  GEditPallete,
+  GEditPalleteItem,
+  GEditRadioItems,
+  GEditSubmit,
+  GEditTitle,
+  GEditWinTitle,
+  GEditWrapper,
+} from "../../style/components/editor.style";
 
 interface Props {
   titleWindow: string;
@@ -26,6 +29,12 @@ interface Props {
   callbackDelete?: Function;
   item?: ITodo;
   isShowDelete: boolean;
+}
+
+interface IFormInputs {
+  todoName: string;
+  category: string;
+  deadLine: string;
 }
 
 const TodoEditorComponent = ({
@@ -46,25 +55,26 @@ const TodoEditorComponent = ({
     register,
     handleSubmit,
     formState: { isValid },
-  } = useForm({
+  } = useForm<IFormInputs>({
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
       if (!!item) {
-        item.title = data["todoName"];
-        item.background = currColor;
-        item.category = data["category"];
-        item.priority = priority;
-        item.deadline = data["deadLine"];
-        callbackSubmit(item);
+        const editItem = JSON.parse(JSON.stringify(item)) as ITodo;
+        editItem.title = data.todoName;
+        editItem.background = currColor;
+        editItem.category = data.category;
+        editItem.priority = priority;
+        editItem.deadline = data.deadLine;
+        callbackSubmit(editItem);
       } else {
         const metaData: ITodoJoin = {
-          title: data["todoName"],
-          category: data["category"],
+          title: data.todoName,
+          category: data.category,
           priority: priority,
-          deadline: data["deadLine"],
+          deadline: data.deadLine,
           status: false,
           background: currColor,
         };
@@ -89,16 +99,26 @@ const TodoEditorComponent = ({
   }, [item]);
 
   return (
-    <PopupWrapper onSubmit={handleSubmit(onSubmit)}>
-      <PopupComponent
-        titleSubmit={titleSubmit}
-        isDisableSubmit={isValid}
-        title={titleWindow}
-        callbackCancel={callbackClose}
-      />
-      <PopupItems>
-        <PopupItem>
-          <PopupEventName
+    <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
+      <GEditHeader>
+        <GEditCancel onClick={() => callbackClose()} type="button">
+          cancel
+        </GEditCancel>
+        <GEditWinTitle>{titleWindow}</GEditWinTitle>
+        <GEditSubmit
+          disabled={!isValid}
+          style={{
+            color: isValid ? "#ff0000" : "#c0c0c0",
+            cursor: isValid ? "pointer" : "not-allowed",
+          }}
+          type="submit"
+        >
+          {titleSubmit}
+        </GEditSubmit>
+      </GEditHeader>
+      <GEditItems>
+        <GEditItem>
+          <GEditName
             minLength={2}
             maxLength={20}
             {...register("todoName", {
@@ -110,9 +130,9 @@ const TodoEditorComponent = ({
             placeholder={`${titleWindow} name`}
             type="text"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupEventName
+        </GEditItem>
+        <GEditItem>
+          <GEditName
             minLength={2}
             maxLength={20}
             {...register("category", {
@@ -124,20 +144,20 @@ const TodoEditorComponent = ({
             placeholder={"category"}
             type="text"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupTitle>deadline:</PopupTitle>
-          <PopupEventDate
+        </GEditItem>
+        <GEditItem>
+          <GEditTitle>deadline:</GEditTitle>
+          <GEditDate
             {...register("deadLine", {
               required: "required filed",
               value: !!item ? makeLocalDate(item.deadline) : "",
             })}
             type="datetime-local"
           />
-        </PopupItem>
-        <PopupItem>
-          <PopupTitle>priority:</PopupTitle>
-          <PopupRadioItems>
+        </GEditItem>
+        <GEditItem>
+          <GEditTitle>priority:</GEditTitle>
+          <GEditRadioItems>
             <GRadioItem size={30}>
               <input onClick={() => SetPriority(0)} name="priority" type="radio" />
               <GRadioRaplace colorSelect={color.priority.hight} rounded={50} isSelect={priority === 0} />
@@ -152,22 +172,22 @@ const TodoEditorComponent = ({
               <input onClick={() => SetPriority(2)} name="priority" type="radio" />
               <GRadioRaplace colorSelect={color.priority.low} rounded={50} isSelect={priority === 2} />
             </GRadioItem>
-          </PopupRadioItems>
-        </PopupItem>
-        <PopupItem>
-          <PopupPallete>
+          </GEditRadioItems>
+        </GEditItem>
+        <GEditItem>
+          <GEditPallete>
             {color.pallete.map((item) => (
-              <PopupPalleteItem
+              <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
                 isSelect={item === currColor}
                 background={item}
-              ></PopupPalleteItem>
+              ></GEditPalleteItem>
             ))}
-          </PopupPallete>
-        </PopupItem>
+          </GEditPallete>
+        </GEditItem>
         {isShowDelete && (
-          <PopupItem>
+          <GEditItem>
             <GButton
               onClick={() => deleteItem(item?.id)}
               style={{ fontSize: "18px" }}
@@ -177,10 +197,10 @@ const TodoEditorComponent = ({
             >
               delete
             </GButton>
-          </PopupItem>
+          </GEditItem>
         )}
-      </PopupItems>
-    </PopupWrapper>
+      </GEditItems>
+    </GEditWrapper>
   );
 };
 
