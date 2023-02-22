@@ -6,7 +6,7 @@ interface Props {}
 
 const TodosPreviewComponent = () => {
   const {
-    size: { windowWidth },
+    size: { innerWidth },
   } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
 
   const arr: IExampleItem[] = [
@@ -19,7 +19,7 @@ const TodosPreviewComponent = () => {
 
   return (
     <TodoExpampleWrapper>
-      <TodoExampleItems maxWidth={windowWidth}>
+      <TodoExampleItems maxWidth={innerWidth}>
         {arr.map((item) => (
           <TodoExampleItemComponent key={item.id} item={item} callback={callback} />
         ))}
