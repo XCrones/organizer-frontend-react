@@ -12,6 +12,7 @@ import ToggleComponent from "./settings/Toggle.component";
 import SortComponent from "./sort/Sort.component";
 import TodoItemComponent from "./todos/TodoItem.component";
 import TodoEditorComponent from "./todos/TodoEditor.component";
+import NotificationComponent from "./notification/Notification.component";
 
 export {
   AppComponent,
@@ -28,4 +29,5 @@ export {
   SortComponent,
   TodoItemComponent,
   TodoEditorComponent,
+  NotificationComponent,
 };
