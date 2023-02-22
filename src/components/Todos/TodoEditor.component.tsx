@@ -12,7 +12,7 @@ import {
   PopupRadioItems,
   PopupPalleteItem,
 } from "../popup/Popup.style";
-import { IJoinTodo, ITodo } from "../../models/todos.models";
+import { ITodoJoin, ITodo } from "../../models/todos.models";
 import { GRadioItem, GRadioRaplace } from "../../style/components/radio.style";
 import { color } from "../../style/variables.style";
 import { useDate } from "../../hooks/date";
@@ -60,7 +60,7 @@ const CreateTodoComponent = ({
         item.deadline = data["deadLine"];
         callbackSubmit(item);
       } else {
-        const metaData: IJoinTodo = {
+        const metaData: ITodoJoin = {
           title: data["todoName"],
           category: data["category"],
           priority: priority,
