@@ -1,16 +1,15 @@
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { ITodo } from "../models/todos.models";
-import axios from "../axios";
 import { IPending } from "../models/pending.model";
+import { Axios, IAxios } from "../axios/methods";
 
 interface TodosStore {
   todos: ITodo[];
   pending: IPending;
   fetchAllTodos: () => void;
-  fetchOneTodo: (id: number) => void;
   joinTodo: (newTodo: ITodo) => void;
-  patchTodo: (todoItem: ITodo) => void;
+  patchTodo: (editTodo: ITodo) => void;
   deleteTodo: (id: number) => void;
 }
 
@@ -23,11 +22,13 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
   fetchAllTodos: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
-      const { data } = await axios.get<ITodo[]>("todos");
+      const metaAxios: IAxios<ITodo[]> = {
+        path: "todos",
+        data: null,
+      };
+      const data = await Axios.get<ITodo[]>(metaAxios);
       if (!!data) {
         set({ todos: data });
-      } else {
-        throw "error get all todos";
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -37,25 +38,14 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       set({ pending: { ...get().pending, fetchAll: false } });
     }
   },
-  fetchOneTodo: async (id) => {
-    set({ pending: { ...get().pending, fetchOne: true } });
-    try {
-      const { data } = await axios.get<ITodo>(`todos/${id}`);
-      if (!!data) {
-        return data;
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      console.log(err);
-      throw err;
-    } finally {
-      set({ pending: { ...get().pending, fetchOne: false } });
-    }
-  },
   joinTodo: async (newTodo) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.post<ITodo>("todos", newTodo);
+      const metaAxios: IAxios<ITodo> = {
+        path: "todos",
+        data: newTodo,
+      };
+      const data = await Axios.post<ITodo>(metaAxios);
       if (!!data) {
         set({
           todos: [...get().todos, data],
@@ -69,10 +59,14 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
       set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
-  patchTodo: async (todoItem) => {
+  patchTodo: async (editTodo) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.patch(`todos/${todoItem.id}`, todoItem);
+      const metaAxios: IAxios<ITodo> = {
+        path: "todos",
+        data: editTodo,
+      };
+      const data = await Axios.patch<ITodo>(metaAxios);
 
       if (!!data) {
         set({
@@ -90,7 +84,11 @@ export const useTodosStore = create<TodosStore>()((set, get) => ({
   deleteTodo: async (id) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const { data } = await axios.delete<ITodo>(`todos/${id}`);
+      const metaAxios: IAxios<ITodo> = {
+        path: `todos/${id}`,
+        data: null,
+      };
+      const data = await Axios.delete<ITodo>(metaAxios);
       if (!!data) {
         set({
           todos: get().todos.filter((item) => item.id !== data.id),
