@@ -49,7 +49,6 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
       };
 
       const result = await authStore.singUp(user);
-      console.log(result);
       if (!result.isError) {
         navigate(ROUTES.TODOS.PATH, { replace: false });
       } else {

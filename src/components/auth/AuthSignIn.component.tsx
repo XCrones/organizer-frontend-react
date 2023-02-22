@@ -45,7 +45,6 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
         password: data["password"] || "",
       };
       const result = await authStore.singIn(user);
-      console.log(result);
       if (!result.isError) {
         navigate(ROUTES.TODOS.PATH, { replace: false });
       } else {
