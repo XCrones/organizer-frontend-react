@@ -1,6 +1,6 @@
 import { IBaseInfo } from "./base.models";
 
-export interface IJoinTodo {
+export interface ITodoJoin {
   title: string;
   category: string;
   priority: number;
@@ -9,4 +9,4 @@ export interface IJoinTodo {
   background: string;
 }
 
-export interface ITodo extends IJoinTodo, IBaseInfo {}
+export interface ITodo extends ITodoJoin, IBaseInfo {}
