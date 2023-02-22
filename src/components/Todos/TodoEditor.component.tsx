@@ -100,7 +100,7 @@ const TodoEditorComponent = ({
     }
   }, [item]);
 
-  return ReactDOM.createPortal(
+  return (
     <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
       <GEditHeader>
         <GEditCancel onClick={() => callbackClose()} type="button">
@@ -202,8 +202,7 @@ const TodoEditorComponent = ({
           </GEditItem>
         )}
       </GEditItems>
-    </GEditWrapper>,
-    document.body
+    </GEditWrapper>
   );
 };
 
