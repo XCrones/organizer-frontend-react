@@ -7,9 +7,9 @@ import style from "./App.module.scss";
 import RoutesComponent from "../routes/Routes.component";
 
 const App = () => {
-  const isAuth = useAuthStore((state) => state.isAuth);
-  const HEIGHT_FOOTER = isAuth ? 50 : 0;
-  const PADDING_BOTTOM = isAuth ? 40 : 0;
+  const isAuth = useAuthStore((state) => state.userData);
+  const HEIGHT_FOOTER = !!isAuth ? 50 : 0;
+  const PADDING_BOTTOM = !!isAuth ? 40 : 0;
 
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
@@ -18,7 +18,7 @@ const App = () => {
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <RoutesComponent />
       </Section>
-      {isAuth && (
+      {!!isAuth && (
         <Footer>
           <FooterComponent />
         </Footer>
