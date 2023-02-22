@@ -173,7 +173,7 @@ const CalendarPage = () => {
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.windowWidth - 40} // padding-left: 20px + padding-right: 20px
+            width={size.innerWidth - 40} // padding-left: 20px + padding-right: 20px
           >
             {Column}
           </List>
