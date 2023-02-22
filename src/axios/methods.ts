@@ -22,10 +22,10 @@ export const Axios = {
       throw error;
     }
   },
-  post: async <T>(meta: IAxios<T>): Promise<T | undefined> => {
+  post: async <R, D>(meta: IAxios<D>): Promise<R | undefined> => {
     try {
       const token = useAuthStore.getState().userData?.token;
-      const { data } = await axios.post<T>(meta.path, meta.data, {
+      const { data } = await axios.post<R>(meta.path, meta.data, {
         headers: { Authorization: `bearer ${token}`, ...contentTypeJSON },
       });
 
@@ -34,10 +34,10 @@ export const Axios = {
       throw error;
     }
   },
-  patch: async <T>(meta: IAxios<T>): Promise<T | undefined> => {
+  patch: async <R, D>(meta: IAxios<D>): Promise<R | undefined> => {
     try {
       const token = useAuthStore.getState().userData?.token;
-      const { data } = await axios.patch<T>(meta.path, meta.data, {
+      const { data } = await axios.patch<R>(meta.path, meta.data, {
         headers: { Authorization: `bearer ${token}`, ...contentTypeJSON },
       });
 
