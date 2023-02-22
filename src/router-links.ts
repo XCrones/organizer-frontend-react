@@ -1,5 +1,5 @@
 export interface IRouterLinkItem {
-  link: string;
+  path: string;
   title: string;
 }
 
@@ -14,22 +14,22 @@ interface IRouterLinks {
 export const ROUTER_LINKS: IRouterLinks = {
   todos: {
     title: "todos",
-    link: "/todos",
+    path: "/todos",
   },
   calendar: {
     title: "calendar",
-    link: "/calendar",
+    path: "/calendar",
   },
   wather: {
     title: "weather",
-    link: "/weather",
+    path: "/weather",
   },
   settings: {
     title: "settings",
-    link: "/settings",
+    path: "/settings",
   },
   auth: {
     title: "auth",
-    link: "/auth",
+    path: "/auth",
   },
 };

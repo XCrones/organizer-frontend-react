@@ -10,13 +10,13 @@ const FooterComponent = () => {
 
   const getIcon = (navPath: string) => {
     switch (navPath) {
-      case ROUTER_LINKS.calendar.link:
+      case ROUTER_LINKS.calendar.path:
         return "bi bi-calendar3";
-      case ROUTER_LINKS.todos.link:
+      case ROUTER_LINKS.todos.path:
         return "bi bi-check2-circle";
-      case ROUTER_LINKS.wather.link:
+      case ROUTER_LINKS.wather.path:
         return "bi bi-cloud-sun-fill";
-      case ROUTER_LINKS.settings.link:
+      case ROUTER_LINKS.settings.path:
         return "bi bi-gear-wide-connected";
       default:
         return "";
@@ -27,13 +27,13 @@ const FooterComponent = () => {
     <FooterNav bgColor={color.footerBg}>
       {links.map((item) => (
         <NavLink
-          key={item.link}
-          to={item.link}
+          key={item.path}
+          to={item.path}
           className="flex flex-col justify-center items-center transition-all duration-300"
           style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
         >
           <FooterIcon>
-            <i className={getIcon(item.link)}></i>
+            <i className={getIcon(item.path)}></i>
           </FooterIcon>
           <FooterTitle>{item.title}</FooterTitle>
         </NavLink>

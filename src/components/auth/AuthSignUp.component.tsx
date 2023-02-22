@@ -51,7 +51,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
       const result = await authStore.singUp(user);
       console.log(result);
       if (!result.isError) {
-        navigate(ROUTER_LINKS.todos.link, { replace: false });
+        navigate(ROUTER_LINKS.todos.path, { replace: false });
       } else {
         SetErrMessage(result.message);
       }
