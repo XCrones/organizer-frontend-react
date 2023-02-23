@@ -1,9 +1,9 @@
-import { Elem } from "./Notification.style";
+import { Notification } from "./Notification.style";
 
 interface Props {}
 
 const NotificationComponent = () => {
-  return <></>;
+  return <Notification></Notification>;
 };
 
 export default NotificationComponent;

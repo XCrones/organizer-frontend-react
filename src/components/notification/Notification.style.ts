@@ -1,3 +1,3 @@
 import styled from "styled-components";
 
-export const Elem = styled.div``;
+export const Notification = styled.div``;
