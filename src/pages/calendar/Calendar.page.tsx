@@ -4,8 +4,14 @@ import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from ".
 import { IEvent, IParseEvent } from "../../models/calendar.models";
 import { shallow } from "zustand/shallow";
 import { IHeaderButton } from "../../models/header.model";
-import { EventEditorComponent, HeaderComponent, MonthComponent, SheduleComponent } from "../../components";
-import { useDate, useWindowSize } from "../../hooks";
+import {
+  EventEditorComponent,
+  HeaderComponent,
+  MonthComponent,
+  NotificationComponent,
+  SheduleComponent,
+} from "../../components";
+import { useDate, useNotif, useWindowSize } from "../../hooks";
 import { useCalendarStore } from "../../store";
 
 interface IDay {
@@ -41,6 +47,7 @@ const CalendarPage = () => {
 
   const { dateParse, next, prev, jump, selectDate, currDate } = useDate();
   const { size } = useWindowSize({ totalHeight: 0, totalWidth: 0 });
+  const { isHideNotif, metaNotif, showNotif } = useNotif();
 
   const refListDays = useRef<FixedSizeList | null>(null);
 
@@ -163,6 +170,7 @@ const CalendarPage = () => {
 
   return (
     <CalendarWrapper>
+      <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent buttns={buttonsHeader} title={"calender"} />
       <Events>
         <MonthComponent
@@ -194,6 +202,7 @@ const CalendarPage = () => {
           titleWindow="event"
           titleSubmit="join"
           isShowDelete={false}
+          callbackNotif={showNotif}
         />
       )}
       {!isHideEdit && (
@@ -205,6 +214,7 @@ const CalendarPage = () => {
           item={editEvent}
           isShowDelete={true}
           callbackDelete={calendarStore.deleteData}
+          callbackNotif={showNotif}
         />
       )}
     </CalendarWrapper>

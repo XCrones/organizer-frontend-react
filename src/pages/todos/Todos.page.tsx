@@ -1,6 +1,13 @@
 import { useLayoutEffect, useMemo, useState } from "react";
 import { shallow } from "zustand/shallow";
-import { HeaderComponent, SortComponent, TodoEditorComponent, TodoItemComponent } from "../../components";
+import {
+  HeaderComponent,
+  NotificationComponent,
+  SortComponent,
+  TodoEditorComponent,
+  TodoItemComponent,
+} from "../../components";
+import { useNotif } from "../../hooks";
 import { IHeaderButton, ITodo } from "../../models";
 import { useTodosStore } from "../../store";
 import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
@@ -49,6 +56,8 @@ const TodosPage = () => {
   const [isHideEdit, SetHideEdit] = useState(true);
   const [isHideSort, SetHideSort] = useState(true);
   const [editTodo, SetEditTodo] = useState<ITodo | undefined>();
+
+  const { isHideNotif, metaNotif, showNotif } = useNotif();
 
   const buttonsHeader: IHeaderButton[] = [
     {
@@ -179,6 +188,7 @@ const TodosPage = () => {
 
   return (
     <TodosWrapper>
+      <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
       <Todos>
         <ListItems>
@@ -200,6 +210,7 @@ const TodosPage = () => {
             titleSubmit="join"
             callbackSubmit={todosStore.joinData}
             isShowDelete={false}
+            callbackNotif={showNotif}
           />
         )}
         {!isHideEdit && (
@@ -211,6 +222,7 @@ const TodosPage = () => {
             callbackSubmit={todosStore.patchData}
             isShowDelete={true}
             callbackDelete={todosStore.deleteData}
+            callbackNotif={showNotif}
           />
         )}
         {!isHideSort && <SortComponent />}
