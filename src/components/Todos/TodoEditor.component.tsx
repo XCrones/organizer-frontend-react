@@ -16,12 +16,12 @@ import {
   GRadioRaplace,
   GButton,
 } from "../../style/components";
-import ReactDOM from "react-dom";
 import { useEffect, useState } from "react";
 import { GColor } from "../../style/variables.style";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
-import { ITodo, ITodoJoin } from "../../models";
+import { IAxiosError, INotifMethods, ITodo, ITodoJoin } from "../../models";
+import { AxiosError } from "axios";
 
 interface Props {
   titleWindow: string;
@@ -29,6 +29,7 @@ interface Props {
   callbackClose: Function;
   callbackSubmit: Function;
   callbackDelete?: Function;
+  callbackNotif: INotifMethods;
   item?: ITodo;
   isShowDelete: boolean;
 }
@@ -47,6 +48,7 @@ const TodoEditorComponent = ({
   callbackSubmit,
   isShowDelete,
   callbackDelete,
+  callbackNotif,
 }: Props) => {
   const [priority, SetPriority] = useState<number>(0);
   const [currColor, SetColor] = useState(GColor.pallete[0]);
@@ -70,7 +72,16 @@ const TodoEditorComponent = ({
         editItem.category = data.category;
         editItem.priority = priority;
         editItem.deadline = data.deadLine;
-        callbackSubmit(editItem);
+        try {
+          await callbackSubmit(editItem);
+          callbackNotif.successful("edit successful");
+          callbackClose();
+        } catch (error) {
+          const err = error as AxiosError<IAxiosError>;
+          if (!!err.response) {
+            callbackNotif.error(err.response.data.message);
+          }
+        }
       } else {
         const metaData: ITodoJoin = {
           title: data.todoName,
@@ -80,15 +91,31 @@ const TodoEditorComponent = ({
           status: false,
           background: currColor,
         };
-        callbackSubmit(metaData);
+        try {
+          await callbackSubmit(metaData);
+          callbackNotif.successful("create new successful");
+          callbackClose();
+        } catch (error) {
+          const err = error as AxiosError<IAxiosError>;
+          if (!!err.response) {
+            callbackNotif.error(err.response.data.message);
+          }
+        }
       }
-      callbackClose();
     }
   };
 
-  const deleteItem = (id: number | undefined) => {
+  const deleteItem = async (id: number | undefined) => {
     if (!!id && !!callbackDelete) {
-      callbackDelete(id);
+      try {
+        await callbackDelete(id);
+        callbackNotif.successful("delete successful");
+      } catch (error) {
+        const err = error as AxiosError<IAxiosError>;
+        if (!!err.response) {
+          callbackNotif.error(err.response.data.message);
+        }
+      }
     }
     callbackClose();
   };

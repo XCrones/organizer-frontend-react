@@ -1,7 +1,8 @@
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
-import { IEvent, IJoinEvent } from "../../models";
+import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
 import {
   GButton,
   GEditWrapper,
@@ -32,6 +33,7 @@ interface Props {
   callbackClose: Function;
   callbackSubmit: Function;
   callbackDelete?: Function;
+  callbackNotif: INotifMethods;
   isShowDelete: boolean;
   item?: IEvent;
 }
@@ -44,6 +46,7 @@ const EventEditorComponent = ({
   callbackSubmit,
   callbackDelete,
   isShowDelete,
+  callbackNotif,
 }: Props) => {
   const [currColor, SetColor] = useState(GColor.pallete[0]);
   const { makeLocalDate } = useDate();
@@ -64,7 +67,17 @@ const EventEditorComponent = ({
         item.title = data.eventName;
         item.description = data.description;
         item.background = currColor;
-        callbackSubmit(item);
+
+        try {
+          await callbackSubmit(item);
+          callbackNotif.successful("edit successful");
+          callbackClose();
+        } catch (error) {
+          const err = error as AxiosError<IAxiosError>;
+          if (!!err.response) {
+            callbackNotif.error(err.response.data.message);
+          }
+        }
       } else {
         const metaData: IJoinEvent = {
           eventStart: data.startEvent,
@@ -73,15 +86,32 @@ const EventEditorComponent = ({
           description: data.description,
           background: currColor,
         };
-        callbackSubmit(metaData);
+
+        try {
+          await callbackSubmit(metaData);
+          callbackNotif.successful("create new successful");
+          callbackClose();
+        } catch (error) {
+          const err = error as AxiosError<IAxiosError>;
+          if (!!err.response) {
+            callbackNotif.error(err.response.data.message);
+          }
+        }
       }
-      callbackClose();
     }
   };
 
-  const deleteItem = (id: number | undefined) => {
+  const deleteItem = async (id: number | undefined) => {
     if (!!id && !!callbackDelete) {
-      callbackDelete(id);
+      try {
+        await callbackDelete(id);
+        callbackNotif.successful("delete successful");
+      } catch (error) {
+        const err = error as AxiosError<IAxiosError>;
+        if (!!err.response) {
+          callbackNotif.error(err.response.data.message);
+        }
+      }
     }
     callbackClose();
   };
