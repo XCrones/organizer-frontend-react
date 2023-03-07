@@ -6,6 +6,7 @@ import { IJoinEvent, IEvent, IParseEvent } from "./calendar.models";
 import { IPending } from "./pending.model";
 import { ITodoJoin, ITodo } from "./todos.models";
 import { INotifMeta, INotifMethods } from "./notification";
+import { IWeatherForecast, ICityWeather, IForecastItem, IWeatherCurr, IReqForecastWeather } from "./weather.model";
 
 export type {
   IAuthSignIn,
@@ -21,4 +22,9 @@ export type {
   INotifMeta,
   INotifMethods,
   IAxiosError,
+  IWeatherCurr,
+  IWeatherForecast,
+  ICityWeather,
+  IForecastItem,
+  IReqForecastWeather,
 };
