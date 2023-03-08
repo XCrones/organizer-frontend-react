@@ -26,19 +26,13 @@ import {
 } from "./WeatherForecast.style";
 import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
-import { IForecastItem } from "../../models";
-import { GHTMLIcons } from "../../style/variables.style";
+import { IForecastItem, IWindowColumn } from "../../models";
+import { GHTMLIcons, GIndents } from "../../style/variables.style";
 
 interface Props {
   cityName: string;
   isHide: boolean;
   callbackClose: Function;
-}
-
-interface IColumn {
-  index: number;
-  style: object;
-  data: IForecastItem[];
 }
 
 interface IWeatherDescr {
@@ -114,8 +108,6 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
     }
   }, [weatherStore.forecast]);
 
-  console.log("WeatherForecastComponent");
-
   const makeTime = (dateUNIX: number, shiftSec: number) =>
     moment.unix(dateUNIX).utc().add(shiftSec, "s").format("HH:mm");
 
@@ -133,7 +125,7 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
 
   if (isHide) return null;
 
-  const Column = memo(({ index, style, data }: IColumn) => {
+  const Column = memo(({ index, style, data }: IWindowColumn<IForecastItem[]>) => {
     const parseDate = (date: string) => {
       const dateString = date.split(" ")[0];
       const dateArr = dateString.split("-");
@@ -246,7 +238,7 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
           itemCount={!!weatherStore.forecast?.list ? weatherStore.forecast.list.length : 0}
           itemData={weatherStore.forecast?.list}
           layout="horizontal"
-          width={size.innerWidth - 40} // padding-left: 20px + padding-right: 20px
+          width={size.innerWidth - GIndents.left_right}
         >
           {Column}
         </List>
