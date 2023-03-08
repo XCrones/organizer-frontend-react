@@ -97,12 +97,10 @@ export const ForecastColumn = styled.div<{ isCurrDate: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid ${(props) => (props.isCurrDate ? "#fff" : "#ffffff0")}; */
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 50px;
   background-color: ${(props) => (props.isCurrDate ? "#16599b" : "#102e4b")};
-  /* color: ${(props) => (props.isCurrDate ? "#000" : "#fff")}; */
 `;
 export const ForecastItem = styled.div<{}>``;
 export const ColumnDay = styled.div<{}>`
