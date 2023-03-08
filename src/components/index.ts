@@ -13,6 +13,7 @@ import SortComponent from "./sort/Sort.component";
 import TodoItemComponent from "./todos/TodoItem.component";
 import TodoEditorComponent from "./todos/TodoEditor.component";
 import NotificationComponent from "./notification/Notification.component";
+import WeatherForecastComponent from "./weather/WeatherForecast.component";
 
 export {
   AppComponent,
@@ -30,4 +31,5 @@ export {
   TodoItemComponent,
   TodoEditorComponent,
   NotificationComponent,
+  WeatherForecastComponent,
 };
