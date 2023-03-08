@@ -31,10 +31,7 @@ const WeatherPage = () => {
 
   useEffect(() => {
     weatherStore.getAllData();
-    console.log("get all data");
   }, []);
-
-  console.log("weather page");
 
   const showForecast = (cityName: string) => {
     SetCityName(cityName);
