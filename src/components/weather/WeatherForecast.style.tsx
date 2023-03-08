@@ -1,15 +1,6 @@
 import { GColor } from "../../style/variables.style";
-import styled, { keyframes } from "styled-components";
-
-const KFrotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
+import styled from "styled-components";
+import { GArotate360, GAsliderLtoR } from "../../ui";
 
 export const WrapperForecast = styled.div`
   position: absolute;
@@ -19,6 +10,7 @@ export const WrapperForecast = styled.div`
   height: 100%;
   padding-top: 20px;
   background-color: ${GColor.mainBg};
+  animation: ${GAsliderLtoR} 150ms linear;
 `;
 
 export const ForecastHeader = styled.div<{}>`
@@ -39,7 +31,7 @@ export const ForecastButt = styled.button.attrs({
 
   & i {
     display: inline-block;
-    animation: ${(props) => (props.isRotate ? KFrotate : "")} 700ms linear infinite;
+    animation: ${(props) => (props.isRotate ? GArotate360 : "")} 700ms linear infinite;
     color: ${(props) => (props.isRotate ? "#000" : "#fff")};
     transition: all 300ms ease-in;
   }
