@@ -55,7 +55,6 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
         data: req,
       });
       if (!!data) {
-        console.log(data);
         set({ data: { ...get().data, forecast: data } });
       }
     } catch (error) {
@@ -68,8 +67,6 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
   },
   joinCity: (nameCity) => {},
   dropCity: async (idCity) => {
-    console.log("drop city", idCity);
-
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const data = await Axios.delete<ICityWeather[]>({ path: `${get().endPoint}/${idCity}` });
