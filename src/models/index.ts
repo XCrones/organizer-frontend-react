@@ -7,6 +7,7 @@ import { IPending } from "./pending.model";
 import { ITodoJoin, ITodo } from "./todos.models";
 import { INotifMeta, INotifMethods } from "./notification";
 import { IWeatherForecast, ICityWeather, IForecastItem, IWeatherCurr, IReqForecastWeather } from "./weather.model";
+import { IWindowColumn } from "./window-column.model";
 
 export type {
   IAuthSignIn,
@@ -27,4 +28,5 @@ export type {
   ICityWeather,
   IForecastItem,
   IReqForecastWeather,
+  IWindowColumn,
 };
