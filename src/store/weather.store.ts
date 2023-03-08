@@ -16,7 +16,7 @@ interface IStateInitial {
   getCities: () => void;
   getForecast: (nameCity: string) => void;
   joinCity: (nameCity: string) => void;
-  deleteCity: (idCIty: number) => void;
+  dropCity: (idCIty: number) => void;
 }
 
 export const useWeatherStore = create<IStateInitial>()((set, get) => ({
@@ -45,7 +45,7 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
     }
   },
   getForecast: async (nameCity) => {
-    set({ pending: { ...get().pending, fetchAll: true } });
+    set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const req: IReqForecastWeather = {
         city: nameCity,
@@ -63,9 +63,26 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
       console.log(err);
       throw err;
     } finally {
-      set({ pending: { ...get().pending, fetchAll: false } });
+      set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
   joinCity: (nameCity) => {},
-  deleteCity: async (idCity) => {},
+  dropCity: async (idCity) => {
+    console.log("drop city", idCity);
+
+    set({ pending: { ...get().pending, fetchOne: true } });
+    try {
+      const data = await Axios.delete<ICityWeather[]>({ path: `${get().endPoint}/${idCity}` });
+
+      if (!!data) {
+        set({ data: { ...get().data, cities: data } });
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      console.log(err);
+      throw err;
+    } finally {
+      set({ pending: { ...get().pending, fetchOne: false } });
+    }
+  },
 }));
