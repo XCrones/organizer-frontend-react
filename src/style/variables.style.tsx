@@ -32,3 +32,8 @@ export const GColor = {
 export const GFonts = {
   inter: "Inter, sans-serif",
 };
+
+export const GHTMLIcons = {
+  deg: <>&deg;</>,
+  nbsp: <>&nbsp;</>,
+};
