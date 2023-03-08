@@ -37,3 +37,9 @@ export const GHTMLIcons = {
   deg: <>&deg;</>,
   nbsp: <>&nbsp;</>,
 };
+
+export const GIndents = {
+  left: 20,
+  right: 20,
+  left_right: 40,
+};
