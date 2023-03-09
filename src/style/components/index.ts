@@ -1,4 +1,4 @@
-import { GButton } from "./button.style";
+import { GButton, GButtClose } from "./button.style";
 import { GCheckboxItem, GCheckboxReplace } from "./checkbox.style";
 import {
   GEditWrapper,
@@ -19,6 +19,7 @@ import {
 import { GRadioItem, GRadioRaplace } from "./radio.style";
 import { GHideBlock } from "./hideblock.style";
 import { GToggle } from "./toggle.style";
+import { GFormError } from "./form.style";
 
 export {
   GToggle,
@@ -42,4 +43,6 @@ export {
   GCheckboxItem,
   GCheckboxReplace,
   GButton,
+  GButtClose,
+  GFormError,
 };

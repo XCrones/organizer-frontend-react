@@ -1,11 +1,10 @@
 import styled from "styled-components";
+import { GFonts } from "../../style/variables.style";
 
-export const Elem = styled.div``;
-
-export const WeatherWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+export const WrapperWeather = styled.div`
+  font-family: ${GFonts.inter};
   display: flex;
   flex-direction: column;
-  row-gap: 25px;
+  row-gap: 10px;
+  position: relative;
 `;
