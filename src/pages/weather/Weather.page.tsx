@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
-import { HeaderComponent, WeatherCitiesComponent, WeatherForecastComponent } from "../../components";
+import {
+  WeatherJoinComponent,
+  HeaderComponent,
+  WeatherCitiesComponent,
+  WeatherForecastComponent,
+  NotificationComponent,
+} from "../../components";
 import { IHeaderButton } from "../../models";
-import { WeatherWrapper } from "./Weather.style";
+import { WrapperWeather } from "./Weather.style";
 import { shallow } from "zustand/shallow";
 import { useWeatherStore } from "../../store";
+import { useNotif } from "../../hooks";
 
 const WeatherPage = () => {
-  const [cityName, SetCityName] = useState("");
+  const [cityName, SetCityName] = useState(-1);
   const [isHideForecast, SetHideForecast] = useState(true);
+  const [isHideSearch, SetHideSearch] = useState(true);
+  const { isHideNotif, metaNotif, showNotif } = useNotif();
 
   const weatherStore = useWeatherStore(
     (state) => ({
@@ -20,7 +29,7 @@ const WeatherPage = () => {
 
   const buttonsHeader: IHeaderButton[] = [
     {
-      callback: () => {},
+      callback: () => SetHideSearch(false),
       icon: "bi bi-plus-lg",
     },
   ];
@@ -29,26 +38,25 @@ const WeatherPage = () => {
     weatherStore.getAllData();
   }, []);
 
-  const showForecast = (cityName: string) => {
-    SetCityName(cityName);
+  const showForecast = (id: number) => {
+    SetCityName(id);
     SetHideForecast(false);
   };
 
   return (
-    <WeatherWrapper>
+    <WrapperWeather>
+      <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent buttns={buttonsHeader} title={"weather"} />
       <WeatherCitiesComponent
+        callbackNotif={showNotif}
         isHide={isHideForecast}
         showForecast={showForecast}
         cities={weatherStore.cities}
         dropCity={weatherStore.dropCity}
       />
-      <WeatherForecastComponent
-        cityName={cityName}
-        isHide={isHideForecast}
-        callbackClose={() => SetHideForecast(true)}
-      />
-    </WeatherWrapper>
+      <WeatherForecastComponent id={cityName} isHide={isHideForecast} callbackClose={() => SetHideForecast(true)} />
+      <WeatherJoinComponent isHide={isHideSearch} callbackClose={() => SetHideSearch(true)} callbackNotif={showNotif} />
+    </WrapperWeather>
   );
 };
 
