@@ -15,6 +15,7 @@ import TodoEditorComponent from "./todos/TodoEditor.component";
 import NotificationComponent from "./notification/Notification.component";
 import WeatherForecastComponent from "./weather/WeatherForecast.component";
 import CitySearchComponent from "./weather/CitySearch.component";
+import WeatherCitiesComponent from "./weather/WeatherCities.component";
 
 export {
   AppComponent,
@@ -34,4 +35,5 @@ export {
   NotificationComponent,
   WeatherForecastComponent,
   CitySearchComponent,
+  WeatherCitiesComponent,
 };
