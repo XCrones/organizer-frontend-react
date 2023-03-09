@@ -6,8 +6,16 @@ import { IJoinEvent, IEvent, IParseEvent } from "./calendar.models";
 import { IPending } from "./pending.model";
 import { ITodoJoin, ITodo } from "./todos.models";
 import { INotifMeta, INotifMethods } from "./notification";
-import { IWeatherForecast, ICityWeather, IForecastItem, IWeatherCurr, IReqForecastWeather } from "./weather.model";
+import {
+  IWeatherForecast,
+  ICityWeather,
+  IForecastItem,
+  IWeatherCurr,
+  IReqWeatherByName,
+  IReqWeatherByGeo,
+} from "./weather.model";
 import { IWindowColumn } from "./window-column.model";
+import { IMoveItem } from "./drag_drop.model";
 
 export type {
   IAuthSignIn,
@@ -27,6 +35,8 @@ export type {
   IWeatherForecast,
   ICityWeather,
   IForecastItem,
-  IReqForecastWeather,
+  IReqWeatherByName,
+  IReqWeatherByGeo,
   IWindowColumn,
+  IMoveItem,
 };
