@@ -22,7 +22,6 @@ const WeatherPage = () => {
     (state) => ({
       cities: state.data.cities,
       getAllData: state.getCities,
-      dropCity: state.dropCity,
     }),
     shallow
   );
@@ -52,7 +51,6 @@ const WeatherPage = () => {
         isHide={isHideForecast}
         showForecast={showForecast}
         cities={weatherStore.cities}
-        dropCity={weatherStore.dropCity}
       />
       <WeatherForecastComponent id={cityName} isHide={isHideForecast} callbackClose={() => SetHideForecast(true)} />
       <WeatherJoinComponent isHide={isHideSearch} callbackClose={() => SetHideSearch(true)} callbackNotif={showNotif} />
