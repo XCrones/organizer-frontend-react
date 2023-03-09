@@ -2,7 +2,7 @@ import { GColor } from "../../style/variables.style";
 import styled from "styled-components";
 import { GArotate360, GAsliderLtoR } from "../../ui";
 
-export const WrapperForecast = styled.div`
+export const WeatherForecast = styled.div`
   position: absolute;
   top: 0;
   left: 0;
