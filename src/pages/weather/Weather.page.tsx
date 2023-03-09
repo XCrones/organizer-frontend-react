@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { HeaderComponent, WeatherForecastComponent } from "../../components";
+import { HeaderComponent, WeatherCitiesComponent, WeatherForecastComponent } from "../../components";
 import { IHeaderButton } from "../../models";
-import { WeatherButn, CityName, WeatherCities, WeatherCity, WeatherContent, WeatherWrapper } from "./Weather.style";
+import { WeatherWrapper } from "./Weather.style";
 import { shallow } from "zustand/shallow";
 import { useWeatherStore } from "../../store";
 
@@ -21,10 +21,6 @@ const WeatherPage = () => {
   const buttonsHeader: IHeaderButton[] = [
     {
       callback: () => {},
-      icon: "",
-    },
-    {
-      callback: () => {},
       icon: "bi bi-plus-lg",
     },
   ];
@@ -41,25 +37,12 @@ const WeatherPage = () => {
   return (
     <WeatherWrapper>
       <HeaderComponent buttns={buttonsHeader} title={"weather"} />
-      {isHideForecast && (
-        <WeatherContent>
-          <WeatherCities>
-            {weatherStore.cities.map((city) => (
-              <WeatherCity key={city.id}>
-                <WeatherButn background="#3794b1" onClick={() => showForecast(city.name)}>
-                  <i className="bi bi-info-circle"></i>
-                </WeatherButn>
-                <CityName>
-                  {city.name}, {city.country}
-                </CityName>
-                <WeatherButn background="#ff0000" onClick={() => weatherStore.dropCity(city.id)}>
-                  <i className="bi bi-x-lg"></i>
-                </WeatherButn>
-              </WeatherCity>
-            ))}
-          </WeatherCities>
-        </WeatherContent>
-      )}
+      <WeatherCitiesComponent
+        isHide={isHideForecast}
+        showForecast={showForecast}
+        cities={weatherStore.cities}
+        dropCity={weatherStore.dropCity}
+      />
       <WeatherForecastComponent
         cityName={cityName}
         isHide={isHideForecast}
