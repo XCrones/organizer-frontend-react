@@ -138,6 +138,11 @@ export interface ICityWeather {
   country: string;
 }
 
-export interface IReqForecastWeather {
+export interface IReqWeatherByName {
   city: string;
+}
+
+export interface IReqWeatherByGeo {
+  lat: number;
+  lon: number;
 }
