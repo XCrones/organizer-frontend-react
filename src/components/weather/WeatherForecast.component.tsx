@@ -9,7 +9,7 @@ import {
   ForecastSunRiseSet,
   ForecastTimes,
   ForecastTitle,
-  WrapperForecast,
+  WeatherForecast,
   ForecastTemps,
   TempMinMax,
   ForecastItems,
@@ -182,7 +182,7 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
   }, areEqual);
 
   return (
-    <WrapperForecast>
+    <WeatherForecast>
       <ForecastHeader>
         <ForecastButt onClick={() => callbackClose()} background="#c02f0b">
           <i className="bi bi-arrow-left"></i>
@@ -289,7 +289,7 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
           </span>
         </DescrItem>
       </ColumnDescr>
-    </WrapperForecast>
+    </WeatherForecast>
   );
 };
 
