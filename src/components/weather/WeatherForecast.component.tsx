@@ -30,7 +30,7 @@ import { IForecastItem, IWindowColumn } from "../../models";
 import { GHTMLIcons, GIndents } from "../../style/variables.style";
 
 interface Props {
-  cityName: string;
+  id: number;
   isHide: boolean;
   callbackClose: Function;
 }
@@ -49,7 +49,7 @@ interface IWeatherDescr {
   dt_txt: string | null;
 }
 
-const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) => {
+const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
   const weatherStore = useWeatherStore(
     (state) => ({
       forecast: state.data.forecast,
@@ -77,11 +77,9 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
 
   const [currDate, SetCurrDate] = useState<string | null>(null);
 
-  const fetchForecast = () => weatherStore.getForecast(cityName);
-
   useEffect(() => {
     if (!isHide) {
-      fetchForecast();
+      weatherStore.getForecast(id);
     }
   }, [isHide]);
 
@@ -192,7 +190,7 @@ const WeatherForecastComponent = ({ cityName, isHide, callbackClose }: Props) =>
         </ForecastTitle>
         <ForecastButt
           disabled={weatherStore.isPending}
-          onClick={() => fetchForecast()}
+          onClick={() => weatherStore.getForecast(id)}
           background="#19b34c"
           isRotate={weatherStore.isPending}
         >
