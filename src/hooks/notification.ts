@@ -1,3 +1,4 @@
+import { APP_MESSAGES } from "../common/app-messages";
 import { useState } from "react";
 import { INotifMeta, INotifMethods } from "../models";
 
@@ -19,7 +20,7 @@ export const useNotif = () => {
     successful: (title: string, timeout?: number) => {
       SetMeta({
         background: "#33ac83",
-        title,
+        title: APP_MESSAGES.succes(title),
       });
       SetHide(false);
       setTimeout(() => {
@@ -29,7 +30,17 @@ export const useNotif = () => {
     error: (title: string | string[], timeout?: number) => {
       SetMeta({
         background: "#a01818",
-        title,
+        title: APP_MESSAGES.error(title),
+      });
+      SetHide(false);
+      setTimeout(() => {
+        SetHide(true);
+      }, Math.max(3000, !!timeout ? timeout : 0));
+    },
+    warn: (title: string | string[], timeout?: number) => {
+      SetMeta({
+        background: "#FFFF00",
+        title: APP_MESSAGES.warn(title),
       });
       SetHide(false);
       setTimeout(() => {
