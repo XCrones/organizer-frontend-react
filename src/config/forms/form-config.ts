@@ -1,4 +1,4 @@
-import { IAuthConfig, IEventConfig, ITodoConfig } from "../../models";
+import { IAuthConfig, IEventConfig, ITodoConfig, IWeatherConfig } from "../../models";
 
 export const FORM_AUTH_CONFIG: IAuthConfig = {
   sign_up: {
@@ -41,5 +41,12 @@ export const FORM_TODO_CONFIG: ITodoConfig = {
       medium: 1,
       hight: 0,
     },
+  },
+};
+
+export const FORM_WEATHER_CONFIG: IWeatherConfig = {
+  name: {
+    min: 3,
+    max: 20,
   },
 };
