@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { APP_MESSAGES } from "../../common/app-messages";
-import { EVENT_CONFIG } from "../../common/form-config";
+import { FORM_EVENT_CONFIG } from "../../config/forms/form-config";
 import { useDate } from "../../hooks";
 import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
 import {
@@ -136,17 +136,17 @@ const EventEditorComponent = ({
       <GEditItems>
         <GEditItem>
           <GEditName
-            minLength={EVENT_CONFIG.name.min}
-            maxLength={EVENT_CONFIG.name.max}
+            minLength={FORM_EVENT_CONFIG.name.min}
+            maxLength={FORM_EVENT_CONFIG.name.max}
             {...register("eventName", {
               required: APP_MESSAGES.REQ_FIELD,
               minLength: {
-                value: EVENT_CONFIG.name.min,
-                message: APP_MESSAGES.MIN_CHAR(EVENT_CONFIG.name.min),
+                value: FORM_EVENT_CONFIG.name.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_EVENT_CONFIG.name.min),
               },
               maxLength: {
-                value: EVENT_CONFIG.name.max,
-                message: APP_MESSAGES.MAX_CHAR(EVENT_CONFIG.name.max),
+                value: FORM_EVENT_CONFIG.name.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_EVENT_CONFIG.name.max),
               },
               value: item?.title,
             })}
@@ -175,16 +175,16 @@ const EventEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditDecr
-            maxLength={EVENT_CONFIG.descr.max}
+            maxLength={FORM_EVENT_CONFIG.descr.max}
             {...register("description", {
               required: false,
               maxLength: {
-                value: EVENT_CONFIG.descr.max,
-                message: APP_MESSAGES.MAX_CHAR(EVENT_CONFIG.descr.max),
+                value: FORM_EVENT_CONFIG.descr.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_EVENT_CONFIG.descr.max),
               },
               value: item?.description,
             })}
-            rows={EVENT_CONFIG.descr.rows}
+            rows={FORM_EVENT_CONFIG.descr.rows}
             placeholder={`${titleWindow} description`}
           />
         </GEditItem>

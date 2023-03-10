@@ -20,10 +20,10 @@ import { useEffect, useState } from "react";
 import { GColor } from "../../ui/variables.style";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
-import { IAxiosError, INotifMethods, ITodo, ITodoJoin } from "../../models";
+import { IAxiosError, INotifMethods, ITodo, ITodoJoin, TPriority } from "../../models";
 import { AxiosError } from "axios";
 import { APP_MESSAGES } from "../../common/app-messages";
-import { TODO_CONFIG } from "../../common/form-config";
+import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
 
 interface Props {
   titleWindow: string;
@@ -52,7 +52,7 @@ const TodoEditorComponent = ({
   callbackDelete,
   callbackNotif,
 }: Props) => {
-  const [priority, SetPriority] = useState<number>(0);
+  const [priority, SetPriority] = useState<TPriority>(0);
   const [currColor, SetColor] = useState(GColor.pallete[0]);
 
   const { makeLocalDate } = useDate();
@@ -141,17 +141,17 @@ const TodoEditorComponent = ({
       <GEditItems>
         <GEditItem>
           <GEditName
-            minLength={TODO_CONFIG.name.min}
-            maxLength={TODO_CONFIG.name.max}
+            minLength={FORM_TODO_CONFIG.name.min}
+            maxLength={FORM_TODO_CONFIG.name.max}
             {...register("todoName", {
               required: APP_MESSAGES.REQ_FIELD,
               minLength: {
-                value: TODO_CONFIG.name.min,
-                message: APP_MESSAGES.MIN_CHAR(TODO_CONFIG.name.min),
+                value: FORM_TODO_CONFIG.name.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_TODO_CONFIG.name.min),
               },
               maxLength: {
-                value: TODO_CONFIG.name.max,
-                message: APP_MESSAGES.MAX_CHAR(TODO_CONFIG.name.max),
+                value: FORM_TODO_CONFIG.name.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_TODO_CONFIG.name.max),
               },
               value: item?.title,
             })}
@@ -161,17 +161,17 @@ const TodoEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditName
-            minLength={TODO_CONFIG.category.min}
-            maxLength={TODO_CONFIG.category.max}
+            minLength={FORM_TODO_CONFIG.category.min}
+            maxLength={FORM_TODO_CONFIG.category.max}
             {...register("category", {
               required: APP_MESSAGES.REQ_FIELD,
               minLength: {
-                value: TODO_CONFIG.category.min,
-                message: APP_MESSAGES.MIN_CHAR(TODO_CONFIG.category.min),
+                value: FORM_TODO_CONFIG.category.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_TODO_CONFIG.category.min),
               },
               maxLength: {
-                value: TODO_CONFIG.category.max,
-                message: APP_MESSAGES.MAX_CHAR(TODO_CONFIG.category.max),
+                value: FORM_TODO_CONFIG.category.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_TODO_CONFIG.category.max),
               },
               value: item?.category,
             })}
@@ -192,30 +192,34 @@ const TodoEditorComponent = ({
         <GEditItem>
           <GEditTitle>priority:</GEditTitle>
           <GEditRadioItems>
-            <GRadioItem size={TODO_CONFIG.priority.size}>
-              <input onClick={() => SetPriority(TODO_CONFIG.priority.levels.hight)} name="priority" type="radio" />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.hight)} name="priority" type="radio" />
               <GRadioRaplace
                 colorSelect={GColor.priority.hight}
-                rounded={TODO_CONFIG.priority.rounded}
-                isSelect={priority === TODO_CONFIG.priority.levels.hight}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.hight}
               />
             </GRadioItem>
 
-            <GRadioItem size={TODO_CONFIG.priority.size}>
-              <input onClick={() => SetPriority(TODO_CONFIG.priority.levels.medium)} name="priority" type="radio" />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input
+                onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.medium)}
+                name="priority"
+                type="radio"
+              />
               <GRadioRaplace
                 colorSelect={GColor.priority.medium}
-                rounded={TODO_CONFIG.priority.rounded}
-                isSelect={priority === TODO_CONFIG.priority.levels.medium}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.medium}
               />
             </GRadioItem>
 
-            <GRadioItem size={TODO_CONFIG.priority.size}>
-              <input onClick={() => SetPriority(TODO_CONFIG.priority.levels.low)} name="priority" type="radio" />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.low)} name="priority" type="radio" />
               <GRadioRaplace
                 colorSelect={GColor.priority.low}
-                rounded={TODO_CONFIG.priority.rounded}
-                isSelect={priority === TODO_CONFIG.priority.levels.low}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.low}
               />
             </GRadioItem>
           </GEditRadioItems>

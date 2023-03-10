@@ -23,7 +23,7 @@ import {
 } from "./AuthSign.style";
 import { RegExp } from "../../common/regexp";
 import { APP_MESSAGES } from "../../common/app-messages";
-import { AUTH_CONFIG } from "../../common/form-config";
+import { FORM_AUTH_CONFIG } from "../../config/forms/form-config";
 
 interface Props {
   toggleForm: Function;
@@ -88,19 +88,19 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
           <FormLabel>first name</FormLabel>
           <FormField>
             <FormInput
-              minLength={AUTH_CONFIG.sign_up.name.min}
-              maxLength={AUTH_CONFIG.sign_up.name.max}
+              minLength={FORM_AUTH_CONFIG.sign_up.name.min}
+              maxLength={FORM_AUTH_CONFIG.sign_up.name.max}
               onFocus={() => SetErrMessage("")}
               type="text"
               {...register("name", {
                 required: APP_MESSAGES.REQ_FIELD,
                 minLength: {
-                  value: AUTH_CONFIG.sign_up.name.min,
-                  message: APP_MESSAGES.MIN_CHAR(AUTH_CONFIG.sign_up.name.min),
+                  value: FORM_AUTH_CONFIG.sign_up.name.min,
+                  message: APP_MESSAGES.MIN_CHAR(FORM_AUTH_CONFIG.sign_up.name.min),
                 },
                 maxLength: {
-                  value: AUTH_CONFIG.sign_up.name.max,
-                  message: APP_MESSAGES.MAX_CHAR(AUTH_CONFIG.sign_up.name.max),
+                  value: FORM_AUTH_CONFIG.sign_up.name.max,
+                  message: APP_MESSAGES.MAX_CHAR(FORM_AUTH_CONFIG.sign_up.name.max),
                 },
               })}
             />
@@ -133,19 +133,19 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
           <FormLabel>password</FormLabel>
           <FormField>
             <FormInput
-              minLength={AUTH_CONFIG.sign_up.password.min}
-              maxLength={AUTH_CONFIG.sign_up.password.max}
+              minLength={FORM_AUTH_CONFIG.sign_up.password.min}
+              maxLength={FORM_AUTH_CONFIG.sign_up.password.max}
               onFocus={() => SetErrMessage("")}
               type={typePass}
               {...register("password", {
                 required: APP_MESSAGES.REQ_FIELD,
                 minLength: {
-                  value: AUTH_CONFIG.sign_up.password.min,
-                  message: APP_MESSAGES.MIN_CHAR(AUTH_CONFIG.sign_up.password.min),
+                  value: FORM_AUTH_CONFIG.sign_up.password.min,
+                  message: APP_MESSAGES.MIN_CHAR(FORM_AUTH_CONFIG.sign_up.password.min),
                 },
                 maxLength: {
-                  value: AUTH_CONFIG.sign_up.password.max,
-                  message: APP_MESSAGES.MAX_CHAR(AUTH_CONFIG.sign_up.password.max),
+                  value: FORM_AUTH_CONFIG.sign_up.password.max,
+                  message: APP_MESSAGES.MAX_CHAR(FORM_AUTH_CONFIG.sign_up.password.max),
                 },
               })}
             />
