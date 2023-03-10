@@ -53,16 +53,10 @@ const CalendarPage = () => {
 
   const refListDays = useRef<FixedSizeList | null>(null);
 
-  const buttonsHeader: IHeaderButton[] = [
-    {
-      callback: () => {},
-      icon: "",
-    },
-    {
-      callback: () => SetHideCreate(false),
-      icon: "bi bi-plus-lg",
-    },
-  ];
+  const buttonsHeader: IHeaderButton = {
+    callback: () => SetHideCreate(false),
+    icon: "bi bi-plus-lg",
+  };
 
   const parseEvents = (events: IEvent[]) => {
     events.forEach((event) => {
@@ -171,7 +165,7 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
-      <HeaderComponent buttns={buttonsHeader} title={"calendar"} />
+      <HeaderComponent butt={buttonsHeader} title={"calendar"} />
       <Events pl={GIndents.left} pr={GIndents.right}>
         <MonthComponent
           monthStr={dateParse.monthStr}

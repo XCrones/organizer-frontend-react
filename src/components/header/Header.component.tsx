@@ -3,18 +3,14 @@ import { HeaderButt, HeaderButtns, HeaderTitle, Header } from "./Header.style";
 
 interface IProps {
   title: string;
-  buttns: IHeaderButton[];
+  butt: IHeaderButton;
 }
 
-const HeaderComponent = ({ title, buttns }: IProps) => {
+const HeaderComponent = ({ title, butt }: IProps) => {
   return (
     <Header>
       <HeaderTitle>{title}</HeaderTitle>
-      <HeaderButtns>
-        {buttns.map((butt, idx) => (
-          <HeaderButt key={idx} onClick={() => butt.callback()} className={butt.icon} />
-        ))}
-      </HeaderButtns>
+      <HeaderButt onClick={() => butt.callback()} className={butt.icon} />
     </Header>
   );
 };

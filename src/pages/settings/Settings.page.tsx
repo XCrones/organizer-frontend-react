@@ -8,20 +8,14 @@ import { GColor, GIndents } from "../../ui/variables.style";
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);
 
-  const buttonsHeader: IHeaderButton[] = [
-    {
-      callback: () => {},
-      icon: "",
-    },
-    {
-      callback: () => {},
-      icon: "",
-    },
-  ];
+  const buttonsHeader: IHeaderButton = {
+    callback: () => {},
+    icon: "",
+  };
 
   return (
     <SettingsWrapper>
-      <HeaderComponent buttns={buttonsHeader} title={"settings"} />
+      <HeaderComponent butt={buttonsHeader} title={"settings"} />
       <SettingsItems pl={GIndents.left} pr={GIndents.right}>
         <Settingsitem>
           <EmailComponent />
