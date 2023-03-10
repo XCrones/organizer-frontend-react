@@ -1,4 +1,3 @@
-import { GColor } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const AuthWrapper = styled.div<{}>`
