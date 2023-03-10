@@ -20,13 +20,13 @@ export const GButtClose = styled.button.attrs({
 
 export const GButtSubmit = styled.button.attrs({
   type: "submit",
-})<{ color1: string; color2: string; mt?: number; mb?: number }>`
+})<{ gradient: string[]; mt?: number; mb?: number; fz?: number }>`
   height: 50px;
   width: 100%;
-  background: ${(props) => props.color1};
-  background: linear-gradient(142deg, ${(props) => props.color2} 0%, ${(props) => props.color1} 100%);
+  background: ${(props) => props.gradient[0]};
+  background: linear-gradient(142deg, ${(props) => props.gradient[0]} 0%, ${(props) => props.gradient[1]} 100%);
   text-transform: capitalize;
-  font-size: 14px;
+  font-size: ${(props) => (props.fz ? props.fz : 14)}px;
   line-height: 19px;
   margin-bottom: ${(props) => (props.mb ? props.mb : 0)}px;
   margin-top: ${(props) => (props.mt ? props.mt : 0)}px;
