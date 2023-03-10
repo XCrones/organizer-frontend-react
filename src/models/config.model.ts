@@ -43,3 +43,10 @@ export interface ITodoConfig {
     };
   };
 }
+
+export interface IWeatherConfig {
+  name: {
+    min: number;
+    max: number;
+  };
+}
