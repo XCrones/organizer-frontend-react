@@ -1,26 +1,35 @@
+import { AxiosError } from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { APP_MESSAGES } from "../../common/app-messages";
+import { RegExp } from "../../common/regexp";
 import { ROUTES } from "../../config/routes/routes";
-import { IAuthSignIn } from "../../models";
+import { IAuthSignIn, IAxiosError } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButton, GPulseLoader } from "../../ui";
+import { GButtSubmit, GPulseLoader } from "../../ui";
+import { GColor } from "../../ui/variables.style";
 import {
-  AuthErr,
-  AuthField,
+  FormErr,
+  FormField,
   AuthForm,
-  AuthFormItem,
-  AuthFormItems,
-  AuthInput,
-  AuthInputIcon,
-  AuthLabel,
-  AuthSubTitle,
-  AuthTitle,
-  AuthToggleForm,
+  FormItem,
+  FormItems,
+  FormInput,
+  FormInputIcon,
+  FormLabel,
+  FormSubtitle,
+  FormTitle,
+  FormToggle,
 } from "./AuthSign.style";
 
 interface Props {
   toggleForm: Function;
+}
+
+interface IFormInputs {
+  email: string;
+  password: string;
 }
 
 const AuthSignInComponent = ({ toggleForm }: Props) => {
@@ -33,88 +42,85 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<IFormInputs>({
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
-      const user: IAuthSignIn = {
-        email: data["email"] || "",
-        password: data["password"] || "",
-      };
-      const result = await authStore.singIn(user);
-      if (!result.isError) {
+      try {
+        const user: IAuthSignIn = {
+          email: data.email,
+          password: data.password,
+        };
+
+        await authStore.singIn(user);
         navigate(ROUTES.TODOS.PATH, { replace: false });
-      } else {
-        SetErrMessage(result.message);
+      } catch (error) {
+        const err = error as AxiosError<IAxiosError>;
+        SetErrMessage(err.response ? String(err.response.data.message) : "");
       }
     }
   };
-  const getError = (field: string) => (errors[field]?.message as string) || "Error!";
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
       {authStore.isPending && <GPulseLoader />}
-      <AuthTitle>sign in to organize pro</AuthTitle>
-      <AuthSubTitle>
+      <FormTitle>sign in to organize pro</FormTitle>
+      <FormSubtitle>
         Lorem ipsum dolor sit amet, consetetur sadipscing, lorem ipsum dolorsed diam nonumy amet eirmod.
-      </AuthSubTitle>
-      <AuthFormItems>
-        <AuthFormItem>
-          <AuthLabel>email</AuthLabel>
-          <AuthField>
-            <AuthInput
+      </FormSubtitle>
+      <FormItems>
+        <FormItem>
+          <FormLabel>email</FormLabel>
+          <FormField>
+            <FormInput
               onFocus={() => SetErrMessage("")}
               type="email"
               {...register("email", {
-                required: "required filed",
+                required: APP_MESSAGES.REQ_FIELD,
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "email invalid",
+                  value: RegExp.email,
+                  message: APP_MESSAGES.EMAIL_INV,
                 },
               })}
             />
-            <AuthInputIcon>
-              {/* {!errors.email && <i className="bi bi-check2 text-orange-400"></i>} */}
-              {errors.email && <i className="bi bi-x-lg text-red-600"></i>}
-            </AuthInputIcon>
-          </AuthField>
-          {errors?.email && <AuthErr>{getError("email")}</AuthErr>}
-          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
-        </AuthFormItem>
+            <FormInputIcon color={GColor.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+          </FormField>
+          {errors?.email && <FormErr>{errors.email.message}</FormErr>}
+          {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
+        </FormItem>
 
-        <AuthFormItem>
-          <AuthLabel>password</AuthLabel>
-          <AuthField>
-            <AuthInput
+        <FormItem>
+          <FormLabel>password</FormLabel>
+          <FormField>
+            <FormInput
               onFocus={() => SetErrMessage("")}
               type={typePass}
               {...register("password", {
-                required: "required filed",
+                required: APP_MESSAGES.REQ_FIELD,
               })}
             />
-            <AuthInputIcon
+            <FormInputIcon
               style={{ cursor: "pointer" }}
+              color={GColor.errors.red}
               onMouseUp={() => SetTypePass("password")}
               onMouseDown={() => SetTypePass("text")}
             >
               {typePass === "text" && <i className="bi bi-eye-fill"></i>}
               {typePass === "password" && <i className="bi bi-eye-slash-fill"></i>}
-            </AuthInputIcon>
-          </AuthField>
-          {errors?.password && <AuthErr>{getError("password")}</AuthErr>}
-          {errMessage.length > 0 && <AuthErr>{errMessage}</AuthErr>}
-        </AuthFormItem>
-      </AuthFormItems>
+            </FormInputIcon>
+          </FormField>
+          {errors?.password && <FormErr>{errors.password.message}</FormErr>}
+          {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
+        </FormItem>
+      </FormItems>
 
-      <GButton style={{ marginBottom: "20px" }} type="submit" color1="#266ED7" color2="#4D8AEB">
+      <GButtSubmit color1={GColor.gradient_blue.color1} color2={GColor.gradient_blue.color2} mb={20}>
         sign in
-      </GButton>
+      </GButtSubmit>
 
-      <AuthToggleForm onClick={() => toggleForm()} type="button">
-        I’m a new user. Registration
-      </AuthToggleForm>
+      <FormToggle onClick={() => toggleForm()}>I’m a new user. Registration</FormToggle>
     </AuthForm>
   );
 };
