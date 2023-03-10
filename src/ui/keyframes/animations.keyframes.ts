@@ -1,5 +1,14 @@
 import { keyframes } from "styled-components";
 
+export const GFrameTtoB = keyframes`
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+`;
+
 export const GFrameSliderLtoR = keyframes`
   from {
     transform: translateX(-100%);
