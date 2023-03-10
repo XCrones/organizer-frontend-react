@@ -2,7 +2,7 @@ import { EmailComponent, HeaderComponent, ToggleComponent } from "../../componen
 import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Settings.style";
 import { IHeaderButton } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButton } from "../../ui";
+import { GButtSubmit } from "../../ui";
 
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);
@@ -30,9 +30,9 @@ const SettingsPage = () => {
         </Settingsitem>
       </SettingsItems>
       <SettingsExit>
-        <GButton onClick={() => logOut()} type="submit" color1="#d72626" color2="#eb4d4d">
+        <GButtSubmit onClick={() => logOut()} type="submit" color1="#d72626" color2="#eb4d4d">
           logout
-        </GButton>
+        </GButtSubmit>
       </SettingsExit>
     </SettingsWrapper>
   );

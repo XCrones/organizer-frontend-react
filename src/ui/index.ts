@@ -1,5 +1,5 @@
 import { GFrameSliderLtoR, GFrameRotate360 } from "./keyframes/animations.keyframes";
-import { GButton, GButtClose, GButtSubmit } from "./components/button.style";
+import { GButtClose, GButtSubmit } from "./components/button.style";
 import { GCheckboxItem, GCheckboxReplace } from "./components/checkbox.style";
 import {
   GEditWrapper,
@@ -47,7 +47,6 @@ export {
   GEditWinTitle,
   GCheckboxItem,
   GCheckboxReplace,
-  GButton,
   GButtClose,
   GFormError,
   GButtSubmit,
