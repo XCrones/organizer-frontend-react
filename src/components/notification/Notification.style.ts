@@ -13,8 +13,10 @@ export const Notification = styled.div<{ background: string; isHide: boolean }>`
   animation: ${GFrameSliderLtoR} 200ms linear;
 `;
 
-export const NotificationTitle = styled.h2`
+export const NotificationTitle = styled.h2<{ textAlign: "center" | "left" }>`
   padding: 5px 10px;
+  text-align: ${(props) => props.textAlign};
+  font-size: 16px;
   &::first-letter {
     text-transform: capitalize;
   }
