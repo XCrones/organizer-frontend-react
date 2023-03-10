@@ -1,4 +1,4 @@
-import { GFonts } from "../../style/variables.style";
+import { GFonts } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const FooterNav = styled.nav<{ bgColor: string }>`

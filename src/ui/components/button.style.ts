@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GFrameRotate360 } from "..";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../variables.style";
 
 export const GButton = styled.button<{ color1: string; color2: string }>`
   height: 50px;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GButtClose, GFormError } from "../../ui";
 import { GButtSubmit } from "../../ui";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import { GFrameSliderLtoR } from "../../ui";
 
 export const WeatherJoin = styled.div<{}>`

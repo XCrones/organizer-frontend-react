@@ -19,7 +19,7 @@ import {
   GEditPallete,
   GEditPalleteItem,
 } from "../../ui";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 
 interface IFormInputs {
   startEvent: string;

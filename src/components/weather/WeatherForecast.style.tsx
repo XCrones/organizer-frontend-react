@@ -1,4 +1,4 @@
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import styled from "styled-components";
 import { GFrameRotate360, GFrameSliderLtoR } from "../../ui";
 

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../config/routes/routes";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import { NavIcon, FooterNav, NavTitle } from "./Footer.style";
 
 const FooterComponent = () => {

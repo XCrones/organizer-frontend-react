@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GFonts } from "../../style/variables.style";
+import { GFonts } from "../../ui/variables.style";
 
 const Scroll = styled.div`
   &::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../variables.style";
 
 const slider = keyframes`
   from {

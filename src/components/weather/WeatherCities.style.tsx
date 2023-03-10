@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GColor, GFonts } from "../../style/variables.style";
+import { GColor, GFonts } from "../../ui/variables.style";
 
 export const Elem = styled.div``;
 export const WeatherCities = styled.div`

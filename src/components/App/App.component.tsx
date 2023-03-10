@@ -1,7 +1,7 @@
 import { FooterComponent, RoutesComponent } from "..";
 import { useWindowSize } from "../../hooks";
 import { useAuthStore } from "../../store";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import style from "./App.module.scss";
 import { Footer, Section, Wrapper } from "./App.style";
 

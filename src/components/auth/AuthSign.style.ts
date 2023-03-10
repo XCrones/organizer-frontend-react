@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 
 export const AuthForm = styled.form<{}>`
   display: flex;

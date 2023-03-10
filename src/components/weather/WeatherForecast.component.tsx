@@ -27,7 +27,7 @@ import {
 import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
 import { IForecastItem, IWindowColumn } from "../../models";
-import { GHTMLIcons, GIndents } from "../../style/variables.style";
+import { GHTMLIcons, GIndents } from "../../ui/variables.style";
 
 interface Props {
   id: number;

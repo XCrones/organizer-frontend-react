@@ -1,6 +1,6 @@
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import styled from "styled-components";
-import { GFonts } from "../../style/variables.style";
+import { GFonts } from "../../ui/variables.style";
 
 export const Item = styled.div<{ bgColor: string }>`
   display: flex;

@@ -17,7 +17,7 @@ import {
   GButton,
 } from "../../ui";
 import { useEffect, useState } from "react";
-import { GColor } from "../../style/variables.style";
+import { GColor } from "../../ui/variables.style";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
 import { IAxiosError, INotifMethods, ITodo, ITodoJoin } from "../../models";
