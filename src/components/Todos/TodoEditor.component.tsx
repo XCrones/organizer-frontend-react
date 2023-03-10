@@ -14,7 +14,7 @@ import {
   GEditWrapper,
   GRadioItem,
   GRadioRaplace,
-  GButton,
+  GButtSubmit,
 } from "../../ui";
 import { useEffect, useState } from "react";
 import { GColor } from "../../ui/variables.style";
@@ -217,15 +217,14 @@ const TodoEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButton
+            <GButtSubmit
               onClick={() => deleteItem(item?.id)}
               style={{ fontSize: "18px" }}
               color1="#871111"
               color2="#e03138"
-              type="button"
             >
               delete
-            </GButton>
+            </GButtSubmit>
           </GEditItem>
         )}
       </GEditItems>
