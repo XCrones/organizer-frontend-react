@@ -11,16 +11,11 @@ interface IUserData {
   token: string;
 }
 
-interface ISignErr {
-  isError: boolean;
-  message: string;
-}
-
 interface AuthStore {
   userData: IUserData | null;
   isPending: boolean;
-  singIn: (userData: IAuthSignIn) => Promise<ISignErr>;
-  singUp: (userData: IAuthSignUp) => Promise<ISignErr>;
+  singIn: (userData: IAuthSignIn) => Promise<void>;
+  singUp: (userData: IAuthSignUp) => Promise<void>;
   logOut: () => Promise<void>;
 }
 
@@ -41,14 +36,10 @@ export const useAuthStore = create<AuthStore>()(
           if (!!data) {
             set({ userData: { ...JSON.parse(JSON.stringify(data)) } });
           }
-
-          return Promise.resolve({ isError: false, message: "" });
         } catch (error) {
-          const err = error as AxiosError<{ statusCode: number; message: string; error: string }>;
-          if (!!err.response?.data) {
-            return { isError: true, message: err.response.data.message };
-          }
-          return Promise.reject(err.message);
+          const err = error as AxiosError;
+          console.log(err);
+          throw err;
         } finally {
           set({ isPending: false });
         }
@@ -65,14 +56,10 @@ export const useAuthStore = create<AuthStore>()(
           if (!!data) {
             set({ userData: { ...JSON.parse(JSON.stringify(data)) } });
           }
-
-          return Promise.resolve({ isError: false, message: "" });
         } catch (error) {
-          const err = error as AxiosError<{ statusCode: number; message: string; error: string }>;
-          if (!!err.response?.data) {
-            return { isError: true, message: err.response.data.message };
-          }
-          return Promise.reject(err.message);
+          const err = error as AxiosError;
+          console.log(err);
+          throw err;
         } finally {
           set({ isPending: false });
         }
@@ -84,7 +71,9 @@ export const useAuthStore = create<AuthStore>()(
             userData: null,
           });
         } catch (error) {
-          return Promise.reject(error);
+          const err = error as AxiosError;
+          console.log(err);
+          throw err;
         } finally {
           set({ isPending: false });
         }

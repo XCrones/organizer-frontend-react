@@ -1,38 +1,38 @@
 import styled from "styled-components";
-import { GColor } from "../../style/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 
-export const AuthForm = styled.form<{}>`
+export const AuthForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
 
-export const AuthFormItems = styled.div`
+export const FormItems = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
   padding-bottom: 40px;
 `;
 
-export const AuthFormItem = styled.div`
+export const FormItem = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const AuthLabel = styled.label`
+export const FormLabel = styled.label`
   text-transform: capitalize;
-  color: ${GColor.colorAuth};
+  color: ${G_COLOR.colorAuth};
   font-size: 12px;
   line-height: 19px;
   font-weight: 400;
   padding-left: 20px;
 `;
 
-export const AuthField = styled.div`
+export const FormField = styled.div`
   position: relative;
   width: 100%;
 `;
 
-export const AuthInput = styled.input`
+export const FormInput = styled.input`
   background: rgb(36, 37, 71);
   background: linear-gradient(142deg, rgba(36, 37, 71, 1) 0%, rgba(36, 37, 71, 1) 44.71%);
   color: #fff;
@@ -41,87 +41,32 @@ export const AuthInput = styled.input`
   width: 100%;
 `;
 
-export const AuthErr = styled.div`
+export const FormErr = styled.div`
   font-size: 14px;
   padding-left: 20px;
   margin-top: 5px;
   color: #ff0000;
 `;
 
-export const AuthInputIcon = styled.div`
+export const FormInputIcon = styled.div<{ color: string }>`
   position: absolute;
   top: 50%;
   right: 20px;
   transform: translate(-50%, -50%);
   font-size: 20px;
   z-index: 2;
+  color: ${(props) => props.color};
 `;
 
-export const AuthAlternativeTitle = styled.div`
-  font-size: 12px;
-  line-height: 19px;
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  column-gap: 20px;
-`;
-
-export const AuthAlternativetext = styled.div``;
-
-export const AuthAlternativeLine = styled.div`
-  flex: 1 1 auto;
-  height: 1px;
-  background-color: ${GColor.colorAuth};
-`;
-
-export const AuthAlternativeItems = styled.div``;
-export const AuthAlternativeItem = styled.a``;
-
-export const AuthAlternativeSign = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  column-gap: 20px;
-  padding-bottom: 20px;
-`;
-
-export const AuthAlternativeSignItem = styled.a<{ color: string }>`
-  display: block;
-  flex: 0 1 100px;
-  height: 45px;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: ${(props) => props.color};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  line-height: 20px;
-`;
-
-export const AuthLink = styled.a`
-  /* cursor: pointer; */
-  text-align: center;
-  display: block;
-  font-size: 12px;
-  color: ${GColor.colorAuthTitle};
-  text-decoration: underline;
-  padding-bottom: 20px;
-  min-height: 38px;
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`;
-
-export const AuthToggleForm = styled.button`
+export const FormToggle = styled.button.attrs({
+  type: "button",
+})`
   font-size: 14px;
   line-height: 15px;
-  color: ${GColor.colorAuthTitle};
+  color: ${G_COLOR.colorAuthTitle};
 `;
 
-export const AuthTitle = styled.h1`
+export const FormTitle = styled.h1`
   max-width: 170px;
   font-size: 27px;
   line-height: 34px;
@@ -133,11 +78,11 @@ export const AuthTitle = styled.h1`
   }
 `;
 
-export const AuthSubTitle = styled.h2`
+export const FormSubtitle = styled.h2`
   max-width: 290px;
   font-size: 12px;
   line-height: 19px;
   font-weight: 400;
   padding-bottom: 30px;
-  color: ${GColor.colorAuthTitle};
+  color: ${G_COLOR.colorAuthTitle};
 `;

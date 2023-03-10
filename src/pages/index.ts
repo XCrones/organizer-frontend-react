@@ -1,5 +1,4 @@
 import AuthPage from "./auth/Auth.page";
-
 import CalendarPage from "./calendar/Calendar.page";
 import HomePage from "./home/Home.page";
 import SettingsPage from "./settings/Settings.page";

@@ -1,8 +1,22 @@
-import { PulseLoader } from "./Pulse.style";
+import styled from "styled-components";
 
-const PulseLoderComponent = () => {
+const Loader = styled.div<{ color: string }>`
+  background-color: ${(props) => props.color};
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const GPulseLoader = () => {
   return (
-    <PulseLoader color="#29345834">
+    <Loader color="#29345834">
       <svg
         style={{ display: "block", shapeRendering: "auto", background: "#ffffff0" }}
         width="80%"
@@ -74,8 +88,8 @@ const PulseLoderComponent = () => {
           ></animate>
         </rect>
       </svg>
-    </PulseLoader>
+    </Loader>
   );
 };
 
-export default PulseLoderComponent;
+export default GPulseLoader;

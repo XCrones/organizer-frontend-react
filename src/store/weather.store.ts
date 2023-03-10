@@ -18,7 +18,7 @@ interface IStateInitial {
   joinCityByName: (nameCity: string) => Promise<void>;
   joinCityByGeo: (reqData: IReqWeatherByGeo) => Promise<void>;
   dropCity: (idCIty: number) => Promise<void>;
-  cityMove: (meta: IMoveItem) => void;
+  cityMove: (meta: IMoveItem) => Promise<void>;
 }
 
 export const useWeatherStore = create<IStateInitial>()((set, get) => ({
@@ -119,7 +119,7 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
       set({ pending: { ...get().pending, fetchOne: false } });
     }
   },
-  cityMove: (meta) => {
+  cityMove: async (meta) => {
     try {
       const arrCities = JSON.parse(JSON.stringify(get().data.cities));
 

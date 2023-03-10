@@ -1,43 +1,54 @@
 import { NavLink } from "react-router-dom";
-import { IRouterLinkItem, ROUTES } from "../../config/routes/routes";
-import { GColor } from "../../style/variables.style";
-import { FooterIcon, FooterNav, FooterTitle } from "./Footer.style";
+import { ROUTES } from "../../config/routes/routes";
+import { G_COLOR, G_INDENTS } from "../../ui/variables.style";
+import { NavIcon, FooterNav, NavTitle } from "./Footer.style";
 
 const FooterComponent = () => {
-  const links = [...(Object.values(ROUTES).map((value) => value) as IRouterLinkItem[])].filter(
-    (item) => item.TITLE !== "auth"
-  );
-
-  const getIcon = (navPath: string) => {
-    switch (navPath) {
-      case ROUTES.CALENDAR.PATH:
-        return "bi bi-calendar3";
-      case ROUTES.TODOS.PATH:
-        return "bi bi-check2-circle";
-      case ROUTES.WEATHER.PATH:
-        return "bi bi-cloud-sun-fill";
-      case ROUTES.SETTINGS.PATH:
-        return "bi bi-gear-wide-connected";
-      default:
-        return "";
-    }
-  };
-
   return (
-    <FooterNav bgColor={GColor.footerBg}>
-      {links.map((item) => (
-        <NavLink
-          key={item.PATH}
-          to={item.PATH}
-          className="flex flex-col justify-center items-center transition-all duration-300"
-          style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
-        >
-          <FooterIcon>
-            <i className={getIcon(item.PATH)}></i>
-          </FooterIcon>
-          <FooterTitle>{item.TITLE}</FooterTitle>
-        </NavLink>
-      ))}
+    <FooterNav bgColor={G_COLOR.footerBg} pl={G_INDENTS.left} pr={G_INDENTS.right}>
+      <NavLink
+        to={ROUTES.TODOS.PATH}
+        className="flex flex-col justify-center items-center transition-all duration-300"
+        style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
+      >
+        <NavIcon>
+          <i className="bi bi-check2-circle"></i>
+        </NavIcon>
+        <NavTitle>{ROUTES.TODOS.TITLE}</NavTitle>
+      </NavLink>
+
+      <NavLink
+        to={ROUTES.CALENDAR.PATH}
+        className="flex flex-col justify-center items-center transition-all duration-300"
+        style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
+      >
+        <NavIcon>
+          <i className="bi bi-calendar3"></i>
+        </NavIcon>
+        <NavTitle>{ROUTES.CALENDAR.TITLE}</NavTitle>
+      </NavLink>
+
+      <NavLink
+        to={ROUTES.WEATHER.PATH}
+        className="flex flex-col justify-center items-center transition-all duration-300"
+        style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
+      >
+        <NavIcon>
+          <i className="bi bi-cloud-sun-fill"></i>
+        </NavIcon>
+        <NavTitle>{ROUTES.WEATHER.TITLE}</NavTitle>
+      </NavLink>
+
+      <NavLink
+        to={ROUTES.SETTINGS.PATH}
+        className="flex flex-col justify-center items-center transition-all duration-300"
+        style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
+      >
+        <NavIcon>
+          <i className="bi bi-gear-wide-connected"></i>
+        </NavIcon>
+        <NavTitle>{ROUTES.SETTINGS.TITLE}</NavTitle>
+      </NavLink>
     </FooterNav>
   );
 };

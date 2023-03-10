@@ -16,6 +16,14 @@ const RoutesComponent = () => {
 
   return (
     <Routes>
+      <Route
+        path={ROUTES.HOME.PATH}
+        element={
+          <GuardRoute>
+            <TodosPage />
+          </GuardRoute>
+        }
+      />
       <Route path={ROUTES.AUTH.PATH} element={<AuthPage />} />
       <Route
         path={ROUTES.TODOS.PATH}

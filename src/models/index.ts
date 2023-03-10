@@ -4,7 +4,7 @@ import { IAuthSignIn, IAuthSignUp } from "./auth.model";
 import { IBaseInfo } from "./base.models";
 import { IJoinEvent, IEvent, IParseEvent } from "./calendar.models";
 import { IPending } from "./pending.model";
-import { ITodoJoin, ITodo } from "./todos.models";
+import { ITodoJoin, ITodo, TPriority } from "./todos.models";
 import { INotifMeta, INotifMethods } from "./notification";
 import {
   IWeatherForecast,
@@ -16,6 +16,8 @@ import {
 } from "./weather.model";
 import { IWindowColumn } from "./window-column.model";
 import { IMoveItem } from "./drag_drop.model";
+import { IAuthConfig, IEventConfig, ITodoConfig, IWeatherConfig } from "./config.model";
+import { ITriangleSize, ITriangle, ITriangleBorderColor } from "./triangle.model";
 
 export type {
   IAuthSignIn,
@@ -39,4 +41,12 @@ export type {
   IReqWeatherByGeo,
   IWindowColumn,
   IMoveItem,
+  TPriority,
+  IAuthConfig,
+  IEventConfig,
+  ITodoConfig,
+  ITriangleSize,
+  ITriangle,
+  ITriangleBorderColor,
+  IWeatherConfig,
 };

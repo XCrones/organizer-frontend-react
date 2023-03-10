@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import { GButtClose, GFormError } from "../../style/components";
-import { GButtSubmit } from "../../style/components/button.style";
-import { GColor } from "../../style/variables.style";
-import { GAsliderLtoR } from "../../ui";
+import { GFormError, GFrameSliderLtoR, GButtSubmit } from "../../ui";
+import { G_COLOR } from "../../ui/variables.style";
 
-export const WeatherJoin = styled.div<{}>`
+export const WeatherJoin = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -13,12 +11,12 @@ export const WeatherJoin = styled.div<{}>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${GColor.colorSettings};
-  animation: ${GAsliderLtoR} 150ms linear;
+  background-color: ${G_COLOR.colorSettings};
+  animation: ${GFrameSliderLtoR} 150ms linear;
   padding: 5px;
 `;
 
-export const JoinHeader = styled.div<{}>`
+export const JoinHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -26,7 +24,7 @@ export const JoinHeader = styled.div<{}>`
   padding: 20px 0;
 `;
 
-export const JoinButt = styled.button.attrs({ type: "button" })<{}>`
+export const JoinButt = styled.button.attrs({ type: "button" })`
   color: ${(props) => props.color};
   font-size: 23px;
   padding: 5px;
@@ -49,32 +47,32 @@ export const JoinGeo = styled(JoinButt)<{ isLock: boolean; color: string }>`
   }
 `;
 
-export const JoinClose = styled(JoinButt)<{}>``;
+export const JoinClose = styled(JoinButt)``;
 
-export const JoinTitle = styled.div<{}>`
+export const JoinTitle = styled.div`
   flex: 1 1 auto;
   text-align: center;
   text-transform: capitalize;
 `;
 
-export const JoinForm = styled.form<{}>``;
+export const JoinForm = styled.form``;
 
-export const FormItem = styled.div<{}>`
+export const FormItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 10px;
 `;
 
-export const FormTitle = styled.label<{}>`
+export const FormTitle = styled.label`
   text-transform: capitalize;
 `;
 
 export const FormInput = styled.input.attrs({
   type: "text",
-})<{}>`
+})`
   color: #fff;
-  background-color: ${GColor.mainBg};
+  background-color: ${G_COLOR.mainBg};
   border-radius: 4px;
   padding: 2px 5px;
 `;

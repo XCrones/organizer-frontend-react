@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { GColor } from "../variables.style";
+import { G_COLOR } from "../variables.style";
 
 const slider = keyframes`
   from {
@@ -18,14 +18,14 @@ export const GEditWrapper = styled.form`
   right: 0;
   bottom: 49px;
   border-radius: 10px 10px 0 0;
-  background-color: ${GColor.mainBg};
+  background-color: ${G_COLOR.mainBg};
   padding: 5px;
   z-index: 10;
   animation: ${slider} 150ms linear;
   color: #fff;
 `;
 
-export const GEditHeader = styled.div<{}>`
+export const GEditHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -35,15 +35,21 @@ export const GEditHeader = styled.div<{}>`
   text-transform: capitalize;
 `;
 
-export const GEditCancel = styled.button<{}>`
+export const GEditCancel = styled.button.attrs({
+  type: "button",
+})`
   text-transform: capitalize;
   color: #ff0000;
 `;
 
-export const GEditWinTitle = styled.div<{}>``;
+export const GEditWinTitle = styled.div``;
 
-export const GEditSubmit = styled.button<{}>`
+export const GEditSubmit = styled.button.attrs({
+  type: "submit",
+})<{ isValid: boolean }>`
   text-transform: capitalize;
+  color: ${(props) => (props.isValid ? "#ff0000" : "#c0c0c0")};
+  cursor: ${(props) => (props.isValid ? "pointer" : "not-allowed")};
 `;
 
 export const GEditItems = styled.div`
@@ -56,7 +62,7 @@ export const GEditItems = styled.div`
 
 export const GEditItem = styled.div`
   width: 100%;
-  background-color: ${GColor.colorSettings};
+  background-color: ${G_COLOR.colorSettings};
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -65,15 +71,17 @@ export const GEditItem = styled.div`
 
 const DefaultInput = styled.input`
   width: 100%;
-  background-color: ${GColor.colorSettings};
+  background-color: ${G_COLOR.colorSettings};
   outline: 0;
   font-size: 15px;
 `;
 
-export const GEditName = styled(DefaultInput)`
+export const GEditName = styled(DefaultInput).attrs({
+  type: "text",
+})`
   &::placeholder {
     font-size: 14px;
-    color: ${GColor.colorAuthTitle};
+    color: ${G_COLOR.colorAuthTitle};
   }
 `;
 
@@ -86,7 +94,7 @@ export const GEditDate = styled(DefaultInput)``;
 
 export const GEditDecr = styled.textarea`
   width: 100%;
-  background-color: ${GColor.colorSettings};
+  background-color: ${G_COLOR.colorSettings};
   outline: 0;
   resize: none;
   font-size: 15px;

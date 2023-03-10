@@ -67,8 +67,6 @@ export const useDate = () => {
       newDate.setDate(dateParse.day + 1);
       makeDate(newDate.toISOString());
     },
-    hour: () => {},
-    minute: () => {},
   };
 
   const prev = {
@@ -87,14 +85,12 @@ export const useDate = () => {
       newDate.setDate(dateParse.day - 1);
       makeDate(newDate.toISOString());
     },
-    hour: () => {},
-    minute: () => {},
   };
 
   const jump = {
     year: (year: number) => {
       const newDate = new Date(selectDate);
-      newDate.setFullYear(dateParse.year + 1);
+      newDate.setFullYear(year);
       makeDate(newDate.toISOString());
     },
     month: (month: number) => {
@@ -107,8 +103,6 @@ export const useDate = () => {
       newDate.setDate(day + 1);
       makeDate(newDate.toISOString());
     },
-    hour: () => {},
-    minute: () => {},
   };
 
   const makeLocalDate = (date: string | undefined) => {

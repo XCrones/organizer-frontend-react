@@ -1,9 +1,11 @@
 import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
-import { ITodo } from "../../models";
+import { TODO_CONFIG } from "../../config/components/components-config";
+import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
+import { ITodo, ITriangle } from "../../models";
 import { useTodosStore } from "../../store";
-import { GCheckboxItem, GCheckboxReplace } from "../../style/components";
-import { GColor } from "../../style/variables.style";
+import { GCheckboxItem, GCheckboxReplace } from "../../ui";
+import { G_COLOR } from "../../ui/variables.style";
 import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
 
 interface Props {
@@ -12,19 +14,24 @@ interface Props {
 }
 
 const TodoItemComponent = ({ item, callbackEdit }: Props) => {
-  const patchData = useTodosStore((state) => state.patchData, shallow);
+  const todosStore = useTodosStore(
+    (state) => ({
+      patchData: state.patchData,
+    }),
+    shallow
+  );
 
   const parseDate = (date: string): string => new Date(Date.parse(date)).toLocaleString();
   const memoizeDate = useMemo(() => parseDate(item.deadline), [item.deadline]);
 
-  const parsePriority = (priority: number) => {
+  const parsePriority = (priority: number): string => {
     switch (priority) {
-      case 0:
-        return GColor.priority.hight;
-      case 1:
-        return GColor.priority.medium;
-      case 2:
-        return GColor.priority.low;
+      case FORM_TODO_CONFIG.priority.levels.hight:
+        return G_COLOR.priority.hight;
+      case FORM_TODO_CONFIG.priority.levels.medium:
+        return G_COLOR.priority.medium;
+      case FORM_TODO_CONFIG.priority.levels.low:
+        return G_COLOR.priority.low;
       default:
         return "";
     }
@@ -34,23 +41,38 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const toggleStatus = useCallback(() => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     todoItem.status = !todoItem.status;
-    patchData(todoItem);
+    todosStore.patchData(todoItem);
   }, [item]);
 
+  const metaTriangle: ITriangle = {
+    size: {
+      t: 0,
+      r: 17,
+      b: 17,
+      l: 0,
+    },
+    borderColor: {
+      t: "transparent",
+      r: memoizePriority,
+      b: "transparent",
+      l: "transparent",
+    },
+  };
+
   return (
-    <Item bgColor={GColor.todoItem}>
-      <GCheckboxItem size={20}>
+    <Item bgColor={G_COLOR.todoItem}>
+      <GCheckboxItem size={TODO_CONFIG.status.size}>
         <input onClick={toggleStatus} type="checkbox" />
-        <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={15} />
+        <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={TODO_CONFIG.status.rounded} />
       </GCheckboxItem>
       <ItemInfo>
         <ItemTitle>{item.title}</ItemTitle>
         <ItemDate>{memoizeDate}</ItemDate>
       </ItemInfo>
-      <ItemEdit color={item.background} onClick={() => callbackEdit(item)} type="button">
+      <ItemEdit color={item.background} onClick={() => callbackEdit(item)}>
         <i className="bi bi-info-square"></i>
       </ItemEdit>
-      <ItemTriangle background={memoizePriority} />
+      <ItemTriangle borderColor={metaTriangle.borderColor} size={metaTriangle.size} />
     </Item>
   );
 };

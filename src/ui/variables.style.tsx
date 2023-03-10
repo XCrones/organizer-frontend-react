@@ -1,4 +1,4 @@
-export const GColor = {
+export const G_COLOR = {
   mainBg: "#171930",
   footerBg: "#0D0F22",
   linkDefault: "#707070",
@@ -27,18 +27,26 @@ export const GColor = {
     "#ff3300",
     "#ffcc00",
   ],
+  gradients: {
+    red: ["#871111", "#e03138"],
+    blue: ["#266ED7", "#4D8AEB"],
+  },
+  errors: {
+    red: "#ff0000",
+    orange: "#ff7b00",
+  },
 };
 
-export const GFonts = {
+export const G_FONTS = {
   inter: "Inter, sans-serif",
 };
 
-export const GHTMLIcons = {
+export const G_HTML_ICONS = {
   deg: <>&deg;</>,
   nbsp: <>&nbsp;</>,
 };
 
-export const GIndents = {
+export const G_INDENTS = {
   left: 20,
   right: 20,
   left_right: 40,

@@ -26,12 +26,10 @@ const WeatherPage = () => {
     shallow
   );
 
-  const buttonsHeader: IHeaderButton[] = [
-    {
-      callback: () => SetHideSearch(false),
-      icon: "bi bi-plus-lg",
-    },
-  ];
+  const buttonsHeader: IHeaderButton = {
+    callback: () => SetHideSearch(false),
+    icon: "bi bi-plus-lg",
+  };
 
   useEffect(() => {
     weatherStore.getAllData();
@@ -45,7 +43,7 @@ const WeatherPage = () => {
   return (
     <WrapperWeather>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
-      <HeaderComponent buttns={buttonsHeader} title={"weather"} />
+      <HeaderComponent butt={buttonsHeader} title={"weather"} />
       <WeatherCitiesComponent
         callbackNotif={showNotif}
         isHide={isHideForecast}

@@ -13,6 +13,8 @@ import {
 } from "../../components";
 import { useDate, useNotif, useWindowSize } from "../../hooks";
 import { useCalendarStore } from "../../store";
+import { G_INDENTS } from "../../ui/variables.style";
+import { CALENDAR_CONFIG } from "../../config/components/components-config";
 
 interface IDay {
   dayStr: string;
@@ -51,16 +53,10 @@ const CalendarPage = () => {
 
   const refListDays = useRef<FixedSizeList | null>(null);
 
-  const buttonsHeader: IHeaderButton[] = [
-    {
-      callback: () => {},
-      icon: "",
-    },
-    {
-      callback: () => SetHideCreate(false),
-      icon: "bi bi-plus-lg",
-    },
-  ];
+  const buttonsHeader: IHeaderButton = {
+    callback: () => SetHideCreate(false),
+    icon: "bi bi-plus-lg",
+  };
 
   const parseEvents = (events: IEvent[]) => {
     events.forEach((event) => {
@@ -150,12 +146,10 @@ const CalendarPage = () => {
           }}
           onClick={() => jump.day(data[index].dayNum)}
           currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
-          type="button"
         >
           <DayWeeek currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}>{data[index].dayStr}</DayWeeek>
           <DayNum>{data[index].dayNum + 1}</DayNum>
         </DaysItem>
-        <div style={{ width: "10px" }}></div>
       </div>
     );
   }, areEqual);
@@ -171,8 +165,8 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
-      <HeaderComponent buttns={buttonsHeader} title={"calender"} />
-      <Events>
+      <HeaderComponent butt={buttonsHeader} title={"calendar"} />
+      <Events pl={G_INDENTS.left} pr={G_INDENTS.right}>
         <MonthComponent
           monthStr={dateParse.monthStr}
           yearNum={dateParse.year}
@@ -182,13 +176,13 @@ const CalendarPage = () => {
         <DaysList>
           <List
             ref={refListDays}
-            overscanCount={2}
-            height={60}
-            itemSize={60}
+            overscanCount={CALENDAR_CONFIG.days_list.overscanCount}
+            height={CALENDAR_CONFIG.days_list.height}
+            itemSize={CALENDAR_CONFIG.days_list.itemSize}
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.innerWidth - 40} // padding-left: 20px + padding-right: 20px
+            width={size.innerWidth - G_INDENTS.left_right}
           >
             {Column}
           </List>

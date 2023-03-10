@@ -1,9 +1,12 @@
 import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { shallow } from "zustand/shallow";
+import { APP_MESSAGES } from "../../common/app-messages";
+import { FORM_WEATHER_CONFIG } from "../../config/forms/form-config";
 import { useGeolocation } from "../../hooks";
 import { IAxiosError, INotifMethods, IReqWeatherByGeo } from "../../models";
 import { useWeatherStore } from "../../store";
+import { G_COLOR } from "../../ui/variables.style";
 import {
   FormError,
   FormInput,
@@ -53,7 +56,7 @@ const WeatherJoinComponent = ({ isHide, callbackClose, callbackNotif }: Props) =
     if (isValid) {
       try {
         await weatherStore.fetchByName(data.nameCity.trim());
-        callbackNotif.successful("add new");
+        callbackNotif.successful(APP_MESSAGES.ADD_NEW_SECCUS);
         callbackClose();
         reset();
       } catch (error) {
@@ -78,7 +81,7 @@ const WeatherJoinComponent = ({ isHide, callbackClose, callbackNotif }: Props) =
         };
 
         await weatherStore.fetchByGeo(reqData);
-        callbackNotif.successful("add new");
+        callbackNotif.successful(APP_MESSAGES.ADD_NEW_SECCUS);
         callbackClose();
         reset();
       } catch (error) {
@@ -105,25 +108,23 @@ const WeatherJoinComponent = ({ isHide, callbackClose, callbackNotif }: Props) =
         <FormItem>
           <FormTitle>name:</FormTitle>
           <FormInput
-            minLength={3}
-            maxLength={20}
+            minLength={FORM_WEATHER_CONFIG.name.min}
+            maxLength={FORM_WEATHER_CONFIG.name.max}
             {...register("nameCity", {
-              required: "required filed",
+              required: APP_MESSAGES.REQ_FIELD,
               minLength: {
-                value: 3,
-                message: "minimum chars 3",
+                value: FORM_WEATHER_CONFIG.name.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_WEATHER_CONFIG.name.min),
               },
               maxLength: {
-                value: 20,
-                message: "maximum chars 20",
+                value: FORM_WEATHER_CONFIG.name.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_WEATHER_CONFIG.name.max),
               },
             })}
           />
         </FormItem>
         <FormError>{errors.nameCity && errors.nameCity.message}</FormError>
-        <FormSubmit color1="#356574" color2="#257b96">
-          send
-        </FormSubmit>
+        <FormSubmit gradient={G_COLOR.gradients.blue}>send</FormSubmit>
       </JoinForm>
     </WeatherJoin>
   );

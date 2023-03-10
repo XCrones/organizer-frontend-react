@@ -9,7 +9,7 @@ export const Moth = styled.div`
   padding-bottom: 25px;
 `;
 
-export const MonthPrev = styled.button`
+export const MonthPrev = styled.button.attrs({ type: "button" })`
   font-size: 15px;
   line-height: 15px;
 `;
@@ -21,7 +21,7 @@ export const MonthCurr = styled.h2`
   line-height: 18px;
 `;
 
-export const MonthNext = styled.button`
+export const MonthNext = styled.button.attrs({ type: "button" })`
   font-size: 15px;
   line-height: 15px;
 `;

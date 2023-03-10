@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { GColor, GFonts } from "../../style/variables.style";
+import { G_COLOR, G_FONTS } from "../../ui/variables.style";
 
-export const Elem = styled.div``;
-export const WeatherCities = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
+export const WeatherCities = styled.div<{ pr: number; pl: number }>`
+  padding-left: ${(props) => props.pl}px;
+  padding-right: ${(props) => props.pr}px;
   display: flex;
   flex-direction: column;
   row-gap: 15px;
@@ -15,15 +14,15 @@ export const WeatherCity = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${GColor.todoItem};
+  background-color: ${G_COLOR.todoItem};
   padding: 15px;
   border-radius: 11px;
 `;
 
-export const CityName = styled.div<{}>`
+export const CityName = styled.div`
   flex: 1 1 auto;
   font-size: 18px;
-  font-family: ${GFonts.inter};
+  font-family: ${G_FONTS.inter};
   text-transform: capitalize;
   padding-left: 10px;
 `;

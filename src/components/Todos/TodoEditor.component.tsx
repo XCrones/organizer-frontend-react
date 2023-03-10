@@ -14,14 +14,16 @@ import {
   GEditWrapper,
   GRadioItem,
   GRadioRaplace,
-  GButton,
-} from "../../style/components";
+  GButtSubmit,
+} from "../../ui";
 import { useEffect, useState } from "react";
-import { GColor } from "../../style/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
-import { IAxiosError, INotifMethods, ITodo, ITodoJoin } from "../../models";
+import { IAxiosError, INotifMethods, ITodo, ITodoJoin, TPriority } from "../../models";
 import { AxiosError } from "axios";
+import { APP_MESSAGES } from "../../common/app-messages";
+import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
 
 interface Props {
   titleWindow: string;
@@ -50,8 +52,8 @@ const TodoEditorComponent = ({
   callbackDelete,
   callbackNotif,
 }: Props) => {
-  const [priority, SetPriority] = useState<number>(0);
-  const [currColor, SetColor] = useState(GColor.pallete[0]);
+  const [priority, SetPriority] = useState<TPriority>(0);
+  const [currColor, SetColor] = useState(G_COLOR.pallete[0]);
 
   const { makeLocalDate } = useDate();
 
@@ -74,7 +76,7 @@ const TodoEditorComponent = ({
         editItem.deadline = data.deadLine;
         try {
           await callbackSubmit(editItem);
-          callbackNotif.successful("edit successful");
+          callbackNotif.successful(APP_MESSAGES.CHANGE_SUCCES);
           callbackClose();
         } catch (error) {
           const err = error as AxiosError<IAxiosError>;
@@ -93,7 +95,7 @@ const TodoEditorComponent = ({
         };
         try {
           await callbackSubmit(metaData);
-          callbackNotif.successful("create new successful");
+          callbackNotif.successful(APP_MESSAGES.CREATE_SUCCES);
           callbackClose();
         } catch (error) {
           const err = error as AxiosError<IAxiosError>;
@@ -109,7 +111,7 @@ const TodoEditorComponent = ({
     if (!!id && !!callbackDelete) {
       try {
         await callbackDelete(id);
-        callbackNotif.successful("delete successful");
+        callbackNotif.successful(APP_MESSAGES.DELETE_SUCCES);
       } catch (error) {
         const err = error as AxiosError<IAxiosError>;
         if (!!err.response) {
@@ -130,30 +132,27 @@ const TodoEditorComponent = ({
   return (
     <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
       <GEditHeader>
-        <GEditCancel onClick={() => callbackClose()} type="button">
-          cancel
-        </GEditCancel>
+        <GEditCancel onClick={() => callbackClose()}>cancel</GEditCancel>
         <GEditWinTitle>{titleWindow}</GEditWinTitle>
-        <GEditSubmit
-          disabled={!isValid}
-          style={{
-            color: isValid ? "#ff0000" : "#c0c0c0",
-            cursor: isValid ? "pointer" : "not-allowed",
-          }}
-          type="submit"
-        >
+        <GEditSubmit disabled={!isValid} isValid={isValid}>
           {titleSubmit}
         </GEditSubmit>
       </GEditHeader>
       <GEditItems>
         <GEditItem>
           <GEditName
-            minLength={2}
-            maxLength={20}
+            minLength={FORM_TODO_CONFIG.name.min}
+            maxLength={FORM_TODO_CONFIG.name.max}
             {...register("todoName", {
-              required: "required filed",
-              minLength: 2,
-              maxLength: 20,
+              required: APP_MESSAGES.REQ_FIELD,
+              minLength: {
+                value: FORM_TODO_CONFIG.name.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_TODO_CONFIG.name.min),
+              },
+              maxLength: {
+                value: FORM_TODO_CONFIG.name.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_TODO_CONFIG.name.max),
+              },
               value: item?.title,
             })}
             placeholder={`${titleWindow} name`}
@@ -162,12 +161,18 @@ const TodoEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditName
-            minLength={2}
-            maxLength={20}
+            minLength={FORM_TODO_CONFIG.category.min}
+            maxLength={FORM_TODO_CONFIG.category.max}
             {...register("category", {
-              required: "required filed",
-              minLength: 2,
-              maxLength: 20,
+              required: APP_MESSAGES.REQ_FIELD,
+              minLength: {
+                value: FORM_TODO_CONFIG.category.min,
+                message: APP_MESSAGES.MIN_CHAR(FORM_TODO_CONFIG.category.min),
+              },
+              maxLength: {
+                value: FORM_TODO_CONFIG.category.max,
+                message: APP_MESSAGES.MAX_CHAR(FORM_TODO_CONFIG.category.max),
+              },
               value: item?.category,
             })}
             placeholder={"category"}
@@ -178,7 +183,7 @@ const TodoEditorComponent = ({
           <GEditTitle>deadline:</GEditTitle>
           <GEditDate
             {...register("deadLine", {
-              required: "required filed",
+              required: APP_MESSAGES.REQ_FIELD,
               value: !!item ? makeLocalDate(item.deadline) : "",
             })}
             type="datetime-local"
@@ -187,25 +192,41 @@ const TodoEditorComponent = ({
         <GEditItem>
           <GEditTitle>priority:</GEditTitle>
           <GEditRadioItems>
-            <GRadioItem size={30}>
-              <input onClick={() => SetPriority(0)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={GColor.priority.hight} rounded={50} isSelect={priority === 0} />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.hight)} name="priority" type="radio" />
+              <GRadioRaplace
+                colorSelect={G_COLOR.priority.hight}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.hight}
+              />
             </GRadioItem>
 
-            <GRadioItem size={30}>
-              <input onClick={() => SetPriority(1)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={GColor.priority.medium} rounded={50} isSelect={priority === 1} />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input
+                onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.medium)}
+                name="priority"
+                type="radio"
+              />
+              <GRadioRaplace
+                colorSelect={G_COLOR.priority.medium}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.medium}
+              />
             </GRadioItem>
 
-            <GRadioItem size={30}>
-              <input onClick={() => SetPriority(2)} name="priority" type="radio" />
-              <GRadioRaplace colorSelect={GColor.priority.low} rounded={50} isSelect={priority === 2} />
+            <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
+              <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.low)} name="priority" type="radio" />
+              <GRadioRaplace
+                colorSelect={G_COLOR.priority.low}
+                rounded={FORM_TODO_CONFIG.priority.rounded}
+                isSelect={priority === FORM_TODO_CONFIG.priority.levels.low}
+              />
             </GRadioItem>
           </GEditRadioItems>
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {GColor.pallete.map((item) => (
+            {G_COLOR.pallete.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -217,15 +238,9 @@ const TodoEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButton
-              onClick={() => deleteItem(item?.id)}
-              style={{ fontSize: "18px" }}
-              color1="#871111"
-              color2="#e03138"
-              type="button"
-            >
+            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={G_COLOR.gradients.red} fz={18}>
               delete
-            </GButton>
+            </GButtSubmit>
           </GEditItem>
         )}
       </GEditItems>
