@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
 import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
 import {
-  GButton,
+  GButtSubmit,
   GEditWrapper,
   GEditHeader,
   GEditCancel,
@@ -201,15 +201,14 @@ const EventEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButton
+            <GButtSubmit
               onClick={() => deleteItem(item?.id)}
               style={{ fontSize: "18px" }}
               color1="#871111"
               color2="#e03138"
-              type="button"
             >
               delete
-            </GButton>
+            </GButtSubmit>
           </GEditItem>
         )}
       </GEditItems>
