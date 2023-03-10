@@ -21,3 +21,23 @@ export const EVENT_CONFIG = {
     rows: 6,
   },
 };
+
+export const TODO_CONFIG = {
+  name: {
+    min: 2,
+    max: 20,
+  },
+  category: {
+    min: 2,
+    max: 20,
+  },
+  priority: {
+    size: 30,
+    rounded: 50,
+    levels: {
+      low: 2,
+      medium: 1,
+      hight: 0,
+    },
+  },
+};
