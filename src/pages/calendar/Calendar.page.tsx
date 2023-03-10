@@ -13,6 +13,8 @@ import {
 } from "../../components";
 import { useDate, useNotif, useWindowSize } from "../../hooks";
 import { useCalendarStore } from "../../store";
+import { GIndents } from "../../ui/variables.style";
+import { CALENDAR_CONFIG } from "../../config/components/components-config";
 
 interface IDay {
   dayStr: string;
@@ -150,12 +152,10 @@ const CalendarPage = () => {
           }}
           onClick={() => jump.day(data[index].dayNum)}
           currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
-          type="button"
         >
           <DayWeeek currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}>{data[index].dayStr}</DayWeeek>
           <DayNum>{data[index].dayNum + 1}</DayNum>
         </DaysItem>
-        <div style={{ width: "10px" }}></div>
       </div>
     );
   }, areEqual);
@@ -182,13 +182,13 @@ const CalendarPage = () => {
         <DaysList>
           <List
             ref={refListDays}
-            overscanCount={2}
-            height={60}
-            itemSize={60}
+            overscanCount={CALENDAR_CONFIG.days_list.overscanCount}
+            height={CALENDAR_CONFIG.days_list.height}
+            itemSize={CALENDAR_CONFIG.days_list.itemSize}
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.innerWidth - 40} // padding-left: 20px + padding-right: 20px
+            width={size.innerWidth - GIndents.left_right}
           >
             {Column}
           </List>
