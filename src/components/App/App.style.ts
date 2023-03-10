@@ -29,6 +29,6 @@ export const Section = styled.section<{ maxHeight: number; paddingBottom: number
   padding-bottom: ${(props) => props.paddingBottom}px; //40px;
 `;
 
-export const Footer = styled.footer<{}>`
+export const Footer = styled.footer`
   grid-area: 2 / 1 / 3 / 2;
 `;
