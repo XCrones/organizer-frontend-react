@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PulseLoader = styled.div<{ color: string }>`
+const Loader = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
   position: absolute;
   top: 50%;
@@ -14,9 +14,9 @@ export const PulseLoader = styled.div<{ color: string }>`
   z-index: 10;
 `;
 
-const PulseLoder = () => {
+export const GPulseLoader = () => {
   return (
-    <PulseLoader color="#29345834">
+    <Loader color="#29345834">
       <svg
         style={{ display: "block", shapeRendering: "auto", background: "#ffffff0" }}
         width="80%"
@@ -88,8 +88,8 @@ const PulseLoder = () => {
           ></animate>
         </rect>
       </svg>
-    </PulseLoader>
+    </Loader>
   );
 };
 
-export default PulseLoder;
+export default GPulseLoader;

@@ -1,4 +1,3 @@
-import { PulseLoader } from "./loaders/Pulse.loader";
 import { GFrameSliderLtoR, GFrameRotate360 } from "./keyframes/animations.keyframes";
 import { GButton, GButtClose, GButtSubmit } from "./components/button.style";
 import { GCheckboxItem, GCheckboxReplace } from "./components/checkbox.style";
@@ -22,9 +21,10 @@ import { GFormError } from "./components/form.style";
 import { GHideBlock } from "./components/hideblock.style";
 import { GRadioItem, GRadioRaplace } from "./components/radio.style";
 import { GToggle } from "./components/toggle.style";
+import { GPulseLoader } from "./loaders/Pulse.loader";
 
 export {
-  PulseLoader,
+  GPulseLoader,
   GFrameSliderLtoR,
   GFrameRotate360,
   GToggle,
