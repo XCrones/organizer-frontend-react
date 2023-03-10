@@ -23,7 +23,7 @@ import {
 } from "./AuthSign.style";
 import { RegExp } from "../../common/regexp";
 import { APP_MESSAGES } from "../../common/app-messages";
-import { AUTH_CONFIG } from "../../common/auth-config";
+import { AUTH_CONFIG } from "../../common/form-config";
 
 interface Props {
   toggleForm: Function;
@@ -163,7 +163,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit color1={GColor.gradient_blue.color1} color2={GColor.gradient_blue.color2} mb={20}>
+      <GButtSubmit gradient={GColor.gradients.blue} mb={20}>
         sign up
       </GButtSubmit>
 

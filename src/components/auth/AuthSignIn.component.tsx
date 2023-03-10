@@ -116,7 +116,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit color1={GColor.gradient_blue.color1} color2={GColor.gradient_blue.color2} mb={20}>
+      <GButtSubmit gradient={GColor.gradients.blue} mb={20}>
         sign in
       </GButtSubmit>
 
