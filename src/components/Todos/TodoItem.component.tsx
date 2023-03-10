@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
-import { ITodo } from "../../models";
+import { TODO_CONFIG } from "../../config/components/components-config";
+import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
+import { ITodo, ITriangle } from "../../models";
 import { useTodosStore } from "../../store";
 import { GCheckboxItem, GCheckboxReplace } from "../../ui";
 import { GColor } from "../../ui/variables.style";
@@ -17,13 +19,13 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const parseDate = (date: string): string => new Date(Date.parse(date)).toLocaleString();
   const memoizeDate = useMemo(() => parseDate(item.deadline), [item.deadline]);
 
-  const parsePriority = (priority: number) => {
+  const parsePriority = (priority: number): string => {
     switch (priority) {
-      case 0:
+      case FORM_TODO_CONFIG.priority.levels.hight:
         return GColor.priority.hight;
-      case 1:
+      case FORM_TODO_CONFIG.priority.levels.medium:
         return GColor.priority.medium;
-      case 2:
+      case FORM_TODO_CONFIG.priority.levels.low:
         return GColor.priority.low;
       default:
         return "";
@@ -37,20 +39,35 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
     patchData(todoItem);
   }, [item]);
 
+  const metaTriangle: ITriangle = {
+    size: {
+      t: 0,
+      r: 17,
+      b: 17,
+      l: 0,
+    },
+    borderColor: {
+      t: "transparent",
+      r: memoizePriority,
+      b: "transparent",
+      l: "transparent",
+    },
+  };
+
   return (
     <Item bgColor={GColor.todoItem}>
-      <GCheckboxItem size={20}>
+      <GCheckboxItem size={TODO_CONFIG.status.size}>
         <input onClick={toggleStatus} type="checkbox" />
-        <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={15} />
+        <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={TODO_CONFIG.status.rounded} />
       </GCheckboxItem>
       <ItemInfo>
         <ItemTitle>{item.title}</ItemTitle>
         <ItemDate>{memoizeDate}</ItemDate>
       </ItemInfo>
-      <ItemEdit color={item.background} onClick={() => callbackEdit(item)} type="button">
+      <ItemEdit color={item.background} onClick={() => callbackEdit(item)}>
         <i className="bi bi-info-square"></i>
       </ItemEdit>
-      <ItemTriangle background={memoizePriority} />
+      <ItemTriangle borderColor={metaTriangle.borderColor} size={metaTriangle.size} />
     </Item>
   );
 };
