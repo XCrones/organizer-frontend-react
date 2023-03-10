@@ -9,9 +9,14 @@ interface IRouterLinks {
   WEATHER: IRouterLinkItem;
   SETTINGS: IRouterLinkItem;
   AUTH: IRouterLinkItem;
+  HOME: IRouterLinkItem;
 }
 
 export const ROUTES: IRouterLinks = {
+  HOME: {
+    TITLE: "home",
+    PATH: "/",
+  },
   TODOS: {
     TITLE: "todos",
     PATH: "/todos",
