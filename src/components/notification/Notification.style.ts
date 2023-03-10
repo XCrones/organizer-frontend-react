@@ -1,14 +1,5 @@
-import styled, { keyframes } from "styled-components";
-
-const showNotif = keyframes`
-  from {
-    transform: translateY(-100%);
-  }
-
-  to {
-    transform: translateY(0%);
-  }
-`;
+import styled from "styled-components";
+import { GFrameSliderLtoR } from "../../ui";
 
 export const Notification = styled.div<{ background: string; isHide: boolean }>`
   position: absolute;
@@ -19,7 +10,7 @@ export const Notification = styled.div<{ background: string; isHide: boolean }>`
   background-color: ${(props) => props.background};
   color: #fff;
   z-index: 100;
-  animation: ${showNotif} 200ms linear;
+  animation: ${GFrameSliderLtoR} 200ms linear;
 `;
 
 export const NotificationTitle = styled.h2`
