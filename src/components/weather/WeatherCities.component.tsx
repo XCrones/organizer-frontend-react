@@ -1,7 +1,9 @@
 import { AxiosError } from "axios";
 import { shallow } from "zustand/shallow";
+import { APP_MESSAGES } from "../../common/app-messages";
 import { IAxiosError, ICityWeather, IMoveItem, INotifMethods } from "../../models";
 import { useWeatherStore } from "../../store";
+import { GColor } from "../../ui/variables.style";
 import { CityName, CityBtn, WeatherCities, WeatherCity } from "./WeatherCities.style";
 
 interface Props {
@@ -23,7 +25,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
   const deleteCity = async (id: number) => {
     try {
       await weatherStore.dropCity(id);
-      callbackNotif.successful("delete");
+      callbackNotif.successful(APP_MESSAGES.DELETE_SUCCES);
     } catch (error) {
       const err = error as AxiosError<IAxiosError>;
       if (!!err.response) {
@@ -51,7 +53,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
         try {
           await weatherStore.cityMove(item);
         } catch (error) {
-          callbackNotif.error("move element");
+          callbackNotif.error(APP_MESSAGES.ERROR_MOVE_ELEMENT);
         }
       }
     }
@@ -78,7 +80,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
           <CityName>
             {city.name}, {city.country}
           </CityName>
-          <CityBtn background="#ff0000" onClick={() => deleteCity(city.id)}>
+          <CityBtn background={GColor.errors.red} onClick={() => deleteCity(city.id)}>
             <i className="bi bi-x-lg"></i>
           </CityBtn>
         </WeatherCity>
