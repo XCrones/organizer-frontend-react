@@ -10,4 +10,6 @@ export const APP_MESSAGES = {
   CREATE_SUCCES: "Create succes",
   CHANGE_SUCCES: "Change succes",
   ERROR_MOVE_ELEMENT: "Error move element",
+  ADD_NEW_SECCUS: "Add new succes",
+  ADD_NEW_ERROR: "Add new error",
 };
