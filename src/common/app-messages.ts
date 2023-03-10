@@ -6,4 +6,7 @@ export const APP_MESSAGES = {
   EMAIL_INV: "Email invalid",
   MIN_CHAR: (count: number) => `Min chars ${String(count)}`,
   MAX_CHAR: (count: number) => `Max chars ${String(count)}`,
+  DELETE_SUCCES: "Delete succes",
+  CREATE_SUCCES: "Create succes",
+  CHANGE_SUCCES: "Change succes",
 };
