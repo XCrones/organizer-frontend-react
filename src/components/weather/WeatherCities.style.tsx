@@ -20,7 +20,7 @@ export const WeatherCity = styled.div`
   border-radius: 11px;
 `;
 
-export const CityName = styled.div<{}>`
+export const CityName = styled.div`
   flex: 1 1 auto;
   font-size: 18px;
   font-family: ${GFonts.inter};
