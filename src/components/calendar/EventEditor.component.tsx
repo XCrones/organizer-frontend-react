@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { APP_MESSAGES } from "../../common/app-messages";
+import { EVENT_CONFIG } from "../../common/form-config";
 import { useDate } from "../../hooks";
 import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
 import {
@@ -70,7 +72,7 @@ const EventEditorComponent = ({
 
         try {
           await callbackSubmit(item);
-          callbackNotif.successful("edit successful");
+          callbackNotif.successful(APP_MESSAGES.CHANGE_SUCCES);
           callbackClose();
         } catch (error) {
           const err = error as AxiosError<IAxiosError>;
@@ -89,7 +91,7 @@ const EventEditorComponent = ({
 
         try {
           await callbackSubmit(metaData);
-          callbackNotif.successful("create new successful");
+          callbackNotif.successful(APP_MESSAGES.CREATE_SUCCES);
           callbackClose();
         } catch (error) {
           const err = error as AxiosError<IAxiosError>;
@@ -105,7 +107,7 @@ const EventEditorComponent = ({
     if (!!id && !!callbackDelete) {
       try {
         await callbackDelete(id);
-        callbackNotif.successful("delete successful");
+        callbackNotif.successful(APP_MESSAGES.DELETE_SUCCES);
       } catch (error) {
         const err = error as AxiosError<IAxiosError>;
         if (!!err.response) {
@@ -125,41 +127,37 @@ const EventEditorComponent = ({
   return (
     <GEditWrapper onSubmit={handleSubmit(onSubmit)}>
       <GEditHeader>
-        <GEditCancel onClick={() => callbackClose()} type="button">
-          cancel
-        </GEditCancel>
+        <GEditCancel onClick={() => callbackClose()}>cancel</GEditCancel>
         <GEditWinTitle>{titleWindow}</GEditWinTitle>
-        <GEditSubmit
-          disabled={!isValid}
-          style={{
-            color: isValid ? "#ff0000" : "#c0c0c0",
-            cursor: isValid ? "pointer" : "not-allowed",
-          }}
-          type="submit"
-        >
+        <GEditSubmit disabled={!isValid} isValid={isValid}>
           {titleSubmit}
         </GEditSubmit>
       </GEditHeader>
       <GEditItems>
         <GEditItem>
           <GEditName
-            minLength={2}
-            maxLength={30}
+            minLength={EVENT_CONFIG.name.min}
+            maxLength={EVENT_CONFIG.name.max}
             {...register("eventName", {
-              required: "required filed",
-              minLength: 2,
-              maxLength: 30,
+              required: APP_MESSAGES.REQ_FIELD,
+              minLength: {
+                value: EVENT_CONFIG.name.min,
+                message: APP_MESSAGES.MIN_CHAR(EVENT_CONFIG.name.min),
+              },
+              maxLength: {
+                value: EVENT_CONFIG.name.max,
+                message: APP_MESSAGES.MAX_CHAR(EVENT_CONFIG.name.max),
+              },
               value: item?.title,
             })}
             placeholder={`${titleWindow} name`}
-            type="text"
           />
         </GEditItem>
         <GEditItem>
           <GEditTitle>start:</GEditTitle>
           <GEditDate
             {...register("startEvent", {
-              required: "required filed",
+              required: APP_MESSAGES.REQ_FIELD,
               value: !!item ? makeLocalDate(item.eventStart) : "",
             })}
             type="datetime-local"
@@ -169,7 +167,7 @@ const EventEditorComponent = ({
           <GEditTitle>end:</GEditTitle>
           <GEditDate
             {...register("endEvent", {
-              required: "required filed",
+              required: APP_MESSAGES.REQ_FIELD,
               value: !!item ? makeLocalDate(item.eventEnd) : "",
             })}
             type="datetime-local"
@@ -177,13 +175,16 @@ const EventEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditDecr
-            maxLength={200}
+            maxLength={EVENT_CONFIG.descr.max}
             {...register("description", {
               required: false,
-              maxLength: 200,
+              maxLength: {
+                value: EVENT_CONFIG.descr.max,
+                message: APP_MESSAGES.MAX_CHAR(EVENT_CONFIG.descr.max),
+              },
               value: item?.description,
             })}
-            rows={6}
+            rows={EVENT_CONFIG.descr.rows}
             placeholder={`${titleWindow} description`}
           />
         </GEditItem>
@@ -201,12 +202,7 @@ const EventEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButtSubmit
-              onClick={() => deleteItem(item?.id)}
-              style={{ fontSize: "18px" }}
-              color1="#871111"
-              color2="#e03138"
-            >
+            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={GColor.gradients.red} fz={18}>
               delete
             </GButtSubmit>
           </GEditItem>
