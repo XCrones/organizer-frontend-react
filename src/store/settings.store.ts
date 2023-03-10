@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { DefaultTheme } from "styled-components";
-import { DarkTheme, LightTheme } from "../ui/theme";
+import { DarkTheme, LightTheme } from "../ui/themes";
 
 interface SettingsStore {
   typeTheme: DefaultTheme;
