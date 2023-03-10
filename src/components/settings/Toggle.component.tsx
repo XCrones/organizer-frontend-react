@@ -1,11 +1,16 @@
+import { shallow } from "zustand/shallow";
 import { useSettingsStore } from "../../store";
 import { GToggle } from "../../ui";
 import { ItemAbout, ItemIcon, ItemTitle, ToggleItem, ToggleItems, ToggleWrapper } from "./Toggle.style";
 
-interface Props {}
-
 const ToggleComponent = () => {
-  const settingsStore = useSettingsStore((state) => state);
+  const settingsStore = useSettingsStore(
+    (state) => ({
+      isNightTheme: state.isNightTheme,
+      toggleTheme: state.toggleTheme,
+    }),
+    shallow
+  );
 
   return (
     <ToggleWrapper>
