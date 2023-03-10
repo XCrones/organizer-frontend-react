@@ -10,3 +10,14 @@ export const AUTH_CONFIG = {
     },
   },
 };
+
+export const EVENT_CONFIG = {
+  name: {
+    min: 2,
+    max: 30,
+  },
+  descr: {
+    max: 200,
+    rows: 6,
+  },
+};
