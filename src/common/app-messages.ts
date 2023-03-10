@@ -9,4 +9,5 @@ export const APP_MESSAGES = {
   DELETE_SUCCES: "Delete succes",
   CREATE_SUCCES: "Create succes",
   CHANGE_SUCCES: "Change succes",
+  ERROR_MOVE_ELEMENT: "Error move element",
 };
