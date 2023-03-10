@@ -6,7 +6,7 @@ import { FORM_WEATHER_CONFIG } from "../../config/forms/form-config";
 import { useGeolocation } from "../../hooks";
 import { IAxiosError, INotifMethods, IReqWeatherByGeo } from "../../models";
 import { useWeatherStore } from "../../store";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import {
   FormError,
   FormInput,
@@ -124,7 +124,7 @@ const WeatherJoinComponent = ({ isHide, callbackClose, callbackNotif }: Props) =
           />
         </FormItem>
         <FormError>{errors.nameCity && errors.nameCity.message}</FormError>
-        <FormSubmit gradient={GColor.gradients.blue}>send</FormSubmit>
+        <FormSubmit gradient={G_COLOR.gradients.blue}>send</FormSubmit>
       </JoinForm>
     </WeatherJoin>
   );

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { GFrameRotate360 } from "..";
-import { GColor } from "../variables.style";
+import { G_COLOR } from "../variables.style";
 
 export const GButtClose = styled.button.attrs({
   type: "button",
 })<{ background: string; isRotate?: boolean }>`
   font-size: 23px;
-  background-color: ${(props) => (props.isRotate ? "#15ad36" : GColor.mainBg)};
+  background-color: ${(props) => (props.isRotate ? "#15ad36" : G_COLOR.mainBg)};
   padding: 5px;
   border-radius: 5px;
 

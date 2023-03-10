@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GFonts } from "../../ui/variables.style";
+import { G_FONTS } from "../../ui/variables.style";
 
 export const TodosWrapper = styled.div`
   display: flex;
@@ -36,6 +36,6 @@ export const ListItem = styled.div<{ isHide: boolean }>`
 export const ListTitle = styled.h2`
   text-transform: capitalize;
   font-weight: 700;
-  font-family: ${GFonts.inter};
+  font-family: ${G_FONTS.inter};
   padding-bottom: 10px;
 `;

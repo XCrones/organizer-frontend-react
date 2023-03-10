@@ -1,4 +1,4 @@
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const Elem = styled.div``;
@@ -21,7 +21,7 @@ export const SettingsItems = styled.div<{ pr: number; pl: number }>`
 
 export const Settingsitem = styled.div`
   padding: 5px;
-  background-color: ${GColor.colorSettings};
+  background-color: ${G_COLOR.colorSettings};
   border-radius: 10px;
 `;
 

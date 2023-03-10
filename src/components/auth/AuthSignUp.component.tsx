@@ -7,7 +7,7 @@ import { ROUTES } from "../../config/routes/routes";
 import { IAuthSignUp, IAxiosError } from "../../models";
 import { useAuthStore } from "../../store";
 import { GButtSubmit, GPulseLoader } from "../../ui";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import {
   FormErr,
   FormField,
@@ -104,7 +104,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={GColor.errors.red}>{errors.name && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+            <FormInputIcon color={G_COLOR.errors.red}>{errors.name && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.name && <FormErr>{errors.name.message}</FormErr>}
         </FormItem>
@@ -123,7 +123,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={GColor.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+            <FormInputIcon color={G_COLOR.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.email && <FormErr>{errors.email.message}</FormErr>}
           {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
@@ -151,7 +151,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
             />
             <FormInputIcon
               style={{ cursor: "pointer" }}
-              color={GColor.errors.red}
+              color={G_COLOR.errors.red}
               onMouseUp={() => setTypePass("password")}
               onMouseDown={() => setTypePass("text")}
             >
@@ -163,7 +163,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit gradient={GColor.gradients.blue} mb={20}>
+      <GButtSubmit gradient={G_COLOR.gradients.blue} mb={20}>
         sign up
       </GButtSubmit>
 

@@ -5,7 +5,7 @@ import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
 import { ITodo, ITriangle } from "../../models";
 import { useTodosStore } from "../../store";
 import { GCheckboxItem, GCheckboxReplace } from "../../ui";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
 
 interface Props {
@@ -27,11 +27,11 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const parsePriority = (priority: number): string => {
     switch (priority) {
       case FORM_TODO_CONFIG.priority.levels.hight:
-        return GColor.priority.hight;
+        return G_COLOR.priority.hight;
       case FORM_TODO_CONFIG.priority.levels.medium:
-        return GColor.priority.medium;
+        return G_COLOR.priority.medium;
       case FORM_TODO_CONFIG.priority.levels.low:
-        return GColor.priority.low;
+        return G_COLOR.priority.low;
       default:
         return "";
     }
@@ -60,7 +60,7 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   };
 
   return (
-    <Item bgColor={GColor.todoItem}>
+    <Item bgColor={G_COLOR.todoItem}>
       <GCheckboxItem size={TODO_CONFIG.status.size}>
         <input onClick={toggleStatus} type="checkbox" />
         <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={TODO_CONFIG.status.rounded} />

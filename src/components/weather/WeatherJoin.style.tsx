@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GFormError, GFrameSliderLtoR, GButtSubmit } from "../../ui";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 
 export const WeatherJoin = styled.div`
   position: absolute;
@@ -11,7 +11,7 @@ export const WeatherJoin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${GColor.colorSettings};
+  background-color: ${G_COLOR.colorSettings};
   animation: ${GFrameSliderLtoR} 150ms linear;
   padding: 5px;
 `;
@@ -72,7 +72,7 @@ export const FormInput = styled.input.attrs({
   type: "text",
 })`
   color: #fff;
-  background-color: ${GColor.mainBg};
+  background-color: ${G_COLOR.mainBg};
   border-radius: 4px;
   padding: 2px 5px;
 `;

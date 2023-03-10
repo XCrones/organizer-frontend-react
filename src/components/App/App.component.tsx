@@ -2,7 +2,7 @@ import { shallow } from "zustand/shallow";
 import { FooterComponent, RoutesComponent } from "..";
 import { useWindowSize } from "../../hooks";
 import { useAuthStore } from "../../store";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import { Footer, Section, Wrapper } from "./App.style";
 import style from "./App.module.scss";
 import { APP_CONFIG } from "../../config/components/components-config";
@@ -21,7 +21,7 @@ const App = () => {
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
   return (
-    <Wrapper className={style.scroll} colorBg={GColor.mainBg} height_footer={HEIGHT_FOOTER}>
+    <Wrapper className={style.scroll} colorBg={G_COLOR.mainBg} height_footer={HEIGHT_FOOTER}>
       <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
         <RoutesComponent />
       </Section>

@@ -3,7 +3,7 @@ import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Se
 import { IHeaderButton } from "../../models";
 import { useAuthStore } from "../../store";
 import { GButtSubmit } from "../../ui";
-import { GColor, GIndents } from "../../ui/variables.style";
+import { G_COLOR, G_INDENTS } from "../../ui/variables.style";
 
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);
@@ -16,7 +16,7 @@ const SettingsPage = () => {
   return (
     <SettingsWrapper>
       <HeaderComponent butt={buttonsHeader} title={"settings"} />
-      <SettingsItems pl={GIndents.left} pr={GIndents.right}>
+      <SettingsItems pl={G_INDENTS.left} pr={G_INDENTS.right}>
         <Settingsitem>
           <EmailComponent />
         </Settingsitem>
@@ -24,8 +24,8 @@ const SettingsPage = () => {
           <ToggleComponent />
         </Settingsitem>
       </SettingsItems>
-      <SettingsExit pl={GIndents.left} pr={GIndents.right}>
-        <GButtSubmit onClick={() => logOut()} gradient={GColor.gradients.blue}>
+      <SettingsExit pl={G_INDENTS.left} pr={G_INDENTS.right}>
+        <GButtSubmit onClick={() => logOut()} gradient={G_COLOR.gradients.blue}>
           logout
         </GButtSubmit>
       </SettingsExit>

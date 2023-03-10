@@ -9,7 +9,7 @@ import { ROUTES } from "../../config/routes/routes";
 import { IAuthSignIn, IAxiosError } from "../../models";
 import { useAuthStore } from "../../store";
 import { GButtSubmit, GPulseLoader } from "../../ui";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 import {
   FormErr,
   FormField,
@@ -92,7 +92,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={GColor.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+            <FormInputIcon color={G_COLOR.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.email && <FormErr>{errors.email.message}</FormErr>}
           {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
@@ -110,7 +110,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
             />
             <FormInputIcon
               style={{ cursor: "pointer" }}
-              color={GColor.errors.red}
+              color={G_COLOR.errors.red}
               onMouseUp={() => SetTypePass("password")}
               onMouseDown={() => SetTypePass("text")}
             >
@@ -123,7 +123,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit gradient={GColor.gradients.blue} mb={20}>
+      <GButtSubmit gradient={G_COLOR.gradients.blue} mb={20}>
         sign in
       </GButtSubmit>
 

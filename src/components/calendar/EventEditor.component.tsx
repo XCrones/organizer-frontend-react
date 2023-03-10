@@ -21,7 +21,7 @@ import {
   GEditPallete,
   GEditPalleteItem,
 } from "../../ui";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 
 interface IFormInputs {
   startEvent: string;
@@ -50,7 +50,7 @@ const EventEditorComponent = ({
   isShowDelete,
   callbackNotif,
 }: Props) => {
-  const [currColor, SetColor] = useState(GColor.pallete[0]);
+  const [currColor, SetColor] = useState(G_COLOR.pallete[0]);
   const { makeLocalDate } = useDate();
 
   const {
@@ -190,7 +190,7 @@ const EventEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {GColor.pallete.map((item) => (
+            {G_COLOR.pallete.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -202,7 +202,7 @@ const EventEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={GColor.gradients.red} fz={18}>
+            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={G_COLOR.gradients.red} fz={18}>
               delete
             </GButtSubmit>
           </GEditItem>

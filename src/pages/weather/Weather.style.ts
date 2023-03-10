@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { GFonts } from "../../ui/variables.style";
+import { G_FONTS } from "../../ui/variables.style";
 
 export const WrapperWeather = styled.div`
-  font-family: ${GFonts.inter};
+  font-family: ${G_FONTS.inter};
   display: flex;
   flex-direction: column;
   row-gap: 10px;

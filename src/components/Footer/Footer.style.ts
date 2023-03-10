@@ -1,4 +1,4 @@
-import { GFonts } from "../../ui/variables.style";
+import { G_FONTS } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const FooterNav = styled.nav<{ bgColor: string; pr: number; pl: number }>`
@@ -10,7 +10,7 @@ export const FooterNav = styled.nav<{ bgColor: string; pr: number; pl: number }>
   justify-content: space-around;
   align-items: center;
   text-transform: capitalize;
-  font-family: ${GFonts.inter};
+  font-family: ${G_FONTS.inter};
   background-color: ${(props) => props.bgColor};
 `;
 

@@ -13,7 +13,7 @@ import {
 } from "../../components";
 import { useDate, useNotif, useWindowSize } from "../../hooks";
 import { useCalendarStore } from "../../store";
-import { GIndents } from "../../ui/variables.style";
+import { G_INDENTS } from "../../ui/variables.style";
 import { CALENDAR_CONFIG } from "../../config/components/components-config";
 
 interface IDay {
@@ -166,7 +166,7 @@ const CalendarPage = () => {
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent butt={buttonsHeader} title={"calendar"} />
-      <Events pl={GIndents.left} pr={GIndents.right}>
+      <Events pl={G_INDENTS.left} pr={G_INDENTS.right}>
         <MonthComponent
           monthStr={dateParse.monthStr}
           yearNum={dateParse.year}
@@ -182,7 +182,7 @@ const CalendarPage = () => {
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.innerWidth - GIndents.left_right}
+            width={size.innerWidth - G_INDENTS.left_right}
           >
             {Column}
           </List>

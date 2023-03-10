@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GFonts } from "../../ui/variables.style";
+import { G_FONTS } from "../../ui/variables.style";
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Events = styled.div<{ pr: number; pl: number }>`
   padding-left: ${(props) => props.pl}px;
   padding-right: ${(props) => props.pr}px;
   font-size: 17px;
-  font-family: ${GFonts.inter};
+  font-family: ${G_FONTS.inter};
   position: relative;
 `;
 

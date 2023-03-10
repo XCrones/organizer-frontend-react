@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GColor } from "../../ui/variables.style";
+import { G_COLOR } from "../../ui/variables.style";
 
 export const AuthForm = styled.form`
   display: flex;
@@ -20,7 +20,7 @@ export const FormItem = styled.div`
 
 export const FormLabel = styled.label`
   text-transform: capitalize;
-  color: ${GColor.colorAuth};
+  color: ${G_COLOR.colorAuth};
   font-size: 12px;
   line-height: 19px;
   font-weight: 400;
@@ -63,7 +63,7 @@ export const FormToggle = styled.button.attrs({
 })`
   font-size: 14px;
   line-height: 15px;
-  color: ${GColor.colorAuthTitle};
+  color: ${G_COLOR.colorAuthTitle};
 `;
 
 export const FormTitle = styled.h1`
@@ -84,5 +84,5 @@ export const FormSubtitle = styled.h2`
   line-height: 19px;
   font-weight: 400;
   padding-bottom: 30px;
-  color: ${GColor.colorAuthTitle};
+  color: ${G_COLOR.colorAuthTitle};
 `;
