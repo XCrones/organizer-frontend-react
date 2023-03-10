@@ -5,4 +5,5 @@ export const APP_MESSAGES = {
   REQ_FIELD: "Required filed",
   EMAIL_INV: "Email invalid",
   MIN_CHAR: (count: number) => `Min chars ${String(count)}`,
+  MAX_CHAR: (count: number) => `Max chars ${String(count)}`,
 };
