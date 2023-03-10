@@ -28,6 +28,7 @@ import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
 import { IForecastItem, IWindowColumn } from "../../models";
 import { GHTMLIcons, GIndents } from "../../ui/variables.style";
+import { WEATHER_CONFIG } from "../../config/components/components-config";
 
 interface Props {
   id: number;
@@ -230,9 +231,9 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
 
       <ForecastItems>
         <List
-          overscanCount={2}
-          height={190}
-          itemSize={110}
+          overscanCount={WEATHER_CONFIG.forecast_list.overscanCount}
+          height={WEATHER_CONFIG.forecast_list.height}
+          itemSize={WEATHER_CONFIG.forecast_list.itemSize}
           itemCount={!!weatherStore.forecast?.list ? weatherStore.forecast.list.length : 0}
           itemData={weatherStore.forecast?.list}
           layout="horizontal"
