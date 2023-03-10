@@ -2,16 +2,6 @@ import styled from "styled-components";
 import { GFrameRotate360 } from "..";
 import { GColor } from "../variables.style";
 
-export const GButton = styled.button<{ color1: string; color2: string }>`
-  height: 50px;
-  width: 100%;
-  background: ${(props) => props.color1};
-  background: linear-gradient(142deg, ${(props) => props.color2} 0%, ${(props) => props.color1} 100%);
-  text-transform: capitalize;
-  font-size: 14px;
-  line-height: 19px;
-`;
-
 export const GButtClose = styled.button.attrs({
   type: "button",
 })<{ background: string; isRotate?: boolean }>`
@@ -30,10 +20,14 @@ export const GButtClose = styled.button.attrs({
 
 export const GButtSubmit = styled.button.attrs({
   type: "submit",
-})<{ color1: string; color2: string }>`
+})<{ color1: string; color2: string; mt?: number; mb?: number }>`
+  height: 50px;
+  width: 100%;
   background: ${(props) => props.color1};
   background: linear-gradient(142deg, ${(props) => props.color2} 0%, ${(props) => props.color1} 100%);
   text-transform: capitalize;
   font-size: 14px;
   line-height: 19px;
+  margin-bottom: ${(props) => (props.mb ? props.mb : 0)}px;
+  margin-top: ${(props) => (props.mt ? props.mt : 0)}px;
 `;
