@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+interface ITime {
+  hour: number;
+  minute: number;
+}
+
+interface IEventItem {
+  startTime: ITime;
+  endTime: ITime;
+  background: string;
+}
+
 export const Shedule = styled.div``;
 
 export const SheduleItems = styled.div`
@@ -61,17 +72,6 @@ export const Events = styled.div`
   width: 100%;
   position: relative;
 `;
-
-interface ITime {
-  hour: number;
-  minute: number;
-}
-
-interface IEventItem {
-  startTime: ITime;
-  endTime: ITime;
-  background: string;
-}
 
 export const EventItem = styled.div<IEventItem>`
   position: absolute;
