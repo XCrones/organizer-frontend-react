@@ -1,10 +1,10 @@
 import { GFonts } from "../../ui/variables.style";
 import styled from "styled-components";
 
-export const FooterNav = styled.nav<{ bgColor: string }>`
+export const FooterNav = styled.nav<{ bgColor: string; pr: number; pl: number }>`
   height: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: ${(props) => props.pl}px;
+  padding-right: ${(props) => props.pr}px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

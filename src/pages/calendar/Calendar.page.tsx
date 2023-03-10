@@ -172,7 +172,7 @@ const CalendarPage = () => {
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent buttns={buttonsHeader} title={"calendar"} />
-      <Events>
+      <Events pl={GIndents.left} pr={GIndents.right}>
         <MonthComponent
           monthStr={dateParse.monthStr}
           yearNum={dateParse.year}

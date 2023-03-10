@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../config/routes/routes";
-import { GColor } from "../../ui/variables.style";
+import { GColor, GIndents } from "../../ui/variables.style";
 import { NavIcon, FooterNav, NavTitle } from "./Footer.style";
 
 const FooterComponent = () => {
   return (
-    <FooterNav bgColor={GColor.footerBg}>
+    <FooterNav bgColor={GColor.footerBg} pl={GIndents.left} pr={GIndents.right}>
       <NavLink
         to={ROUTES.TODOS.PATH}
         className="flex flex-col justify-center items-center transition-all duration-300"

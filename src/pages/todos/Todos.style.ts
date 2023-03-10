@@ -7,15 +7,15 @@ export const TodosWrapper = styled.div`
   row-gap: 10px;
 `;
 
-export const Todos = styled.div`
+export const Todos = styled.div<{ pr: number; pl: number }>`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 25px;
   position: relative;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: ${(props) => props.pl}px;
+  padding-right: ${(props) => props.pr}px;
 `;
 
 export const ListItems = styled.div`

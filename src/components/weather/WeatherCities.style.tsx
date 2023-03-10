@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { GColor, GFonts } from "../../ui/variables.style";
 
-export const Elem = styled.div``;
-export const WeatherCities = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
+export const WeatherCities = styled.div<{ pr: number; pl: number }>`
+  padding-left: ${(props) => props.pl}px;
+  padding-right: ${(props) => props.pr}px;
   display: flex;
   flex-direction: column;
   row-gap: 15px;

@@ -7,9 +7,9 @@ export const CalendarWrapper = styled.div`
   row-gap: 25px;
 `;
 
-export const Events = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
+export const Events = styled.div<{ pr: number; pl: number }>`
+  padding-left: ${(props) => props.pl}px;
+  padding-right: ${(props) => props.pr}px;
   font-size: 17px;
   font-family: ${GFonts.inter};
   position: relative;

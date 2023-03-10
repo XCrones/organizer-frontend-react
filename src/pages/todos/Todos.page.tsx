@@ -10,6 +10,7 @@ import {
 import { useNotif } from "../../hooks";
 import { IHeaderButton, ITodo } from "../../models";
 import { useTodosStore } from "../../store";
+import { GIndents } from "../../ui/variables.style";
 import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 
 interface IParsingTodo {
@@ -190,7 +191,7 @@ const TodosPage = () => {
     <TodosWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
-      <Todos>
+      <Todos pl={GIndents.left} pr={GIndents.right}>
         <ListItems>
           {memoizeList.map((item) => (
             <ListItem isHide={item.todos.length === 0} key={item.title}>

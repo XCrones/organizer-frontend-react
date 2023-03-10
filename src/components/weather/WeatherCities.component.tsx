@@ -3,7 +3,7 @@ import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { IAxiosError, ICityWeather, IMoveItem, INotifMethods } from "../../models";
 import { useWeatherStore } from "../../store";
-import { GColor } from "../../ui/variables.style";
+import { GColor, GIndents } from "../../ui/variables.style";
 import { CityName, CityBtn, WeatherCities, WeatherCity } from "./WeatherCities.style";
 
 interface Props {
@@ -64,7 +64,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
   }
 
   return (
-    <WeatherCities>
+    <WeatherCities pl={GIndents.left} pr={GIndents.right}>
       {cities.map((city, index) => (
         <WeatherCity
           key={city.id}
