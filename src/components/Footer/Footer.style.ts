@@ -14,18 +14,12 @@ export const FooterNav = styled.nav<{ bgColor: string }>`
   background-color: ${(props) => props.bgColor};
 `;
 
-export const FooterIcon = styled.div<{}>`
+export const NavIcon = styled.div`
   font-size: 25px;
   line-height: 25px;
 `;
 
-export const FooterTitle = styled.h3<{}>`
+export const NavTitle = styled.h3`
   font-size: 10px;
   line-height: 10px;
-`;
-
-export const IconTodo = styled.div<{}>`
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
 `;

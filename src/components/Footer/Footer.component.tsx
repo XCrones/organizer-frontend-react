@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../config/routes/routes";
 import { GColor } from "../../style/variables.style";
-import { FooterIcon, FooterNav, FooterTitle } from "./Footer.style";
+import { NavIcon, FooterNav, NavTitle } from "./Footer.style";
 
 const FooterComponent = () => {
   return (
@@ -11,10 +11,10 @@ const FooterComponent = () => {
         className="flex flex-col justify-center items-center transition-all duration-300"
         style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
       >
-        <FooterIcon>
+        <NavIcon>
           <i className="bi bi-check2-circle"></i>
-        </FooterIcon>
-        <FooterTitle>{ROUTES.TODOS.TITLE}</FooterTitle>
+        </NavIcon>
+        <NavTitle>{ROUTES.TODOS.TITLE}</NavTitle>
       </NavLink>
 
       <NavLink
@@ -22,10 +22,10 @@ const FooterComponent = () => {
         className="flex flex-col justify-center items-center transition-all duration-300"
         style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
       >
-        <FooterIcon>
+        <NavIcon>
           <i className="bi bi-calendar3"></i>
-        </FooterIcon>
-        <FooterTitle>{ROUTES.CALENDAR.TITLE}</FooterTitle>
+        </NavIcon>
+        <NavTitle>{ROUTES.CALENDAR.TITLE}</NavTitle>
       </NavLink>
 
       <NavLink
@@ -33,10 +33,10 @@ const FooterComponent = () => {
         className="flex flex-col justify-center items-center transition-all duration-300"
         style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
       >
-        <FooterIcon>
+        <NavIcon>
           <i className="bi bi-cloud-sun-fill"></i>
-        </FooterIcon>
-        <FooterTitle>{ROUTES.WEATHER.TITLE}</FooterTitle>
+        </NavIcon>
+        <NavTitle>{ROUTES.WEATHER.TITLE}</NavTitle>
       </NavLink>
 
       <NavLink
@@ -44,10 +44,10 @@ const FooterComponent = () => {
         className="flex flex-col justify-center items-center transition-all duration-300"
         style={({ isActive }) => (isActive ? { color: "#ffffff" } : { color: "#707070" })}
       >
-        <FooterIcon>
+        <NavIcon>
           <i className="bi bi-gear-wide-connected"></i>
-        </FooterIcon>
-        <FooterTitle>{ROUTES.SETTINGS.TITLE}</FooterTitle>
+        </NavIcon>
+        <NavTitle>{ROUTES.SETTINGS.TITLE}</NavTitle>
       </NavLink>
     </FooterNav>
   );
