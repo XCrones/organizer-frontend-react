@@ -20,3 +20,8 @@ export const CALENDAR_CONFIG = {
     itemSize: 60,
   },
 };
+
+export const APP_CONFIG = {
+  height_footer: 50,
+  padding_bottom: 40,
+};
