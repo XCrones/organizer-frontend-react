@@ -1,6 +1,6 @@
-import { GColor } from "../../ui/variables.style";
 import styled from "styled-components";
-import { GFonts } from "../../ui/variables.style";
+import { GTriangle } from "../../ui";
+import { GColor, GFonts } from "../../ui/variables.style";
 
 export const Item = styled.div<{ bgColor: string }>`
   display: flex;
@@ -14,7 +14,7 @@ export const Item = styled.div<{ bgColor: string }>`
   overflow: hidden;
 `;
 
-export const ItemTitle = styled.h3<{}>`
+export const ItemTitle = styled.h3`
   max-width: 220px;
   font-size: 15px;
   font-family: ${GFonts.inter};
@@ -25,7 +25,7 @@ export const ItemTitle = styled.h3<{}>`
   }
 `;
 
-export const ItemDate = styled.div<{}>`
+export const ItemDate = styled.div`
   font-size: 13px;
   color: ${GColor.colorAuthTitle};
 `;
@@ -37,18 +37,13 @@ export const ItemInfo = styled.div`
   row-gap: 5px;
 `;
 
-export const ItemEdit = styled.button<{ color: string }>`
+export const ItemEdit = styled.button.attrs({ type: "button" })<{ color: string }>`
   font-size: 22px;
   color: ${(props) => props.color};
 `;
 
-export const ItemTriangle = styled.div<{ background: string }>`
+export const ItemTriangle = styled(GTriangle)`
   position: absolute;
   top: 0;
   right: 0px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 17px 17px 0;
-  border-color: transparent ${(props) => props.background} transparent transparent;
 `;
