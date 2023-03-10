@@ -25,7 +25,7 @@ export const GEditWrapper = styled.form`
   color: #fff;
 `;
 
-export const GEditHeader = styled.div<{}>`
+export const GEditHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -35,15 +35,21 @@ export const GEditHeader = styled.div<{}>`
   text-transform: capitalize;
 `;
 
-export const GEditCancel = styled.button<{}>`
+export const GEditCancel = styled.button.attrs({
+  type: "button",
+})`
   text-transform: capitalize;
   color: #ff0000;
 `;
 
-export const GEditWinTitle = styled.div<{}>``;
+export const GEditWinTitle = styled.div``;
 
-export const GEditSubmit = styled.button<{}>`
+export const GEditSubmit = styled.button.attrs({
+  type: "submit",
+})<{ isValid: boolean }>`
   text-transform: capitalize;
+  color: ${(props) => (props.isValid ? "#ff0000" : "#c0c0c0")};
+  cursor: ${(props) => (props.isValid ? "pointer" : "not-allowed")};
 `;
 
 export const GEditItems = styled.div`
@@ -70,7 +76,9 @@ const DefaultInput = styled.input`
   font-size: 15px;
 `;
 
-export const GEditName = styled(DefaultInput)`
+export const GEditName = styled(DefaultInput).attrs({
+  type: "text",
+})`
   &::placeholder {
     font-size: 14px;
     color: ${GColor.colorAuthTitle};
