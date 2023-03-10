@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AuthWrapper = styled.div<{}>`
+export const AuthWrapper = styled.div`
   height: 100%;
   width: 100%;
   padding-top: 40px;
