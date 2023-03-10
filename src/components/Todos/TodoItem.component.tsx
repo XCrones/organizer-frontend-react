@@ -14,7 +14,12 @@ interface Props {
 }
 
 const TodoItemComponent = ({ item, callbackEdit }: Props) => {
-  const patchData = useTodosStore((state) => state.patchData, shallow);
+  const todosStore = useTodosStore(
+    (state) => ({
+      patchData: state.patchData,
+    }),
+    shallow
+  );
 
   const parseDate = (date: string): string => new Date(Date.parse(date)).toLocaleString();
   const memoizeDate = useMemo(() => parseDate(item.deadline), [item.deadline]);
@@ -36,7 +41,7 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const toggleStatus = useCallback(() => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
     todoItem.status = !todoItem.status;
-    patchData(todoItem);
+    todosStore.patchData(todoItem);
   }, [item]);
 
   const metaTriangle: ITriangle = {
