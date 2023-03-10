@@ -18,7 +18,7 @@ import {
   GEditDecr,
   GEditPallete,
   GEditPalleteItem,
-} from "../../style/components";
+} from "../../ui";
 import { GColor } from "../../style/variables.style";
 
 interface IFormInputs {

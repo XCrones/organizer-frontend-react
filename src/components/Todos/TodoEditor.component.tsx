@@ -15,7 +15,7 @@ import {
   GRadioItem,
   GRadioRaplace,
   GButton,
-} from "../../style/components";
+} from "../../ui";
 import { useEffect, useState } from "react";
 import { GColor } from "../../style/variables.style";
 import { useForm } from "react-hook-form";

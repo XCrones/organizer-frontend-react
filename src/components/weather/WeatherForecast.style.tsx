@@ -1,6 +1,6 @@
 import { GColor } from "../../style/variables.style";
 import styled from "styled-components";
-import { GArotate360, GAsliderLtoR } from "../../ui";
+import { GFrameRotate360, GFrameSliderLtoR } from "../../ui";
 
 export const WeatherForecast = styled.div`
   position: absolute;
@@ -10,7 +10,7 @@ export const WeatherForecast = styled.div`
   height: 100%;
   padding-top: 20px;
   background-color: ${GColor.mainBg};
-  animation: ${GAsliderLtoR} 150ms linear;
+  animation: ${GFrameSliderLtoR} 150ms linear;
 `;
 
 export const ForecastHeader = styled.div<{}>`
@@ -31,7 +31,7 @@ export const ForecastButt = styled.button.attrs({
 
   & i {
     display: inline-block;
-    animation: ${(props) => (props.isRotate ? GArotate360 : "")} 700ms linear infinite;
+    animation: ${(props) => (props.isRotate ? GFrameRotate360 : "")} 700ms linear infinite;
     color: ${(props) => (props.isRotate ? "#000" : "#fff")};
     transition: all 300ms ease-in;
   }

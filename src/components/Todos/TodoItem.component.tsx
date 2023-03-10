@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
 import { ITodo } from "../../models";
 import { useTodosStore } from "../../store";
-import { GCheckboxItem, GCheckboxReplace } from "../../style/components";
+import { GCheckboxItem, GCheckboxReplace } from "../../ui";
 import { GColor } from "../../style/variables.style";
 import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { GArotate360 } from "../../ui";
-import { GColor } from "../variables.style";
+import { GFrameRotate360 } from "..";
+import { GColor } from "../../style/variables.style";
 
 export const GButton = styled.button<{ color1: string; color2: string }>`
   height: 50px;
@@ -22,7 +22,7 @@ export const GButtClose = styled.button.attrs({
 
   & i {
     display: inline-block;
-    animation: ${(props) => (props.isRotate ? GArotate360 : "")} 700ms linear infinite;
+    animation: ${(props) => (props.isRotate ? GFrameRotate360 : "")} 700ms linear infinite;
     color: ${(props) => (props.isRotate ? "#000" : "#fff")};
     transition: all 300ms ease-in;
   }

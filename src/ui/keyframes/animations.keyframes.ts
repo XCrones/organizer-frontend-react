@@ -1,6 +1,6 @@
 import { keyframes } from "styled-components";
 
-export const GAsliderLtoR = keyframes`
+export const GFrameSliderLtoR = keyframes`
   from {
     transform: translateX(-100%);
   }
@@ -10,7 +10,7 @@ export const GAsliderLtoR = keyframes`
   }
 `;
 
-export const GArotate360 = keyframes`
+export const GFrameRotate360 = keyframes`
   from {
     transform: rotate(0deg);
   }

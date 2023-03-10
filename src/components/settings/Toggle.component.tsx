@@ -1,5 +1,5 @@
 import { useSettingsStore } from "../../store";
-import { GToggle } from "../../style/components";
+import { GToggle } from "../../ui";
 import { ItemAbout, ItemIcon, ItemTitle, ToggleItem, ToggleItems, ToggleWrapper } from "./Toggle.style";
 
 interface Props {}

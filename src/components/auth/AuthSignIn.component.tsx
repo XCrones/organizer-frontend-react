@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../config/routes/routes";
 import { IAuthSignIn } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButton } from "../../style/components";
-import { PulseLoderComponent } from "../../ui";
+import { GButton } from "../../ui";
+import PulseLoder from "../../ui/loaders/Pulse.loader";
 import {
   AuthErr,
   AuthField,
@@ -56,7 +56,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
-      {authStore.isPending && <PulseLoderComponent />}
+      {authStore.isPending && <PulseLoder />}
       <AuthTitle>sign in to organize pro</AuthTitle>
       <AuthSubTitle>
         Lorem ipsum dolor sit amet, consetetur sadipscing, lorem ipsum dolorsed diam nonumy amet eirmod.

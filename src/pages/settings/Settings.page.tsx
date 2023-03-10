@@ -2,7 +2,7 @@ import { EmailComponent, HeaderComponent, ToggleComponent } from "../../componen
 import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Settings.style";
 import { IHeaderButton } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButton } from "../../style/components";
+import { GButton } from "../../ui";
 
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);

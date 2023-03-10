@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { GButtClose, GFormError } from "../../style/components";
-import { GButtSubmit } from "../../style/components/button.style";
+import { GButtClose, GFormError } from "../../ui";
+import { GButtSubmit } from "../../ui";
 import { GColor } from "../../style/variables.style";
-import { GAsliderLtoR } from "../../ui";
+import { GFrameSliderLtoR } from "../../ui";
 
 export const WeatherJoin = styled.div<{}>`
   position: absolute;
@@ -14,7 +14,7 @@ export const WeatherJoin = styled.div<{}>`
   justify-content: center;
   align-items: center;
   background-color: ${GColor.colorSettings};
-  animation: ${GAsliderLtoR} 150ms linear;
+  animation: ${GFrameSliderLtoR} 150ms linear;
   padding: 5px;
 `;
 
