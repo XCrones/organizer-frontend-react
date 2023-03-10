@@ -9,7 +9,6 @@ import HeaderComponent from "./header/Header.component";
 import RoutesComponent from "./routes/Routes.component";
 import EmailComponent from "./settings/Email.component";
 import ToggleComponent from "./settings/Toggle.component";
-import SortComponent from "./sort/Sort.component";
 import TodoItemComponent from "./todos/TodoItem.component";
 import TodoEditorComponent from "./todos/TodoEditor.component";
 import NotificationComponent from "./notification/Notification.component";
@@ -29,7 +28,6 @@ export {
   RoutesComponent,
   EmailComponent,
   ToggleComponent,
-  SortComponent,
   TodoItemComponent,
   TodoEditorComponent,
   NotificationComponent,

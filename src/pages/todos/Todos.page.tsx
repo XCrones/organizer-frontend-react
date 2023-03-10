@@ -1,12 +1,6 @@
 import { useLayoutEffect, useMemo, useState } from "react";
 import { shallow } from "zustand/shallow";
-import {
-  HeaderComponent,
-  NotificationComponent,
-  SortComponent,
-  TodoEditorComponent,
-  TodoItemComponent,
-} from "../../components";
+import { HeaderComponent, NotificationComponent, TodoEditorComponent, TodoItemComponent } from "../../components";
 import { useNotif } from "../../hooks";
 import { IHeaderButton, ITodo } from "../../models";
 import { useTodosStore } from "../../store";
@@ -55,21 +49,14 @@ const TodosPage = () => {
 
   const [isHideCreate, SetHideCreate] = useState(true);
   const [isHideEdit, SetHideEdit] = useState(true);
-  const [isHideSort, SetHideSort] = useState(true);
   const [editTodo, SetEditTodo] = useState<ITodo | undefined>();
 
   const { isHideNotif, metaNotif, showNotif } = useNotif();
 
-  const buttonsHeader: IHeaderButton[] = [
-    {
-      callback: () => SetHideSort(false),
-      icon: "bi bi-funnel",
-    },
-    {
-      callback: () => SetHideCreate(false),
-      icon: "bi bi-plus-lg",
-    },
-  ];
+  const buttonsHeader: IHeaderButton = {
+    callback: () => SetHideCreate(false),
+    icon: "bi bi-plus-lg",
+  };
 
   const editItem = (item: ITodo) => {
     const todoItem = JSON.parse(JSON.stringify(item)) as ITodo;
@@ -190,7 +177,7 @@ const TodosPage = () => {
   return (
     <TodosWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
-      <HeaderComponent buttns={buttonsHeader} title={"toDo"} />
+      <HeaderComponent butt={buttonsHeader} title={"toDo"} />
       <Todos pl={GIndents.left} pr={GIndents.right}>
         <ListItems>
           {memoizeList.map((item) => (
@@ -226,7 +213,6 @@ const TodosPage = () => {
             callbackNotif={showNotif}
           />
         )}
-        {!isHideSort && <SortComponent />}
       </Todos>
     </TodosWrapper>
   );
