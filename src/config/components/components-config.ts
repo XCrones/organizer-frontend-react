@@ -12,3 +12,11 @@ export const WEATHER_CONFIG = {
     itemSize: 110,
   },
 };
+
+export const CALENDAR_CONFIG = {
+  days_list: {
+    overscanCount: 2,
+    height: 60,
+    itemSize: 60,
+  },
+};
