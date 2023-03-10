@@ -1,13 +1,16 @@
+import { shallow } from "zustand/shallow";
 import { useAuthStore } from "../../store";
 import { Avatar, AvatarImg, AvatarSvg, EmailWrapper, Info, InfoEmail, InfoName } from "./Email.style";
 
-interface Props {}
-
 const EmailComponent = () => {
-  // const {
-  //   userData: { email, name, urlAvatar },
-  // } = useAppSelector((state) => state.audh);
-  const authStore = useAuthStore((state) => state.userData);
+  const authStore = useAuthStore(
+    (state) => ({
+      urlAvatar: state.userData?.urlAvatar,
+      name: state.userData?.name,
+      email: state.userData?.email,
+    }),
+    shallow
+  );
 
   const isEmptyAvatar = !!authStore?.urlAvatar ? true : false;
 
