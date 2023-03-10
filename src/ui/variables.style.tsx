@@ -27,9 +27,9 @@ export const GColor = {
     "#ff3300",
     "#ffcc00",
   ],
-  gradient_blue: {
-    color1: "#266ED7",
-    color2: "#4D8AEB",
+  gradients: {
+    red: ["#871111", "#e03138"],
+    blue: ["#266ED7", "#4D8AEB"],
   },
   errors: {
     red: "#ff0000",
