@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { RegExp } from "../../common/regexp";
 import { ROUTES } from "../../config/routes/routes";
@@ -34,7 +35,13 @@ interface IFormInputs {
 
 const AuthSignInComponent = ({ toggleForm }: Props) => {
   const navigate = useNavigate();
-  const authStore = useAuthStore((state) => state);
+  const authStore = useAuthStore(
+    (state) => ({
+      isPending: state.isPending,
+      signIn: state.singIn,
+    }),
+    shallow
+  );
   const [typePass, SetTypePass] = useState<"password" | "text">("password");
   const [errMessage, SetErrMessage] = useState("");
 
@@ -54,7 +61,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
           password: data.password,
         };
 
-        await authStore.singIn(user);
+        await authStore.signIn(user);
         navigate(ROUTES.TODOS.PATH, { replace: false });
       } catch (error) {
         const err = error as AxiosError<IAxiosError>;
