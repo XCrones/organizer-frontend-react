@@ -16,7 +16,7 @@ import {
 } from "./weather.model";
 import { IWindowColumn } from "./window-column.model";
 import { IMoveItem } from "./drag_drop.model";
-import { IAuthConfig, IEventConfig, ITodoConfig } from "./config.model";
+import { IAuthConfig, IEventConfig, ITodoConfig, IWeatherConfig } from "./config.model";
 import { ITriangleSize, ITriangle, ITriangleBorderColor } from "./triangle.model";
 
 export type {
@@ -48,4 +48,5 @@ export type {
   ITriangleSize,
   ITriangle,
   ITriangleBorderColor,
+  IWeatherConfig,
 };
