@@ -1,16 +1,23 @@
 import { shallow } from "zustand/shallow";
 import { FooterComponent, RoutesComponent } from "..";
 import { useWindowSize } from "../../hooks";
-import { useAuthStore } from "../../store";
-import { G_COLOR } from "../../ui/variables.style";
+import { useAuthStore, useSettingsStore } from "../../store";
 import { Footer, Section, Wrapper } from "./App.style";
 import style from "./App.module.scss";
 import { APP_CONFIG } from "../../config/components/components-config";
+import { ThemeProvider } from "styled-components";
 
 const App = () => {
   const authStore = useAuthStore(
     (state) => ({
       isAuth: !!state.userData ? true : false,
+    }),
+    shallow
+  );
+
+  const settingsStore = useSettingsStore(
+    (state) => ({
+      typeTheme: state.typeTheme,
     }),
     shallow
   );
@@ -21,16 +28,18 @@ const App = () => {
   const { memoizedHeight } = useWindowSize({ totalHeight: HEIGHT_FOOTER, totalWidth: 0 });
 
   return (
-    <Wrapper className={style.scroll} colorBg={G_COLOR.mainBg} height_footer={HEIGHT_FOOTER}>
-      <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
-        <RoutesComponent />
-      </Section>
-      {authStore.isAuth && (
-        <Footer>
-          <FooterComponent />
-        </Footer>
-      )}
-    </Wrapper>
+    <ThemeProvider theme={settingsStore.typeTheme}>
+      <Wrapper className={style.scroll} height_footer={HEIGHT_FOOTER}>
+        <Section maxHeight={memoizedHeight} paddingBottom={PADDING_BOTTOM}>
+          <RoutesComponent />
+        </Section>
+        {authStore.isAuth && (
+          <Footer>
+            <FooterComponent />
+          </Footer>
+        )}
+      </Wrapper>
+    </ThemeProvider>
   );
 };
 
