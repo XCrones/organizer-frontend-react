@@ -1,4 +1,6 @@
-export const AUTH_CONFIG = {
+import { IAuthConfig, IEventConfig, ITodoConfig } from "../../models";
+
+export const FORM_AUTH_CONFIG: IAuthConfig = {
   sign_up: {
     name: {
       min: 3,
@@ -11,7 +13,7 @@ export const AUTH_CONFIG = {
   },
 };
 
-export const EVENT_CONFIG = {
+export const FORM_EVENT_CONFIG: IEventConfig = {
   name: {
     min: 2,
     max: 30,
@@ -22,7 +24,7 @@ export const EVENT_CONFIG = {
   },
 };
 
-export const TODO_CONFIG = {
+export const FORM_TODO_CONFIG: ITodoConfig = {
   name: {
     min: 2,
     max: 20,
