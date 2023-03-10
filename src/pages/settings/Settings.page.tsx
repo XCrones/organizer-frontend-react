@@ -3,6 +3,7 @@ import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Se
 import { IHeaderButton } from "../../models";
 import { useAuthStore } from "../../store";
 import { GButtSubmit } from "../../ui";
+import { GColor } from "../../ui/variables.style";
 
 const SettingsPage = () => {
   const logOut = useAuthStore((state) => state.logOut);
@@ -30,7 +31,7 @@ const SettingsPage = () => {
         </Settingsitem>
       </SettingsItems>
       <SettingsExit>
-        <GButtSubmit onClick={() => logOut()} type="submit" color1="#d72626" color2="#eb4d4d">
+        <GButtSubmit onClick={() => logOut()} gradient={GColor.gradients.blue}>
           logout
         </GButtSubmit>
       </SettingsExit>
