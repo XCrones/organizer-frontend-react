@@ -22,6 +22,7 @@ import { GHideBlock } from "./components/hideblock.style";
 import { GRadioItem, GRadioRaplace } from "./components/radio.style";
 import { GToggle } from "./components/toggle.style";
 import { GPulseLoader } from "./loaders/Pulse.loader";
+import { GTriangle } from "./components/triangle.style";
 
 export {
   GPulseLoader,
@@ -51,4 +52,5 @@ export {
   GButtClose,
   GFormError,
   GButtSubmit,
+  GTriangle,
 };
