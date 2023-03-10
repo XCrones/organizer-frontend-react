@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { GFonts } from "../../ui/variables.style";
 
 export const CalendarWrapper = styled.div`
-  /* height: 100%;
-  width: 100%; */
   display: flex;
   flex-direction: column;
   row-gap: 25px;
@@ -21,7 +19,7 @@ export const DaysList = styled.div`
   padding-bottom: 35px;
 `;
 
-export const DaysItem = styled.button<{ currDay: boolean }>`
+export const DaysItem = styled.button.attrs({ type: "button" })<{ currDay: boolean }>`
   border: 1px solid;
   border-radius: 10px;
   display: flex;
@@ -33,7 +31,7 @@ export const DaysItem = styled.button<{ currDay: boolean }>`
   height: 100%;
   background: ${(props) => (props.currDay ? "#654ea3" : "#")};
   background: ${(props) =>
-    props.currDay ? "linear-gradient(180deg, rgba(101, 78, 163, 1) 0%, rgba(234, 175, 200, 1) 100%)" : "#"};
+    props.currDay ? "linear-gradient(180deg, rgba(101, 78, 163, 1) 0%, rgba(234, 175, 200, 1) 100%)" : ""};
 `;
 
 export const DayWeeek = styled.h4<{ currDay: boolean }>`
