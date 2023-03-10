@@ -171,7 +171,7 @@ const CalendarPage = () => {
   return (
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
-      <HeaderComponent buttns={buttonsHeader} title={"calender"} />
+      <HeaderComponent buttns={buttonsHeader} title={"calendar"} />
       <Events>
         <MonthComponent
           monthStr={dateParse.monthStr}
