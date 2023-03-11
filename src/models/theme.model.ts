@@ -10,6 +10,21 @@ export interface ITheme {
   section: {
     color: string;
     background: string;
+    block: {
+      background: string;
+      color: {
+        title: string;
+        subtitle: string;
+      };
+    };
+    settings: {
+      btn: {
+        submit: {
+          gradient: string[];
+          color: string;
+        };
+      };
+    };
   };
   footer: {
     color: string;
