@@ -1,5 +1,5 @@
 import { EmailComponent, HeaderComponent, ToggleComponent } from "../../components";
-import { SettingsExit, Settingsitem, SettingsItems, SettingsWrapper } from "./Settings.style";
+import { SettingsExit, Settingsitem, SettingsItems, SettingsSubmit, SettingsWrapper } from "./Settings.style";
 import { IHeaderButton } from "../../models";
 import { useAuthStore } from "../../store";
 import { GButtSubmit } from "../../ui";
@@ -25,9 +25,7 @@ const SettingsPage = () => {
         </Settingsitem>
       </SettingsItems>
       <SettingsExit>
-        <GButtSubmit onClick={() => logOut()} gradient={G_VARIABLES.color.gradient.blue}>
-          logout
-        </GButtSubmit>
+        <SettingsSubmit onClick={() => logOut()}>logout</SettingsSubmit>
       </SettingsExit>
     </SettingsWrapper>
   );
