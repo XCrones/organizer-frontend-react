@@ -14,7 +14,7 @@ export const WeatherCity = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${G_VARIABLES.backgrund.dark_blue};
+  background-color: ${(props) => props.theme.section.block.background};
   padding: 15px;
   border-radius: 11px;
 `;
