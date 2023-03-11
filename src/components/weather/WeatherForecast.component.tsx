@@ -172,10 +172,9 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           </ColumnIcon>
           <ColumnTemp>
             {data[index].main.temp.toFixed(1)}
-            {G_VARIABLES.html_symbol.deg}
+            &deg;
           </ColumnTemp>
         </ForecastColumn>
-        <div style={{ width: "10px", flex: "0 0 auto" }}></div>
       </div>
     );
   }, areEqual);
@@ -214,18 +213,18 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
         <CurrIcon src={weatherDescr.icon} alt="icon weather" />
         <CurrTemp>
           {weatherDescr.temp}
-          {G_VARIABLES.html_symbol.deg}
+          &deg;
         </CurrTemp>
       </ForecastCurrent>
 
       <ForecastTemps>
         <TempMinMax>
           min: {weatherDescr.temp_min}
-          {G_VARIABLES.html_symbol.deg}
+          &deg;
         </TempMinMax>
         <TempMinMax>
           max: {weatherDescr.temp_max}
-          {G_VARIABLES.html_symbol.deg}
+          &deg;
         </TempMinMax>
       </ForecastTemps>
 
@@ -248,41 +247,41 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           <i className="bi bi-thermometer-half"></i>
           <span>
             {weatherDescr.feels_like}
-            {G_VARIABLES.html_symbol.deg}
+            &deg;
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-wind"></i>
           <span>
-            {G_VARIABLES.html_symbol.nbsp}
+            &nbsp;
             {weatherDescr.wind_speed} <span>m/s</span>
           </span>
         </DescrItem>
         <DescrItem>
           <span>
             {weatherDescr.pressure}
-            {G_VARIABLES.html_symbol.nbsp}
+            &nbsp;
             <span>hPa</span>
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-cloud-fill"></i>
           <span>
-            {G_VARIABLES.html_symbol.nbsp}
+            &nbsp;
             {weatherDescr.clouds}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-moisture"></i>
           <span>
-            {G_VARIABLES.html_symbol.nbsp}
+            &nbsp;
             {weatherDescr.humidity}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-binoculars"></i>
           <span>
-            {G_VARIABLES.html_symbol.nbsp}
+            &nbsp;
             {weatherDescr.visibility}
             <span>km</span>
           </span>

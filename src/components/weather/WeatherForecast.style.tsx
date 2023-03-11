@@ -9,7 +9,7 @@ export const WeatherForecast = styled.div`
   right: 0;
   height: 100%;
   padding-top: 20px;
-  background-color: ${G_VARIABLES.backgrund.dark_blue};
+  background-color: ${(props) => props.theme.section.background};
   animation: ${GFrameSliderLtoR} 150ms linear;
 `;
 
@@ -21,9 +21,7 @@ export const ForecastHeader = styled.div`
   padding: 0 20px;
 `;
 
-export const ForecastButt = styled.button.attrs({
-  type: "button",
-})<{ background: string; isRotate?: boolean }>`
+export const ForecastButt = styled.button.attrs({ type: "button" })<{ background: string; isRotate?: boolean }>`
   font-size: 23px;
   background-color: ${(props) => (props.isRotate ? "#15ad36" : G_VARIABLES.backgrund.dark_blue)};
   padding: 5px;
@@ -44,8 +42,8 @@ export const ForecastTitle = styled.h2`
 
 export const ForecastTemp = styled.div``;
 
+// padding-top: 10px;
 export const ForecastTimes = styled.div`
-  padding-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -70,25 +68,28 @@ export const ForecastCurrent = styled.div`
 `;
 
 export const CurrTemp = styled.h3`
-  font-size: 50px;
+  font-size: 40px;
+  line-height: 40px;
 `;
 
 export const CurrIcon = styled.img``;
 
 export const ForecastTemps = styled.div`
-  padding-top: 10px;
-  padding-bottom: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   column-gap: 20px;
   font-size: 14px;
+  padding-bottom: 20px;
 `;
+
 export const TempMinMax = styled.div``;
 
 export const ForecastItems = styled.div`
-  padding: 20px;
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
+  padding-bottom: 20px;
 `;
 
 export const ForecastColumn = styled.div<{ isCurrDate: boolean }>`
@@ -97,11 +98,12 @@ export const ForecastColumn = styled.div<{ isCurrDate: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 20px;
   padding-bottom: 20px;
+  padding-top: 20px;
   border-radius: 50px;
   background-color: ${(props) => (props.isCurrDate ? "#16599b" : "#102e4b")};
 `;
+
 export const ForecastItem = styled.div``;
 export const ColumnDay = styled.div`
   font-size: 14px;
@@ -126,7 +128,7 @@ export const ColumnDescr = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  row-gap: 15px;
+  row-gap: 10px;
 `;
 export const DescrItem = styled.div`
   flex: 0 1 27%;
