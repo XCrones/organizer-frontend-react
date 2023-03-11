@@ -1,4 +1,3 @@
-import { G_COLOR } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const Elem = styled.div``;

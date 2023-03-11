@@ -17,13 +17,13 @@ import {
   GButtSubmit,
 } from "../../ui";
 import { useEffect, useState } from "react";
-import { G_COLOR } from "../../ui/variables.style";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
 import { IAxiosError, INotifMethods, ITodo, ITodoJoin, TPriority } from "../../models";
 import { AxiosError } from "axios";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
+import { G_VARIABLES } from "../../ui/variables";
 
 interface Props {
   titleWindow: string;
@@ -53,7 +53,7 @@ const TodoEditorComponent = ({
   callbackNotif,
 }: Props) => {
   const [priority, SetPriority] = useState<TPriority>(0);
-  const [currColor, SetColor] = useState(G_COLOR.pallete[0]);
+  const [currColor, SetColor] = useState(G_VARIABLES.color.pallete[0]);
 
   const { makeLocalDate } = useDate();
 
@@ -195,7 +195,7 @@ const TodoEditorComponent = ({
             <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
               <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.hight)} name="priority" type="radio" />
               <GRadioRaplace
-                colorSelect={G_COLOR.priority.hight}
+                colorSelect={G_VARIABLES.color.priority.hight}
                 rounded={FORM_TODO_CONFIG.priority.rounded}
                 isSelect={priority === FORM_TODO_CONFIG.priority.levels.hight}
               />
@@ -208,7 +208,7 @@ const TodoEditorComponent = ({
                 type="radio"
               />
               <GRadioRaplace
-                colorSelect={G_COLOR.priority.medium}
+                colorSelect={G_VARIABLES.color.priority.medium}
                 rounded={FORM_TODO_CONFIG.priority.rounded}
                 isSelect={priority === FORM_TODO_CONFIG.priority.levels.medium}
               />
@@ -217,7 +217,7 @@ const TodoEditorComponent = ({
             <GRadioItem size={FORM_TODO_CONFIG.priority.size}>
               <input onClick={() => SetPriority(FORM_TODO_CONFIG.priority.levels.low)} name="priority" type="radio" />
               <GRadioRaplace
-                colorSelect={G_COLOR.priority.low}
+                colorSelect={G_VARIABLES.color.priority.low}
                 rounded={FORM_TODO_CONFIG.priority.rounded}
                 isSelect={priority === FORM_TODO_CONFIG.priority.levels.low}
               />
@@ -226,7 +226,7 @@ const TodoEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {G_COLOR.pallete.map((item) => (
+            {G_VARIABLES.color.pallete.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -238,7 +238,7 @@ const TodoEditorComponent = ({
         </GEditItem>
         {isShowDelete && (
           <GEditItem>
-            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={G_COLOR.gradients.red} fz={18}>
+            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={G_VARIABLES.color.gradient.red} fz={18}>
               delete
             </GButtSubmit>
           </GEditItem>

@@ -27,7 +27,7 @@ import {
 import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
 import { IForecastItem, IWindowColumn } from "../../models";
-import { G_HTML_ICONS, G_INDENTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 import { WEATHER_CONFIG } from "../../config/components/components-config";
 
 interface Props {
@@ -172,7 +172,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           </ColumnIcon>
           <ColumnTemp>
             {data[index].main.temp.toFixed(1)}
-            {G_HTML_ICONS.deg}
+            {G_VARIABLES.html_symbol.deg}
           </ColumnTemp>
         </ForecastColumn>
         <div style={{ width: "10px", flex: "0 0 auto" }}></div>
@@ -214,18 +214,18 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
         <CurrIcon src={weatherDescr.icon} alt="icon weather" />
         <CurrTemp>
           {weatherDescr.temp}
-          {G_HTML_ICONS.deg}
+          {G_VARIABLES.html_symbol.deg}
         </CurrTemp>
       </ForecastCurrent>
 
       <ForecastTemps>
         <TempMinMax>
           min: {weatherDescr.temp_min}
-          {G_HTML_ICONS.deg}
+          {G_VARIABLES.html_symbol.deg}
         </TempMinMax>
         <TempMinMax>
           max: {weatherDescr.temp_max}
-          {G_HTML_ICONS.deg}
+          {G_VARIABLES.html_symbol.deg}
         </TempMinMax>
       </ForecastTemps>
 
@@ -237,7 +237,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           itemCount={!!weatherStore.forecast?.list ? weatherStore.forecast.list.length : 0}
           itemData={weatherStore.forecast?.list}
           layout="horizontal"
-          width={size.innerWidth - G_INDENTS.left_right}
+          width={size.innerWidth - G_VARIABLES.indent.left + G_VARIABLES.indent.right}
         >
           {Column}
         </List>
@@ -248,41 +248,41 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           <i className="bi bi-thermometer-half"></i>
           <span>
             {weatherDescr.feels_like}
-            {G_HTML_ICONS.deg}
+            {G_VARIABLES.html_symbol.deg}
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-wind"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            {G_VARIABLES.html_symbol.nbsp}
             {weatherDescr.wind_speed} <span>m/s</span>
           </span>
         </DescrItem>
         <DescrItem>
           <span>
             {weatherDescr.pressure}
-            {G_HTML_ICONS.nbsp}
+            {G_VARIABLES.html_symbol.nbsp}
             <span>hPa</span>
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-cloud-fill"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            {G_VARIABLES.html_symbol.nbsp}
             {weatherDescr.clouds}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-moisture"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            {G_VARIABLES.html_symbol.nbsp}
             {weatherDescr.humidity}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-binoculars"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            {G_VARIABLES.html_symbol.nbsp}
             {weatherDescr.visibility}
             <span>km</span>
           </span>

@@ -1,17 +1,17 @@
-import { G_FONTS } from "../../ui/variables.style";
 import styled from "styled-components";
+import { G_VARIABLES } from "../../ui/variables";
 
-export const FooterNav = styled.nav<{ bgColor: string; pr: number; pl: number }>`
+export const FooterNav = styled.nav`
   height: 100%;
-  padding-left: ${(props) => props.pl}px;
-  padding-right: ${(props) => props.pr}px;
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   text-transform: capitalize;
-  font-family: ${G_FONTS.inter};
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.theme.footer.background};
+  transition: ${(props) => props.theme.transition.theme};
 `;
 
 export const NavIcon = styled.div`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GTriangle } from "../../ui";
-import { G_COLOR, G_FONTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const Item = styled.div<{ bgColor: string }>`
   display: flex;
@@ -17,7 +17,6 @@ export const Item = styled.div<{ bgColor: string }>`
 export const ItemTitle = styled.h3`
   max-width: 220px;
   font-size: 15px;
-  font-family: ${G_FONTS.inter};
   text-overflow: ellipsis;
   overflow: hidden;
   &::first-letter {
@@ -27,7 +26,7 @@ export const ItemTitle = styled.h3`
 
 export const ItemDate = styled.div`
   font-size: 13px;
-  color: ${G_COLOR.colorAuthTitle};
+  color: ${G_VARIABLES.color.light_gray};
 `;
 
 export const ItemInfo = styled.div`

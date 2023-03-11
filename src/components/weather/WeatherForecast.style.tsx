@@ -1,6 +1,6 @@
-import { G_COLOR } from "../../ui/variables.style";
 import styled from "styled-components";
 import { GFrameRotate360, GFrameSliderLtoR } from "../../ui";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const WeatherForecast = styled.div`
   position: absolute;
@@ -9,7 +9,7 @@ export const WeatherForecast = styled.div`
   right: 0;
   height: 100%;
   padding-top: 20px;
-  background-color: ${G_COLOR.mainBg};
+  background-color: ${G_VARIABLES.backgrund.dark_blue};
   animation: ${GFrameSliderLtoR} 150ms linear;
 `;
 
@@ -25,7 +25,7 @@ export const ForecastButt = styled.button.attrs({
   type: "button",
 })<{ background: string; isRotate?: boolean }>`
   font-size: 23px;
-  background-color: ${(props) => (props.isRotate ? "#15ad36" : G_COLOR.mainBg)};
+  background-color: ${(props) => (props.isRotate ? "#15ad36" : G_VARIABLES.backgrund.dark_blue)};
   padding: 5px;
   border-radius: 5px;
 
@@ -114,7 +114,7 @@ export const ColumnDay = styled.div`
 export const ColumnDate = styled.div``;
 export const ColumnTime = styled.div``;
 export const ColumnIcon = styled.div`
-  background-color: ${G_COLOR.mainBg};
+  background-color: ${G_VARIABLES.backgrund.dark_blue};
   border-radius: 50%;
   margin: 10px;
 `;
