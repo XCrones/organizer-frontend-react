@@ -5,11 +5,11 @@ interface IG_VARIABLES {
   backgrund: {
     section: {
       dark: "#171930";
-      light: "#d7dee4";
+      light: "#F6F7F9";
     };
     footer: {
       dark: "#0D0F22";
-      light: "#FFFFFF";
+      light: "#d7dee4";
     };
     nav: {
       dark: {
@@ -23,6 +23,10 @@ interface IG_VARIABLES {
     };
     dark_blue: "#1E203B";
     medium_blue: "#383b5f";
+    block: {
+      dark: "#383b5f";
+      light: "#c8c8dd";
+    };
   };
   color: {
     section: {
@@ -62,9 +66,27 @@ interface IG_VARIABLES {
     ];
     light_gray: "#707070";
     gradient: {
-      red: ["#871111", "#e03138"];
-      blue: ["#266ED7", "#4D8AEB"];
+      red: {
+        dark: ["#871111", "#e03138"];
+        lightight: ["#871111", "#e03138"];
+      };
+      blue: {
+        dark: ["#266ED7", "#4D8AEB"];
+        light: ["#2160be", "#4073be"];
+      };
     };
+    block: {
+      title: {
+        dark: "#fff";
+        light: "#000";
+      };
+      subtitle: {
+        dark: "#a59d9d";
+        light: "#292626";
+      };
+    };
+    white: "#fff";
+    black: "#000";
   };
   indent: {
     left: 20;
@@ -81,11 +103,11 @@ export const G_VARIABLES: IG_VARIABLES = {
   backgrund: {
     section: {
       dark: "#171930",
-      light: "#d7dee4",
+      light: "#F6F7F9",
     },
     footer: {
       dark: "#0D0F22",
-      light: "#FFFFFF",
+      light: "#d7dee4",
     },
     nav: {
       dark: {
@@ -99,6 +121,10 @@ export const G_VARIABLES: IG_VARIABLES = {
     },
     dark_blue: "#1E203B",
     medium_blue: "#383b5f",
+    block: {
+      dark: "#383b5f",
+      light: "#c8c8dd",
+    },
   },
   color: {
     section: {
@@ -138,9 +164,27 @@ export const G_VARIABLES: IG_VARIABLES = {
     ],
     light_gray: "#707070",
     gradient: {
-      red: ["#871111", "#e03138"],
-      blue: ["#266ED7", "#4D8AEB"],
+      red: {
+        dark: ["#871111", "#e03138"],
+        lightight: ["#871111", "#e03138"],
+      },
+      blue: {
+        dark: ["#266ED7", "#4D8AEB"],
+        light: ["#2160be", "#4073be"],
+      },
     },
+    block: {
+      title: {
+        dark: "#fff",
+        light: "#000",
+      },
+      subtitle: {
+        dark: "#a59d9d",
+        light: "#292626",
+      },
+    },
+    white: "#fff",
+    black: "#000",
   },
   indent: {
     left: 20,
