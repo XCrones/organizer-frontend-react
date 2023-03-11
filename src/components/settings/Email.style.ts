@@ -33,9 +33,10 @@ export const Info = styled.div`
 export const InfoName = styled.h3`
   text-transform: capitalize;
   font-size: 18px;
+  color: ${(props) => props.theme.section.block.color.title};
 `;
 
 export const InfoEmail = styled.h3`
   font-size: 14px;
-  color: #a6a6a6;
+  color: ${(props) => props.theme.section.block.color.subtitle};
 `;
