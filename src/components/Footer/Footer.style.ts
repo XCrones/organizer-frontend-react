@@ -14,9 +14,17 @@ export const FooterNav = styled.nav`
   transition: ${(props) => props.theme.transition.theme};
 `;
 
-export const NavIcon = styled.div`
-  font-size: 25px;
-  line-height: 25px;
+export const NavItem = styled.div<{ isActive: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  color: ${(props) => (props.isActive ? props.theme.footer.nav.select : props.theme.footer.nav.default)};
+  i {
+    font-size: 25px;
+    line-height: 25px;
+  }
 `;
 
 export const NavTitle = styled.h3`
