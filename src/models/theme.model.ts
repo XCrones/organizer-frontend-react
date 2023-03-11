@@ -4,10 +4,15 @@ export enum ETheme {
 }
 
 export interface ITheme {
-  background: {
-    main: string;
+  transition: {
+    theme: string;
   };
-  color: {
-    main: string;
+  section: {
+    color: string;
+    background: string;
+  };
+  footer: {
+    color: string;
+    background: string;
   };
 }
