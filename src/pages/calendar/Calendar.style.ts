@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { G_FONTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -7,11 +7,10 @@ export const CalendarWrapper = styled.div`
   row-gap: 25px;
 `;
 
-export const Events = styled.div<{ pr: number; pl: number }>`
-  padding-left: ${(props) => props.pl}px;
-  padding-right: ${(props) => props.pr}px;
+export const Events = styled.div`
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
   font-size: 17px;
-  font-family: ${G_FONTS.inter};
   position: relative;
 `;
 
