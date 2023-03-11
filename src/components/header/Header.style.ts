@@ -1,4 +1,3 @@
-import { G_FONTS } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const Header = styled.header`
@@ -13,17 +12,13 @@ export const Header = styled.header`
 export const HeaderTitle = styled.h1`
   text-transform: capitalize;
   font-size: 27px;
-  font-family: ${G_FONTS.inter};
   font-weight: 700;
 `;
 
-export const HeaderButtns = styled.div`
-  display: flex;
-  flex-direction: row;
-  column-gap: 15px;
-`;
-
 export const HeaderButt = styled.button.attrs({ type: "button" })`
-  font-size: 24px;
-  line-height: 32px;
+  & i {
+    font-size: 24px;
+    line-height: 32px;
+    color: ${(props) => props.theme.section.color};
+  }
 `;
