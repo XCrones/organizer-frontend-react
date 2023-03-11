@@ -5,11 +5,21 @@ export const G_VARIABLES = {
   backgrund: {
     section: {
       dark: "#171930",
-      light: "#F8F8FA",
+      light: "#d7dee4",
     },
     footer: {
       dark: "#0D0F22",
-      light: "#bfbfcc",
+      light: "#FFFFFF",
+    },
+    nav: {
+      dark: {
+        default: "#63636d",
+        select: "#fff",
+      },
+      light: {
+        default: "#878792",
+        select: "#000",
+      },
     },
     dark_blue: "#1E203B",
     medium_blue: "#383b5f",
