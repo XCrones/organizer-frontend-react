@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { G_FONTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const TodosWrapper = styled.div`
   display: flex;
@@ -7,15 +7,15 @@ export const TodosWrapper = styled.div`
   row-gap: 10px;
 `;
 
-export const Todos = styled.div<{ pr: number; pl: number }>`
+export const Todos = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 25px;
   position: relative;
-  padding-left: ${(props) => props.pl}px;
-  padding-right: ${(props) => props.pr}px;
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
 `;
 
 export const ListItems = styled.div`
@@ -36,6 +36,5 @@ export const ListItem = styled.div<{ isHide: boolean }>`
 export const ListTitle = styled.h2`
   text-transform: capitalize;
   font-weight: 700;
-  font-family: ${G_FONTS.inter};
   padding-bottom: 10px;
 `;
