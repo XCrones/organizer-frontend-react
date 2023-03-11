@@ -26,6 +26,7 @@ export const ToggleItem = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  color: ${(props) => props.theme.section.block.color.title};
 `;
 
 export const ItemAbout = styled.div<{}>`
@@ -35,8 +36,10 @@ export const ItemAbout = styled.div<{}>`
   align-items: center;
 `;
 
-export const ItemIcon = styled.div`
+export const ItemIcon = styled.div<{ isDarkTheme: boolean }>`
   font-size: 20px;
+  color: ${(props) => (!props.isDarkTheme ? "#000" : "#fff")};
+  transition: ${(props) => props.theme.transition.theme};
 `;
 export const ItemTitle = styled.div`
   font-size: 14px;
