@@ -14,5 +14,9 @@ export interface ITheme {
   footer: {
     color: string;
     background: string;
+    nav: {
+      select: string;
+      default: string;
+    };
   };
 }
