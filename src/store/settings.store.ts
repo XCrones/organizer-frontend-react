@@ -5,16 +5,16 @@ import { DarkTheme, LightTheme } from "../ui/themes";
 
 interface SettingsStore {
   typeTheme: DefaultTheme;
-  isNightTheme: boolean;
+  isDarkTheme: boolean;
   toggleTheme: () => void;
 }
 export const useSettingsStore = create<SettingsStore>()(
   persist(
     (set, get) => ({
       typeTheme: DarkTheme,
-      isNightTheme: true,
+      isDarkTheme: true,
       toggleTheme: () => {
-        set({ isNightTheme: !get().isNightTheme, typeTheme: !get().isNightTheme ? DarkTheme : LightTheme });
+        set({ isDarkTheme: !get().isDarkTheme, typeTheme: !get().isDarkTheme ? DarkTheme : LightTheme });
       },
     }),
     {
