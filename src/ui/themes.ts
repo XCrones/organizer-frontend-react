@@ -9,6 +9,21 @@ export const DarkTheme: DefaultTheme = {
   section: {
     background: G_VARIABLES.backgrund.section.dark,
     color: G_VARIABLES.color.section.dark,
+    block: {
+      background: G_VARIABLES.backgrund.block.dark,
+      color: {
+        title: G_VARIABLES.color.block.title.dark,
+        subtitle: G_VARIABLES.color.block.subtitle.dark,
+      },
+    },
+    settings: {
+      btn: {
+        submit: {
+          gradient: G_VARIABLES.color.gradient.blue.dark,
+          color: G_VARIABLES.color.white,
+        },
+      },
+    },
   },
   footer: {
     background: G_VARIABLES.backgrund.footer.dark,
@@ -28,6 +43,21 @@ export const LightTheme: DefaultTheme = {
   section: {
     background: G_VARIABLES.backgrund.section.light,
     color: G_VARIABLES.color.section.light,
+    block: {
+      background: G_VARIABLES.backgrund.block.light,
+      color: {
+        title: G_VARIABLES.color.block.title.light,
+        subtitle: G_VARIABLES.color.block.subtitle.light,
+      },
+    },
+    settings: {
+      btn: {
+        submit: {
+          gradient: G_VARIABLES.color.gradient.blue.light,
+          color: G_VARIABLES.color.white,
+        },
+      },
+    },
   },
   footer: {
     background: G_VARIABLES.backgrund.footer.light,
