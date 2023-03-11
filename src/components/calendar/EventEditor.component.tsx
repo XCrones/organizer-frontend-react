@@ -50,7 +50,7 @@ const EventEditorComponent = ({
   isShowDelete,
   callbackNotif,
 }: Props) => {
-  const [currColor, SetColor] = useState(G_VARIABLES.color.pallete[0]);
+  const [currColor, SetColor] = useState<string>(G_VARIABLES.color.pallete[0]);
   const { makeLocalDate } = useDate();
 
   const {
