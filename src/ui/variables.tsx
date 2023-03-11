@@ -1,4 +1,4 @@
-interface G_VARIABLES {
+interface IG_VARIABLES {
   transition: {
     theme: `all 300ms ease-in-out`;
   };
@@ -74,7 +74,7 @@ interface G_VARIABLES {
   };
 }
 
-export const G_VARIABLES: G_VARIABLES = {
+export const G_VARIABLES: IG_VARIABLES = {
   transition: {
     theme: `all 300ms ease-in-out`,
   },
