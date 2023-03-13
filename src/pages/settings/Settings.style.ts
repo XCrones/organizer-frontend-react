@@ -35,6 +35,5 @@ export const SettingsExit = styled.div`
 export const SettingsSubmit = styled(GButtSubmit)`
   color: ${props => props.theme.section.settings.btn.submit.color};
   background: ${(props) => props.theme.section.settings.btn.submit.gradient[0]};
-  background: linear-gradient(142deg, ${(props) => props.theme.section.settings.btn.submit.gradient[0]} 0%, ${(props) => props.theme.section.settings.btn.submit.gradient[1]} 100%
-  );
+  background: linear-gradient(142deg, ${(props) => props.theme.section.settings.btn.submit.gradient[0]} 0%, ${(props) => props.theme.section.settings.btn.submit.gradient[1]} 100%);
 `;
