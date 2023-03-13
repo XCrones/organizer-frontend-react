@@ -6,7 +6,7 @@ import { ItemAbout, ItemIcon, ItemTitle, ToggleItem, ToggleItems, ToggleWrapper 
 const ToggleComponent = () => {
   const settingsStore = useSettingsStore(
     (state) => ({
-      isNightTheme: state.isNightTheme,
+      isDarkTheme: state.isDarkTheme,
       toggleTheme: state.toggleTheme,
     }),
     shallow
@@ -17,13 +17,13 @@ const ToggleComponent = () => {
       <ToggleItems>
         <ToggleItem>
           <ItemAbout>
-            <ItemIcon>
+            <ItemIcon isDarkTheme={settingsStore.isDarkTheme}>
               <i className="bi bi-moon-stars-fill"></i>
             </ItemIcon>
-            <ItemTitle>night theme</ItemTitle>
+            <ItemTitle>dark theme</ItemTitle>
           </ItemAbout>
           <GToggle
-            isSet={settingsStore.isNightTheme}
+            isSet={settingsStore.isDarkTheme}
             colors={{ true: "#1aff1a", false: "#ff1a1a", slider: "#fff" }}
             size={{ width: 50, height: 22 }}
             onClick={() => settingsStore.toggleTheme()}

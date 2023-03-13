@@ -24,16 +24,17 @@ export const CityName = styled.div`
   font-size: 18px;
   text-transform: capitalize;
   padding-left: 10px;
+  color: ${(props) => props.theme.section.weather.cities.item.color};
 `;
 
 export const CityBtn = styled.button.attrs({
   type: "button",
 })<{ background: string }>`
-  padding: 5px;
   border-radius: 7px;
   transition: all 150ms ease-in;
-  color: #808080;
-  font-size: 18px;
+  color: ${(props) => props.theme.section.weather.cities.btn.color};
+  font-size: 20px;
+  width: 30px;
 
   &:hover {
     color: #fff;

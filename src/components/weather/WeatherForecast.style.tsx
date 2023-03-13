@@ -21,23 +21,26 @@ export const ForecastHeader = styled.div`
   padding: 0 20px;
 `;
 
-export const ForecastButt = styled.button.attrs({ type: "button" })<{ background: string; isRotate?: boolean }>`
-  font-size: 23px;
-  background-color: ${(props) => (props.isRotate ? "#15ad36" : G_VARIABLES.backgrund.dark_blue)};
-  padding: 5px;
+export const ForecastButt = styled.button.attrs({ type: "button" })<{ isRotate?: boolean }>`
+  font-size: 25px;
   border-radius: 5px;
+  width: 35px;
 
   & i {
     display: inline-block;
     animation: ${(props) => (props.isRotate ? GFrameRotate360 : "")} 700ms linear infinite;
-    color: ${(props) => (props.isRotate ? "#000" : "#fff")};
+    color: ${(props) =>
+      props.isRotate ? G_VARIABLES.color.green.light : props.theme.section.weather.forecast.color.item};
     transition: all 300ms ease-in;
   }
 `;
 
 export const ForecastTitle = styled.h2`
   text-align: center;
-  font-size: 27px;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ForecastTemp = styled.div``;
@@ -72,7 +75,10 @@ export const CurrTemp = styled.h3`
   line-height: 40px;
 `;
 
-export const CurrIcon = styled.img``;
+export const CurrIcon = styled.img`
+  background-color: ${(props) => props.theme.section.weather.forecast.iconWeather.background};
+  border-radius: 50%;
+`;
 
 export const ForecastTemps = styled.div`
   display: flex;
@@ -92,6 +98,7 @@ export const ForecastItems = styled.div`
   padding-bottom: 20px;
 `;
 
+// prettier-ignore
 export const ForecastColumn = styled.div<{ isCurrDate: boolean }>`
   width: 100px;
   display: flex;
@@ -101,10 +108,12 @@ export const ForecastColumn = styled.div<{ isCurrDate: boolean }>`
   padding-bottom: 20px;
   padding-top: 20px;
   border-radius: 50px;
-  background-color: ${(props) => (props.isCurrDate ? "#16599b" : "#102e4b")};
+  background-color: ${(props) => (props.isCurrDate ? props.theme.section.weather.forecast.day_times.background.select : props.theme.section.weather.forecast.day_times.background.default)};
+  color: ${(props) => (props.isCurrDate ? props.theme.section.weather.forecast.day_times.color.select : props.theme.section.weather.forecast.day_times.color.default)};
 `;
 
 export const ForecastItem = styled.div``;
+
 export const ColumnDay = styled.div`
   font-size: 14px;
   display: flex;
@@ -113,10 +122,13 @@ export const ColumnDay = styled.div`
   align-items: center;
   row-gap: 5px;
 `;
+
 export const ColumnDate = styled.div``;
+
 export const ColumnTime = styled.div``;
+
 export const ColumnIcon = styled.div`
-  background-color: ${G_VARIABLES.backgrund.dark_blue};
+  background-color: ${G_VARIABLES.color.dark_blue.medium};
   border-radius: 50%;
   margin: 10px;
 `;
@@ -140,7 +152,8 @@ export const DescrItem = styled.div`
   margin: 0 10px;
   padding: 8px 5px;
   border-radius: 15px;
-  background-color: #16599b;
+  background-color: ${(props) => props.theme.section.weather.forecast.descr.background};
+  color: ${(props) => props.theme.section.weather.forecast.descr.color};
 
   & > span > span {
     font-size: 12px;

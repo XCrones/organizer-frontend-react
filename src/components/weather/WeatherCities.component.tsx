@@ -80,7 +80,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
           <CityName>
             {city.name}, {city.country}
           </CityName>
-          <CityBtn background={G_VARIABLES.color.error.red} onClick={() => deleteCity(city.id)}>
+          <CityBtn background={G_VARIABLES.color.red.medium} onClick={() => deleteCity(city.id)}>
             <i className="bi bi-x-lg"></i>
           </CityBtn>
         </WeatherCity>

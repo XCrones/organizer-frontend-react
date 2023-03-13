@@ -124,7 +124,7 @@ const WeatherJoinComponent = ({ isHide, callbackClose, callbackNotif }: Props) =
           />
         </FormItem>
         <FormError>{errors.nameCity && errors.nameCity.message}</FormError>
-        <FormSubmit gradient={G_VARIABLES.color.gradient.blue}>send</FormSubmit>
+        <FormSubmit>send</FormSubmit>
       </JoinForm>
     </WeatherJoin>
   );

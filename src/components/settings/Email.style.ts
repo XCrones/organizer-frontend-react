@@ -38,5 +38,5 @@ export const InfoName = styled.h3`
 
 export const InfoEmail = styled.h3`
   font-size: 14px;
-  color: ${(props) => props.theme.section.block.color.subtitle};
+  color: ${(props) => props.theme.section.settings.title};
 `;

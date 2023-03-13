@@ -161,7 +161,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
     const memoCurrDate = useMemo(() => isSelectDate(data[index].dt_txt), [data[index].dt_txt]);
 
     return (
-      <div style={style}>
+      <div style={{ ...style }}>
         <ForecastColumn onClick={setDescr} isCurrDate={memoCurrDate}>
           <ColumnDay>
             <ColumnDate>{memoDate}</ColumnDate>
@@ -182,7 +182,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
   return (
     <WeatherForecast>
       <ForecastHeader>
-        <ForecastButt onClick={() => callbackClose()} background="#c02f0b">
+        <ForecastButt onClick={() => callbackClose()}>
           <i className="bi bi-arrow-left"></i>
         </ForecastButt>
         <ForecastTitle>
@@ -191,7 +191,6 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
         <ForecastButt
           disabled={weatherStore.isPending}
           onClick={() => weatherStore.getForecast(id)}
-          background="#19b34c"
           isRotate={weatherStore.isPending}
         >
           <i className="bi bi-arrow-repeat"></i>
@@ -236,7 +235,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           itemCount={!!weatherStore.forecast?.list ? weatherStore.forecast.list.length : 0}
           itemData={weatherStore.forecast?.list}
           layout="horizontal"
-          width={size.innerWidth - G_VARIABLES.indent.left + G_VARIABLES.indent.right}
+          width={size.innerWidth - (G_VARIABLES.indent.left + G_VARIABLES.indent.right)}
         >
           {Column}
         </List>

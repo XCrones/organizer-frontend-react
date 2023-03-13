@@ -139,13 +139,11 @@ const CalendarPage = () => {
       +currDate.toLocaleDateString().split(".")[1] - 1 === month;
 
     return (
-      <div style={style}>
+      <div style={{ ...style }}>
         <DaysItem
-          style={{
-            borderColor: isToday(+data[index].dayNum, +data[index].monthNum) ? "#ff4800" : "#fff",
-          }}
           onClick={() => jump.day(data[index].dayNum)}
-          currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
+          isSelectDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
+          isCurrDay={isToday(+data[index].dayNum, +data[index].monthNum)}
         >
           <DayWeeek currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}>{data[index].dayStr}</DayWeeek>
           <DayNum>{data[index].dayNum + 1}</DayNum>
@@ -182,7 +180,7 @@ const CalendarPage = () => {
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.innerWidth - G_VARIABLES.indent.left + G_VARIABLES.indent.right}
+            width={size.innerWidth - (G_VARIABLES.indent.left + G_VARIABLES.indent.right)}
           >
             {Column}
           </List>

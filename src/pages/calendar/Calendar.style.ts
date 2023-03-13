@@ -18,8 +18,9 @@ export const DaysList = styled.div`
   padding-bottom: 35px;
 `;
 
-export const DaysItem = styled.button.attrs({ type: "button" })<{ currDay: boolean }>`
-  border: 1px solid;
+// prettier-ignore
+export const DaysItem = styled.button.attrs({ type: "button" })<{ isSelectDay: boolean, isCurrDay: boolean }>`
+  border: 1px solid ${props => props.isCurrDay? props.theme.section.calendar.day.border.select : props.isSelectDay? props.theme.section.background : props.theme.section.calendar.day.border.default};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -28,9 +29,8 @@ export const DaysItem = styled.button.attrs({ type: "button" })<{ currDay: boole
   row-gap: 5px;
   width: 50px;
   height: 100%;
-  background: ${(props) => (props.currDay ? "#654ea3" : "#")};
-  background: ${(props) =>
-    props.currDay ? "linear-gradient(180deg, rgba(101, 78, 163, 1) 0%, rgba(234, 175, 200, 1) 100%)" : ""};
+  background: ${(props) => (props.isSelectDay ? "#654ea3" : "#")};
+  background: ${(props) => props.isSelectDay ? `linear-gradient(180deg, ${props.theme.section.calendar.day.gradient[0]} 0%, ${props.theme.section.calendar.day.gradient[1]} 100%)` : ""};
 `;
 
 export const DayWeeek = styled.h4<{ currDay: boolean }>`
