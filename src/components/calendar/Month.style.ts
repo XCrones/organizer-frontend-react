@@ -9,9 +9,10 @@ export const Moth = styled.div`
   padding-bottom: 25px;
 `;
 
-export const MonthPrev = styled.button.attrs({ type: "button" })`
-  font-size: 15px;
+export const MonthButt = styled.button.attrs({ type: "button" })`
+  font-size: 20px;
   line-height: 15px;
+  color: ${(props) => props.theme.section.calendar.month.btn.color};
 `;
 
 export const MonthCurr = styled.h2`
@@ -19,9 +20,4 @@ export const MonthCurr = styled.h2`
   font-size: 17px;
   font-weight: 600;
   line-height: 18px;
-`;
-
-export const MonthNext = styled.button.attrs({ type: "button" })`
-  font-size: 15px;
-  line-height: 15px;
 `;
