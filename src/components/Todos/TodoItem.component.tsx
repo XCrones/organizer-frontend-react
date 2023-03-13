@@ -6,7 +6,7 @@ import { ITodo, ITriangle } from "../../models";
 import { useTodosStore } from "../../store";
 import { GCheckboxItem, GCheckboxReplace } from "../../ui";
 import { G_VARIABLES } from "../../ui/variables";
-import { Item, ItemDate, ItemEdit, ItemInfo, ItemTitle, ItemTriangle } from "./TodoItem.style";
+import { Item, ItemSubtitle, ItemButt, ItemInfo, ItemTitle, ItemTriangle, ItemCheckBox } from "./TodoItem.style";
 
 interface Props {
   item: ITodo;
@@ -27,11 +27,11 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   const parsePriority = (priority: number): string => {
     switch (priority) {
       case FORM_TODO_CONFIG.priority.levels.hight:
-        return G_VARIABLES.color.priority.hight;
+        return G_VARIABLES.color.red.hight;
       case FORM_TODO_CONFIG.priority.levels.medium:
-        return G_VARIABLES.color.priority.medium;
+        return G_VARIABLES.color.orange.medium;
       case FORM_TODO_CONFIG.priority.levels.low:
-        return G_VARIABLES.color.priority.low;
+        return G_VARIABLES.color.green.medium;
       default:
         return "";
     }
@@ -60,18 +60,18 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   };
 
   return (
-    <Item bgColor={G_VARIABLES.backgrund.dark_blue}>
+    <Item>
       <GCheckboxItem size={TODO_CONFIG.status.size}>
         <input onClick={toggleStatus} type="checkbox" />
-        <GCheckboxReplace colorSelect={item.background} isSelect={item.status} rounded={TODO_CONFIG.status.rounded} />
+        <ItemCheckBox isActive={item.status} colorSelect={item.background} rounded={TODO_CONFIG.status.rounded} />
       </GCheckboxItem>
       <ItemInfo>
         <ItemTitle>{item.title}</ItemTitle>
-        <ItemDate>{memoizeDate}</ItemDate>
+        <ItemSubtitle>{memoizeDate}</ItemSubtitle>
       </ItemInfo>
-      <ItemEdit color={item.background} onClick={() => callbackEdit(item)}>
-        <i className="bi bi-info-square"></i>
-      </ItemEdit>
+      <ItemButt color={item.background} onClick={() => callbackEdit(item)}>
+        <i className="bi bi-info-square-fill"></i>
+      </ItemButt>
       <ItemTriangle borderColor={metaTriangle.borderColor} size={metaTriangle.size} />
     </Item>
   );
