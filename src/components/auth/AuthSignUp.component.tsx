@@ -6,8 +6,7 @@ import { shallow } from "zustand/shallow";
 import { ROUTES } from "../../config/routes/routes";
 import { IAuthSignUp, IAxiosError } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButtSubmit, GPulseLoader } from "../../ui";
-import { G_COLOR } from "../../ui/variables.style";
+import { GPulseLoader } from "../../ui";
 import {
   FormErr,
   FormField,
@@ -20,10 +19,12 @@ import {
   FormSubtitle,
   FormTitle,
   FormToggle,
+  FormSubmit,
 } from "./AuthSign.style";
 import { RegExp } from "../../common/regexp";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_AUTH_CONFIG } from "../../config/forms/form-config";
+import { G_VARIABLES } from "../../ui/variables";
 
 interface Props {
   toggleForm: Function;
@@ -46,7 +47,8 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
     shallow
   );
 
-  const [typePass, setTypePass] = useState<"password" | "text">("password");
+  const [typePass, SetTypePass] = useState<"password" | "text">("password");
+  const [isHidePass, SetHidePass] = useState(false);
   const [errMessage, SetErrMessage] = useState("");
 
   const {
@@ -104,7 +106,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={G_COLOR.errors.red}>{errors.name && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+            <FormInputIcon isError={!!errors.name}>{errors.name && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.name && <FormErr>{errors.name.message}</FormErr>}
         </FormItem>
@@ -123,7 +125,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={G_COLOR.errors.red}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
+            <FormInputIcon isError={!!errors.email}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.email && <FormErr>{errors.email.message}</FormErr>}
           {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
@@ -150,10 +152,16 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
               })}
             />
             <FormInputIcon
+              isError={isHidePass}
               style={{ cursor: "pointer" }}
-              color={G_COLOR.errors.red}
-              onMouseUp={() => setTypePass("password")}
-              onMouseDown={() => setTypePass("text")}
+              onClick={() => {
+                SetHidePass((prev) => !prev);
+                if (isHidePass) {
+                  SetTypePass("password");
+                } else {
+                  SetTypePass("text");
+                }
+              }}
             >
               {typePass === "text" && <i className="bi bi-eye-fill"></i>}
               {typePass === "password" && <i className="bi bi-eye-slash-fill"></i>}
@@ -163,9 +171,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit gradient={G_COLOR.gradients.blue} mb={20}>
-        sign up
-      </GButtSubmit>
+      <FormSubmit mb={20}>sign up</FormSubmit>
 
       <FormToggle onClick={() => toggleForm()}>I have an account, Login</FormToggle>
     </AuthForm>

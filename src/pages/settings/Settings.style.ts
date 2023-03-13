@@ -1,4 +1,5 @@
-import { G_COLOR } from "../../ui/variables.style";
+import { GButtSubmit } from "./../../ui/components/button.style";
+import { G_VARIABLES } from "../../ui/variables";
 import styled from "styled-components";
 
 export const Elem = styled.div``;
@@ -9,9 +10,9 @@ export const SettingsWrapper = styled.div`
   row-gap: 25px;
 `;
 
-export const SettingsItems = styled.div<{ pr: number; pl: number }>`
-  padding-left: ${(props) => props.pl}px;
-  padding-right: ${(props) => props.pr}px;
+export const SettingsItems = styled.div`
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
   height: 100%;
   width: 100%;
   display: flex;
@@ -21,11 +22,18 @@ export const SettingsItems = styled.div<{ pr: number; pl: number }>`
 
 export const Settingsitem = styled.div`
   padding: 5px;
-  background-color: ${G_COLOR.colorSettings};
   border-radius: 10px;
+  background-color: ${(props) => props.theme.section.block.background};
 `;
 
-export const SettingsExit = styled.div<{ pr: number; pl: number }>`
-  padding-left: ${(props) => props.pl}px;
-  padding-right: ${(props) => props.pr}px;
+export const SettingsExit = styled.div`
+  padding-left: ${G_VARIABLES.indent.left}px;
+  padding-right: ${G_VARIABLES.indent.right}px;
+`;
+
+// prettier-ignore
+export const SettingsSubmit = styled(GButtSubmit)`
+  color: ${props => props.theme.section.settings.btn.submit.color};
+  background: ${(props) => props.theme.section.settings.btn.submit.gradient[0]};
+  background: linear-gradient(142deg, ${(props) => props.theme.section.settings.btn.submit.gradient[0]} 0%, ${(props) => props.theme.section.settings.btn.submit.gradient[1]} 100%);
 `;

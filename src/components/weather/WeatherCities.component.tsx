@@ -3,7 +3,7 @@ import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { IAxiosError, ICityWeather, IMoveItem, INotifMethods } from "../../models";
 import { useWeatherStore } from "../../store";
-import { G_COLOR, G_INDENTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 import { CityName, CityBtn, WeatherCities, WeatherCity } from "./WeatherCities.style";
 
 interface Props {
@@ -64,7 +64,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
   }
 
   return (
-    <WeatherCities pl={G_INDENTS.left} pr={G_INDENTS.right}>
+    <WeatherCities>
       {cities.map((city, index) => (
         <WeatherCity
           key={city.id}
@@ -80,7 +80,7 @@ const WeatherCitiesComponent = ({ isHide, showForecast, cities, callbackNotif }:
           <CityName>
             {city.name}, {city.country}
           </CityName>
-          <CityBtn background={G_COLOR.errors.red} onClick={() => deleteCity(city.id)}>
+          <CityBtn background={G_VARIABLES.color.red.medium} onClick={() => deleteCity(city.id)}>
             <i className="bi bi-x-lg"></i>
           </CityBtn>
         </WeatherCity>

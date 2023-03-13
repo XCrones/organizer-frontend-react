@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { G_COLOR } from "../../ui/variables.style";
+import { GButtSubmit } from "../../ui";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const AuthForm = styled.form`
   display: flex;
@@ -20,7 +21,7 @@ export const FormItem = styled.div`
 
 export const FormLabel = styled.label`
   text-transform: capitalize;
-  color: ${G_COLOR.colorAuth};
+  color: ${(props) => props.theme.section.auth.field.label};
   font-size: 12px;
   line-height: 19px;
   font-weight: 400;
@@ -33,9 +34,8 @@ export const FormField = styled.div`
 `;
 
 export const FormInput = styled.input`
-  background: rgb(36, 37, 71);
-  background: linear-gradient(142deg, rgba(36, 37, 71, 1) 0%, rgba(36, 37, 71, 1) 44.71%);
-  color: #fff;
+  background: ${(props) => props.theme.section.auth.field.background};
+  color: ${(props) => props.theme.section.auth.field.text_color};
   padding: 17px 20px;
   border-radius: 10px;
   width: 100%;
@@ -48,14 +48,14 @@ export const FormErr = styled.div`
   color: #ff0000;
 `;
 
-export const FormInputIcon = styled.div<{ color: string }>`
+export const FormInputIcon = styled.div<{ isError: boolean }>`
   position: absolute;
   top: 50%;
   right: 20px;
   transform: translate(-50%, -50%);
   font-size: 20px;
   z-index: 2;
-  color: ${(props) => props.color};
+  color: ${(props) => (props.isError ? props.theme.section.auth.field.error : G_VARIABLES.color.green.medium)};
 `;
 
 export const FormToggle = styled.button.attrs({
@@ -63,7 +63,7 @@ export const FormToggle = styled.button.attrs({
 })`
   font-size: 14px;
   line-height: 15px;
-  color: ${G_COLOR.colorAuthTitle};
+  color: ${(props) => props.theme.section.auth.subtitle};
 `;
 
 export const FormTitle = styled.h1`
@@ -72,7 +72,7 @@ export const FormTitle = styled.h1`
   line-height: 34px;
   font-weight: 700;
   padding-bottom: 16px;
-  color: #fff;
+  color: ${(props) => props.theme.section.auth.title};
   &::first-letter {
     text-transform: uppercase;
   }
@@ -84,5 +84,11 @@ export const FormSubtitle = styled.h2`
   line-height: 19px;
   font-weight: 400;
   padding-bottom: 30px;
-  color: ${G_COLOR.colorAuthTitle};
+  color: ${(props) => props.theme.section.auth.subtitle};
+`;
+
+// prettier-ignore
+export const FormSubmit = styled(GButtSubmit)<{}>`
+  background: ${(props) => props.theme.section.auth.submit.gradient[0]};
+  background: linear-gradient(142deg, ${(props) => props.theme.section.auth.submit.gradient[0]} 0%, ${(props) => props.theme.section.auth.submit.gradient[1]} 100%);
 `;

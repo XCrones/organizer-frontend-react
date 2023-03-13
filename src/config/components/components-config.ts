@@ -8,7 +8,7 @@ export const TODO_CONFIG = {
 export const WEATHER_CONFIG = {
   forecast_list: {
     overscanCount: 2,
-    height: 190,
+    height: 220,
     itemSize: 110,
   },
 };

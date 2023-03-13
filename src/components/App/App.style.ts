@@ -1,21 +1,19 @@
 import styled from "styled-components";
 
-interface IWrapper {
-  colorBg: string;
-  height_footer: number;
-}
+export const Wrapper = styled.div<{ height_footer: number }>`
+  @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
-export const Wrapper = styled.div<IWrapper>`
   min-height: 100vh;
   min-width: 100%;
-  color: #fff;
-  background-color: ${(props) => props.colorBg};
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr ${(props) => props.height_footer}px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  color: ${(props) => props.theme.section.color};
+  background-color: ${(props) => props.theme.section.background};
+  transition: ${(props) => props.theme.transition.theme};
+  font-family: "Inter", sans-serif;
 `;
 
 export const Section = styled.section<{ maxHeight: number; paddingBottom: number }>`

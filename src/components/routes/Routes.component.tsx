@@ -16,6 +16,8 @@ const RoutesComponent = () => {
 
   return (
     <Routes>
+      <Route path={ROUTES.AUTH.PATH} element={<AuthPage />} />
+
       <Route
         path={ROUTES.HOME.PATH}
         element={
@@ -24,7 +26,7 @@ const RoutesComponent = () => {
           </GuardRoute>
         }
       />
-      <Route path={ROUTES.AUTH.PATH} element={<AuthPage />} />
+
       <Route
         path={ROUTES.TODOS.PATH}
         element={
@@ -33,6 +35,7 @@ const RoutesComponent = () => {
           </GuardRoute>
         }
       />
+
       <Route
         path={ROUTES.CALENDAR.PATH}
         element={
@@ -41,6 +44,7 @@ const RoutesComponent = () => {
           </GuardRoute>
         }
       />
+
       <Route
         path={ROUTES.WEATHER.PATH}
         element={
@@ -49,6 +53,7 @@ const RoutesComponent = () => {
           </GuardRoute>
         }
       />
+
       <Route
         path={ROUTES.SETTINGS.PATH}
         element={

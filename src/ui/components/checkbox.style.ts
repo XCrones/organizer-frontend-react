@@ -15,7 +15,7 @@ export const GCheckboxItem = styled.div<{ size: number }>`
   }
 `;
 
-export const GCheckboxReplace = styled.div<{ isSelect: boolean; colorSelect: string; rounded: number }>`
+export const GCheckboxReplace = styled.div<{ colorSelect: string; rounded: number }>`
   height: 100%;
   width: 100%;
   border-radius: ${(props) => props.rounded}%;
@@ -32,7 +32,6 @@ export const GCheckboxReplace = styled.div<{ isSelect: boolean; colorSelect: str
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background-color: ${(props) => (props.isSelect ? props.colorSelect : "#1e203b")};
     border-radius: ${(props) => props.rounded}%;
   }
 `;

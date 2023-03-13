@@ -6,7 +6,6 @@ import { FORM_EVENT_CONFIG } from "../../config/forms/form-config";
 import { useDate } from "../../hooks";
 import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
 import {
-  GButtSubmit,
   GEditWrapper,
   GEditHeader,
   GEditCancel,
@@ -20,8 +19,9 @@ import {
   GEditDecr,
   GEditPallete,
   GEditPalleteItem,
+  GEditButt,
 } from "../../ui";
-import { G_COLOR } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 
 interface IFormInputs {
   startEvent: string;
@@ -50,7 +50,7 @@ const EventEditorComponent = ({
   isShowDelete,
   callbackNotif,
 }: Props) => {
-  const [currColor, SetColor] = useState(G_COLOR.pallete[0]);
+  const [currColor, SetColor] = useState<string>(G_VARIABLES.pallete.editor[0]);
   const { makeLocalDate } = useDate();
 
   const {
@@ -190,7 +190,7 @@ const EventEditorComponent = ({
         </GEditItem>
         <GEditItem>
           <GEditPallete>
-            {G_COLOR.pallete.map((item) => (
+            {G_VARIABLES.pallete.editor.map((item) => (
               <GEditPalleteItem
                 key={item}
                 onClick={() => SetColor(item)}
@@ -200,13 +200,7 @@ const EventEditorComponent = ({
             ))}
           </GEditPallete>
         </GEditItem>
-        {isShowDelete && (
-          <GEditItem>
-            <GButtSubmit onClick={() => deleteItem(item?.id)} gradient={G_COLOR.gradients.red} fz={18}>
-              delete
-            </GButtSubmit>
-          </GEditItem>
-        )}
+        {isShowDelete && <GEditButt onClick={() => deleteItem(item?.id)}>delete</GEditButt>}
       </GEditItems>
     </GEditWrapper>
   );

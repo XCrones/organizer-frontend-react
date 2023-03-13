@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GFormError, GFrameSliderLtoR, GButtSubmit } from "../../ui";
-import { G_COLOR } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 
 export const WeatherJoin = styled.div`
   position: absolute;
@@ -11,9 +11,10 @@ export const WeatherJoin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${G_COLOR.colorSettings};
   animation: ${GFrameSliderLtoR} 150ms linear;
   padding: 5px;
+  background-color: ${(props) => props.theme.section.weather.join.background};
+  border-bottom: 1px solid ${(props) => props.theme.section.weather.join.color};
 `;
 
 export const JoinHeader = styled.div`
@@ -21,7 +22,8 @@ export const JoinHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px;
+  color: ${(props) => props.theme.section.weather.join.color};
 `;
 
 export const JoinButt = styled.button.attrs({ type: "button" })`
@@ -47,7 +49,9 @@ export const JoinGeo = styled(JoinButt)<{ isLock: boolean; color: string }>`
   }
 `;
 
-export const JoinClose = styled(JoinButt)``;
+export const JoinClose = styled(JoinButt)`
+  color: ${(props) => props.theme.section.weather.join.icon_color};
+`;
 
 export const JoinTitle = styled.div`
   flex: 1 1 auto;
@@ -72,11 +76,12 @@ export const FormInput = styled.input.attrs({
   type: "text",
 })`
   color: #fff;
-  background-color: ${G_COLOR.mainBg};
   border-radius: 4px;
   padding: 2px 5px;
+  background-color: ${(props) => props.theme.section.weather.join.field.background};
+  color: ${(props) => props.theme.section.weather.join.field.color};
 `;
-
+// prettier-ignore
 export const FormSubmit = styled(GButtSubmit)`
   margin-top: 20px;
   margin-bottom: 20px;
@@ -84,9 +89,13 @@ export const FormSubmit = styled(GButtSubmit)`
   height: 30px;
   width: 100%;
   border-radius: 5px;
+  color: ${(props) => props.theme.section.weather.join.submit.color};
+  background: ${(props) => props.theme.section.weather.join.submit.gradient[0]};
+  background: linear-gradient(142deg, ${(props) => props.theme.section.weather.join.submit.gradient[0]} 0%, ${(props) => props.theme.section.weather.join.submit.gradient[1]} 100%);
 `;
 
 export const FormError = styled(GFormError)`
   text-align: center;
   padding-top: 5px;
+  color: ${G_VARIABLES.color.red.hight};
 `;

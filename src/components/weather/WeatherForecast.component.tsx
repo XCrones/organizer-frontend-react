@@ -27,7 +27,7 @@ import {
 import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
 import { IForecastItem, IWindowColumn } from "../../models";
-import { G_HTML_ICONS, G_INDENTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 import { WEATHER_CONFIG } from "../../config/components/components-config";
 
 interface Props {
@@ -161,7 +161,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
     const memoCurrDate = useMemo(() => isSelectDate(data[index].dt_txt), [data[index].dt_txt]);
 
     return (
-      <div style={style}>
+      <div style={{ ...style }}>
         <ForecastColumn onClick={setDescr} isCurrDate={memoCurrDate}>
           <ColumnDay>
             <ColumnDate>{memoDate}</ColumnDate>
@@ -172,10 +172,9 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           </ColumnIcon>
           <ColumnTemp>
             {data[index].main.temp.toFixed(1)}
-            {G_HTML_ICONS.deg}
+            &deg;
           </ColumnTemp>
         </ForecastColumn>
-        <div style={{ width: "10px", flex: "0 0 auto" }}></div>
       </div>
     );
   }, areEqual);
@@ -183,7 +182,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
   return (
     <WeatherForecast>
       <ForecastHeader>
-        <ForecastButt onClick={() => callbackClose()} background="#c02f0b">
+        <ForecastButt onClick={() => callbackClose()}>
           <i className="bi bi-arrow-left"></i>
         </ForecastButt>
         <ForecastTitle>
@@ -192,7 +191,6 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
         <ForecastButt
           disabled={weatherStore.isPending}
           onClick={() => weatherStore.getForecast(id)}
-          background="#19b34c"
           isRotate={weatherStore.isPending}
         >
           <i className="bi bi-arrow-repeat"></i>
@@ -214,18 +212,18 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
         <CurrIcon src={weatherDescr.icon} alt="icon weather" />
         <CurrTemp>
           {weatherDescr.temp}
-          {G_HTML_ICONS.deg}
+          &deg;
         </CurrTemp>
       </ForecastCurrent>
 
       <ForecastTemps>
         <TempMinMax>
           min: {weatherDescr.temp_min}
-          {G_HTML_ICONS.deg}
+          &deg;
         </TempMinMax>
         <TempMinMax>
           max: {weatherDescr.temp_max}
-          {G_HTML_ICONS.deg}
+          &deg;
         </TempMinMax>
       </ForecastTemps>
 
@@ -237,7 +235,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           itemCount={!!weatherStore.forecast?.list ? weatherStore.forecast.list.length : 0}
           itemData={weatherStore.forecast?.list}
           layout="horizontal"
-          width={size.innerWidth - G_INDENTS.left_right}
+          width={size.innerWidth - (G_VARIABLES.indent.left + G_VARIABLES.indent.right)}
         >
           {Column}
         </List>
@@ -248,41 +246,41 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
           <i className="bi bi-thermometer-half"></i>
           <span>
             {weatherDescr.feels_like}
-            {G_HTML_ICONS.deg}
+            &deg;
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-wind"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            &nbsp;
             {weatherDescr.wind_speed} <span>m/s</span>
           </span>
         </DescrItem>
         <DescrItem>
           <span>
             {weatherDescr.pressure}
-            {G_HTML_ICONS.nbsp}
+            &nbsp;
             <span>hPa</span>
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-cloud-fill"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            &nbsp;
             {weatherDescr.clouds}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-moisture"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            &nbsp;
             {weatherDescr.humidity}%
           </span>
         </DescrItem>
         <DescrItem>
           <i className="bi bi-binoculars"></i>
           <span>
-            {G_HTML_ICONS.nbsp}
+            &nbsp;
             {weatherDescr.visibility}
             <span>km</span>
           </span>

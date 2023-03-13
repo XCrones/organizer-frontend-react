@@ -13,7 +13,7 @@ import {
 } from "../../components";
 import { useDate, useNotif, useWindowSize } from "../../hooks";
 import { useCalendarStore } from "../../store";
-import { G_INDENTS } from "../../ui/variables.style";
+import { G_VARIABLES } from "../../ui/variables";
 import { CALENDAR_CONFIG } from "../../config/components/components-config";
 
 interface IDay {
@@ -139,13 +139,11 @@ const CalendarPage = () => {
       +currDate.toLocaleDateString().split(".")[1] - 1 === month;
 
     return (
-      <div style={style}>
+      <div style={{ ...style }}>
         <DaysItem
-          style={{
-            borderColor: isToday(+data[index].dayNum, +data[index].monthNum) ? "#ff4800" : "#fff",
-          }}
           onClick={() => jump.day(data[index].dayNum)}
-          currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
+          isSelectDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}
+          isCurrDay={isToday(+data[index].dayNum, +data[index].monthNum)}
         >
           <DayWeeek currDay={isSelectDay(+data[index].dayNum, +data[index].monthNum)}>{data[index].dayStr}</DayWeeek>
           <DayNum>{data[index].dayNum + 1}</DayNum>
@@ -166,7 +164,7 @@ const CalendarPage = () => {
     <CalendarWrapper>
       <NotificationComponent isHide={isHideNotif} meta={metaNotif} />
       <HeaderComponent butt={buttonsHeader} title={"calendar"} />
-      <Events pl={G_INDENTS.left} pr={G_INDENTS.right}>
+      <Events>
         <MonthComponent
           monthStr={dateParse.monthStr}
           yearNum={dateParse.year}
@@ -182,7 +180,7 @@ const CalendarPage = () => {
             itemCount={daysMonth.length}
             itemData={daysMonth}
             layout="horizontal"
-            width={size.innerWidth - G_INDENTS.left_right}
+            width={size.innerWidth - (G_VARIABLES.indent.left + G_VARIABLES.indent.right)}
           >
             {Column}
           </List>

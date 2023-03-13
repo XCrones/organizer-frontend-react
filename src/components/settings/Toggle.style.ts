@@ -1,4 +1,3 @@
-import { G_FONTS } from "../../ui/variables.style";
 import styled from "styled-components";
 
 export const ToggleWrapper = styled.div`
@@ -27,6 +26,7 @@ export const ToggleItem = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  color: ${(props) => props.theme.section.block.color.title};
 `;
 
 export const ItemAbout = styled.div<{}>`
@@ -36,12 +36,13 @@ export const ItemAbout = styled.div<{}>`
   align-items: center;
 `;
 
-export const ItemIcon = styled.div`
+export const ItemIcon = styled.div<{ isDarkTheme: boolean }>`
   font-size: 20px;
+  color: ${(props) => (!props.isDarkTheme ? "#000" : "#fff")};
+  transition: ${(props) => props.theme.transition.theme};
 `;
 export const ItemTitle = styled.div`
   font-size: 14px;
-  font-family: ${G_FONTS.inter};
   &::first-letter {
     text-transform: uppercase;
   }
