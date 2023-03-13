@@ -8,8 +8,7 @@ import { RegExp } from "../../common/regexp";
 import { ROUTES } from "../../config/routes/routes";
 import { IAuthSignIn, IAxiosError } from "../../models";
 import { useAuthStore } from "../../store";
-import { GButtSubmit, GPulseLoader } from "../../ui";
-import { G_VARIABLES } from "../../ui/variables";
+import { GPulseLoader } from "../../ui";
 import {
   FormErr,
   FormField,
@@ -22,6 +21,7 @@ import {
   FormSubtitle,
   FormTitle,
   FormToggle,
+  FormSubmit,
 } from "./AuthSign.style";
 
 interface Props {
@@ -43,6 +43,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
     shallow
   );
   const [typePass, SetTypePass] = useState<"password" | "text">("password");
+  const [isHidePass, SetHidePass] = useState(false);
   const [errMessage, SetErrMessage] = useState("");
 
   const {
@@ -92,9 +93,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
                 },
               })}
             />
-            <FormInputIcon color={G_VARIABLES.color.error.red}>
-              {errors.email && <i className="bi bi-x-lg"></i>}
-            </FormInputIcon>
+            <FormInputIcon isError={!!errors.email}>{errors.email && <i className="bi bi-x-lg"></i>}</FormInputIcon>
           </FormField>
           {errors?.email && <FormErr>{errors.email.message}</FormErr>}
           {errMessage.length > 0 && <FormErr>{errMessage}</FormErr>}
@@ -111,10 +110,16 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
               })}
             />
             <FormInputIcon
+              isError={isHidePass}
               style={{ cursor: "pointer" }}
-              color={G_VARIABLES.color.error.red}
-              onMouseUp={() => SetTypePass("password")}
-              onMouseDown={() => SetTypePass("text")}
+              onClick={() => {
+                SetHidePass((prev) => !prev);
+                if (isHidePass) {
+                  SetTypePass("password");
+                } else {
+                  SetTypePass("text");
+                }
+              }}
             >
               {typePass === "text" && <i className="bi bi-eye-fill"></i>}
               {typePass === "password" && <i className="bi bi-eye-slash-fill"></i>}
@@ -125,9 +130,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
         </FormItem>
       </FormItems>
 
-      <GButtSubmit gradient={G_VARIABLES.color.gradient.blue} mb={20}>
-        sign in
-      </GButtSubmit>
+      <FormSubmit mb={20}>sign in</FormSubmit>
 
       <FormToggle onClick={() => toggleForm()}>I’m a new user. Registration</FormToggle>
     </AuthForm>
