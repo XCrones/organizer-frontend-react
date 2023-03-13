@@ -1,4 +1,4 @@
-import { MonthCurr, MonthNext, MonthPrev, Moth } from "./Month.style";
+import { MonthButt, MonthCurr, Moth } from "./Month.style";
 
 interface Props {
   nextMonth: Function;
@@ -10,13 +10,13 @@ interface Props {
 const MonthComponent = ({ monthStr, nextMonth, prevMonth, yearNum }: Props) => {
   return (
     <Moth>
-      <MonthPrev onClick={() => prevMonth()}>
+      <MonthButt onClick={() => prevMonth()}>
         <i className="bi bi-chevron-left"></i>
-      </MonthPrev>
+      </MonthButt>
       <MonthCurr>{`${monthStr} ${yearNum}`}</MonthCurr>
-      <MonthNext onClick={() => nextMonth()}>
+      <MonthButt onClick={() => nextMonth()}>
         <i className="bi bi-chevron-right"></i>
-      </MonthNext>
+      </MonthButt>
     </Moth>
   );
 };
