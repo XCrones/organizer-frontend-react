@@ -9,11 +9,11 @@ export const GEditWrapper = styled.form`
   right: 0;
   bottom: 49px;
   border-radius: 10px 10px 0 0;
-  background-color: ${G_VARIABLES.backgrund.section.dark};
+  background-color: ${(props) => props.theme.section.editor.background};
   padding: 5px;
   z-index: 10;
   animation: ${GFrameSliderLtoR} 150ms linear;
-  color: #fff;
+  color: ${(props) => props.theme.section.editor.color};
 `;
 
 export const GEditHeader = styled.div`
@@ -30,17 +30,39 @@ export const GEditCancel = styled.button.attrs({
   type: "button",
 })`
   text-transform: capitalize;
-  color: #ff0000;
+  color: ${(props) => props.theme.section.editor.butt.cancel.color};
+  padding: 5px;
+  border-radius: 5px;
+  background: ${(props) => props.theme.section.editor.butt.cancel.graient[0]};
+  background: linear-gradient(
+    142deg,
+    ${(props) => props.theme.section.editor.butt.cancel.graient[0]} 0%,
+    ${(props) => props.theme.section.editor.butt.cancel.graient[1]} 100%
+  );
 `;
 
-export const GEditWinTitle = styled.div``;
+export const GEditWinTitle = styled.div`
+  color: ${(props) => props.theme.section.editor.color};
+  font-size: 20px;
+`;
 
 export const GEditSubmit = styled.button.attrs({
   type: "submit",
 })<{ isValid: boolean }>`
   text-transform: capitalize;
-  color: ${(props) => (props.isValid ? "#ff0000" : "#c0c0c0")};
+  color: ${(props) => (props.isValid ? props.theme.section.editor.butt.submit.color : "#c0c0c0")};
   cursor: ${(props) => (props.isValid ? "pointer" : "not-allowed")};
+  border: 1px solid
+    ${(props) =>
+      props.isValid ? props.theme.section.editor.butt.submit.graient[0] : props.theme.section.editor.butt.submit.color};
+  padding: 5px;
+  border-radius: 5px;
+  background: ${(props) => props.theme.section.editor.butt.submit.graient[0]};
+  background: linear-gradient(
+    142deg,
+    ${(props) => props.theme.section.editor.butt.submit.graient[0]} 0%,
+    ${(props) => props.theme.section.editor.butt.submit.graient[1]} 100%
+  );
 `;
 
 export const GEditItems = styled.div`
@@ -53,7 +75,7 @@ export const GEditItems = styled.div`
 
 export const GEditItem = styled.div`
   width: 100%;
-  background-color: ${G_VARIABLES.backgrund.medium_blue};
+  background-color: ${(props) => props.theme.section.editor.field.background};
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -62,7 +84,7 @@ export const GEditItem = styled.div`
 
 const DefaultInput = styled.input`
   width: 100%;
-  background-color: ${G_VARIABLES.backgrund.medium_blue};
+  background-color: ${(props) => props.theme.section.editor.field.background};
   outline: 0;
   font-size: 15px;
 `;
@@ -72,7 +94,7 @@ export const GEditName = styled(DefaultInput).attrs({
 })`
   &::placeholder {
     font-size: 14px;
-    color: ${G_VARIABLES.color.light_gray};
+    color: ${G_VARIABLES.color.gray.light};
   }
 `;
 
@@ -85,7 +107,7 @@ export const GEditDate = styled(DefaultInput)``;
 
 export const GEditDecr = styled.textarea`
   width: 100%;
-  background-color: ${G_VARIABLES.backgrund.medium_blue};
+  background-color: ${(props) => props.theme.section.editor.field.background};
   outline: 0;
   resize: none;
   font-size: 15px;
@@ -119,4 +141,15 @@ export const GEditRadioItems = styled.div`
   flex-direction: row;
   align-items: center;
   column-gap: 10px;
+`;
+
+// prettier-ignore
+export const GEditButt = styled.button.attrs({ type: "button" })`
+  height: 50px;
+  width: 100%;
+  text-transform: capitalize;
+  font-size: 19px;
+  color: #fff;
+  background: ${(props) => props.theme.section.editor.butt.delete.graient[0]};
+  background: linear-gradient(142deg, ${(props) => props.theme.section.editor.butt.delete.graient[0]} 0%, ${(props) => props.theme.section.editor.butt.delete.graient[1]} 100%);
 `;
