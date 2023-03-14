@@ -12,7 +12,7 @@
 - react-window;
 - moment;
 - bootstrap-icons;
-- backend свой, Nestjs [organizer-backend-nest](https://github.com/XCrones/organizer-backend-nest)
+- backend свой на Nestjs: [organizer-backend-nest](https://github.com/XCrones/organizer-backend-nest)
 
 ## Возможности:
 
