@@ -67,15 +67,19 @@ const TodoEditorComponent = ({
 
   const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
+      const metaData: ITodoJoin = {
+        title: data.todoName,
+        category: data.category,
+        priority: priority,
+        deadline: data.deadLine,
+        status: false,
+        background: currColor,
+      };
+
       if (!!item) {
-        const editItem = JSON.parse(JSON.stringify(item)) as ITodo;
-        editItem.title = data.todoName;
-        editItem.background = currColor;
-        editItem.category = data.category;
-        editItem.priority = priority;
-        editItem.deadline = data.deadLine;
+        Object.assign(item, metaData);
         try {
-          await callbackSubmit(editItem);
+          await callbackSubmit(item);
           callbackNotif.successful(APP_MESSAGES.CHANGE_SUCCES);
           callbackClose();
         } catch (error) {
@@ -85,14 +89,6 @@ const TodoEditorComponent = ({
           }
         }
       } else {
-        const metaData: ITodoJoin = {
-          title: data.todoName,
-          category: data.category,
-          priority: priority,
-          deadline: data.deadLine,
-          status: false,
-          background: currColor,
-        };
         try {
           await callbackSubmit(metaData);
           callbackNotif.successful(APP_MESSAGES.CREATE_SUCCES);

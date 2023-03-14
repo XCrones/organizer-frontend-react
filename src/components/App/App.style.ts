@@ -13,7 +13,7 @@ export const Wrapper = styled.div<{ height_footer: number }>`
   color: ${(props) => props.theme.section.color};
   background-color: ${(props) => props.theme.section.background};
   transition: ${(props) => props.theme.transition.theme};
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
 `;
 
 export const Section = styled.section<{ maxHeight: number; paddingBottom: number }>`

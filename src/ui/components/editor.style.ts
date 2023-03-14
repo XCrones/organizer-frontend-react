@@ -1,4 +1,4 @@
-import { GFrameSliderLtoR } from "./../keyframes/animations.keyframes";
+import { GFrameSliderLtoR } from "../keyframes";
 import { G_VARIABLES } from "../variables";
 import styled from "styled-components";
 

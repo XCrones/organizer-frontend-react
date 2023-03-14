@@ -114,10 +114,10 @@ export const DarkTheme: DefaultTheme = {
       },
     },
     editor: {
-      background: G_VARIABLES.color.dark_blue.light,
+      background: G_VARIABLES.color.dark_blue.medium,
       color: G_VARIABLES.color.white,
       field: {
-        background: G_VARIABLES.color.dark_blue.medium,
+        background: G_VARIABLES.color.dark_blue.light,
         color: G_VARIABLES.color.white,
       },
       butt: {

@@ -1,44 +1,27 @@
-export type TCalendarTitle = "calendar";
-export type TCalendarPath = "/calendar";
-
-export type TTodoTitle = "todos";
-export type TTodoPath = "/todos";
-
-export type TWeatherTitle = "weather";
-export type TWeatherPath = "/weather";
-
-export type TAuthTitle = "auth";
-export type TAuthPath = "/auth";
-
-export type TSettingsTitle = "settings";
-export type TSettingsPath = "/settings";
-
-export type THomeTitle = "home";
-export type THomePath = "/";
 interface IRouterLinks {
   CALENDAR: {
-    PATH: TCalendarPath;
-    TITLE: TCalendarTitle;
+    PATH: "/calendar";
+    TITLE: "calendar";
   };
   TODOS: {
-    PATH: TTodoPath;
-    TITLE: TTodoTitle;
+    PATH: "/todos";
+    TITLE: "todos";
   };
   WEATHER: {
-    PATH: TWeatherPath;
-    TITLE: TWeatherTitle;
+    PATH: "/weather";
+    TITLE: "weather";
   };
   SETTINGS: {
-    PATH: TSettingsPath;
-    TITLE: TSettingsTitle;
+    PATH: "/settings";
+    TITLE: "settings";
   };
   AUTH: {
-    PATH: TAuthPath;
-    TITLE: TAuthTitle;
+    PATH: "/auth";
+    TITLE: "auth";
   };
   HOME: {
-    PATH: THomePath;
-    TITLE: THomeTitle;
+    PATH: "/";
+    TITLE: "home";
   };
 }
 

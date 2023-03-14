@@ -1,4 +1,4 @@
-import { GFrameSliderLtoR, GFrameRotate360, GFrameTtoB } from "./keyframes/animations.keyframes";
+import { GFrameSliderLtoR, GFrameRotate360, GFrameTtoB } from "./keyframes";
 import { GButtSubmit } from "./components/button.style";
 import { GCheckboxItem, GCheckboxReplace } from "./components/checkbox.style";
 import {
