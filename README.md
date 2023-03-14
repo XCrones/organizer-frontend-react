@@ -48,3 +48,9 @@
   - JWT;
 
   ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/auth.png)
+
+- Settings:
+
+  - Night theme;
+
+  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/settings.png)
