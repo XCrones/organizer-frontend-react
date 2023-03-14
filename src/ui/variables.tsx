@@ -78,6 +78,9 @@ export const G_VARIABLES = {
       medium: "#171930",
       hight: "#0D0F22",
     },
+    medium_blue: {
+      light: "#2f3045",
+    },
     light_blue: {
       light: "#b6b6dd",
     },
