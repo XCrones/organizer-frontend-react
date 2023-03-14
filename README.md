@@ -23,14 +23,16 @@
   - изменение;
   - статус;
   - сортировка;
-    ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todo.png)
+
+  ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todo.png)
 
 - Calendar:
 
   - создание;
   - удаление;
   - изменение;
-    ![Calendar](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/calendar.png)
+
+  ![Calendar](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/calendar.png)
 
 - Weather:
 
@@ -38,8 +40,11 @@
   - удаление;
   - определение геопозиции;
   - прогноз погоды;
-    ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/weather.png)
+
+  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/weather.png)
 
 - Auth:
+
   - JWT;
-    ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/auth.png)
+
+  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/auth.png)
