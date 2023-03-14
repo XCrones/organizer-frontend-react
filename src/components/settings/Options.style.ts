@@ -1,32 +1,20 @@
 import styled from "styled-components";
 
-export const ToggleWrapper = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-
-export const ToggleItems = styled.div`
+export const OptionsItems = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
 `;
 
-export const ToggleLine = styled.div`
-  width: 100%;
-  height: 1px;
-  border-radius: 10px;
-  background-color: #c0c0c0;
-  margin: 10px 0;
-`;
-
-export const ToggleItem = styled.div`
+export const OptionsItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   color: ${(props) => props.theme.section.block.color.title};
+  padding: 5px 15px;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.section.block.background};
 `;
 
 export const ItemAbout = styled.div<{}>`
@@ -43,6 +31,7 @@ export const ItemIcon = styled.div<{ isDarkTheme: boolean }>`
 `;
 export const ItemTitle = styled.div`
   font-size: 14px;
+  color: ${(props) => props.theme.section.settings.title};
   &::first-letter {
     text-transform: uppercase;
   }
