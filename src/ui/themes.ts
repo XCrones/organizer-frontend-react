@@ -76,6 +76,7 @@ export const DarkTheme: DefaultTheme = {
       },
     },
     calendar: {
+      title: G_VARIABLES.color.white,
       month: {
         btn: {
           color: G_VARIABLES.color.white,
@@ -221,6 +222,7 @@ export const LightTheme: DefaultTheme = {
       },
     },
     calendar: {
+      title: G_VARIABLES.color.black,
       month: {
         btn: {
           color: G_VARIABLES.color.black,
