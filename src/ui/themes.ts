@@ -17,7 +17,8 @@ export const DarkTheme: DefaultTheme = {
       },
     },
     settings: {
-      title: G_VARIABLES.color.light_gray.medium,
+      title: G_VARIABLES.color.white,
+      subtitle: G_VARIABLES.color.light_gray.medium,
       btn: {
         submit: {
           gradient: G_VARIABLES.gradient.blue.medium,
@@ -161,7 +162,8 @@ export const LightTheme: DefaultTheme = {
       },
     },
     settings: {
-      title: G_VARIABLES.color.light_gray.hight,
+      title: G_VARIABLES.color.black,
+      subtitle: G_VARIABLES.color.light_gray.hight,
       btn: {
         submit: {
           gradient: G_VARIABLES.gradient.blue.light,

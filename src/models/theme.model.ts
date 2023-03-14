@@ -19,6 +19,7 @@ export interface ITheme {
     };
     settings: {
       title: string;
+      subtitle: string;
       btn: {
         submit: {
           gradient: string[];

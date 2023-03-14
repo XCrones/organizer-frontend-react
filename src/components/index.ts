@@ -7,14 +7,14 @@ import SheduleComponent from "./calendar/Shedule.component";
 import FooterComponent from "./footer/Footer.component";
 import HeaderComponent from "./header/Header.component";
 import RoutesComponent from "./routes/Routes.component";
-import EmailComponent from "./settings/Email.component";
-import ToggleComponent from "./settings/Toggle.component";
+import OptionsComponent from "./settings/Options.component";
 import TodoItemComponent from "./todos/TodoItem.component";
 import TodoEditorComponent from "./todos/TodoEditor.component";
 import NotificationComponent from "./notification/Notification.component";
 import WeatherForecastComponent from "./weather/WeatherForecast.component";
 import WeatherJoinComponent from "./weather/WeatherJoin.component";
 import WeatherCitiesComponent from "./weather/WeatherCities.component";
+import UserComponent from "./settings/User.component";
 
 export {
   AppComponent,
@@ -26,12 +26,12 @@ export {
   FooterComponent,
   HeaderComponent,
   RoutesComponent,
-  EmailComponent,
-  ToggleComponent,
+  OptionsComponent,
   TodoItemComponent,
   TodoEditorComponent,
   NotificationComponent,
   WeatherForecastComponent,
   WeatherJoinComponent,
   WeatherCitiesComponent,
+  UserComponent,
 };

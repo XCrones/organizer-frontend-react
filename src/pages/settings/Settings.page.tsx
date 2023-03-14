@@ -1,32 +1,24 @@
-import { EmailComponent, HeaderComponent, ToggleComponent } from "../../components";
-import { SettingsExit, Settingsitem, SettingsItems, SettingsSubmit, SettingsWrapper } from "./Settings.style";
-import { IHeaderButton } from "../../models";
+import { HeaderComponent, OptionsComponent, UserComponent } from "../../components";
+import { SettingsItems, SettingsSubmit, SettingsWrapper } from "./Settings.style";
 import { useAuthStore } from "../../store";
-import { GButtSubmit } from "../../ui";
-import { G_VARIABLES } from "../../ui/variables";
+import { shallow } from "zustand/shallow";
 
 const SettingsPage = () => {
-  const logOut = useAuthStore((state) => state.logOut);
-
-  const buttonsHeader: IHeaderButton = {
-    callback: () => {},
-    icon: "",
-  };
+  const authStore = useAuthStore(
+    (state) => ({
+      logOut: state.logOut,
+    }),
+    shallow
+  );
 
   return (
     <SettingsWrapper>
-      <HeaderComponent butt={buttonsHeader} title={"settings"} />
+      <HeaderComponent title={"settings"} />
       <SettingsItems>
-        <Settingsitem>
-          <EmailComponent />
-        </Settingsitem>
-        <Settingsitem>
-          <ToggleComponent />
-        </Settingsitem>
+        <UserComponent />
+        <OptionsComponent />
+        <SettingsSubmit onClick={() => authStore.logOut()}>logout</SettingsSubmit>
       </SettingsItems>
-      <SettingsExit>
-        <SettingsSubmit onClick={() => logOut()}>logout</SettingsSubmit>
-      </SettingsExit>
     </SettingsWrapper>
   );
 };
