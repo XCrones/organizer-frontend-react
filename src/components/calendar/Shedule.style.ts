@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { G_VARIABLES } from "../../ui/variables";
 
 interface ITime {
   hour: number;
@@ -42,7 +43,7 @@ export const SheduleLine = styled.div`
   flex: 1 1 auto;
   width: 100%;
   height: 2px;
-  background-color: #2f3045;
+  background-color: ${G_VARIABLES.color.medium_blue.light}70;
   position: relative;
   &:before {
     content: "";
@@ -50,7 +51,7 @@ export const SheduleLine = styled.div`
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: #2f3045;
+    background-color: ${G_VARIABLES.color.medium_blue.light};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -79,7 +80,7 @@ export const EventItem = styled.div<IEventItem>`
   height: ${(props) => (props.endTime.hour - props.startTime.hour) * 40 + (40 * props.endTime.minute) / 60}px;
   left: 0;
   right: 0;
-  background-color: ${(props) => `${props.background}50`};
+  background-color: ${(props) => `${props.background}90`};
   border-radius: 5px;
   padding: 5px 10px;
   display: flex;
@@ -102,6 +103,7 @@ export const EventTitle = styled.h4`
   overflow: hidden;
   white-space: nowrap;
   text-transform: capitalize;
+  color: ${(props) => props.theme.section.calendar.title};
 `;
 
 export const EventDescription = styled.h5`
