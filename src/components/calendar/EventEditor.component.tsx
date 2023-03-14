@@ -63,13 +63,21 @@ const EventEditorComponent = ({
 
   const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
-      if (!!item) {
-        item.eventStart = data.startEvent;
-        item.eventEnd = data.endEvent;
-        item.title = data.eventName;
-        item.description = data.description;
-        item.background = currColor;
+      if (data.startEvent > data.endEvent) {
+        callbackNotif.error(APP_MESSAGES.EVENT_TIME_ERROR);
+        return;
+      }
 
+      const metaData: IJoinEvent = {
+        eventStart: data.startEvent,
+        eventEnd: data.endEvent,
+        title: data.eventName,
+        description: data.description,
+        background: currColor,
+      };
+
+      if (!!item) {
+        Object.assign(item, metaData);
         try {
           await callbackSubmit(item);
           callbackNotif.successful(APP_MESSAGES.CHANGE_SUCCES);
@@ -81,14 +89,6 @@ const EventEditorComponent = ({
           }
         }
       } else {
-        const metaData: IJoinEvent = {
-          eventStart: data.startEvent,
-          eventEnd: data.endEvent,
-          title: data.eventName,
-          description: data.description,
-          background: currColor,
-        };
-
         try {
           await callbackSubmit(metaData);
           callbackNotif.successful(APP_MESSAGES.CREATE_SUCCES);
