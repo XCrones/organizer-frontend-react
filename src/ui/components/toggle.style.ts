@@ -1,23 +1,11 @@
+import { G_VARIABLES } from "../variables";
 import styled from "styled-components";
 
-interface IToggle {
-  isSet: boolean;
-  colors: {
-    true: string;
-    false: string;
-    slider: string;
-  };
-  size: {
-    width: number;
-    height: number;
-  };
-}
-
-export const GToggle = styled.div<IToggle>`
+export const GToggle = styled.div<{ width: number; height: number; isSet: boolean }>`
   cursor: pointer;
-  height: ${(props) => props.size.height}px;
-  width: ${(props) => props.size.width}px;
-  background-color: ${(props) => (props.isSet ? props.colors.true : props.colors.false)};
+  height: ${(props) => props.height}px;
+  width: ${(props) => props.width}px;
+  background-color: ${(props) => (props.isSet ? G_VARIABLES.color.green.medium : G_VARIABLES.color.red.medium)};
   position: relative;
   border-radius: 10px;
 
@@ -29,7 +17,7 @@ export const GToggle = styled.div<IToggle>`
     left: ${(props) => (props.isSet ? "55%" : "2%")};
     height: 90%;
     width: 40%;
-    background-color: ${(props) => props.colors.slider};
+    background-color: ${G_VARIABLES.color.white};
     border-radius: 50%;
     transition: left 0.2s ease-in-out;
   }
