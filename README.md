@@ -16,7 +16,7 @@
 
 ## Возможности:
 
-- Todo:
+- Todos:
 
   - создание;
   - удаление;
@@ -24,7 +24,7 @@
   - статус;
   - сортировка;
 
-  ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todo.png)
+  ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todos.png)
 
 - Calendar:
 
