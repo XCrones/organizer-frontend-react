@@ -77,6 +77,7 @@ export interface ITheme {
       };
     };
     calendar: {
+      title: string;
       month: {
         btn: {
           color: string;
