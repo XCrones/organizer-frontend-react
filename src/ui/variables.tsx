@@ -90,7 +90,7 @@ export const G_VARIABLES = {
       light: "#292626",
     },
     purple: {
-      light: "#200f4e",
+      light: "#282964",
     },
   },
   indent: {
