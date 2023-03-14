@@ -16,7 +16,7 @@
 
 ## Возможности:
 
-- Todos:
+- Todo:
 
   - создание;
   - удаление;
@@ -24,7 +24,7 @@
   - статус;
   - сортировка;
 
-  ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todos.png)
+  ![Todos](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/todos-dark-light.png)
 
 - Calendar:
 
@@ -32,7 +32,7 @@
   - удаление;
   - изменение;
 
-  ![Calendar](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/calendar.png)
+  ![Calendar](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/calendar-dark-light.png)
 
 - Weather:
 
@@ -41,16 +41,16 @@
   - определение геопозиции;
   - прогноз погоды;
 
-  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/weather.png)
+  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/weather-dark-light.png)
 
 - Auth:
 
   - JWT;
 
-  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/auth.png)
+  ![Auth](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/auth-dark-light.png)
 
 - Settings:
 
   - Night theme;
 
-  ![Weather](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/settings.png)
+  ![Settings](https://github.com/XCrones/organizer-frontend-react/blob/main/preview/settings-dark-light.png)
