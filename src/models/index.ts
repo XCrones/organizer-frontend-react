@@ -1,3 +1,4 @@
+import { IBaseResponse } from "./IBaseResponse";
 import { IAxiosError } from "./axiosError";
 import { IHeaderButton } from "./header.model";
 import { IAuthSignIn, IAuthSignUp } from "./auth.model";
@@ -51,6 +52,7 @@ export type {
   ITriangleBorderColor,
   IWeatherConfig,
   ITheme,
+  IBaseResponse,
 };
 
 export { ETheme };
