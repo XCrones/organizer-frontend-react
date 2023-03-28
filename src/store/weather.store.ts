@@ -1,3 +1,4 @@
+import { IBaseResponse } from "./../models/IBaseResponse";
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { Axios } from "../config/axios/methods";
@@ -15,7 +16,7 @@ interface IStateInitial {
   data: IData;
   getCities: () => Promise<void>;
   getForecast: (id: number) => Promise<void>;
-  joinCityByName: (nameCity: string) => Promise<void>;
+  joinCityByName: (cityName: string) => Promise<void>;
   joinCityByGeo: (reqData: IReqWeatherByGeo) => Promise<void>;
   dropCity: (idCIty: number) => Promise<void>;
   cityMove: (meta: IMoveItem) => Promise<void>;
@@ -34,9 +35,9 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
   getCities: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
-      const data = await Axios.get<ICityWeather[]>({ path: `${get().endPoint}` });
-      if (!!data) {
-        set({ data: { ...get().data, cities: data } });
+      const response = await Axios.get<IBaseResponse<ICityWeather[]>>({ path: `${get().endPoint}/cities` });
+      if (!!response.data) {
+        set({ data: { ...get().data, cities: response.data } });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -46,19 +47,20 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
       set({ pending: { ...get().pending, fetchAll: false } });
     }
   },
-  joinCityByName: async (nameCity) => {
+  joinCityByName: async (cityName) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
       const reqData: IReqWeatherByName = {
-        city: nameCity,
+        cityName,
       };
 
-      const data = await Axios.post<ICityWeather[], IReqWeatherByName>({
+      const response = await Axios.post<IBaseResponse<ICityWeather>, IReqWeatherByName>({
         path: `${get().endPoint}/city-name`,
         data: reqData,
       });
-      if (!!data) {
-        set({ data: { ...get().data, cities: data } });
+
+      if (!!response?.data) {
+        set({ data: { ...get().data, cities: [...get().data.cities, response.data] } });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -71,12 +73,13 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
   joinCityByGeo: async (reqData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.post<ICityWeather[], IReqWeatherByGeo>({
+      const response = await Axios.post<IBaseResponse<ICityWeather>, IReqWeatherByGeo>({
         path: `${get().endPoint}/city-geo`,
         data: reqData,
       });
-      if (!!data) {
-        set({ data: { ...get().data, cities: data } });
+
+      if (!!response?.data) {
+        set({ data: { ...get().data, cities: [...get().data.cities, response.data] } });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -89,11 +92,12 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
   getForecast: async (id) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.get<IWeatherForecast>({
+      const response = await Axios.get<IBaseResponse<IWeatherForecast>>({
         path: `${get().endPoint}/${id}`,
       });
-      if (!!data) {
-        set({ data: { ...get().data, forecast: data } });
+
+      if (!!response.data) {
+        set({ data: { ...get().data, forecast: response.data } });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -106,10 +110,10 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
   dropCity: async (idCity) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.delete<ICityWeather[]>({ path: `${get().endPoint}/${idCity}` });
+      const data = await Axios.delete<IBaseResponse<boolean>>({ path: `${get().endPoint}/${idCity}` });
 
-      if (!!data) {
-        set({ data: { ...get().data, cities: data } });
+      if (data?.data) {
+        set({ data: { ...get().data, cities: get().data.cities.filter((item) => item.id != idCity) } });
       }
     } catch (error) {
       const err = error as AxiosError;

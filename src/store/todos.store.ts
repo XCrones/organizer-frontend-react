@@ -1,3 +1,4 @@
+import { IBaseResponse } from "./../models/IBaseResponse";
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { Axios } from "../config/axios/methods";
@@ -24,9 +25,10 @@ export const useTodosStore = create<IStateInitial>()((set, get) => ({
   getAllData: async () => {
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
-      const data = await Axios.get<ITodo[]>({ path: get().endPoint });
-      if (!!data) {
-        set({ data: data });
+      const response = await Axios.get<IBaseResponse<ITodo[]>>({ path: get().endPoint });
+
+      if (!!response?.data) {
+        set({ data: response.data });
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -39,11 +41,11 @@ export const useTodosStore = create<IStateInitial>()((set, get) => ({
   joinData: async (newTodo) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.post<ITodo, ITodoJoin>({ path: get().endPoint, data: newTodo });
+      const response = await Axios.post<IBaseResponse<ITodo>, ITodoJoin>({ path: get().endPoint, data: newTodo });
 
-      if (!!data) {
+      if (!!response?.data) {
         set({
-          data: [...get().data, data],
+          data: [...get().data, response.data],
         });
       }
     } catch (error) {
@@ -57,11 +59,14 @@ export const useTodosStore = create<IStateInitial>()((set, get) => ({
   patchData: async (editData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.patch<ITodo, ITodo>({ path: get().endPoint, data: editData });
+      const response = await Axios.patch<IBaseResponse<ITodo>, ITodo>({
+        path: `${get().endPoint}/${editData.id}`,
+        data: editData,
+      });
 
-      if (!!data) {
+      if (!!response?.data) {
         set({
-          data: get().data.map((item) => (item.id === data.id ? { ...data } : item)),
+          data: get().data.map((item) => (item.id === response.data.id ? { ...response.data } : item)),
         });
       }
     } catch (error) {
@@ -75,11 +80,11 @@ export const useTodosStore = create<IStateInitial>()((set, get) => ({
   deleteData: async (idData) => {
     set({ pending: { ...get().pending, fetchOne: true } });
     try {
-      const data = await Axios.delete<ITodo>({ path: `${get().endPoint}/${idData}` });
+      const response = await Axios.delete<IBaseResponse<boolean>>({ path: `${get().endPoint}/${idData}` });
 
-      if (!!data) {
+      if (response?.data) {
         set({
-          data: get().data.filter((item) => item.id !== data.id),
+          data: get().data.filter((item) => item.id !== idData),
         });
       }
     } catch (error) {
