@@ -1,7 +1,7 @@
 import { IBaseInfo } from ".";
 
 export interface IJoinEvent {
-  title: string;
+  name: string;
   eventStart: string;
   eventEnd: string;
   background: string;
