@@ -124,6 +124,15 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
 
   if (isHide) return null;
 
+  const makeUrlImg = (url: string) => {
+    if (!!url) {
+      // prettier-ignore
+      return `${import.meta.env.VITE_APP_WEATHER_URL_ICON}${url}${import.meta.env.VITE_APP_WEATHER_ICON_POSTFIX}`
+    }
+
+    return "";
+  };
+
   const Column = memo(({ index, style, data }: IWindowColumn<IForecastItem[]>) => {
     const parseDate = (date: string) => {
       const dateString = date.split(" ")[0];
@@ -168,7 +177,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
             <ColumnTime>{memoTime}</ColumnTime>
           </ColumnDay>
           <ColumnIcon>
-            <img src={data[index].weather[0].icon} alt="" />
+            <img src={makeUrlImg(data[index].weather[0].icon)} alt="" />
           </ColumnIcon>
           <ColumnTemp>
             {data[index].main.temp.toFixed(1)}
@@ -209,7 +218,7 @@ const WeatherForecastComponent = ({ id, isHide, callbackClose }: Props) => {
       </ForecastTimes>
 
       <ForecastCurrent>
-        <CurrIcon src={weatherDescr.icon} alt="icon weather" />
+        <CurrIcon src={makeUrlImg(weatherDescr.icon)} alt="icon weather" />
         <CurrTemp>
           {weatherDescr.temp}
           &deg;
