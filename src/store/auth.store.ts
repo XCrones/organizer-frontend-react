@@ -4,6 +4,15 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { IAuthSignIn, IAuthSignUp } from "../models";
 import axios from "../config/axios";
 
+interface IResponse {
+  data: {
+    email: string;
+    name: string;
+    urlAvatar: string;
+  };
+  token: string;
+}
+
 interface IUserData {
   email: string;
   name: string;
@@ -27,14 +36,21 @@ export const useAuthStore = create<AuthStore>()(
       singIn: async (userData) => {
         set({ isPending: true });
         try {
-          const { data } = await axios.post<IUserData>("auth/signin", userData, {
+          const { data } = await axios.post<IResponse>("login/signin", userData, {
             headers: {
               "Conent-type": "Application/json",
             },
           });
 
           if (!!data) {
-            set({ userData: { ...JSON.parse(JSON.stringify(data)) } });
+            set({
+              userData: {
+                email: data.data.email,
+                name: data.data.name,
+                urlAvatar: data.data.urlAvatar,
+                token: data.token,
+              },
+            });
           }
         } catch (error) {
           const err = error as AxiosError;
@@ -47,14 +63,21 @@ export const useAuthStore = create<AuthStore>()(
       singUp: async (userData) => {
         set({ isPending: true });
         try {
-          const { data } = await axios.post<IUserData>("auth/signup", userData, {
+          const { data } = await axios.post<IResponse>("login/signup", userData, {
             headers: {
               "Conent-type": "Application/json",
             },
           });
 
           if (!!data) {
-            set({ userData: { ...JSON.parse(JSON.stringify(data)) } });
+            set({
+              userData: {
+                email: data.data.email,
+                name: data.data.name,
+                urlAvatar: data.data.urlAvatar,
+                token: data.token,
+              },
+            });
           }
         } catch (error) {
           const err = error as AxiosError;
