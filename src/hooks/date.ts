@@ -110,8 +110,8 @@ export const useDate = () => {
       if (!!date) {
         const fullParseDate = new Date(Date.parse(date)).toLocaleString();
         const parseDate = fullParseDate.split(",")[0];
-        const parseTime = fullParseDate.split(",")[1];
-        return `${parseDate.split(".").reverse().join("-")}T${parseTime.trim()}`;
+        const parseTime = fullParseDate.split(",")[1].trim().split(":");
+        return `${parseDate.split(".").reverse().join("-")}T${parseTime[0]}:${parseTime[1]}`;
       }
       return "";
     } catch (err) {
