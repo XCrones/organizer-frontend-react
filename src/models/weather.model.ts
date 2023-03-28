@@ -139,7 +139,7 @@ export interface ICityWeather {
 }
 
 export interface IReqWeatherByName {
-  city: string;
+  cityName: string;
 }
 
 export interface IReqWeatherByGeo {
