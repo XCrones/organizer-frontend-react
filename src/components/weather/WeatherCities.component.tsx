@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
-import { IAxiosError, ICityWeather, IMoveItem, INotifMethods } from "../../models";
+import { IAxiosError, ICityWeather, IMoveItem, INotifMethods } from "../../models/Interfaces";
 import { useWeatherStore } from "../../store";
 import { G_VARIABLES } from "../../ui/variables";
 import { CityName, CityBtn, WeatherCities, WeatherCity } from "./WeatherCities.style";
