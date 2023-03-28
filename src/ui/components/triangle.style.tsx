@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ITriangle } from "../../models";
+import { ITriangle } from "../../models/Interfaces";
 
 // prettier-ignore
 export const GTriangle = styled.div<ITriangle>`

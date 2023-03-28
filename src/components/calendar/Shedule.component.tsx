@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IParseEvent } from "../../models/calendar.models";
+import { IParseEvent } from "../../models/Interfaces";
 import {
   EventItem,
   Events,

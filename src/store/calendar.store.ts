@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { create } from "zustand";
 import { Axios } from "../config/axios/methods";
 import { ROUTES } from "../config/routes/routes";
-import { IBaseResponse, IEvent, IJoinEvent, IPending } from "../models";
+import { IBaseResponse, IEvent, IJoinEvent, IPending } from "../models/Interfaces";
 
 interface IStateInitial {
   endPoint: string;

@@ -1,8 +1,3 @@
-export enum ETheme {
-  light = "light",
-  dark = "dark",
-}
-
 export interface ITheme {
   transition: {
     theme: string;

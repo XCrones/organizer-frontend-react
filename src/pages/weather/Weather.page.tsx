@@ -6,7 +6,7 @@ import {
   WeatherForecastComponent,
   NotificationComponent,
 } from "../../components";
-import { IHeaderButton } from "../../models";
+import { IHeaderButton } from "../../models/Interfaces";
 import { WrapperWeather } from "./Weather.style";
 import { shallow } from "zustand/shallow";
 import { useWeatherStore } from "../../store";

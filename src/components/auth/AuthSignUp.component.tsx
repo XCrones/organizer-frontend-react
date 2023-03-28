@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { shallow } from "zustand/shallow";
 import { ROUTES } from "../../config/routes/routes";
-import { IAuthSignUp, IAxiosError } from "../../models";
+import { IAuthSignUp, IAxiosError } from "../../models/Interfaces";
 import { useAuthStore } from "../../store";
 import { GPulseLoader } from "../../ui";
 import {
@@ -76,7 +76,7 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
         };
 
         await authStore.singUp(user);
-        navigate(ROUTES.TODOS.PATH, { replace: false });
+        navigate(ROUTES.TODO.PATH, { replace: false });
       } catch (error) {
         const err = error as AxiosError<IAxiosError>;
         SetErrMessage(err.response ? String(err.response.data.message) : "");

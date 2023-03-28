@@ -18,7 +18,7 @@ import {
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDate } from "../../hooks";
-import { IAxiosError, INotifMethods, ITodo, ITodoJoin, TPriority } from "../../models";
+import { IAxiosError, INotifMethods, ITodo, ITodoJoin, TPriority } from "../../models/Interfaces";
 import { AxiosError } from "axios";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_TODO_CONFIG } from "../../config/forms/form-config";

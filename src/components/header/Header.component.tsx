@@ -1,4 +1,4 @@
-import { IHeaderButton } from "../../models";
+import { IHeaderButton } from "../../models/Interfaces";
 import { HeaderButt, HeaderTitle, Header } from "./Header.style";
 
 interface IProps {

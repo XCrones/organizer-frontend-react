@@ -26,7 +26,7 @@ import {
 } from "./WeatherForecast.style";
 import { areEqual, FixedSizeList as List } from "react-window";
 import { useWindowSize } from "../../hooks";
-import { IForecastItem, IWindowColumn } from "../../models";
+import { IForecastItem, IWindowColumn } from "../../models/Interfaces";
 import { G_VARIABLES } from "../../ui/variables";
 import { WEATHER_CONFIG } from "../../config/components/components-config";
 

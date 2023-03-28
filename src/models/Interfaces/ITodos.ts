@@ -1,5 +1,5 @@
-import { EPriority } from "./Enum/EPriority";
 import { IBaseInfo } from ".";
+import { EPriority } from "../Enum";
 
 export interface ITodoJoin {
   name: string;

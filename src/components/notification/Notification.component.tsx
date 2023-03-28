@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { INotifMeta } from "../../models";
+import { INotifMeta } from "../../models/Interfaces";
 import { Notification, NotificationTitle } from "./Notification.style";
 
 interface Props {

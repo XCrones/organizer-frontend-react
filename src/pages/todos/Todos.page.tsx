@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo, useState } from "react";
 import { shallow } from "zustand/shallow";
 import { HeaderComponent, NotificationComponent, TodoEditorComponent, TodoItemComponent } from "../../components";
 import { useNotif } from "../../hooks";
-import { IHeaderButton, ITodo } from "../../models";
+import { IHeaderButton, ITodo } from "../../models/Interfaces";
 import { useTodosStore } from "../../store";
 import { ListItem, ListItems, ListTitle, Todos, TodosWrapper } from "./Todos.style";
 

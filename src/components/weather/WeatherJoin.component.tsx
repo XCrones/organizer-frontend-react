@@ -4,7 +4,7 @@ import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_WEATHER_CONFIG } from "../../config/forms/form-config";
 import { useGeolocation } from "../../hooks";
-import { IAxiosError, INotifMethods, IReqWeatherByGeo } from "../../models";
+import { IAxiosError, INotifMethods, IReqWeatherByGeo } from "../../models/Interfaces";
 import { useWeatherStore } from "../../store";
 import {
   FormError,

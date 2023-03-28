@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { INotifMeta, INotifMethods } from "../models";
+import { INotifMeta, INotifMethods } from "../models/Interfaces";
 
 export const useNotif = () => {
   const [isHide, SetHide] = useState(true);

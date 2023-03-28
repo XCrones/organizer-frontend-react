@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
 import { TODO_CONFIG } from "../../config/components/components-config";
-import { ITodo, ITriangle } from "../../models";
+import { ITodo, ITriangle } from "../../models/Interfaces";
 import { useTodosStore } from "../../store";
 import { GCheckboxItem } from "../../ui";
 import { G_VARIABLES } from "../../ui/variables";

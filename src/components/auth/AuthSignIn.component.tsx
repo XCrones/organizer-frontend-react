@@ -6,7 +6,7 @@ import { shallow } from "zustand/shallow";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { RegExp } from "../../common/regexp";
 import { ROUTES } from "../../config/routes/routes";
-import { IAuthSignIn, IAxiosError } from "../../models";
+import { IAuthSignIn, IAxiosError } from "../../models/Interfaces";
 import { useAuthStore } from "../../store";
 import { GPulseLoader } from "../../ui";
 import {
@@ -63,7 +63,7 @@ const AuthSignInComponent = ({ toggleForm }: Props) => {
         };
 
         await authStore.signIn(user);
-        navigate(ROUTES.TODOS.PATH, { replace: false });
+        navigate(ROUTES.TODO.PATH, { replace: false });
       } catch (error) {
         const err = error as AxiosError<IAxiosError>;
         SetErrMessage(err.response ? String(err.response.data.message) : "");

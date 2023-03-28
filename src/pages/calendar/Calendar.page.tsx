@@ -1,9 +1,8 @@
 import { memo, useEffect, useRef, useState, useLayoutEffect } from "react";
 import { areEqual, FixedSizeList, FixedSizeList as List } from "react-window";
 import { CalendarWrapper, DayNum, DaysItem, DaysList, DayWeeek, Events } from "./Calendar.style";
-import { IEvent, IParseEvent } from "../../models/calendar.models";
+import { IEvent, IParseEvent, IHeaderButton } from "../../models/Interfaces";
 import { shallow } from "zustand/shallow";
-import { IHeaderButton } from "../../models/header.model";
 import {
   EventEditorComponent,
   HeaderComponent,

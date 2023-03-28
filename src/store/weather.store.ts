@@ -1,9 +1,16 @@
-import { IBaseResponse } from "./../models/IBaseResponse";
+import { IBaseResponse } from "../models/Interfaces";
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { Axios } from "../config/axios/methods";
 import { ROUTES } from "../config/routes/routes";
-import { ICityWeather, IPending, IReqWeatherByName, IReqWeatherByGeo, IWeatherForecast, IMoveItem } from "../models";
+import {
+  ICityWeather,
+  IPending,
+  IReqWeatherByName,
+  IReqWeatherByGeo,
+  IWeatherForecast,
+  IMoveItem,
+} from "../models/Interfaces";
 
 interface IData {
   forecast: IWeatherForecast | null;
@@ -36,7 +43,7 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
     set({ pending: { ...get().pending, fetchAll: true } });
     try {
       const response = await Axios.get<IBaseResponse<ICityWeather[]>>({ path: `${get().endPoint}/cities` });
-      if (!!response.data) {
+      if (!!response?.data) {
         set({ data: { ...get().data, cities: response.data } });
       }
     } catch (error) {
@@ -96,7 +103,7 @@ export const useWeatherStore = create<IStateInitial>()((set, get) => ({
         path: `${get().endPoint}/${id}`,
       });
 
-      if (!!response.data) {
+      if (!!response?.data) {
         set({ data: { ...get().data, forecast: response.data } });
       }
     } catch (error) {

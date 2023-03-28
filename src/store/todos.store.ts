@@ -1,9 +1,9 @@
-import { IBaseResponse } from "./../models/IBaseResponse";
 import { AxiosError } from "axios";
 import { create } from "zustand";
 import { Axios } from "../config/axios/methods";
 import { ROUTES } from "../config/routes/routes";
-import { IPending, ITodo, ITodoJoin } from "../models";
+import { IPending, ITodo, ITodoJoin } from "../models/Interfaces";
+import { IBaseResponse } from "../models/Interfaces";
 
 interface IStateInitial {
   endPoint: string;
@@ -16,7 +16,7 @@ interface IStateInitial {
 }
 
 export const useTodosStore = create<IStateInitial>()((set, get) => ({
-  endPoint: ROUTES.TODOS.PATH,
+  endPoint: ROUTES.TODO.PATH,
   pending: {
     fetchAll: false,
     fetchOne: false,

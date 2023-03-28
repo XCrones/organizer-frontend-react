@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_EVENT_CONFIG } from "../../config/forms/form-config";
 import { useDate } from "../../hooks";
-import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models";
+import { IAxiosError, IEvent, IJoinEvent, INotifMethods } from "../../models/Interfaces";
 import {
   GEditWrapper,
   GEditHeader,
