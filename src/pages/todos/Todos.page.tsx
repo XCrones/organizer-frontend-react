@@ -64,7 +64,7 @@ const TodosPage = () => {
   };
 
   const parseTodos = (todoItems: ITodo[]): IParsingTodo[] => {
-    const sortArr = (arr: ITodo[]) => arr.sort((a, b) => (a.deadline < b.deadline ? -1 : 1));
+    const sortArr = (arr: ITodo[]) => arr.sort((a, b) => (a.deadLine < b.deadLine ? -1 : 1));
 
     try {
       const todos: ITodos = {
@@ -98,34 +98,35 @@ const TodosPage = () => {
       };
 
       const parseDate = (date: string) => {
-        const makeDate = new Date(Date.parse(date)).toLocaleDateString();
+        const makeDate = date.split("T");
+        const dateStrg = makeDate[0].split("-");
         return {
-          year: +makeDate.split(".")[2],
-          month: +makeDate.split(".")[1],
-          day: +makeDate.split(".")[0],
-          full: makeDate,
+          year: +dateStrg[0],
+          month: +dateStrg[1],
+          day: +dateStrg[2],
+          full: new Date(Date.parse(date)).toLocaleDateString(),
         };
       };
 
       todoItems.forEach((todo) => {
-        if (parseDate(todo.deadline).full === localeDate.full) {
+        if (parseDate(todo.deadLine).full === localeDate.full) {
           todos.today.todos.push(todo);
         } else if (
-          parseDate(todo.deadline).month === localeDate.month &&
-          parseDate(todo.deadline).day === localeDate.day + 1
+          parseDate(todo.deadLine).month === localeDate.month &&
+          parseDate(todo.deadLine).day === localeDate.day + 1
         ) {
           todos.tommorow.todos.push(todo);
         } else if (
-          parseDate(todo.deadline).month === localeDate.month &&
-          parseDate(todo.deadline).year === localeDate.year
+          parseDate(todo.deadLine).month === localeDate.month &&
+          parseDate(todo.deadLine).year === localeDate.year
         ) {
           todos.thisMonth.todos.push(todo);
         } else if (
-          parseDate(todo.deadline).year === localeDate.year &&
-          parseDate(todo.deadline).month >= localeDate.month
+          parseDate(todo.deadLine).year === localeDate.year &&
+          parseDate(todo.deadLine).month >= localeDate.month
         ) {
           todos.thisYear.todos.push(todo);
-        } else if (parseDate(todo.deadline).year > localeDate.year) {
+        } else if (parseDate(todo.deadLine).year > localeDate.year) {
           todos.more.todos.push(todo);
         }
       });
