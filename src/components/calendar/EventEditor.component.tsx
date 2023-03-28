@@ -69,9 +69,9 @@ const EventEditorComponent = ({
       }
 
       const metaData: IJoinEvent = {
-        eventStart: data.startEvent,
-        eventEnd: data.endEvent,
-        title: data.eventName,
+        eventStart: new Date(Date.parse(data.startEvent)).toISOString(),
+        eventEnd: new Date(Date.parse(data.endEvent)).toISOString(),
+        name: data.eventName,
         description: data.description,
         background: currColor,
       };
@@ -148,7 +148,7 @@ const EventEditorComponent = ({
                 value: FORM_EVENT_CONFIG.name.max,
                 message: APP_MESSAGES.MAX_CHAR(FORM_EVENT_CONFIG.name.max),
               },
-              value: item?.title,
+              value: item?.name,
             })}
             placeholder={`${titleWindow} name`}
           />

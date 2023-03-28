@@ -68,10 +68,10 @@ const TodoEditorComponent = ({
   const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
       const metaData: ITodoJoin = {
-        title: data.todoName,
+        name: data.todoName,
         category: data.category,
         priority: priority,
-        deadline: data.deadLine,
+        deadLine: new Date(Date.parse(data.deadLine)).toISOString(),
         status: false,
         background: currColor,
       };
@@ -149,7 +149,7 @@ const TodoEditorComponent = ({
                 value: FORM_TODO_CONFIG.name.max,
                 message: APP_MESSAGES.MAX_CHAR(FORM_TODO_CONFIG.name.max),
               },
-              value: item?.title,
+              value: item?.name,
             })}
             placeholder={`${titleWindow} name`}
             type="text"
@@ -180,7 +180,7 @@ const TodoEditorComponent = ({
           <GEditDate
             {...register("deadLine", {
               required: APP_MESSAGES.REQ_FIELD,
-              value: !!item ? makeLocalDate(item.deadline) : "",
+              value: !!item ? makeLocalDate(item.deadLine) : "",
             })}
             type="datetime-local"
           />
