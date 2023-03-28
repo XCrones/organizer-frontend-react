@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { shallow } from "zustand/shallow";
 import { TODO_CONFIG } from "../../config/components/components-config";
-import { FORM_TODO_CONFIG } from "../../config/forms/form-config";
 import { ITodo, ITriangle } from "../../models";
 import { useTodosStore } from "../../store";
-import { GCheckboxItem, GCheckboxReplace } from "../../ui";
+import { GCheckboxItem } from "../../ui";
 import { G_VARIABLES } from "../../ui/variables";
 import { Item, ItemSubtitle, ItemButt, ItemInfo, ItemTitle, ItemTriangle, ItemCheckBox } from "./TodoItem.style";
+import { EPriority } from "../../models/Enum";
 
 interface Props {
   item: ITodo;
@@ -22,15 +22,15 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
   );
 
   const parseDate = (date: string): string => new Date(Date.parse(date)).toLocaleString();
-  const memoizeDate = useMemo(() => parseDate(item.deadline), [item.deadline]);
+  const memoizeDate = useMemo(() => parseDate(item.deadLine), [item.deadLine]);
 
   const parsePriority = (priority: number): string => {
     switch (priority) {
-      case FORM_TODO_CONFIG.priority.levels.hight:
+      case EPriority.hight:
         return G_VARIABLES.color.red.hight;
-      case FORM_TODO_CONFIG.priority.levels.medium:
+      case EPriority.medium:
         return G_VARIABLES.color.orange.medium;
-      case FORM_TODO_CONFIG.priority.levels.low:
+      case EPriority.low:
         return G_VARIABLES.color.green.medium;
       default:
         return "";
@@ -66,7 +66,7 @@ const TodoItemComponent = ({ item, callbackEdit }: Props) => {
         <ItemCheckBox isActive={item.status} colorSelect={item.background} rounded={TODO_CONFIG.status.rounded} />
       </GCheckboxItem>
       <ItemInfo>
-        <ItemTitle>{item.title}</ItemTitle>
+        <ItemTitle>{item.name}</ItemTitle>
         <ItemSubtitle>{memoizeDate}</ItemSubtitle>
       </ItemInfo>
       <ItemButt color={item.background} onClick={() => callbackEdit(item)}>
