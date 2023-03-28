@@ -1,53 +1,28 @@
-interface IRouterLinks {
-  CALENDAR: {
-    PATH: "/calendar";
-    TITLE: "calendar";
-  };
-  TODOS: {
-    PATH: "/todo";
-    TITLE: "todo";
-  };
-  WEATHER: {
-    PATH: "/weather";
-    TITLE: "weather";
-  };
-  SETTINGS: {
-    PATH: "/settings";
-    TITLE: "settings";
-  };
-  AUTH: {
-    PATH: "/auth";
-    TITLE: "auth";
-  };
-  HOME: {
-    PATH: "/";
-    TITLE: "home";
-  };
-}
+import { ERoutesPath, ERoutesTitle } from "../../models/Enum";
 
-export const ROUTES: IRouterLinks = {
+export const ROUTES = {
   HOME: {
-    TITLE: "home",
-    PATH: "/",
+    TITLE: ERoutesTitle.HOME,
+    PATH: ERoutesPath.HOME,
   },
-  TODOS: {
-    TITLE: "todo",
-    PATH: "/todo",
+  TODO: {
+    TITLE: ERoutesTitle.TODO,
+    PATH: ERoutesPath.TODO,
   },
   CALENDAR: {
-    TITLE: "calendar",
-    PATH: "/calendar",
+    TITLE: ERoutesTitle.CALENDAR,
+    PATH: ERoutesPath.CALENDAR,
   },
   WEATHER: {
-    TITLE: "weather",
-    PATH: "/weather",
+    TITLE: ERoutesTitle.WEATHER,
+    PATH: ERoutesPath.WEATHER,
   },
   SETTINGS: {
-    TITLE: "settings",
-    PATH: "/settings",
+    TITLE: ERoutesTitle.SETTINGS,
+    PATH: ERoutesPath.SETTINGS,
   },
   AUTH: {
-    TITLE: "auth",
-    PATH: "/auth",
+    TITLE: ERoutesTitle.AUTH,
+    PATH: ERoutesPath.AUTH,
   },
 };
