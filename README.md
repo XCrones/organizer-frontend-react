@@ -13,7 +13,7 @@
 - moment;
 - bootstrap-icons;
 - backend свой на ASP.NET: [organizer-backend-net](https://github.com/XCrones/organizer-backend-NET)
-- (устарело)backend свой на Nestjs: [organizer-backend-nest](https://github.com/XCrones/organizer-backend-nest)
+- (устарело) backend свой на Nestjs: [organizer-backend-nest](https://github.com/XCrones/organizer-backend-nest)
 
 ## Возможности:
 
