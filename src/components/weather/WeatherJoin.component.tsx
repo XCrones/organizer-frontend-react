@@ -6,7 +6,6 @@ import { FORM_WEATHER_CONFIG } from "../../config/forms/form-config";
 import { useGeolocation } from "../../hooks";
 import { IAxiosError, INotifMethods, IReqWeatherByGeo } from "../../models";
 import { useWeatherStore } from "../../store";
-import { G_VARIABLES } from "../../ui/variables";
 import {
   FormError,
   FormInput,
