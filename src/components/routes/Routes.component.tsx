@@ -28,7 +28,7 @@ const RoutesComponent = () => {
       />
 
       <Route
-        path={ROUTES.TODOS.PATH}
+        path={ROUTES.TODO.PATH}
         element={
           <GuardRoute>
             <TodosPage />
