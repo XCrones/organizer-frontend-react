@@ -5,11 +5,11 @@ import { FooterNav, NavTitle, NavItem } from "./Footer.style";
 const FooterComponent = () => {
   return (
     <FooterNav>
-      <NavLink to={ROUTES.TODOS.PATH}>
+      <NavLink to={ROUTES.TODO.PATH}>
         {({ isActive }) => (
           <NavItem isActive={isActive}>
             <i className="bi bi-check2-circle"></i>
-            <NavTitle>{ROUTES.TODOS.TITLE}</NavTitle>
+            <NavTitle>{ROUTES.TODO.TITLE}</NavTitle>
           </NavItem>
         )}
       </NavLink>
