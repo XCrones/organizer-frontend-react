@@ -4,8 +4,8 @@ interface IRouterLinks {
     TITLE: "calendar";
   };
   TODOS: {
-    PATH: "/todos";
-    TITLE: "todos";
+    PATH: "/todo";
+    TITLE: "todo";
   };
   WEATHER: {
     PATH: "/weather";
@@ -31,8 +31,8 @@ export const ROUTES: IRouterLinks = {
     PATH: "/",
   },
   TODOS: {
-    TITLE: "todos",
-    PATH: "/todos",
+    TITLE: "todo",
+    PATH: "/todo",
   },
   CALENDAR: {
     TITLE: "calendar",
