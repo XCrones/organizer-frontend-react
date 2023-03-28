@@ -67,7 +67,7 @@ const CalendarPage = () => {
         minuteStart: +hourSTart.split(":")[1],
         hourEnd: +hourEnd.split(":")[0],
         minuteEnd: +hourEnd.split(":")[1],
-        title: event.title,
+        title: event.name,
         background: event.background,
         id: event.id,
         description: event.description,
