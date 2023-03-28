@@ -1,14 +1,15 @@
+import { EPriority } from "./Enum/EPriority";
 import { IBaseInfo } from ".";
 
 export interface ITodoJoin {
-  title: string;
+  name: string;
   category: string;
   priority: TPriority;
-  deadline: string;
+  deadLine: string;
   status: boolean;
   background: string;
 }
 
 export interface ITodo extends ITodoJoin, IBaseInfo {}
 
-export type TPriority = 0 | 1 | 2;
+export type TPriority = EPriority.hight | EPriority.medium | EPriority.low;
