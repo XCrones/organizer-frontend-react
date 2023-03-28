@@ -24,7 +24,6 @@ import {
 import { RegExp } from "../../common/regexp";
 import { APP_MESSAGES } from "../../common/app-messages";
 import { FORM_AUTH_CONFIG } from "../../config/forms/form-config";
-import { G_VARIABLES } from "../../ui/variables";
 
 interface Props {
   toggleForm: Function;
@@ -33,6 +32,7 @@ interface Props {
 interface IFormInputs {
   email: string;
   password: string;
+  comparePassword: string;
   name: string;
 }
 
@@ -62,10 +62,16 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
   const onSubmit = async (data: IFormInputs) => {
     if (isValid) {
       try {
+        if (data.password != data.comparePassword) {
+          SetErrMessage("passwords must be compare");
+          return;
+        }
+
         const user: IAuthSignUp = {
+          name: data.name,
           email: data.email,
           password: data.password,
-          name: data.name,
+          comparePassword: data.comparePassword,
           urlAvatar: "",
         };
 
@@ -140,6 +146,45 @@ const AuthSignUpComponent = ({ toggleForm }: Props) => {
               onFocus={() => SetErrMessage("")}
               type={typePass}
               {...register("password", {
+                required: APP_MESSAGES.REQ_FIELD,
+                minLength: {
+                  value: FORM_AUTH_CONFIG.sign_up.password.min,
+                  message: APP_MESSAGES.MIN_CHAR(FORM_AUTH_CONFIG.sign_up.password.min),
+                },
+                maxLength: {
+                  value: FORM_AUTH_CONFIG.sign_up.password.max,
+                  message: APP_MESSAGES.MAX_CHAR(FORM_AUTH_CONFIG.sign_up.password.max),
+                },
+              })}
+            />
+            <FormInputIcon
+              isError={isHidePass}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                SetHidePass((prev) => !prev);
+                if (isHidePass) {
+                  SetTypePass("password");
+                } else {
+                  SetTypePass("text");
+                }
+              }}
+            >
+              {typePass === "text" && <i className="bi bi-eye-fill"></i>}
+              {typePass === "password" && <i className="bi bi-eye-slash-fill"></i>}
+            </FormInputIcon>
+          </FormField>
+          {errors?.password && <FormErr>{errors.password.message}</FormErr>}
+        </FormItem>
+
+        <FormItem>
+          <FormLabel>compare Password</FormLabel>
+          <FormField>
+            <FormInput
+              minLength={FORM_AUTH_CONFIG.sign_up.password.min}
+              maxLength={FORM_AUTH_CONFIG.sign_up.password.max}
+              onFocus={() => SetErrMessage("")}
+              type={typePass}
+              {...register("comparePassword", {
                 required: APP_MESSAGES.REQ_FIELD,
                 minLength: {
                   value: FORM_AUTH_CONFIG.sign_up.password.min,
