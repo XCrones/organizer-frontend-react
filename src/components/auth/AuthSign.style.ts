@@ -5,6 +5,7 @@ import { G_VARIABLES } from "../../ui/variables";
 export const AuthForm = styled.form`
   display: flex;
   flex-direction: column;
+  padding-bottom: 20px;
 `;
 
 export const FormItems = styled.div`
