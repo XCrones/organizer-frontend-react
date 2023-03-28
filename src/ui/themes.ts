@@ -1,4 +1,4 @@
-import { ETheme } from "../models";
+import { ETheme } from "../models/Enum";
 import { G_VARIABLES } from "./variables";
 import { DefaultTheme } from "styled-components";
 
